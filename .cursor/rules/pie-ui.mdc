@@ -1,0 +1,108 @@
+---
+alwaysApply: true
+---
+
+# 📝 Pie UI + Cursor AI Project Rules
+
+## 1️⃣ 프로젝트 목표
+
+- React + TypeScript 기반 UI 라이브러리
+- 토큰 우선 (디자인 토큰 관리 + 컴포넌트 연동)
+- Storybook으로 문서화
+- Cursor AI 활용 → 반복 코딩 / 컴포넌트 생성 자동화
+- npm 배포 가능
+- 확장성, 접근성(A11y) 고려
+
+---
+
+## 2️⃣ 프로젝트 구조 규칙
+
+```
+pie-ui/
+ ├─ packages/
+ │   ├─ tokens/           # 디자인 토큰
+ │   │   ├─ colors.ts
+ │   │   ├─ typography.ts
+ │   │   ├─ spacing.ts
+ │   │   └─ index.ts
+ │   └─ components/       # UI 컴포넌트
+ │       ├─ Button.tsx
+ │       ├─ Input.tsx
+ │       └─ index.ts
+ └─ apps/
+     └─ docs/             # Storybook / Demo
+
+```
+
+- **tokens** : 브랜드별 테마, 컬러/폰트/스페이싱/쉐도우 등 정의
+- **components** : 토큰을 가져와서 재사용 가능하게 설계
+- **apps/docs** : Storybook / Demo + Cursor AI 테스트
+
+---
+
+## 3️⃣ 기술/라이브러리 규칙
+
+| 영역 | 기술/라이브러리 |
+| --- | --- |
+| 언어 | TypeScript |
+| UI | React |
+| 번들링 | Vite (library mode) |
+| 문서화 | Storybook |
+| 테스트 | Vitest + React Testing Library |
+| 린트/포맷 | ESLint + Prettier |
+| 배포 | npm, Changesets (자동 버전 관리) |
+| Cursor AI | 반복 컴포넌트 생성, Docs 보조 |
+
+---
+
+## 4️⃣ 코드 스타일 & Commit 규칙
+
+- **Component 단위로 Commit**
+- **Commit 메시지 컨벤션**
+    
+    ```
+    feat(Button): add primary variant
+    fix(Input): correct placeholder style
+    docs(Button): add story in Storybook
+    
+    ```
+    
+- **Lint/Format 자동화**
+    - pre-commit hook: `lint-staged` + `husky`
+
+---
+
+## 5️⃣ Cursor AI 활용 규칙
+
+- **자동 생성 컴포넌트** → 반드시 수동 리뷰 후 merge
+- **반복 작업 코드 보조** → Button, Input, Modal 등 템플릿 기반 생성
+- **Docs 작성 보조** → Storybook MDX, Props Table 자동 생성
+- **코드 품질** → Cursor AI가 만든 코드도 ESLint + Prettier 통과 필수
+
+---
+
+## 6️⃣ 패키지 & 버전 관리
+
+- **tokens** 패키지 → 버전 1.0.0부터 시작
+- **components** 패키지 → tokens 버전 의존성 명시
+- **Changesets** → 각 배포마다 SemVer 기반 자동 버전 업데이트
+- **Peer Dependencies** → React, ReactDOM 외부화
+
+---
+
+## 7️⃣ Storybook / Demo 규칙
+
+- 각 컴포넌트별 **1 Story = 1 Variant + 1 Interactive Example**
+- **Docs Tab**: Props, Token Mapping, A11y Info
+- Cursor AI로 생성한 컴포넌트 → 반드시 Docs에서 시각화
+
+---
+
+## 8️⃣ 협업 규칙 (혼자지만 포트폴리오 기준)
+
+- GitHub Flow 사용 (feature 브랜치 → main merge)
+- Commit 메시지 규칙 엄수
+- Cursor AI 코드는 feature branch에서만 적용 후 merge
+- 패키지 배포 시 CHANGELOG.md 자동 생성
+
+---
