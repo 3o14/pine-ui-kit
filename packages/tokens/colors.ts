@@ -31,11 +31,11 @@ export type ColorTokens = {
 
 const lightPalette: Record<ColorIntent, ColorScale> = {
 	primary: {
-		surface: "#2563eb",
-		surfaceHover: "#1d4ed8",
-		surfaceActive: "#1e40af",
+		surface: "#8b5cf6",
+		surfaceHover: "#7c3aed",
+		surfaceActive: "#6d28d9",
 		text: "#ffffff",
-		border: "#1d4ed8",
+		border: "#7c3aed",
 	},
 	secondary: {
 		surface: "#475569",
@@ -76,11 +76,11 @@ const lightPalette: Record<ColorIntent, ColorScale> = {
 
 const darkPalette: Record<ColorIntent, ColorScale> = {
 	primary: {
-		surface: "#3b82f6",
-		surfaceHover: "#2563eb",
-		surfaceActive: "#1d4ed8",
+		surface: "#a78bfa",
+		surfaceHover: "#8b5cf6",
+		surfaceActive: "#7c3aed",
 		text: "#0b1120",
-		border: "#2563eb",
+		border: "#8b5cf6",
 	},
 	secondary: {
 		surface: "#64748b",
