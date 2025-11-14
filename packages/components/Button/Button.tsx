@@ -81,7 +81,7 @@ const getButtonStyles = (
 	const baseStyles: React.CSSProperties = {
 		fontFamily: fontFamily.sans,
 		fontWeight: fontWeight.semibold,
-		borderRadius: radius.md,
+		borderRadius: radius.lg,
 		cursor: disabled ? "not-allowed" : "pointer",
 		transition: "all 0.2s ease-in-out",
 		display: "inline-flex",
