@@ -1,0 +1,30 @@
+# Source files
+src/
+packages/
+apps/
+
+# Storybook
+.storybook/
+
+# Config files
+vite.config.ts
+tsconfig*.json
+eslint.config.js
+
+# Development
+node_modules/
+.DS_Store
+*.log
+*.tgz
+
+# Tests & Stories
+**/*.test.tsx
+**/*.test.ts
+**/*.stories.tsx
+**/*.stories.ts
+
+# Git
+.git
+.gitignore
+.cursorignore
+
