@@ -1,0 +1,304 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Getting Started" />
+
+# 🚀 Getting Started
+
+Pie UI를 프로젝트에 설치하고 사용하는 방법을 안내합니다.
+
+---
+
+## 📦 설치
+
+### npm
+```bash
+npm install pie-ui
+```
+
+### yarn
+```bash
+yarn add pie-ui
+```
+
+### pnpm
+```bash
+pnpm add pie-ui
+```
+
+---
+
+## 🎨 기본 사용법
+
+### 1. 컴포넌트 import
+
+```tsx
+import { Button, Badge, Switch, TextField } from 'pie-ui';
+```
+
+### 2. 컴포넌트 사용
+
+```tsx
+function App() {
+  return (
+    <div>
+      <Button intent="primary" size="md">
+        Primary Button
+      </Button>
+      
+      <Badge variant="subtle" intent="success">
+        New Feature
+      </Badge>
+      
+      <Switch label="Enable notifications" />
+      
+      <TextField 
+        label="Email"
+        placeholder="Enter your email"
+        helperText="We'll never share your email"
+      />
+    </div>
+  );
+}
+```
+
+---
+
+## 🎨 테마 사용
+
+### Light/Dark Mode
+
+모든 컴포넌트는 `mode` prop으로 테마를 제어할 수 있습니다:
+
+```tsx
+<Button mode="dark" intent="primary">
+  Dark Mode Button
+</Button>
+```
+
+### 글로벌 테마 Provider (예정)
+
+향후 버전에서 ThemeProvider를 제공할 예정입니다:
+
+```tsx
+// 예정된 API
+<ThemeProvider theme="dark">
+  <App />
+</ThemeProvider>
+```
+
+---
+
+## 🎯 디자인 토큰
+
+### Intent (색상 테마)
+
+모든 컴포넌트는 6가지 intent를 지원합니다:
+
+- `primary` - 주요 액션
+- `secondary` - 보조 액션
+- `success` - 성공, 완료
+- `warning` - 주의, 경고
+- `danger` - 위험, 삭제
+- `neutral` - 중립적인 정보
+
+```tsx
+<Button intent="primary">Primary</Button>
+<Button intent="success">Success</Button>
+<Button intent="danger">Delete</Button>
+```
+
+### Size
+
+대부분의 컴포넌트는 3가지 크기를 지원합니다:
+
+- `sm` - Small
+- `md` - Medium (기본)
+- `lg` - Large
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+```
+
+---
+
+## 🔧 TypeScript
+
+Pie UI는 TypeScript로 작성되어 완벽한 타입 지원을 제공합니다:
+
+```tsx
+import type { ButtonProps, BadgeProps } from 'pie-ui';
+
+const MyButton: React.FC<ButtonProps> = (props) => {
+  return <Button {...props} />;
+};
+```
+
+---
+
+## ♿ 접근성
+
+모든 컴포넌트는 WCAG 2.1 가이드라인을 준수합니다:
+
+- ✅ 키보드 네비게이션
+- ✅ 스크린 리더 지원
+- ✅ Focus indicators
+- ✅ ARIA 속성
+
+```tsx
+// 자동으로 접근성 속성이 적용됩니다
+<Switch 
+  label="Enable feature"
+  aria-label="Enable feature toggle"
+/>
+```
+
+---
+
+## 📱 반응형
+
+컴포넌트는 반응형을 지원하지만, 레이아웃은 사용자가 직접 제어합니다:
+
+```tsx
+<div style={{ 
+  display: 'flex', 
+  flexDirection: 'column',
+  gap: '1rem'
+}}>
+  <Button fullWidth>Full Width Button</Button>
+  <TextField fullWidth placeholder="Full width input" />
+</div>
+```
+
+---
+
+## 🎭 스타일 커스터마이징
+
+### className 사용
+
+모든 컴포넌트는 `className` prop을 지원합니다:
+
+```tsx
+<Button className="my-custom-class">
+  Custom Styled Button
+</Button>
+```
+
+### style prop 사용
+
+인라인 스타일도 지원합니다:
+
+```tsx
+<Badge style={{ marginLeft: '8px' }}>
+  Custom Badge
+</Badge>
+```
+
+---
+
+## 💡 예제
+
+### 로그인 폼
+
+```tsx
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [remember, setRemember] = useState(false);
+
+  return (
+    <form>
+      <TextField
+        type="email"
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        fullWidth
+      />
+      
+      <TextField
+        type="password"
+        label="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        fullWidth
+      />
+      
+      <Checkbox
+        label="Remember me"
+        checked={remember}
+        onChange={(e) => setRemember(e.target.checked)}
+      />
+      
+      <Button type="submit" intent="primary" fullWidth>
+        Sign In
+      </Button>
+    </form>
+  );
+}
+```
+
+### 알림 카운트
+
+```tsx
+function NotificationIcon() {
+  const [count, setCount] = useState(5);
+  
+  return (
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <span style={{ fontSize: '1.5rem' }}>🔔</span>
+      {count > 0 && (
+        <Badge
+          size="sm"
+          intent="danger"
+          rounded
+          style={{ 
+            position: 'absolute', 
+            top: -5, 
+            right: -10 
+          }}
+        >
+          {count}
+        </Badge>
+      )}
+    </div>
+  );
+}
+```
+
+---
+
+## 🐛 문제 해결
+
+### Storybook과 함께 사용
+
+Storybook 환경에서는 이미 설정되어 있습니다. 추가 설정이 필요하지 않습니다.
+
+### Next.js와 함께 사용
+
+```tsx
+// app/layout.tsx
+import 'pie-ui/styles.css'; // 예정된 기능
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+---
+
+## 📚 다음 단계
+
+- [Changelog](/story/changelog--page) - 버전 히스토리 확인
+- [Components](/story/components-badge--default) - 모든 컴포넌트 둘러보기
+- GitHub - 소스 코드 확인 (예정)
+
+---
+
+궁금한 점이 있으시면 GitHub Issues에 남겨주세요!
+

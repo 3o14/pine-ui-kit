@@ -1,0 +1,99 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Changelog" />
+
+# 📝 Changelog
+
+모든 주요 변경사항은 이 페이지에 기록됩니다.
+
+---
+
+## [Unreleased]
+
+### Added
+- 🎨 Badge 컴포넌트 추가
+  - 3가지 variant (solid, outline, subtle)
+  - 6가지 intent 색상
+  - Dot indicator 지원
+  - Pill 형태 지원
+
+### Changed
+- 🔧 Storybook 설정 개선
+  - TypeScript Props 자동 문서화
+  - Docs 페이지 목차 추가
+  - 컴포넌트 정렬 순서 설정
+
+### Fixed
+- 🐛 React 18로 다운그레이드 (Storybook 호환성)
+- 🐛 Rolldown-Vite → 정식 Vite로 변경 (안정성)
+
+---
+
+## [0.1.0] - 2024-11-16
+
+### Added
+- 🎉 초기 릴리즈
+- ✅ Button 컴포넌트
+  - 3가지 variant (solid, outline, ghost)
+  - 6가지 intent 색상
+  - 3가지 size
+- ✅ Checkbox 컴포넌트
+  - 체크마크 애니메이션
+  - 접근성 지원
+- ✅ Switch 컴포넌트
+  - 부드러운 토글 애니메이션
+  - Spring 효과
+- ✅ TextField 컴포넌트
+  - Outline/Filled variant
+  - 에러/성공 상태
+  - Helper text 지원
+- ✅ Dialog 컴포넌트
+  - Portal 렌더링
+  - ESC/Overlay 닫기
+  - 애니메이션 지원
+
+### Design System
+- 🎨 디자인 토큰 시스템 구축
+  - Colors (Light/Dark 테마)
+  - Typography
+  - Spacing
+  - Radius
+  - Shadow
+- 🎨 Vanilla Extract CSS-in-JS
+- 🎨 Recipe 패턴 적용
+
+### Documentation
+- 📚 Storybook 8 설정
+- 📚 각 컴포넌트별 10+ Stories
+- 📚 접근성(A11y) 테스트 추가
+
+---
+
+## 버전 관리 규칙
+
+이 프로젝트는 [Semantic Versioning](https://semver.org/)을 따릅니다:
+
+- **MAJOR** (1.0.0): Breaking changes
+- **MINOR** (0.1.0): 새로운 기능 추가 (하위 호환)
+- **PATCH** (0.0.1): 버그 수정 (하위 호환)
+
+---
+
+## 다음 계획
+
+### v0.2.0 (예정)
+- [ ] Dropdown 컴포넌트
+- [ ] Tooltip 컴포넌트
+- [ ] Toast/Notification 컴포넌트
+- [ ] 다크 모드 자동 전환
+
+### v0.3.0 (예정)
+- [ ] Form 컴포넌트 (React Hook Form 통합)
+- [ ] Table 컴포넌트
+- [ ] 성능 최적화
+
+### v1.0.0 (목표)
+- [ ] 프로덕션 레디
+- [ ] 완전한 테스트 커버리지
+- [ ] npm 배포
+
