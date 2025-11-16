@@ -8,6 +8,14 @@ const preview: Preview = {
        date: /Date$/i,
       },
     },
+    docs: {
+      toc: true,
+    },
+    options: {
+      storySort: {
+        order: ['Components', ['Badge', 'Button', 'Checkbox', 'Dialog', 'Switch', 'TextField']],
+      },
+    },
   },
 };
 
