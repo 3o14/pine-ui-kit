@@ -65,7 +65,7 @@ function App() {
 
 ## Documentation
 
-**Visit our [Storybook documentation](https://github.com/3o14/pie-ui#readme) for:**
+**Visit our [Storybook documentation](https://3o14.github.io/pie-ui/) for:**
 
 - **Getting Started Guide** — Installation and usage
 - **Component API** — Props, variants, and examples
@@ -124,6 +124,7 @@ This project is licensed under the [MIT License](LICENSE) — feel free to use i
 <div align="center">
   <p>Built with ❤️ for the design systems community</p>
   <p>
+    <a href="https://3o14.github.io/pie-ui/">Documentation</a> •
     <a href="https://github.com/3o14/pie-ui">GitHub</a> •
     <a href="https://www.npmjs.com/package/@3o14/pie-ui">npm</a>
   </p>
