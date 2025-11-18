@@ -1,96 +1,130 @@
-# 🥧 Pie UI
+<div align="center">
+  <h1>🥧 Pie UI</h1>
+  <p><strong>A modern React component library built with design tokens at its core</strong></p>
+  
+  <p>
+    <a href="https://www.npmjs.com/package/@3o14/pie-ui"><img src="https://img.shields.io/npm/v/@3o14/pie-ui?style=flat-square" alt="npm version" /></a>
+    <a href="https://www.npmjs.com/package/@3o14/pie-ui"><img src="https://img.shields.io/npm/dm/@3o14/pie-ui?style=flat-square" alt="npm downloads" /></a>
+    <a href="https://github.com/3o14/pie-ui/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@3o14/pie-ui?style=flat-square" alt="license" /></a>
+  </p>
+  
+  <p>
+    Pie UI is a <strong>token-driven component library</strong> for React applications.<br />
+    Built with TypeScript, accessibility, and developer experience in mind.
+  </p>
+</div>
 
-**React + TypeScript 기반의 모던 UI 컴포넌트 라이브러리**
+---
 
-디자인 토큰 우선 접근 방식으로 구축된 확장 가능하고 접근성 있는 UI 컴포넌트 라이브러리입니다.
+## Features
 
-## ✨ 특징
+- **Token-First Design** — Consistent theming through design tokens
+- **Light & Dark Mode** — Built-in theme variants out of the box
+- **Accessible** — WCAG 2.1 compliant components
+- **Tree-Shakeable** — Import only what you need
+- **TypeScript Native** — First-class TypeScript support
+- **Zero-Runtime CSS** — Powered by Vanilla Extract
 
-- 🎨 **토큰 기반 디자인 시스템** - 일관된 디자인 언어
-- 🌗 **라이트/다크 모드** - 내장 테마 지원
-- ♿ **접근성 우선** - WCAG 2.1 준수
-- 📦 **Tree-shakeable** - 최적화된 번들 크기
-- 🔧 **TypeScript** - 완벽한 타입 지원
-- 🎭 **Vanilla Extract** - Zero-runtime CSS-in-JS
+## Quick Start
 
-## 📚 문서
-
-**전체 문서는 Storybook에서 확인하세요:**
+Install Pie UI using your preferred package manager:
 
 ```bash
-pnpm install
-pnpm run storybook
+npm install @3o14/pie-ui
+# or
+pnpm add @3o14/pie-ui
+# or
+yarn add @3o14/pie-ui
 ```
 
-Storybook에서 다음을 확인할 수 있습니다:
-- 📖 **Introduction** - 프로젝트 소개
-- 🚀 **Getting Started** - 설치 및 사용법
-- 📝 **Changelog** - 버전 히스토리
-- 🧩 **Components** - 모든 컴포넌트 문서 및 예제
-
-## 🧩 컴포넌트
-
-- **Badge** - 상태, 레이블, 카운트 표시
-- **Button** - 다양한 variant와 상태
-- **Checkbox** - 체크박스 입력
-- **Dialog** - 모달 대화상자
-- **Switch** - 토글 스위치
-- **TextField** - 텍스트 입력 필드
-
-## 🚀 빠른 시작
+Import components and start building:
 
 ```tsx
-import { Button, Badge } from 'pie-ui';
+import { Button, Badge, TextField, Switch } from "@3o14/pie-ui";
+import "@3o14/pie-ui/style.css";
 
 function App() {
-  return (
-    <>
-      <Button intent="primary" size="md">
-        Click me
-      </Button>
-      <Badge variant="subtle" intent="success">
-        New
-      </Badge>
-    </>
-  );
+	return (
+		<div>
+			<Button intent="primary" size="md">
+				Get Started
+			</Button>
+			<Badge variant="solid" intent="success">
+				New
+			</Badge>
+			<Switch size="md" intent="primary" />
+			<TextField
+				label="Email"
+				placeholder="you@example.com"
+				variant="outline"
+			/>
+		</div>
+	);
 }
 ```
 
-## 🛠️ 개발
+## Documentation
+
+**Visit our [Storybook documentation](https://github.com/3o14/pie-ui#readme) for:**
+
+- **Getting Started Guide** — Installation and usage
+- **Component API** — Props, variants, and examples
+- **Design Tokens** — Theming and customization
+- **Accessibility** — A11y guidelines and best practices
+
+To run Storybook locally:
 
 ```bash
-# 의존성 설치
+git clone https://github.com/3o14/pie-ui.git
+cd pie-ui
 pnpm install
-
-# Storybook 실행
 pnpm run storybook
-
-# Lint 검사
-pnpm run lint
-
-# Storybook 빌드
-pnpm run build-storybook
 ```
 
-## 📦 기술 스택
+## Components
 
-- **React 18** - UI 라이브러리
-- **TypeScript** - 타입 안전성
-- **Vanilla Extract** - CSS-in-JS (Zero-runtime)
-- **Vite** - 빌드 도구
-- **Storybook 8** - 문서화 및 개발 환경
-- **ESLint** - 코드 품질
+| Component     | Description                            |
+| ------------- | -------------------------------------- |
+| **Badge**     | Display status, labels, or counts      |
+| **Button**    | Primary actions with multiple variants |
+| **Checkbox**  | Selectable input with custom styling   |
+| **Dialog**    | Modal dialogs with Portal support      |
+| **Dropdown**  | Select input with custom options       |
+| **Switch**    | Toggle between two states              |
+| **TextField** | Text input with validation states      |
 
-## 🎯 프로젝트 목표
+## Tech Stack
 
-이 프로젝트는 **디자인 시스템 역할로의 전환**을 목표로 하는 학습 프로젝트입니다:
+Built with modern tools for optimal developer experience:
 
-- ✅ React + TypeScript 기반 컴포넌트 개발
-- ✅ 디자인 토큰 관리 및 적용
-- ✅ Storybook을 통한 문서화
-- ✅ 접근성(A11y) 고려
-- 🔄 npm 배포 및 버전 관리 (예정)
+- [React 18](https://react.dev/) — UI library
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [Vanilla Extract](https://vanilla-extract.style/) — Zero-runtime CSS-in-TS
+- [Vite](https://vitejs.dev/) — Lightning-fast build tool
+- [Storybook 8](https://storybook.js.org/) — Component documentation
 
-## 📄 라이선스
+## Contributing
 
-MIT License
+Contributions are welcome! This project is part of a learning journey toward building production-ready design systems.
+
+If you'd like to contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the [MIT License](LICENSE) — feel free to use it in your projects!
+
+---
+
+<div align="center">
+  <p>Built with ❤️ for the design systems community</p>
+  <p>
+    <a href="https://github.com/3o14/pie-ui">GitHub</a> •
+    <a href="https://www.npmjs.com/package/@3o14/pie-ui">npm</a>
+  </p>
+</div>
