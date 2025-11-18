@@ -2,83 +2,120 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Introduction" />
 
-# 🥧 Pie UI
+<div align="center">
+  <h1>🥧 Pie UI</h1>
+  <p><strong>A modern React component library built with design tokens at its core</strong></p>
+  
+  <p>
+    <a href="https://www.npmjs.com/package/@3o14/pie-ui"><img src="https://img.shields.io/npm/v/@3o14/pie-ui?style=flat-square" alt="npm version" /></a>
+    <a href="https://www.npmjs.com/package/@3o14/pie-ui"><img src="https://img.shields.io/npm/dm/@3o14/pie-ui?style=flat-square" alt="npm downloads" /></a>
+    <a href="https://github.com/3o14/pie-ui/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@3o14/pie-ui?style=flat-square" alt="license" /></a>
+  </p>
+  
+  <p>
+    Pie UI is a <strong>token-driven component library</strong> for React applications.<br />
+    Built with TypeScript, accessibility, and developer experience in mind.
+  </p>
+</div>
 
-**React + TypeScript 기반의 모던 UI 컴포넌트 라이브러리**
+---
 
-Pie UI는 디자인 토큰 우선 접근 방식으로 구축된 확장 가능하고 접근성 있는 UI 컴포넌트 라이브러리입니다.
+## Features
 
-## ✨ 특징
+- **Token-First Design** — Consistent theming through design tokens
+- **Light & Dark Mode** — Built-in theme variants out of the box
+- **Accessible** — WCAG 2.1 compliant components
+- **Tree-Shakeable** — Import only what you need
+- **TypeScript Native** — First-class TypeScript support
+- **Zero-Runtime CSS** — Powered by Vanilla Extract
 
-- 🎨 **토큰 기반 디자인 시스템** - 일관된 디자인 언어
-- 🌗 **라이트/다크 모드** - 내장 테마 지원
-- ♿ **접근성 우선** - WCAG 2.1 준수
-- 📦 **Tree-shakeable** - 최적화된 번들 크기
-- 🔧 **TypeScript** - 완벽한 타입 지원
-- 🎭 **Vanilla Extract** - Zero-runtime CSS-in-JS
+## Quick Start
 
-## 🎯 프로젝트 목표
-
-이 프로젝트는 디자인 시스템 역할로의 전환을 목표로 하는 학습 프로젝트입니다.
-
-- ✅ React + TypeScript 기반 컴포넌트 개발
-- ✅ 디자인 토큰 관리 및 적용
-- ✅ Storybook을 통한 문서화
-- ✅ npm 배포 및 버전 관리 경험
-
-## 📦 설치
+Install Pie UI using your preferred package manager:
 
 ```bash
-npm install pie-ui
+npm install @3o14/pie-ui
 # or
-yarn add pie-ui
+pnpm add @3o14/pie-ui
 # or
-pnpm add pie-ui
+yarn add @3o14/pie-ui
 ```
 
-## 🚀 빠른 시작
+Import components and start building:
 
 ```tsx
-import { Button, Badge } from 'pie-ui';
+import { Button, Badge, TextField, Switch } from "@3o14/pie-ui";
+import "@3o14/pie-ui/style.css";
 
 function App() {
   return (
-    <>
+    <div>
       <Button intent="primary" size="md">
-        Click me
+        Get Started
       </Button>
-      <Badge variant="subtle" intent="success">
+      <Badge variant="solid" intent="success">
         New
       </Badge>
-    </>
+      <Switch size="md" intent="primary" />
+      <TextField
+        label="Email"
+        placeholder="you@example.com"
+        variant="outline"
+      />
+    </div>
   );
 }
 ```
 
-## 🧩 컴포넌트
+## Components
 
-현재 사용 가능한 컴포넌트:
+Browse the component library in the sidebar to explore all available components with interactive examples.
 
-- **Badge** - 상태, 레이블, 카운트 표시
-- **Button** - 다양한 variant와 상태를 가진 버튼
-- **Checkbox** - 체크박스 입력
-- **Dialog** - 모달 대화상자
-- **Switch** - 토글 스위치
-- **TextField** - 텍스트 입력 필드
+| Component | Description |
+|-----------|-------------|
+| **Badge** | Display status, labels, or counts |
+| **Button** | Primary actions with multiple variants |
+| **Checkbox** | Selectable input with custom styling |
+| **Dialog** | Modal dialogs with Portal support |
+| **Dropdown** | Select input with custom options |
+| **Switch** | Toggle between two states |
+| **TextField** | Text input with validation states |
 
-## 📚 문서
+## Tech Stack
 
-각 컴포넌트의 상세 문서는 좌측 사이드바에서 확인하실 수 있습니다.
+Built with modern tools for optimal developer experience:
 
-## 🤝 기여
+- [React 18](https://react.dev/) — UI library
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [Vanilla Extract](https://vanilla-extract.style/) — Zero-runtime CSS-in-TS
+- [Vite](https://vitejs.dev/) — Lightning-fast build tool
+- [Storybook 8](https://storybook.js.org/) — Component documentation
 
-이 프로젝트는 개인 포트폴리오 목적으로 제작되었으나, 피드백과 제안은 언제나 환영합니다!
+## Contributing
 
-## 📄 라이선스
+Contributions are welcome! This project is part of a learning journey toward building production-ready design systems.
 
-MIT License
+If you'd like to contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Resources
+
+- [GitHub Repository](https://github.com/3o14/pie-ui)
+- [npm Package](https://www.npmjs.com/package/@3o14/pie-ui)
+- [Documentation](https://3o14.github.io/pie-ui/)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE) — feel free to use it in your projects!
 
 ---
 
-Made with ❤️ for learning and portfolio
+<div align="center">
+  <p>Built with ❤️ for the design systems community</p>
+</div>
 
