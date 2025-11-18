@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import clsx from "clsx";
 import * as styles from "./Dropdown.css";
 import { lightTheme, darkTheme } from "../../tokens/theme.css";
@@ -43,17 +43,6 @@ export const Dropdown = ({
 
 	const selectedOption = options.find((opt) => opt.value === value);
 
-	// Toggle dropdown
-	const handleToggle = useCallback(() => {
-		if (disabled) return;
-		if (isOpen) {
-			handleClose();
-		} else {
-			setIsOpen(true);
-			setFocusedIndex(-1);
-		}
-	}, [isOpen, disabled]);
-
 	// Close with animation
 	const handleClose = useCallback(() => {
 		setIsClosing(true);
@@ -63,6 +52,17 @@ export const Dropdown = ({
 			setFocusedIndex(-1);
 		}, 150);
 	}, []);
+
+	// Toggle dropdown
+	const handleToggle = useCallback(() => {
+		if (disabled) return;
+		if (isOpen) {
+			handleClose();
+		} else {
+			setIsOpen(true);
+			setFocusedIndex(-1);
+		}
+	}, [isOpen, disabled, handleClose]);
 
 	// Select option
 	const handleSelect = useCallback(
@@ -229,4 +229,3 @@ export const Dropdown = ({
 		</div>
 	);
 };
-
