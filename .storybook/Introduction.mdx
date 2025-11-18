@@ -2,6 +2,11 @@ import { Meta } from '@storybook/blocks';
 
 <Meta title="Introduction" />
 
+{/* 
+  ⚠️ This file is auto-generated from README.md
+  Do not edit directly - run 'pnpm run sync-readme' to update
+*/}
+
 <div align="center">
   <h1>🥧 Pie UI</h1>
   <p><strong>A modern React component library built with design tokens at its core</strong></p>
@@ -48,38 +53,54 @@ import { Button, Badge, TextField, Switch } from "@3o14/pie-ui";
 import "@3o14/pie-ui/style.css";
 
 function App() {
-  return (
-    <div>
-      <Button intent="primary" size="md">
-        Get Started
-      </Button>
-      <Badge variant="solid" intent="success">
-        New
-      </Badge>
-      <Switch size="md" intent="primary" />
-      <TextField
-        label="Email"
-        placeholder="you@example.com"
-        variant="outline"
-      />
-    </div>
-  );
+	return (
+		<div>
+			<Button intent="primary" size="md">
+				Get Started
+			</Button>
+			<Badge variant="solid" intent="success">
+				New
+			</Badge>
+			<Switch size="md" intent="primary" />
+			<TextField
+				label="Email"
+				placeholder="you@example.com"
+				variant="outline"
+			/>
+		</div>
+	);
 }
+```
+
+## Documentation
+
+**Visit our [Storybook documentation](https://3o14.github.io/pie-ui/) for:**
+
+- **Getting Started Guide** — Installation and usage
+- **Component API** — Props, variants, and examples
+- **Design Tokens** — Theming and customization
+- **Accessibility** — A11y guidelines and best practices
+
+To run Storybook locally:
+
+```bash
+git clone https://github.com/3o14/pie-ui.git
+cd pie-ui
+pnpm install
+pnpm run storybook
 ```
 
 ## Components
 
-Browse the component library in the sidebar to explore all available components with interactive examples.
-
-| Component | Description |
-|-----------|-------------|
-| **Badge** | Display status, labels, or counts |
-| **Button** | Primary actions with multiple variants |
-| **Checkbox** | Selectable input with custom styling |
-| **Dialog** | Modal dialogs with Portal support |
-| **Dropdown** | Select input with custom options |
-| **Switch** | Toggle between two states |
-| **TextField** | Text input with validation states |
+| Component     | Description                            |
+| ------------- | -------------------------------------- |
+| **Badge**     | Display status, labels, or counts      |
+| **Button**    | Primary actions with multiple variants |
+| **Checkbox**  | Selectable input with custom styling   |
+| **Dialog**    | Modal dialogs with Portal support      |
+| **Dropdown**  | Select input with custom options       |
+| **Switch**    | Toggle between two states              |
+| **TextField** | Text input with validation states      |
 
 ## Tech Stack
 
@@ -103,12 +124,6 @@ If you'd like to contribute:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## Resources
-
-- [GitHub Repository](https://github.com/3o14/pie-ui)
-- [npm Package](https://www.npmjs.com/package/@3o14/pie-ui)
-- [Documentation](https://3o14.github.io/pie-ui/)
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE) — feel free to use it in your projects!
@@ -117,5 +132,10 @@ This project is licensed under the [MIT License](LICENSE) — feel free to use i
 
 <div align="center">
   <p>Built with ❤️ for the design systems community</p>
+  <p>
+    <a href="https://3o14.github.io/pie-ui/">Documentation</a> •
+    <a href="https://github.com/3o14/pie-ui">GitHub</a> •
+    <a href="https://www.npmjs.com/package/@3o14/pie-ui">npm</a>
+  </p>
 </div>
 

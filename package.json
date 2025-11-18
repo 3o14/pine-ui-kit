@@ -36,7 +36,8 @@
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build",
+		"build-storybook": "pnpm run sync-readme && storybook build",
+		"sync-readme": "node scripts/sync-readme.js",
 		"prepublishOnly": "pnpm run build:lib"
 	},
 	"dependencies": {
