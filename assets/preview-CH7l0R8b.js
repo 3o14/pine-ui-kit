@@ -1,0 +1,1 @@
+const o={parameters:{controls:{matchers:{color:/(background|color)$/i,date:/Date$/i}},docs:{toc:!0},options:{storySort:{order:["Components",["Badge","Button","Checkbox","Dialog","Switch","TextField"]]}}}};export{o as default};
