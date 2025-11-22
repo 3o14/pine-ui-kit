@@ -35,6 +35,10 @@
 	"files": [
 		"dist"
 	],
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build && tsc --project tsconfig.build.json",
@@ -47,7 +51,7 @@
 		"prepublishOnly": "pnpm run build:lib",
 		"changeset": "changeset",
 		"version": "changeset version",
-		"release": "pnpm run build:lib && changeset publish"
+		"release": "pnpm run build:lib && npm publish --provenance --access public"
 	},
 	"dependencies": {
 		"clsx": "^2.1.1"
