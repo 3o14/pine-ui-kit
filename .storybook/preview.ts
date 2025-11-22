@@ -22,7 +22,17 @@ const preview: Preview = {
 			storySort: {
 				order: [
 					"Components",
-					["Badge", "Button", "Checkbox", "Dialog", "Switch", "TextField"],
+					[
+						"Badge",
+						"Button",
+						"Checkbox",
+						"Dialog",
+						"Dropdown",
+						"Icon",
+						"Switch",
+						"Text",
+						"TextField",
+					],
 				],
 			},
 		},
