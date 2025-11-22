@@ -1,4 +1,11 @@
 import type { Preview } from '@storybook/react'
+import { lightTheme } from '../packages/tokens/theme.css'
+import '../packages/tokens/theme.css'
+
+// Apply light theme to storybook root
+if (typeof document !== 'undefined') {
+  document.documentElement.classList.add(lightTheme);
+}
 
 const preview: Preview = {
   parameters: {
