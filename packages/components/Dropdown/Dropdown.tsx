@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Dropdown.css";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme } from "../../tokens/theme.css";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type DropdownSize = "sm" | "md" | "lg";
 
@@ -19,7 +20,6 @@ export interface DropdownProps {
 	size?: DropdownSize;
 	fullWidth?: boolean;
 	disabled?: boolean;
-	mode?: "light" | "dark";
 	className?: string;
 }
 
@@ -31,7 +31,6 @@ export const Dropdown = ({
 	size = "md",
 	fullWidth = false,
 	disabled = false,
-	mode = "light",
 	className,
 }: DropdownProps) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +38,8 @@ export const Dropdown = ({
 	const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const menuRef = useRef<HTMLDivElement>(null);
-	const themeClass = mode === "dark" ? darkTheme : lightTheme;
+	const themeContext = useContext(ThemeContext);
+	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	const selectedOption = options.find((opt) => opt.value === value);
 

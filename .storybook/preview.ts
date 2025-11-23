@@ -2,7 +2,7 @@ import type { Preview } from "@storybook/react";
 import { lightTheme, darkTheme } from "../packages/tokens/theme.css";
 import "../packages/tokens/theme.css";
 
-	const preview: Preview = {
+const preview: Preview = {
 	parameters: {
 		controls: {
 			matchers: {
@@ -31,20 +31,20 @@ import "../packages/tokens/theme.css";
 				],
 			},
 		},
-		themes: {
-			default: "light",
-			list: [
-				{
-					name: "light",
-					class: lightTheme,
-					color: "#ffffff",
-				},
-				{
-					name: "dark",
-					class: darkTheme,
-					color: "#0b1120",
-				},
-			],
+	},
+	globalTypes: {
+		theme: {
+			description: "Global theme for components",
+			defaultValue: "light",
+			toolbar: {
+				title: "Theme",
+				icon: "circlehollow",
+				items: [
+					{ value: "light", title: "Light" },
+					{ value: "dark", title: "Dark" },
+				],
+				dynamicTitle: true,
+			},
 		},
 	},
 	decorators: [
@@ -54,7 +54,8 @@ import "../packages/tokens/theme.css";
 			const themeClass = theme === "dark" ? darkTheme : lightTheme;
 			
 			if (typeof document !== "undefined") {
-				document.documentElement.className = themeClass;
+				document.documentElement.classList.remove(lightTheme, darkTheme);
+				document.documentElement.classList.add(themeClass);
 			}
 			
 			return Story();

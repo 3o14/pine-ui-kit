@@ -1,4 +1,3 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TextField } from "./TextField";
 
@@ -25,11 +24,6 @@ const meta = {
 			options: ["default", "error", "success"],
 			description: "TextField status state",
 		},
-		mode: {
-			control: "radio",
-			options: ["light", "dark"],
-			description: "Color mode (theme)",
-		},
 		fullWidth: {
 			control: "boolean",
 			description: "Full width field",
@@ -54,7 +48,6 @@ export const Default: Story = {
 		placeholder: "Enter text...",
 		size: "md",
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -66,7 +59,6 @@ export const WithLabel: Story = {
 		type: "email",
 		size: "md",
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -78,7 +70,6 @@ export const WithHelperText: Story = {
 		helperText: "Choose a unique username",
 		size: "md",
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -100,7 +91,6 @@ export const Sizes: Story = {
 	),
 	args: {
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -131,7 +121,6 @@ export const Variants: Story = {
 	),
 	args: {
 		size: "md",
-		mode: "light",
 	},
 };
 
@@ -171,7 +160,6 @@ export const StatusStates: Story = {
 	),
 	args: {
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -184,7 +172,6 @@ export const Error: Story = {
 		error: true,
 		helperText: "Password must be at least 8 characters",
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -216,7 +203,6 @@ export const Disabled: Story = {
 	args: {
 		disabled: true,
 		helperText: "This field is disabled",
-		mode: "light",
 	},
 };
 
@@ -233,7 +219,6 @@ export const FullWidth: Story = {
 		fullWidth: true,
 		helperText: "Takes up all available width",
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -277,7 +262,6 @@ export const DarkMode: Story = {
 	),
 	args: {
 		variant: "outline",
-		mode: "dark",
 	},
 };
 
@@ -323,7 +307,6 @@ export const FormExample: Story = {
 	),
 	args: {
 		variant: "outline",
-		mode: "light",
 	},
 };
 
@@ -336,7 +319,6 @@ export const Playground: Story = {
 		size: "md",
 		variant: "outline",
 		status: "default",
-		mode: "light",
 		disabled: false,
 		error: false,
 		fullWidth: false,

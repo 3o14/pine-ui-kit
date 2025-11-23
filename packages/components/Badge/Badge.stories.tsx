@@ -56,15 +56,6 @@ const meta = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		mode: {
-			control: "select",
-			options: ["light", "dark"],
-			description: "테마 모드",
-			table: {
-				type: { summary: '"light" | "dark"' },
-				defaultValue: { summary: "light" },
-			},
-		},
 	},
 } satisfies Meta<typeof Badge>;
 
@@ -271,30 +262,20 @@ export const DarkMode: Story = {
 		>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge mode="dark" intent="primary">
-						Primary
-					</Badge>
-					<Badge mode="dark" intent="secondary">
-						Secondary
-					</Badge>
-					<Badge mode="dark" intent="success">
-						Success
-					</Badge>
-					<Badge mode="dark" intent="warning">
-						Warning
-					</Badge>
-					<Badge mode="dark" intent="danger">
-						Danger
-					</Badge>
+					<Badge intent="primary">Primary</Badge>
+					<Badge intent="secondary">Secondary</Badge>
+					<Badge intent="success">Success</Badge>
+					<Badge intent="warning">Warning</Badge>
+					<Badge intent="danger">Danger</Badge>
 				</div>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge mode="dark" variant="outline" intent="primary">
+					<Badge variant="outline" intent="primary">
 						Outline
 					</Badge>
-					<Badge mode="dark" variant="subtle" intent="success">
+					<Badge variant="subtle" intent="success">
 						Subtle
 					</Badge>
-					<Badge mode="dark" showDot intent="primary" rounded>
+					<Badge showDot intent="primary" rounded>
 						With Dot
 					</Badge>
 				</div>
