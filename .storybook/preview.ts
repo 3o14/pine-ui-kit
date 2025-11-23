@@ -1,13 +1,8 @@
 import type { Preview } from "@storybook/react";
-import { lightTheme } from "../packages/tokens/theme.css";
+import { lightTheme, darkTheme } from "../packages/tokens/theme.css";
 import "../packages/tokens/theme.css";
 
-// Apply light theme to storybook root
-if (typeof document !== "undefined") {
-	document.documentElement.classList.add(lightTheme);
-}
-
-const preview: Preview = {
+	const preview: Preview = {
 	parameters: {
 		controls: {
 			matchers: {
@@ -36,7 +31,35 @@ const preview: Preview = {
 				],
 			},
 		},
+		themes: {
+			default: "light",
+			list: [
+				{
+					name: "light",
+					class: lightTheme,
+					color: "#ffffff",
+				},
+				{
+					name: "dark",
+					class: darkTheme,
+					color: "#0b1120",
+				},
+			],
+		},
 	},
+	decorators: [
+		(Story, context) => {
+			// Apply theme class to document root
+			const theme = context.globals.theme || "light";
+			const themeClass = theme === "dark" ? darkTheme : lightTheme;
+			
+			if (typeof document !== "undefined") {
+				document.documentElement.className = themeClass;
+			}
+			
+			return Story();
+		},
+	],
 };
 
 export default preview;

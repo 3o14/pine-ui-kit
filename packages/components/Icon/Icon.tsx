@@ -18,7 +18,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
 
 /**
  * Icon component for rendering SVG icons with consistent sizing and colors.
- *
+ * 
  * @example
  * ```tsx
  * // With custom SVG
@@ -26,7 +26,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
  *   <circle cx="12" cy="12" r="10" />
  *   <path d="M12 6v6l4 2" />
  * </Icon>
- *
+ * 
  * // With lucide-react (optional dependency)
  * import { Heart } from 'lucide-react';
  * <Icon size="lg" intent="danger">
@@ -51,7 +51,7 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
 				children as React.ReactElement,
 				{
 					className: combinedClassName,
-					...props,
+				...props,
 				} as React.SVGProps<SVGSVGElement>
 			);
 		}
