@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Badge.css";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type BadgeSize = "sm" | "md" | "lg";
 export type BadgeVariant = "solid" | "outline" | "subtle";
@@ -14,7 +15,6 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 	intent?: BadgeIntent;
 	rounded?: boolean;
 	showDot?: boolean;
-	mode?: "light" | "dark";
 	children: React.ReactNode;
 }
 
@@ -24,12 +24,16 @@ export const Badge = ({
 	intent = "primary",
 	rounded = false,
 	showDot = false,
-	mode = "light",
 	children,
 	className,
 	...props
 }: BadgeProps) => {
-	const themeClass = mode === "dark" ? darkTheme : lightTheme;
+	// ThemeProvider의 테마를 자동으로 감지 (없으면 기본값 사용)
+	// useContext는 항상 최상위에서 호출되어야 하므로 조건부 호출 문제 없음
+	const themeContext = useContext(ThemeContext);
+
+	// 항상 ThemeProvider의 테마를 사용 (없으면 기본값 light 사용)
+	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	return (
 		<span

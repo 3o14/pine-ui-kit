@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import {
 	container,
@@ -9,7 +9,8 @@ import {
 	helperText as helperTextStyle,
 	helperTextStatus,
 } from "./TextField.css";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme } from "../../tokens/theme.css";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type TextFieldSize = "sm" | "md" | "lg";
 export type TextFieldVariant = "outline" | "filled";
@@ -24,7 +25,6 @@ export interface TextFieldProps
 	helperText?: string;
 	error?: boolean;
 	fullWidth?: boolean;
-	mode?: "light" | "dark";
 }
 
 export const TextField = ({
@@ -35,12 +35,12 @@ export const TextField = ({
 	helperText,
 	error = false,
 	fullWidth = false,
-	mode = "light",
 	disabled = false,
 	className,
 	...props
 }: TextFieldProps) => {
-	const themeClass = mode === "dark" ? darkTheme : lightTheme;
+	const themeContext = useContext(ThemeContext);
+	const themeClass = themeContext?.themeClass ?? lightTheme;
 	const finalStatus = error ? "error" : status;
 
 	return (

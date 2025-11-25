@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Switch.css";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type SwitchSize = "sm" | "md" | "lg";
 export type SwitchIntent = ColorIntent;
@@ -14,7 +15,6 @@ export interface SwitchProps
 	label?: string;
 	checked?: boolean;
 	disabled?: boolean;
-	mode?: "light" | "dark";
 }
 
 export const Switch = ({
@@ -23,12 +23,12 @@ export const Switch = ({
 	label,
 	checked: controlledChecked,
 	disabled = false,
-	mode = "light",
 	className,
 	onChange,
 	...props
 }: SwitchProps) => {
-	const themeClass = mode === "dark" ? darkTheme : lightTheme;
+	const themeContext = useContext(ThemeContext);
+	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	// Uncontrolled 모드 지원
 	const [internalChecked, setInternalChecked] = React.useState(false);
