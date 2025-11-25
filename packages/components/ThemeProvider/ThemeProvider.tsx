@@ -5,6 +5,7 @@ import {
 	type ThemeMode,
 	type ThemeContextValue,
 } from "./ThemeContext";
+import clsx from "clsx";
 
 export interface ThemeProviderProps {
 	children: React.ReactNode;
@@ -16,6 +17,8 @@ export interface ThemeProviderProps {
 	 * @default true
 	 */
 	syncWithSystem?: boolean;
+	className?: string;
+	style?: React.CSSProperties;
 }
 
 /**
@@ -54,6 +57,8 @@ export const ThemeProvider = ({
 	mode: controlledMode,
 	onModeChange,
 	syncWithSystem = true,
+	className,
+	style,
 }: ThemeProviderProps) => {
 	// defaultMode가 없으면 시스템 테마를 기본값으로 사용
 	const getInitialMode = (): ThemeMode => {
@@ -144,7 +149,9 @@ export const ThemeProvider = ({
 
 	return (
 		<ThemeContext.Provider value={value}>
-			<div className={themeClass}>{children}</div>
+			<div className={clsx(themeClass, className)} style={style}>
+				{children}
+			</div>
 		</ThemeContext.Provider>
 	);
 };

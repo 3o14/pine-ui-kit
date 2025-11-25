@@ -1,6 +1,21 @@
-import type { Preview } from "@storybook/react";
-import { lightTheme, darkTheme } from "../packages/tokens/theme.css";
+import React from "react";
+import type { Decorator, Preview } from "@storybook/react";
 import "../packages/tokens/theme.css";
+import { ThemeWrapper } from "./ThemeWrapper";
+import {
+	appearanceTheme,
+	type AppearanceMode,
+} from "../packages/tokens/appearanceTheme";
+
+const withTheme: Decorator = (Story, context) => {
+	const theme = (context.globals?.theme || "light") as AppearanceMode;
+
+	return (
+		<ThemeWrapper mode={theme}>
+			<Story />
+		</ThemeWrapper>
+	);
+};
 
 const preview: Preview = {
 	parameters: {
@@ -23,7 +38,6 @@ const preview: Preview = {
 						"Checkbox",
 						"Dialog",
 						"Dropdown",
-						"Icon",
 						"Switch",
 						"Text",
 						"TextField",
@@ -31,10 +45,17 @@ const preview: Preview = {
 				],
 			},
 		},
+		backgrounds: {
+			default: "light",
+			values: [
+				{ name: "light", value: appearanceTheme.light.bodyBackground },
+				{ name: "dark", value: appearanceTheme.dark.bodyBackground },
+			],
+		},
 	},
 	globalTypes: {
 		theme: {
-			description: "Global theme for components",
+			description: "Global theme for components and background",
 			defaultValue: "light",
 			toolbar: {
 				title: "Theme",
@@ -47,20 +68,7 @@ const preview: Preview = {
 			},
 		},
 	},
-	decorators: [
-		(Story, context) => {
-			// Apply theme class to document root
-			const theme = context.globals.theme || "light";
-			const themeClass = theme === "dark" ? darkTheme : lightTheme;
-			
-			if (typeof document !== "undefined") {
-				document.documentElement.classList.remove(lightTheme, darkTheme);
-				document.documentElement.classList.add(themeClass);
-			}
-			
-			return Story();
-		},
-	],
+	decorators: [withTheme],
 };
 
 export default preview;
