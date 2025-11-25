@@ -1,6 +1,6 @@
 {
 	"name": "@3o14-0711/pie-ui",
-	"version": "0.2.0",
+	"version": "1.0.0",
 	"type": "module",
 	"license": "MIT",
 	"description": "React + TypeScript UI component library with design tokens",
