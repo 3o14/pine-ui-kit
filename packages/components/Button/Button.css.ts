@@ -322,3 +322,4 @@ export const ghost = styleVariants({
 export const fullWidth = style({
 	width: "100%",
 });
+

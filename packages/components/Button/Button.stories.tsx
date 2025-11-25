@@ -32,11 +32,6 @@ const meta = {
 			],
 			description: "Color intent based on design tokens",
 		},
-		mode: {
-			control: "radio",
-			options: ["light", "dark"],
-			description: "Color mode (theme)",
-		},
 		fullWidth: {
 			control: "boolean",
 			description: "Full width button",
@@ -58,7 +53,6 @@ export const Primary: Story = {
 		intent: "primary",
 		variant: "solid",
 		size: "lg",
-		mode: "light",
 	},
 };
 
@@ -79,7 +73,6 @@ export const Variants: Story = {
 	),
 	args: {
 		intent: "primary",
-		mode: "light",
 	},
 };
 
@@ -101,7 +94,6 @@ export const Sizes: Story = {
 	args: {
 		intent: "primary",
 		variant: "solid",
-		mode: "light",
 	},
 };
 
@@ -131,7 +123,6 @@ export const Intents: Story = {
 	),
 	args: {
 		variant: "solid",
-		mode: "light",
 	},
 };
 
@@ -170,7 +161,6 @@ export const DarkMode: Story = {
 	),
 	args: {
 		variant: "solid",
-		mode: "dark",
 	},
 };
 
@@ -192,7 +182,6 @@ export const Disabled: Story = {
 	args: {
 		disabled: true,
 		intent: "primary",
-		mode: "light",
 	},
 };
 
@@ -207,7 +196,6 @@ export const FullWidth: Story = {
 		fullWidth: true,
 		intent: "primary",
 		variant: "solid",
-		mode: "light",
 	},
 };
 
@@ -218,7 +206,6 @@ export const Playground: Story = {
 		intent: "primary",
 		variant: "solid",
 		size: "md",
-		mode: "light",
 		disabled: false,
 		fullWidth: false,
 	},

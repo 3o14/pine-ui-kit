@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Button.css";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type ButtonVariant = "solid" | "outline" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
@@ -15,7 +16,6 @@ export interface ButtonProps
 	intent?: ButtonIntent;
 	fullWidth?: boolean;
 	disabled?: boolean;
-	mode?: "light" | "dark";
 }
 
 export const Button = ({
@@ -24,12 +24,12 @@ export const Button = ({
 	intent = "primary",
 	fullWidth = false,
 	disabled = false,
-	mode = "light",
 	children,
 	className,
 	...props
 }: ButtonProps) => {
-	const themeClass = mode === "dark" ? darkTheme : lightTheme;
+	const themeContext = useContext(ThemeContext);
+	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	return (
 		<button

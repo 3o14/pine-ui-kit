@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useContext } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import * as styles from "./Dialog.css";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme } from "../../tokens/theme.css";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type DialogSize = "sm" | "md" | "lg" | "xl" | "full";
 
@@ -17,7 +18,6 @@ export interface DialogProps {
 	showCloseButton?: boolean;
 	closeOnOverlayClick?: boolean;
 	closeOnEscape?: boolean;
-	mode?: "light" | "dark";
 	className?: string;
 }
 
@@ -32,13 +32,13 @@ export const Dialog = ({
 	showCloseButton = true,
 	closeOnOverlayClick = true,
 	closeOnEscape = true,
-	mode = "light",
 	className,
 }: DialogProps) => {
 	const [isClosing, setIsClosing] = useState(false);
 	const [mounted, setMounted] = useState(false);
 	const dialogRef = useRef<HTMLDivElement>(null);
-	const themeClass = mode === "dark" ? darkTheme : lightTheme;
+	const themeContext = useContext(ThemeContext);
+	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	useEffect(() => {
 		setMounted(true);
