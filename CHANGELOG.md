@@ -1,5 +1,11 @@
 # @3o14/pie-ui
 
+## 1.0.0
+
+### Major Changes
+
+- 5621030: 스토리북 다크모드 세팅
+
 ## 0.2.0
 
 ### Minor Changes
