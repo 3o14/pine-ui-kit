@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { lightTheme, darkTheme } from "../../tokens/theme.css";
-import { ThemeContext, type ThemeMode, type ThemeContextValue } from "./ThemeContext";
+import {
+	ThemeContext,
+	type ThemeMode,
+	type ThemeContextValue,
+} from "./ThemeContext";
 
 export interface ThemeProviderProps {
 	children: React.ReactNode;
@@ -22,21 +26,21 @@ const getSystemTheme = (): ThemeMode => {
 	if (typeof window === "undefined") {
 		return "light";
 	}
-	
+
 	const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 	return prefersDark ? "dark" : "light";
 };
 
 /**
  * ThemeProvider - 모든 자식 컴포넌트에 테마 컨텍스트를 제공합니다
- * 
+ *
  * @example
  * ```tsx
  * <ThemeProvider defaultMode="light">
  *   <App />
  * </ThemeProvider>
  * ```
- * 
+ *
  * @example 시스템 테마 자동 감지
  * ```tsx
  * <ThemeProvider syncWithSystem={true}>
@@ -52,21 +56,20 @@ export const ThemeProvider = ({
 	syncWithSystem = true,
 }: ThemeProviderProps) => {
 	// defaultMode가 없으면 시스템 테마를 기본값으로 사용
-	const initialMode = useMemo(() => {
+	const getInitialMode = (): ThemeMode => {
 		if (defaultMode) {
 			return defaultMode;
 		}
 		return syncWithSystem ? getSystemTheme() : "light";
-	}, [defaultMode, syncWithSystem]);
+	};
 
-	const [internalMode, setInternalMode] = useState<ThemeMode>(initialMode);
-	
+	const [internalMode, setInternalMode] = useState<ThemeMode>(getInitialMode);
 
+	// controlledMode가 변경되면 즉시 내부 상태 업데이트
 	useEffect(() => {
-		if (controlledMode !== undefined && controlledMode !== internalMode) {
+		if (controlledMode !== undefined) {
 			setInternalMode(controlledMode);
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [controlledMode]);
 
 	// 시스템 테마 변경 감지 및 자동 적용
@@ -81,8 +84,10 @@ export const ThemeProvider = ({
 		}
 
 		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-		
-		const handleSystemThemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
+
+		const handleSystemThemeChange = (
+			e: MediaQueryListEvent | MediaQueryList
+		) => {
 			const newSystemTheme: ThemeMode = e.matches ? "dark" : "light";
 			setInternalMode(newSystemTheme);
 			onModeChange?.(newSystemTheme);
@@ -98,12 +103,15 @@ export const ThemeProvider = ({
 			mediaQuery.removeEventListener("change", handleSystemThemeChange);
 		};
 	}, [syncWithSystem, controlledMode, onModeChange]);
-	
+
 	// 제어된 모드가 제공되면 사용하고, 그렇지 않으면 내부 상태를 사용
-	const mode = controlledMode ?? internalMode;
+	// controlledMode가 변경되면 즉시 반영되도록 useMemo 사용
+	const mode = useMemo(() => {
+		return controlledMode ?? internalMode;
+	}, [controlledMode, internalMode]);
+
 	const themeClass = useMemo(() => {
-		const computed = mode === "dark" ? darkTheme : lightTheme;
-		return computed;
+		return mode === "dark" ? darkTheme : lightTheme;
 	}, [mode]);
 
 	// vanilla-extract CSS 변수를 위해 document root와 동기화
@@ -111,17 +119,20 @@ export const ThemeProvider = ({
 	useEffect(() => {
 		// 두 테마 클래스를 모두 제거합니다
 		document.documentElement.classList.remove(lightTheme, darkTheme);
-		
+
 		// 올바른 테마 클래스를 추가합니다
 		document.documentElement.classList.add(themeClass);
 	}, [mode, themeClass]);
 
-	const setMode = useCallback((newMode: ThemeMode) => {
-		if (!controlledMode) {
-			setInternalMode(newMode);
-		}
-		onModeChange?.(newMode);
-	}, [controlledMode, onModeChange]);
+	const setMode = useCallback(
+		(newMode: ThemeMode) => {
+			if (!controlledMode) {
+				setInternalMode(newMode);
+			}
+			onModeChange?.(newMode);
+		},
+		[controlledMode, onModeChange]
+	);
 
 	const value: ThemeContextValue = useMemo(() => {
 		return {
@@ -137,5 +148,3 @@ export const ThemeProvider = ({
 		</ThemeContext.Provider>
 	);
 };
-
-
