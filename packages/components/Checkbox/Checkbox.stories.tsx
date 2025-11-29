@@ -1,3 +1,4 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
 
@@ -156,14 +157,24 @@ export const Variants: Story = {
 				label="Square Primary"
 				checked
 			/>
-			<Checkbox variant="circle" intent="primary" label="Circle Primary" checked />
+			<Checkbox
+				variant="circle"
+				intent="primary"
+				label="Circle Primary"
+				checked
+			/>
 			<Checkbox
 				variant="square"
 				intent="success"
 				label="Square Success"
 				checked
 			/>
-			<Checkbox variant="circle" intent="success" label="Circle Success" checked />
+			<Checkbox
+				variant="circle"
+				intent="success"
+				label="Circle Success"
+				checked
+			/>
 		</div>
 	),
 };

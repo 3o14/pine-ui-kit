@@ -74,8 +74,7 @@ type Story = StoryObj<typeof meta>;
 // Default (Uncontrolled)
 export const Default: Story = {
 	render: (args) => {
-		const { checked: _checked, ...restArgs } = args;
-		return <Switch {...restArgs} />;
+		return <Switch {...args} />;
 	},
 };
 
@@ -84,7 +83,7 @@ export const Checked: Story = {
 	args: {
 		checked: true,
 	},
-	render: (args) => {
+	render: function CheckedSwitch(args) {
 		const [checked, setChecked] = React.useState(args.checked ?? false);
 		React.useEffect(() => {
 			setChecked(args.checked ?? false);
@@ -344,7 +343,7 @@ export const ControlledExample: Story = {
 // Playground
 export const Playground: Story = {
 	args: {},
-	render: (args) => {
+	render: function PlaygroundSwitch(args) {
 		const [checked, setChecked] = React.useState(args.checked ?? false);
 		React.useEffect(() => {
 			setChecked(args.checked ?? false);
