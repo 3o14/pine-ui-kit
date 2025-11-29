@@ -4,9 +4,10 @@ import * as styles from "./Checkbox.css";
 import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
+import { Text } from "../Text/Text";
 
 export type CheckboxSize = "small" | "medium" | "large" | "xlarge";
-export type CheckboxVariant = "solid" | "weak";
+export type CheckboxVariant = "circle" | "square";
 export type CheckboxIntent = ColorIntent;
 export type CheckboxRounded = "small" | "medium" | "large";
 
@@ -23,7 +24,7 @@ export interface CheckboxProps
 
 export const Checkbox = ({
 	size = "medium",
-	variant = "solid",
+	variant = "square",
 	intent = "primary",
 	rounded = "medium",
 	label,
@@ -87,9 +88,9 @@ export const Checkbox = ({
 				</svg>
 			</span>
 			{label && (
-				<span className={clsx(styles.label, styles.labelSize[size])}>
+				<Text as="span" size={size} intent="inherit">
 					{label}
-				</span>
+				</Text>
 			)}
 		</label>
 	);

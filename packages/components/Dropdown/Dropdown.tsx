@@ -2,9 +2,12 @@ import { useEffect, useRef, useState, useCallback, useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Dropdown.css";
 import { lightTheme } from "../../tokens/theme.css";
+import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
-export type DropdownSize = "sm" | "md" | "lg";
+export type DropdownSize = "small" | "medium" | "large";
+export type DropdownRounded = "small" | "medium" | "large";
+export type DropdownIntent = ColorIntent;
 
 export interface DropdownOption {
 	value: string;
@@ -18,6 +21,8 @@ export interface DropdownProps {
 	onChange?: (value: string) => void;
 	placeholder?: string;
 	size?: DropdownSize;
+	rounded?: DropdownRounded;
+	intent?: DropdownIntent;
 	fullWidth?: boolean;
 	disabled?: boolean;
 	className?: string;
@@ -28,7 +33,9 @@ export const Dropdown = ({
 	value,
 	onChange,
 	placeholder = "Select an option",
-	size = "md",
+	size = "medium",
+	rounded = "medium",
+	intent = "primary",
 	fullWidth = false,
 	disabled = false,
 	className,
@@ -43,7 +50,6 @@ export const Dropdown = ({
 
 	const selectedOption = options.find((opt) => opt.value === value);
 
-	// Close with animation
 	const handleClose = useCallback(() => {
 		setIsClosing(true);
 		setTimeout(() => {
@@ -53,7 +59,6 @@ export const Dropdown = ({
 		}, 150);
 	}, []);
 
-	// Toggle dropdown
 	const handleToggle = useCallback(() => {
 		if (disabled) return;
 		if (isOpen) {
@@ -64,7 +69,6 @@ export const Dropdown = ({
 		}
 	}, [isOpen, disabled, handleClose]);
 
-	// Select option
 	const handleSelect = useCallback(
 		(optionValue: string) => {
 			onChange?.(optionValue);
@@ -73,7 +77,6 @@ export const Dropdown = ({
 		[onChange, handleClose]
 	);
 
-	// Outside click
 	useEffect(() => {
 		if (!isOpen) return;
 
@@ -90,13 +93,12 @@ export const Dropdown = ({
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, [isOpen, handleClose]);
 
-	// Keyboard navigation
 	useEffect(() => {
 		if (!isOpen) return;
 
-		const handleKeyDown = (event: KeyboardEvent) => {
-			const enabledOptions = options.filter((opt) => !opt.disabled);
+		const enabledOptions = options.filter((opt) => !opt.disabled);
 
+		const handleKeyDown = (event: KeyboardEvent) => {
 			switch (event.key) {
 				case "Escape":
 					event.preventDefault();
@@ -142,17 +144,16 @@ export const Dropdown = ({
 		return () => document.removeEventListener("keydown", handleKeyDown);
 	}, [isOpen, focusedIndex, options, handleSelect, handleClose]);
 
-	// Auto-scroll focused item into view
 	useEffect(() => {
-		if (isOpen && focusedIndex >= 0 && menuRef.current) {
-			const focusedElement = menuRef.current.children[
-				focusedIndex
-			] as HTMLElement;
-			if (focusedElement && focusedElement.scrollIntoView) {
-				focusedElement.scrollIntoView({
-					block: "nearest",
-				});
-			}
+		if (!isOpen || focusedIndex < 0 || !menuRef.current) return;
+
+		const focusedElement = menuRef.current.children[
+			focusedIndex
+		] as HTMLElement | null;
+		if (focusedElement?.scrollIntoView) {
+			focusedElement.scrollIntoView({
+				block: "nearest",
+			});
 		}
 	}, [focusedIndex, isOpen]);
 
@@ -166,12 +167,14 @@ export const Dropdown = ({
 				className
 			)}
 		>
-			{/* Trigger Button */}
 			<button
 				type="button"
 				className={clsx(
-					styles.trigger,
-					styles.triggerSize[size],
+					styles.trigger({
+						size,
+						rounded,
+						intent,
+					}),
 					fullWidth && styles.triggerFullWidth
 				)}
 				onClick={handleToggle}
@@ -179,6 +182,7 @@ export const Dropdown = ({
 				data-state={isOpen ? "open" : "closed"}
 				aria-haspopup="listbox"
 				aria-expanded={isOpen}
+				aria-label={selectedOption?.label || placeholder}
 			>
 				<span>{selectedOption?.label || placeholder}</span>
 				<span className={styles.triggerIcon}>
@@ -200,19 +204,19 @@ export const Dropdown = ({
 				</span>
 			</button>
 
-			{/* Menu */}
 			{(isOpen || isClosing) && (
 				<div
 					ref={menuRef}
 					className={styles.menu}
 					data-state={isClosing ? "closing" : "open"}
+					data-intent={intent}
 					role="listbox"
 				>
 					{options.map((option, index) => (
 						<button
 							key={option.value}
 							type="button"
-							className={styles.menuItem}
+							className={styles.menuItem({ intent })}
 							onClick={() => handleSelect(option.value)}
 							disabled={option.disabled}
 							data-selected={option.value === value}

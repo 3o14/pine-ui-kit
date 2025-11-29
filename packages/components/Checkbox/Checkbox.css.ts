@@ -1,4 +1,4 @@
-import { style, styleVariants, keyframes } from "@vanilla-extract/css";
+import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "../../tokens/theme.css";
 
@@ -86,8 +86,12 @@ export const checkbox = recipe({
 		},
 
 		variant: {
-			solid: {},
-			weak: {},
+			circle: {
+				borderRadius: "50%",
+			},
+			square: {
+				borderRadius: themeContract.radius.small,
+			},
 		},
 
 		intent: {
@@ -101,13 +105,13 @@ export const checkbox = recipe({
 
 		rounded: {
 			small: {
-				borderRadius: themeContract.radius.sm,
+				borderRadius: themeContract.radius.small,
 			},
 			medium: {
-				borderRadius: themeContract.radius.md,
+				borderRadius: themeContract.radius.medium,
 			},
 			large: {
-				borderRadius: themeContract.radius.lg,
+				borderRadius: themeContract.radius.large,
 			},
 		},
 
@@ -240,7 +244,7 @@ export const checkbox = recipe({
 
 		// Weak variants - Primary
 		{
-			variants: { variant: "weak", intent: "primary", checked: false },
+			variants: { variant: "square", intent: "primary", checked: false },
 			style: {
 				borderColor: themeContract.color.primary.weak,
 				selectors: {
@@ -251,7 +255,7 @@ export const checkbox = recipe({
 			},
 		},
 		{
-			variants: { variant: "weak", intent: "primary", checked: true },
+			variants: { variant: "square", intent: "primary", checked: true },
 			style: {
 				borderColor: themeContract.color.primary.weak,
 				backgroundColor: themeContract.color.primary.weak,
@@ -261,7 +265,7 @@ export const checkbox = recipe({
 
 		// Weak variants - Secondary
 		{
-			variants: { variant: "weak", intent: "secondary", checked: false },
+			variants: { variant: "square", intent: "secondary", checked: false },
 			style: {
 				borderColor: themeContract.color.secondary.weak,
 				selectors: {
@@ -272,7 +276,7 @@ export const checkbox = recipe({
 			},
 		},
 		{
-			variants: { variant: "weak", intent: "secondary", checked: true },
+			variants: { variant: "square", intent: "secondary", checked: true },
 			style: {
 				borderColor: themeContract.color.secondary.weak,
 				backgroundColor: themeContract.color.secondary.weak,
@@ -282,7 +286,7 @@ export const checkbox = recipe({
 
 		// Weak variants - Success
 		{
-			variants: { variant: "weak", intent: "success", checked: false },
+			variants: { variant: "square", intent: "success", checked: false },
 			style: {
 				borderColor: themeContract.color.success.weak,
 				selectors: {
@@ -293,7 +297,7 @@ export const checkbox = recipe({
 			},
 		},
 		{
-			variants: { variant: "weak", intent: "success", checked: true },
+			variants: { variant: "square", intent: "success", checked: true },
 			style: {
 				borderColor: themeContract.color.success.weak,
 				backgroundColor: themeContract.color.success.weak,
@@ -303,7 +307,7 @@ export const checkbox = recipe({
 
 		// Weak variants - Warning
 		{
-			variants: { variant: "weak", intent: "warning", checked: false },
+			variants: { variant: "square", intent: "warning", checked: false },
 			style: {
 				borderColor: themeContract.color.warning.weak,
 				selectors: {
@@ -314,7 +318,7 @@ export const checkbox = recipe({
 			},
 		},
 		{
-			variants: { variant: "weak", intent: "warning", checked: true },
+			variants: { variant: "square", intent: "warning", checked: true },
 			style: {
 				borderColor: themeContract.color.warning.weak,
 				backgroundColor: themeContract.color.warning.weak,
@@ -324,7 +328,7 @@ export const checkbox = recipe({
 
 		// Weak variants - Danger
 		{
-			variants: { variant: "weak", intent: "danger", checked: false },
+			variants: { variant: "square", intent: "danger", checked: false },
 			style: {
 				borderColor: themeContract.color.danger.weak,
 				selectors: {
@@ -335,7 +339,7 @@ export const checkbox = recipe({
 			},
 		},
 		{
-			variants: { variant: "weak", intent: "danger", checked: true },
+			variants: { variant: "square", intent: "danger", checked: true },
 			style: {
 				borderColor: themeContract.color.danger.weak,
 				backgroundColor: themeContract.color.danger.weak,
@@ -345,7 +349,7 @@ export const checkbox = recipe({
 
 		// Weak variants - Neutral
 		{
-			variants: { variant: "weak", intent: "neutral", checked: false },
+			variants: { variant: "square", intent: "neutral", checked: false },
 			style: {
 				borderColor: themeContract.color.neutral.weak,
 				selectors: {
@@ -356,7 +360,7 @@ export const checkbox = recipe({
 			},
 		},
 		{
-			variants: { variant: "weak", intent: "neutral", checked: true },
+			variants: { variant: "square", intent: "neutral", checked: true },
 			style: {
 				borderColor: themeContract.color.neutral.weak,
 				backgroundColor: themeContract.color.neutral.weak,
@@ -367,7 +371,7 @@ export const checkbox = recipe({
 
 	defaultVariants: {
 		size: "medium",
-		variant: "solid",
+		variant: "square",
 		intent: "primary",
 		rounded: "medium",
 		checked: false,
@@ -385,31 +389,5 @@ export const checkmarkIcon = style({
 			display: "block",
 			animation: `${checkmark} 0.2s ease-in-out`,
 		},
-	},
-});
-
-// Label text
-export const label = style({
-	fontFamily: themeContract.typography.fontFamily.sans,
-	fontWeight: themeContract.typography.fontWeight.regular,
-	color: themeContract.color.surface.text,
-});
-
-export const labelSize = styleVariants({
-	small: {
-		fontSize: themeContract.typography.fontSize.sm,
-		lineHeight: themeContract.typography.lineHeight.sm,
-	},
-	medium: {
-		fontSize: themeContract.typography.fontSize.md,
-		lineHeight: themeContract.typography.lineHeight.md,
-	},
-	large: {
-		fontSize: themeContract.typography.fontSize.lg,
-		lineHeight: themeContract.typography.lineHeight.lg,
-	},
-	xlarge: {
-		fontSize: themeContract.typography.fontSize.xl,
-		lineHeight: themeContract.typography.lineHeight.xl,
 	},
 });

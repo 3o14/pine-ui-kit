@@ -18,21 +18,29 @@ const meta = {
 		size: {
 			control: "select",
 			options: [
-				"xs",
-				"sm",
-				"md",
-				"lg",
-				"xl",
-				"display-sm",
-				"display-md",
-				"display-lg",
+				"xsmall",
+				"small",
+				"medium",
+				"large",
+				"xlarge",
+				"display-small",
+				"display-medium",
+				"display-large",
 			],
 			description: "Text size",
+			table: {
+				type: { summary: "TextSize" },
+				defaultValue: { summary: "medium" },
+			},
 		},
 		weight: {
 			control: "select",
 			options: ["regular", "medium", "semibold", "bold"],
 			description: "Font weight",
+			table: {
+				type: { summary: "TextWeight" },
+				defaultValue: { summary: "regular" },
+			},
 		},
 		intent: {
 			control: "select",
@@ -46,15 +54,27 @@ const meta = {
 				"inherit",
 			],
 			description: "Text color intent",
+			table: {
+				type: { summary: "TextIntent" },
+				defaultValue: { summary: "inherit" },
+			},
 		},
 		align: {
 			control: "select",
 			options: ["left", "center", "right"],
 			description: "Text alignment",
+			table: {
+				type: { summary: "TextAlign" },
+				defaultValue: { summary: "left" },
+			},
 		},
 		truncate: {
 			control: "boolean",
 			description: "Enable text truncation",
+			table: {
+				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
+			},
 		},
 	},
 } satisfies Meta<typeof Text>;
@@ -66,8 +86,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	args: {
 		children: "The quick brown fox jumps over the lazy dog",
-		size: "md",
+		size: "medium",
 		weight: "regular",
+		intent: "inherit",
+		align: "left",
+		truncate: false,
 	},
 };
 
@@ -75,14 +98,14 @@ export const Default: Story = {
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-			<Text size="xs">Extra Small (xs) - 0.75rem</Text>
-			<Text size="sm">Small (sm) - 0.875rem</Text>
-			<Text size="md">Medium (md) - 1rem</Text>
-			<Text size="lg">Large (lg) - 1.125rem</Text>
-			<Text size="xl">Extra Large (xl) - 1.25rem</Text>
-			<Text size="display-sm">Display Small - 1.5rem</Text>
-			<Text size="display-md">Display Medium - 1.875rem</Text>
-			<Text size="display-lg">Display Large - 2.25rem</Text>
+			<Text size="xsmall">Extra Small (xsmall) - 0.75rem</Text>
+			<Text size="small">Small (small) - 0.875rem</Text>
+			<Text size="medium">Medium (medium) - 1rem</Text>
+			<Text size="large">Large (large) - 1.125rem</Text>
+			<Text size="xlarge">Extra Large (xlarge) - 1.25rem</Text>
+			<Text size="display-small">Display Small - 1.5rem</Text>
+			<Text size="display-medium">Display Medium - 1.875rem</Text>
+			<Text size="display-large">Display Large - 2.25rem</Text>
 		</div>
 	),
 };
@@ -91,16 +114,16 @@ export const Sizes: Story = {
 export const Weights: Story = {
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-			<Text weight="regular" size="lg">
+			<Text weight="regular" size="large">
 				Regular Weight (400)
 			</Text>
-			<Text weight="medium" size="lg">
+			<Text weight="medium" size="large">
 				Medium Weight (500)
 			</Text>
-			<Text weight="semibold" size="lg">
+			<Text weight="semibold" size="large">
 				Semibold Weight (600)
 			</Text>
-			<Text weight="bold" size="lg">
+			<Text weight="bold" size="large">
 				Bold Weight (700)
 			</Text>
 		</div>
@@ -111,25 +134,25 @@ export const Weights: Story = {
 export const Intents: Story = {
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-			<Text intent="primary" size="lg">
+			<Text intent="primary" size="large">
 				Primary Color
 			</Text>
-			<Text intent="secondary" size="lg">
+			<Text intent="secondary" size="large">
 				Secondary Color
 			</Text>
-			<Text intent="success" size="lg">
+			<Text intent="success" size="large">
 				Success Color
 			</Text>
-			<Text intent="warning" size="lg">
+			<Text intent="warning" size="large">
 				Warning Color
 			</Text>
-			<Text intent="danger" size="lg">
+			<Text intent="danger" size="large">
 				Danger Color
 			</Text>
-			<Text intent="neutral" size="lg">
+			<Text intent="neutral" size="large">
 				Neutral Color
 			</Text>
-			<Text intent="inherit" size="lg">
+			<Text intent="inherit" size="large">
 				Inherit Color (default)
 			</Text>
 		</div>
@@ -140,22 +163,22 @@ export const Intents: Story = {
 export const Headings: Story = {
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-			<Text as="h1" size="display-lg" weight="bold">
+			<Text as="h1" size="display-large" weight="bold">
 				Heading 1
 			</Text>
-			<Text as="h2" size="display-md" weight="bold">
+			<Text as="h2" size="display-medium" weight="bold">
 				Heading 2
 			</Text>
-			<Text as="h3" size="display-sm" weight="semibold">
+			<Text as="h3" size="display-small" weight="semibold">
 				Heading 3
 			</Text>
-			<Text as="h4" size="xl" weight="semibold">
+			<Text as="h4" size="xlarge" weight="semibold">
 				Heading 4
 			</Text>
-			<Text as="h5" size="lg" weight="medium">
+			<Text as="h5" size="large" weight="medium">
 				Heading 5
 			</Text>
-			<Text as="h6" size="md" weight="medium">
+			<Text as="h6" size="medium" weight="medium">
 				Heading 6
 			</Text>
 		</div>
@@ -211,16 +234,16 @@ export const TypographyShowcase: Story = {
 	render: () => (
 		<div style={{ maxWidth: "600px", display: "flex", flexDirection: "column", gap: "24px" }}>
 			<div>
-				<Text as="h1" size="display-lg" weight="bold" intent="primary">
+				<Text as="h1" size="display-large" weight="bold" intent="primary">
 					Typography System
 				</Text>
-				<Text size="lg" intent="neutral">
+				<Text size="large" intent="neutral">
 					A comprehensive text component with design tokens
 				</Text>
 			</div>
 
 			<div>
-				<Text as="h2" size="display-sm" weight="semibold">
+				<Text as="h2" size="display-small" weight="semibold">
 					Introduction
 				</Text>
 				<Text>
@@ -231,7 +254,7 @@ export const TypographyShowcase: Story = {
 			</div>
 
 			<div>
-				<Text as="h3" size="xl" weight="semibold">
+				<Text as="h3" size="xlarge" weight="semibold">
 					Features
 				</Text>
 				<ul style={{ marginTop: "8px" }}>
@@ -244,7 +267,7 @@ export const TypographyShowcase: Story = {
 			</div>
 
 			<div>
-				<Text size="sm" intent="neutral">
+				<Text size="small" intent="neutral">
 					Built with TypeScript and Vanilla Extract for type safety and
 					zero-runtime CSS.
 				</Text>
@@ -258,7 +281,7 @@ export const Playground: Story = {
 	args: {
 		children: "Customize me!",
 		as: "p",
-		size: "md",
+		size: "medium",
 		weight: "regular",
 		intent: "inherit",
 		align: "left",

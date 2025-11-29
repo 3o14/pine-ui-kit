@@ -17,30 +17,23 @@ export type TextElement =
 	| "h6"
 	| "p"
 	| "span"
-	| "div";
+	| "div"
+	| "label";
 
 export interface TextProps {
-	/** HTML 요소 타입 (다형성 지원) */
 	as?: TextElement;
-	/** 텍스트 크기 */
 	size?: TextSize;
-	/** 텍스트 굵기 */
 	weight?: TextWeight;
-	/** 텍스트 색상/의도 */
 	intent?: TextIntent;
-	/** 텍스트 정렬 */
 	align?: TextAlign;
-	/** 텍스트 말줄임 */
 	truncate?: boolean;
-	/** 자식 요소 */
 	children?: React.ReactNode;
-	/** 추가 클래스명 */
 	className?: string;
 }
 
 export const Text = ({
 	as: Component = "p",
-	size = "md",
+	size = "medium",
 	weight = "regular",
 	intent = "inherit",
 	align = "left",
@@ -66,4 +59,3 @@ export const Text = ({
 		</Component>
 	);
 };
-

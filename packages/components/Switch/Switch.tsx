@@ -4,8 +4,9 @@ import * as styles from "./Switch.css";
 import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
+import { Text } from "../Text/Text";
 
-export type SwitchSize = "sm" | "md" | "lg";
+export type SwitchSize = "small" | "medium" | "large" | "xlarge";
 export type SwitchIntent = ColorIntent;
 
 export interface SwitchProps
@@ -18,7 +19,7 @@ export interface SwitchProps
 }
 
 export const Switch = ({
-	size = "md",
+	size = "medium",
 	intent = "primary",
 	label,
 	checked: controlledChecked,
@@ -68,9 +69,9 @@ export const Switch = ({
 				/>
 			</span>
 			{label && (
-				<span className={clsx(styles.label, styles.labelSize[size])}>
+				<Text as="span" size={size} intent="inherit">
 					{label}
-				</span>
+				</Text>
 			)}
 		</label>
 	);

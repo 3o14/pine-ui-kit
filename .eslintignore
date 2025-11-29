@@ -1,0 +1,9 @@
+# Build outputs
+dist/
+storybook-static/
+node_modules/
+
+# Config files
+*.config.js
+*.config.ts
+

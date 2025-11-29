@@ -31,23 +31,23 @@ export const button = recipe({
 		size: {
 			small: {
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
-				fontSize: themeContract.typography.fontSize.sm,
-				lineHeight: themeContract.typography.lineHeight.sm,
+				fontSize: themeContract.typography.fontSize.small,
+				lineHeight: themeContract.typography.lineHeight.small,
 			},
 			medium: {
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
-				fontSize: themeContract.typography.fontSize.md,
-				lineHeight: themeContract.typography.lineHeight.md,
+				fontSize: themeContract.typography.fontSize.medium,
+				lineHeight: themeContract.typography.lineHeight.medium,
 			},
 			large: {
 				padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
-				fontSize: themeContract.typography.fontSize.lg,
-				lineHeight: themeContract.typography.lineHeight.lg,
+				fontSize: themeContract.typography.fontSize.large,
+				lineHeight: themeContract.typography.lineHeight.large,
 			},
 			xlarge: {
 				padding: `${themeContract.spacing.lg} ${themeContract.spacing.xl}`,
-				fontSize: themeContract.typography.fontSize.xl,
-				lineHeight: themeContract.typography.lineHeight.xl,
+				fontSize: themeContract.typography.fontSize.xlarge,
+				lineHeight: themeContract.typography.lineHeight.xlarge,
 			},
 		},
 
@@ -75,13 +75,13 @@ export const button = recipe({
 
 		rounded: {
 			small: {
-				borderRadius: themeContract.radius.sm,
+				borderRadius: themeContract.radius.small,
 			},
 			medium: {
-				borderRadius: themeContract.radius.md,
+				borderRadius: themeContract.radius.medium,
 			},
 			large: {
-				borderRadius: themeContract.radius.lg,
+				borderRadius: themeContract.radius.large,
 			},
 		},
 	},
@@ -93,11 +93,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.primary.surface,
 				color: themeContract.color.primary.text,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.primary.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.primary.surfaceActive,
@@ -111,11 +111,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.secondary.surface,
 				color: themeContract.color.secondary.text,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.secondary.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.secondary.surfaceActive,
@@ -129,11 +129,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.success.surface,
 				color: themeContract.color.success.text,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.success.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.success.surfaceActive,
@@ -147,11 +147,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.warning.surface,
 				color: themeContract.color.warning.text,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.warning.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.warning.surfaceActive,
@@ -165,11 +165,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.danger.surface,
 				color: themeContract.color.danger.text,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.danger.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.danger.surfaceActive,
@@ -183,11 +183,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.neutral.surface,
 				color: themeContract.color.neutral.text,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.neutral.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.neutral.surfaceActive,
@@ -399,11 +399,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.primary.weak,
 				color: themeContract.color.primary.surface,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.primary.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.primary.surfaceActive,
@@ -417,11 +417,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.secondary.weak,
 				color: themeContract.color.secondary.surface,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.secondary.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.secondary.surfaceActive,
@@ -435,11 +435,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.success.weak,
 				color: themeContract.color.success.surface,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.success.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.success.surfaceActive,
@@ -453,11 +453,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.warning.weak,
 				color: themeContract.color.warning.surface,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.warning.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.warning.surfaceActive,
@@ -471,11 +471,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.danger.weak,
 				color: themeContract.color.danger.surface,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.danger.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.danger.surfaceActive,
@@ -489,11 +489,11 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.neutral.weak,
 				color: themeContract.color.neutral.surface,
-				boxShadow: themeContract.shadow.sm,
+				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
 						backgroundColor: themeContract.color.neutral.surfaceHover,
-						boxShadow: themeContract.shadow.md,
+						boxShadow: themeContract.shadow.medium,
 					},
 					"&:active:not(:disabled)": {
 						backgroundColor: themeContract.color.neutral.surfaceActive,

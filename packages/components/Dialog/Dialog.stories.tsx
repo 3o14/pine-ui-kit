@@ -13,6 +13,14 @@ const meta = {
 	args: {
 		open: false,
 		onClose: () => {},
+		size: "medium",
+		rounded: "medium",
+		title: "Dialog Title",
+		description: "Dialog description",
+		actions: undefined,
+		showCloseButton: true,
+		closeOnOverlayClick: true,
+		closeOnEscape: true,
 		children: null,
 	},
 	argTypes: {
@@ -21,15 +29,25 @@ const meta = {
 			description: "Dialog 표시 여부",
 			table: {
 				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
 			},
 		},
 		size: {
 			control: "select",
-			options: ["sm", "md", "lg", "xl", "full"],
+			options: ["small", "medium", "large", "xlarge", "full"],
 			description: "Dialog 크기",
 			table: {
 				type: { summary: "DialogSize" },
-				defaultValue: { summary: "md" },
+				defaultValue: { summary: "medium" },
+			},
+		},
+		rounded: {
+			control: "select",
+			options: ["small", "medium", "large"],
+			description: "Dialog 모서리 둥글기",
+			table: {
+				type: { summary: "DialogRounded" },
+				defaultValue: { summary: "medium" },
 			},
 		},
 		title: {
@@ -70,13 +88,18 @@ const meta = {
 				defaultValue: { summary: "true" },
 			},
 		},
-		mode: {
-			control: "select",
-			options: ["light", "dark"],
-			description: "테마 모드",
+		actions: {
+			control: "object",
+			description: "Footer에 표시할 버튼 액션들",
 			table: {
-				type: { summary: '"light" | "dark"' },
-				defaultValue: { summary: "light" },
+				type: { summary: "DialogAction[]" },
+			},
+		},
+		footer: {
+			control: false,
+			description: "하위 호환성을 위해 유지 (actions 사용 권장)",
+			table: {
+				type: { summary: "React.ReactNode" },
 			},
 		},
 	},
@@ -87,18 +110,22 @@ type Story = StoryObj<typeof meta>;
 
 // Basic Dialog
 export const Basic: Story = {
-	render: function BasicDialog() {
-		const [open, setOpen] = React.useState(false);
+	render: function BasicDialog(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		// args.open이 변경되면 내부 상태 동기화
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		return (
 			<>
 				<Button onClick={() => setOpen(true)}>Open Dialog</Button>
-				<Dialog
-					open={open}
-					onClose={() => setOpen(false)}
-					title="Basic Dialog"
-					description="This is a basic dialog example"
-				>
+				<Dialog {...restArgs} open={open} onClose={() => setOpen(false)}>
 					<p>This is the dialog content. You can put any content here.</p>
 				</Dialog>
 			</>
@@ -108,25 +135,37 @@ export const Basic: Story = {
 
 // With Footer
 export const WithFooter: Story = {
-	render: function DialogWithFooter() {
-		const [open, setOpen] = React.useState(false);
+	render: function DialogWithFooter(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		return (
 			<>
 				<Button onClick={() => setOpen(true)}>Open Dialog with Footer</Button>
 				<Dialog
+					{...restArgs}
 					open={open}
 					onClose={() => setOpen(false)}
-					title="Confirm Action"
-					description="Are you sure you want to proceed?"
-					footer={
-						<>
-							<Button variant="ghost" onClick={() => setOpen(false)}>
-								Cancel
-							</Button>
-							<Button onClick={() => setOpen(false)}>Confirm</Button>
-						</>
-					}
+					title={args.title ?? "Confirm Action"}
+					description={args.description ?? "Are you sure you want to proceed?"}
+					actions={[
+						{
+							label: "Cancel",
+							onClick: () => setOpen(false),
+							variant: "ghost",
+						},
+						{
+							label: "Confirm",
+							onClick: () => setOpen(false),
+						},
+					]}
 				>
 					<p>This action cannot be undone. Please confirm to proceed.</p>
 				</Dialog>
@@ -139,24 +178,24 @@ export const WithFooter: Story = {
 export const Sizes: Story = {
 	render: function DialogSizes() {
 		const [size, setSize] = React.useState<
-			"sm" | "md" | "lg" | "xl" | "full" | null
+			"small" | "medium" | "large" | "xlarge" | "full" | null
 		>(null);
 
 		return (
 			<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-				<Button size="sm" onClick={() => setSize("sm")}>
+				<Button size="small" onClick={() => setSize("small")}>
 					Small
 				</Button>
-				<Button size="sm" onClick={() => setSize("md")}>
+				<Button size="small" onClick={() => setSize("medium")}>
 					Medium
 				</Button>
-				<Button size="sm" onClick={() => setSize("lg")}>
+				<Button size="small" onClick={() => setSize("large")}>
 					Large
 				</Button>
-				<Button size="sm" onClick={() => setSize("xl")}>
+				<Button size="small" onClick={() => setSize("xlarge")}>
 					Extra Large
 				</Button>
-				<Button size="sm" onClick={() => setSize("full")}>
+				<Button size="small" onClick={() => setSize("full")}>
 					Full
 				</Button>
 				{size && (
@@ -164,7 +203,7 @@ export const Sizes: Story = {
 						open={true}
 						onClose={() => setSize(null)}
 						size={size}
-						title={`${size.toUpperCase()} Dialog`}
+						title={`${size.charAt(0).toUpperCase() + size.slice(1)} Dialog`}
 						description="This demonstrates different dialog sizes"
 					>
 						<p>
@@ -180,25 +219,37 @@ export const Sizes: Story = {
 
 // Long Content (Scrollable)
 export const LongContent: Story = {
-	render: function DialogLongContent() {
-		const [open, setOpen] = React.useState(false);
+	render: function DialogLongContent(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		return (
 			<>
 				<Button onClick={() => setOpen(true)}>Open Long Content Dialog</Button>
 				<Dialog
+					{...restArgs}
 					open={open}
 					onClose={() => setOpen(false)}
-					title="Terms and Conditions"
-					description="Please read carefully"
-					footer={
-						<>
-							<Button variant="ghost" onClick={() => setOpen(false)}>
-								Decline
-							</Button>
-							<Button onClick={() => setOpen(false)}>Accept</Button>
-						</>
-					}
+					title={args.title ?? "Terms and Conditions"}
+					description={args.description ?? "Please read carefully"}
+					actions={[
+						{
+							label: "Decline",
+							onClick: () => setOpen(false),
+							variant: "ghost",
+						},
+						{
+							label: "Accept",
+							onClick: () => setOpen(false),
+						},
+					]}
 				>
 					<div
 						style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
@@ -219,30 +270,43 @@ export const LongContent: Story = {
 
 // Without Close Button
 export const WithoutCloseButton: Story = {
-	render: function DialogWithoutClose() {
-		const [open, setOpen] = React.useState(false);
+	args: {
+		showCloseButton: false,
+		closeOnOverlayClick: false,
+		closeOnEscape: false,
+	},
+	render: function DialogWithoutClose(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		return (
 			<>
 				<Button onClick={() => setOpen(true)}>Open (No Close Button)</Button>
 				<Dialog
+					{...restArgs}
 					open={open}
 					onClose={() => setOpen(false)}
-					title="Forced Action"
-					description="You must choose an option"
-					showCloseButton={false}
-					closeOnOverlayClick={false}
-					closeOnEscape={false}
-					footer={
-						<>
-							<Button variant="outline" onClick={() => setOpen(false)}>
-								Cancel
-							</Button>
-							<Button intent="danger" onClick={() => setOpen(false)}>
-								Delete
-							</Button>
-						</>
-					}
+					title={args.title ?? "Forced Action"}
+					description={args.description ?? "You must choose an option"}
+					actions={[
+						{
+							label: "Cancel",
+							onClick: () => setOpen(false),
+							variant: "outline",
+						},
+						{
+							label: "Delete",
+							onClick: () => setOpen(false),
+							intent: "danger",
+						},
+					]}
 				>
 					<p>
 						This dialog requires you to make a choice. You cannot close it by
@@ -256,8 +320,16 @@ export const WithoutCloseButton: Story = {
 
 // Form Dialog
 export const FormDialog: Story = {
-	render: function DialogForm() {
-		const [open, setOpen] = React.useState(false);
+	render: function DialogForm(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		const handleSubmit = (e: React.FormEvent) => {
 			e.preventDefault();
@@ -268,20 +340,29 @@ export const FormDialog: Story = {
 			<>
 				<Button onClick={() => setOpen(true)}>Create New Item</Button>
 				<Dialog
+					{...restArgs}
 					open={open}
 					onClose={() => setOpen(false)}
-					title="Create New Item"
-					description="Fill in the details below"
-					footer={
-						<>
-							<Button variant="ghost" onClick={() => setOpen(false)}>
-								Cancel
-							</Button>
-							<Button type="submit" form="item-form">
-								Create
-							</Button>
-						</>
-					}
+					title={args.title ?? "Create New Item"}
+					description={args.description ?? "Fill in the details below"}
+					actions={[
+						{
+							label: "Cancel",
+							onClick: () => setOpen(false),
+							variant: "ghost",
+						},
+						{
+							label: "Create",
+							onClick: () => {
+								const form = document.getElementById(
+									"item-form"
+								) as HTMLFormElement;
+								if (form) {
+									form.requestSubmit();
+								}
+							},
+						},
+					]}
 				>
 					<form
 						id="item-form"
@@ -335,54 +416,18 @@ export const FormDialog: Story = {
 	},
 };
 
-// Dark Mode
-export const DarkMode: Story = {
-	render: function DialogDarkMode() {
-		const [open, setOpen] = React.useState(false);
-
-		return (
-			<div
-				style={{
-					backgroundColor: "#1a1a1a",
-					padding: "2rem",
-					borderRadius: "8px",
-				}}
-			>
-				<Button mode="dark" onClick={() => setOpen(true)}>
-					Open Dark Dialog
-				</Button>
-				<Dialog
-					open={open}
-					onClose={() => setOpen(false)}
-					mode="dark"
-					title="Dark Mode Dialog"
-					description="This dialog uses dark theme"
-					footer={
-						<>
-							<Button
-								mode="dark"
-								variant="ghost"
-								onClick={() => setOpen(false)}
-							>
-								Cancel
-							</Button>
-							<Button mode="dark" onClick={() => setOpen(false)}>
-								Confirm
-							</Button>
-						</>
-					}
-				>
-					<p>This dialog is rendered in dark mode.</p>
-				</Dialog>
-			</div>
-		);
-	},
-};
-
 // Confirmation Dialog
 export const ConfirmationDialog: Story = {
-	render: function DialogConfirmation() {
-		const [open, setOpen] = React.useState(false);
+	render: function DialogConfirmation(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		return (
 			<>
@@ -390,21 +435,24 @@ export const ConfirmationDialog: Story = {
 					Delete Item
 				</Button>
 				<Dialog
+					{...restArgs}
 					open={open}
 					onClose={() => setOpen(false)}
-					size="sm"
-					title="Delete Item?"
-					description="This action cannot be undone"
-					footer={
-						<>
-							<Button variant="ghost" onClick={() => setOpen(false)}>
-								Cancel
-							</Button>
-							<Button intent="danger" onClick={() => setOpen(false)}>
-								Delete
-							</Button>
-						</>
-					}
+					size={args.size ?? "small"}
+					title={args.title ?? "Delete Item?"}
+					description={args.description ?? "This action cannot be undone"}
+					actions={[
+						{
+							label: "Cancel",
+							onClick: () => setOpen(false),
+							variant: "ghost",
+						},
+						{
+							label: "Delete",
+							onClick: () => setOpen(false),
+							intent: "danger",
+						},
+					]}
 				>
 					<p>
 						Are you sure you want to delete this item? This action is permanent
@@ -418,8 +466,16 @@ export const ConfirmationDialog: Story = {
 
 // Success Dialog
 export const SuccessDialog: Story = {
-	render: function DialogSuccess() {
-		const [open, setOpen] = React.useState(false);
+	render: function DialogSuccess(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
 
 		return (
 			<>
@@ -427,19 +483,51 @@ export const SuccessDialog: Story = {
 					Show Success
 				</Button>
 				<Dialog
+					{...restArgs}
 					open={open}
 					onClose={() => setOpen(false)}
-					size="sm"
-					title="✅ Success!"
-					description="Your action was completed successfully"
-					footer={
-						<Button intent="success" fullWidth onClick={() => setOpen(false)}>
-							Continue
-						</Button>
+					size={args.size ?? "small"}
+					title={args.title ?? "✅ Success!"}
+					description={
+						args.description ?? "Your action was completed successfully"
 					}
+					actions={[
+						{
+							label: "Continue",
+							onClick: () => setOpen(false),
+							intent: "success",
+						},
+					]}
 				>
 					<p style={{ textAlign: "center" }}>
 						Your changes have been saved successfully.
+					</p>
+				</Dialog>
+			</>
+		);
+	},
+};
+
+// Playground - args를 직접 사용하여 Controls 패널에서 모든 props를 테스트할 수 있음
+export const Playground: Story = {
+	render: function DialogPlayground(args) {
+		const [open, setOpen] = React.useState(args.open ?? false);
+
+		React.useEffect(() => {
+			setOpen(args.open ?? false);
+		}, [args.open]);
+
+		// open과 onClose를 제외한 나머지 props
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const { open: _open, onClose: _onClose, ...restArgs } = args;
+
+		return (
+			<>
+				<Button onClick={() => setOpen(true)}>Open Dialog</Button>
+				<Dialog {...restArgs} open={open} onClose={() => setOpen(false)}>
+					<p>
+						This is a playground dialog. Use the Controls panel to customize all
+						props.
 					</p>
 				</Dialog>
 			</>
