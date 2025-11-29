@@ -19,6 +19,13 @@ const meta = {
 	tags: ["autodocs"],
 	args: {
 		options: sampleOptions,
+		value: undefined,
+		placeholder: "Select an option",
+		size: "medium",
+		rounded: "medium",
+		intent: "primary",
+		fullWidth: false,
+		disabled: false,
 	},
 	argTypes: {
 		options: {
@@ -45,11 +52,36 @@ const meta = {
 		},
 		size: {
 			control: "select",
-			options: ["sm", "md", "lg"],
+			options: ["small", "medium", "large"],
 			description: "드롭다운 크기",
 			table: {
 				type: { summary: "DropdownSize" },
-				defaultValue: { summary: "md" },
+				defaultValue: { summary: "medium" },
+			},
+		},
+		rounded: {
+			control: "select",
+			options: ["small", "medium", "large"],
+			description: "드롭다운 모서리 둥글기",
+			table: {
+				type: { summary: "DropdownRounded" },
+				defaultValue: { summary: "medium" },
+			},
+		},
+		intent: {
+			control: "select",
+			options: [
+				"primary",
+				"secondary",
+				"success",
+				"warning",
+				"danger",
+				"neutral",
+			],
+			description: "드롭다운 색상 테마",
+			table: {
+				type: { summary: "DropdownIntent" },
+				defaultValue: { summary: "primary" },
 			},
 		},
 		fullWidth: {
@@ -68,15 +100,6 @@ const meta = {
 				defaultValue: { summary: "false" },
 			},
 		},
-		mode: {
-			control: "select",
-			options: ["light", "dark"],
-			description: "테마 모드",
-			table: {
-				type: { summary: '"light" | "dark"' },
-				defaultValue: { summary: "light" },
-			},
-		},
 	},
 } satisfies Meta<typeof Dropdown>;
 
@@ -85,16 +108,23 @@ type Story = StoryObj<typeof meta>;
 
 // Basic Dropdown
 export const Basic: Story = {
-	render: function BasicDropdown() {
-		const [value, setValue] = React.useState<string>("");
+	render: function BasicDropdown(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "");
+		}, [args.value]);
 
 		return (
 			<div style={{ width: "300px" }}>
 				<Dropdown
-					options={sampleOptions}
+					{...args}
 					value={value}
-					onChange={setValue}
-					placeholder="Select a fruit"
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+					placeholder={args.placeholder ?? "Select a fruit"}
 				/>
 			</div>
 		);
@@ -103,12 +133,26 @@ export const Basic: Story = {
 
 // With Default Value
 export const WithDefaultValue: Story = {
-	render: function DropdownWithDefault() {
-		const [value, setValue] = React.useState<string>("banana");
+	args: {
+		value: "banana",
+	},
+	render: function DropdownWithDefault(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "banana");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "banana");
+		}, [args.value]);
 
 		return (
 			<div style={{ width: "300px" }}>
-				<Dropdown options={sampleOptions} value={value} onChange={setValue} />
+				<Dropdown
+					{...args}
+					value={value}
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+				/>
 			</div>
 		);
 	},
@@ -134,22 +178,130 @@ export const Sizes: Story = {
 					options={sampleOptions}
 					value={value1}
 					onChange={setValue1}
-					size="sm"
+					size="small"
 					placeholder="Small"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
 					onChange={setValue2}
-					size="md"
+					size="medium"
 					placeholder="Medium"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
 					onChange={setValue3}
-					size="lg"
+					size="large"
 					placeholder="Large"
+				/>
+			</div>
+		);
+	},
+};
+
+// Intents
+export const Intents: Story = {
+	render: function DropdownIntents() {
+		const [value1, setValue1] = React.useState<string>("");
+		const [value2, setValue2] = React.useState<string>("");
+		const [value3, setValue3] = React.useState<string>("");
+		const [value4, setValue4] = React.useState<string>("");
+		const [value5, setValue5] = React.useState<string>("");
+		const [value6, setValue6] = React.useState<string>("");
+
+		return (
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					gap: "1rem",
+					width: "300px",
+				}}
+			>
+				<Dropdown
+					options={sampleOptions}
+					value={value1}
+					onChange={setValue1}
+					intent="primary"
+					placeholder="Primary"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value2}
+					onChange={setValue2}
+					intent="secondary"
+					placeholder="Secondary"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value3}
+					onChange={setValue3}
+					intent="success"
+					placeholder="Success"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value4}
+					onChange={setValue4}
+					intent="warning"
+					placeholder="Warning"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value5}
+					onChange={setValue5}
+					intent="danger"
+					placeholder="Danger"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value6}
+					onChange={setValue6}
+					intent="neutral"
+					placeholder="Neutral"
+				/>
+			</div>
+		);
+	},
+};
+
+// Rounded
+export const Rounded: Story = {
+	render: function DropdownRounded() {
+		const [value1, setValue1] = React.useState<string>("");
+		const [value2, setValue2] = React.useState<string>("");
+		const [value3, setValue3] = React.useState<string>("");
+
+		return (
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					gap: "1rem",
+					width: "300px",
+				}}
+			>
+				<Dropdown
+					options={sampleOptions}
+					value={value1}
+					onChange={setValue1}
+					rounded="small"
+					placeholder="Small rounded"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value2}
+					onChange={setValue2}
+					rounded="medium"
+					placeholder="Medium rounded"
+				/>
+				<Dropdown
+					options={sampleOptions}
+					value={value3}
+					onChange={setValue3}
+					rounded="large"
+					placeholder="Large rounded"
 				/>
 			</div>
 		);
@@ -158,17 +310,26 @@ export const Sizes: Story = {
 
 // Full Width
 export const FullWidth: Story = {
-	render: function DropdownFullWidth() {
-		const [value, setValue] = React.useState<string>("");
+	args: {
+		fullWidth: true,
+	},
+	render: function DropdownFullWidth(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "");
+		}, [args.value]);
 
 		return (
 			<div style={{ width: "100%", maxWidth: "500px" }}>
 				<Dropdown
-					options={sampleOptions}
+					{...args}
 					value={value}
-					onChange={setValue}
-					fullWidth
-					placeholder="Full width dropdown"
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+					placeholder={args.placeholder ?? "Full width dropdown"}
 				/>
 			</div>
 		);
@@ -177,22 +338,27 @@ export const FullWidth: Story = {
 
 // Disabled
 export const Disabled: Story = {
-	render: () => (
-		<div style={{ width: "300px" }}>
-			<Dropdown
-				options={sampleOptions}
-				value="apple"
-				disabled
-				placeholder="Disabled"
-			/>
-		</div>
-	),
+	args: {
+		value: "apple",
+		disabled: true,
+	},
+	render: function DropdownDisabled(args) {
+		return (
+			<div style={{ width: "300px" }}>
+				<Dropdown {...args} placeholder={args.placeholder ?? "Disabled"} />
+			</div>
+		);
+	},
 };
 
 // With Disabled Options
 export const WithDisabledOptions: Story = {
-	render: function DropdownDisabledOptions() {
-		const [value, setValue] = React.useState<string>("");
+	render: function DropdownDisabledOptions(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "");
+		}, [args.value]);
 
 		const optionsWithDisabled = [
 			{ value: "apple", label: "Apple" },
@@ -205,10 +371,14 @@ export const WithDisabledOptions: Story = {
 		return (
 			<div style={{ width: "300px" }}>
 				<Dropdown
+					{...args}
 					options={optionsWithDisabled}
 					value={value}
-					onChange={setValue}
-					placeholder="Select a fruit"
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+					placeholder={args.placeholder ?? "Select a fruit"}
 				/>
 			</div>
 		);
@@ -217,8 +387,12 @@ export const WithDisabledOptions: Story = {
 
 // Many Options (Scrollable)
 export const ManyOptions: Story = {
-	render: function DropdownManyOptions() {
-		const [value, setValue] = React.useState<string>("");
+	render: function DropdownManyOptions(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "");
+		}, [args.value]);
 
 		const manyOptions = Array.from({ length: 20 }, (_, i) => ({
 			value: `option-${i + 1}`,
@@ -228,36 +402,14 @@ export const ManyOptions: Story = {
 		return (
 			<div style={{ width: "300px" }}>
 				<Dropdown
+					{...args}
 					options={manyOptions}
 					value={value}
-					onChange={setValue}
-					placeholder="Select an option"
-				/>
-			</div>
-		);
-	},
-};
-
-// Dark Mode
-export const DarkMode: Story = {
-	render: function DropdownDarkMode() {
-		const [value, setValue] = React.useState<string>("");
-
-		return (
-			<div
-				style={{
-					backgroundColor: "#1a1a1a",
-					padding: "2rem",
-					borderRadius: "8px",
-					width: "300px",
-				}}
-			>
-				<Dropdown
-					options={sampleOptions}
-					value={value}
-					onChange={setValue}
-					mode="dark"
-					placeholder="Select a fruit"
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+					placeholder={args.placeholder ?? "Select an option"}
 				/>
 			</div>
 		);
@@ -387,8 +539,15 @@ export const FormExample: Story = {
 
 // Controlled vs Uncontrolled
 export const ControlledExample: Story = {
-	render: function DropdownControlled() {
-		const [value, setValue] = React.useState<string>("cherry");
+	args: {
+		value: "cherry",
+	},
+	render: function DropdownControlled(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "cherry");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "cherry");
+		}, [args.value]);
 
 		return (
 			<div
@@ -399,7 +558,14 @@ export const ControlledExample: Story = {
 					width: "300px",
 				}}
 			>
-				<Dropdown options={sampleOptions} value={value} onChange={setValue} />
+				<Dropdown
+					{...args}
+					value={value}
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+				/>
 				<p>
 					Selected value: <strong>{value || "None"}</strong>
 				</p>
@@ -429,6 +595,30 @@ export const ControlledExample: Story = {
 						Clear
 					</button>
 				</div>
+			</div>
+		);
+	},
+};
+
+// Playground - args를 직접 사용하여 Controls 패널에서 모든 props를 테스트할 수 있음
+export const Playground: Story = {
+	render: function DropdownPlayground(args) {
+		const [value, setValue] = React.useState<string>(args.value ?? "");
+
+		React.useEffect(() => {
+			setValue(args.value ?? "");
+		}, [args.value]);
+
+		return (
+			<div style={{ width: "300px" }}>
+				<Dropdown
+					{...args}
+					value={value}
+					onChange={(newValue) => {
+						setValue(newValue);
+						args.onChange?.(newValue);
+					}}
+				/>
 			</div>
 		);
 	},
