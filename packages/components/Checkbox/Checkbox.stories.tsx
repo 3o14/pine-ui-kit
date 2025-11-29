@@ -13,6 +13,7 @@ const meta = {
 		size: "medium",
 		variant: "square",
 		intent: "primary",
+		rounded: "medium",
 		checked: false,
 		disabled: false,
 	},
@@ -49,6 +50,15 @@ const meta = {
 			table: {
 				type: { summary: "CheckboxIntent" },
 				defaultValue: { summary: "primary" },
+			},
+		},
+		rounded: {
+			control: "select",
+			options: ["small", "medium", "large"],
+			description: "체크박스 모서리 둥글기",
+			table: {
+				type: { summary: "CheckboxRounded" },
+				defaultValue: { summary: "medium" },
 			},
 		},
 		label: {

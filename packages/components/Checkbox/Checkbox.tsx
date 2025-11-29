@@ -9,12 +9,14 @@ import { Text } from "../Text/Text";
 export type CheckboxSize = "small" | "medium" | "large" | "xlarge";
 export type CheckboxVariant = "circle" | "square";
 export type CheckboxIntent = ColorIntent;
+export type CheckboxRounded = "small" | "medium" | "large";
 
 export interface CheckboxProps
 	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
 	size?: CheckboxSize;
 	variant?: CheckboxVariant;
 	intent?: CheckboxIntent;
+	rounded?: CheckboxRounded;
 	label?: string;
 	checked?: boolean;
 	disabled?: boolean;
@@ -24,6 +26,7 @@ export const Checkbox = ({
 	size = "medium",
 	variant = "square",
 	intent = "primary",
+	rounded = "medium",
 	label,
 	checked: controlledChecked,
 	disabled = false,
@@ -61,6 +64,7 @@ export const Checkbox = ({
 					size,
 					variant,
 					intent,
+					rounded,
 					checked,
 				})}
 			>

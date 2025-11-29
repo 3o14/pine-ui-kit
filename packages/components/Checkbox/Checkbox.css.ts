@@ -103,6 +103,18 @@ export const checkbox = recipe({
 			neutral: {},
 		},
 
+		rounded: {
+			small: {
+				borderRadius: themeContract.radius.small,
+			},
+			medium: {
+				borderRadius: themeContract.radius.medium,
+			},
+			large: {
+				borderRadius: themeContract.radius.large,
+			},
+		},
+
 		checked: {
 			true: {},
 			false: {},
@@ -229,13 +241,13 @@ export const checkbox = recipe({
 				backgroundColor: themeContract.color.neutral.surface,
 			},
 		},
-
 	],
 
 	defaultVariants: {
 		size: "medium",
 		variant: "square",
 		intent: "primary",
+		rounded: "medium",
 		checked: false,
 	},
 });
@@ -253,4 +265,3 @@ export const checkmarkIcon = style({
 		},
 	},
 });
-
