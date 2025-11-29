@@ -1,4 +1,4 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "../../tokens/theme.css";
 
@@ -51,19 +51,24 @@ export const track = recipe({
 
 	variants: {
 		size: {
-			sm: {
+			small: {
 				width: "30px",
 				height: "18px",
 				padding: "2px 4px",
 			},
-			md: {
+			medium: {
 				width: "43px",
 				height: "24px",
 				padding: "2px 3px",
 			},
-			lg: {
+			large: {
 				width: "54px",
 				height: "30px",
+				padding: "2px 4px",
+			},
+			xlarge: {
+				width: "66px",
+				height: "36px",
 				padding: "2px 4px",
 			},
 		},
@@ -170,7 +175,7 @@ export const track = recipe({
 	],
 
 	defaultVariants: {
-		size: "md",
+		size: "medium",
 		intent: "primary",
 		checked: false,
 	},
@@ -189,17 +194,21 @@ export const thumb = recipe({
 
 	variants: {
 		size: {
-			sm: {
+			small: {
 				width: "14px",
 				height: "14px",
 			},
-			md: {
+			medium: {
 				width: "20px",
 				height: "20px",
 			},
-			lg: {
+			large: {
 				width: "24px",
 				height: "24px",
+			},
+			xlarge: {
+				width: "28px",
+				height: "28px",
 			},
 		},
 
@@ -214,49 +223,33 @@ export const thumb = recipe({
 	compoundVariants: [
 		// Checked state - move thumb to right based on size
 		{
-			variants: { size: "sm", checked: true },
+			variants: { size: "small", checked: true },
 			style: {
 				transform: "translateX(16px)",
 			},
 		},
 		{
-			variants: { size: "md", checked: true },
+			variants: { size: "medium", checked: true },
 			style: {
 				transform: "translateX(22px)",
 			},
 		},
 		{
-			variants: { size: "lg", checked: true },
+			variants: { size: "large", checked: true },
 			style: {
 				transform: "translateX(28px)",
+			},
+		},
+		{
+			variants: { size: "xlarge", checked: true },
+			style: {
+				transform: "translateX(34px)",
 			},
 		},
 	],
 
 	defaultVariants: {
-		size: "md",
+		size: "medium",
 		checked: false,
-	},
-});
-
-// Label text
-export const label = style({
-	fontFamily: themeContract.typography.fontFamily.sans,
-	fontWeight: themeContract.typography.fontWeight.regular,
-	color: themeContract.color.surface.text,
-});
-
-export const labelSize = styleVariants({
-	sm: {
-		fontSize: themeContract.typography.fontSize.small,
-		lineHeight: themeContract.typography.lineHeight.small,
-	},
-	md: {
-		fontSize: themeContract.typography.fontSize.medium,
-		lineHeight: themeContract.typography.lineHeight.medium,
-	},
-	lg: {
-		fontSize: themeContract.typography.fontSize.large,
-		lineHeight: themeContract.typography.lineHeight.large,
 	},
 });
