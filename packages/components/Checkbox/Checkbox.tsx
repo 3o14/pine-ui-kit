@@ -5,21 +5,27 @@ import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
-export type CheckboxSize = "sm" | "md" | "lg";
+export type CheckboxSize = "small" | "medium" | "large" | "xlarge";
+export type CheckboxVariant = "solid" | "weak";
 export type CheckboxIntent = ColorIntent;
+export type CheckboxRounded = "small" | "medium" | "large";
 
 export interface CheckboxProps
 	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
 	size?: CheckboxSize;
+	variant?: CheckboxVariant;
 	intent?: CheckboxIntent;
+	rounded?: CheckboxRounded;
 	label?: string;
 	checked?: boolean;
 	disabled?: boolean;
 }
 
 export const Checkbox = ({
-	size = "md",
+	size = "medium",
+	variant = "solid",
 	intent = "primary",
+	rounded = "medium",
 	label,
 	checked: controlledChecked,
 	disabled = false,
@@ -55,7 +61,9 @@ export const Checkbox = ({
 			<span
 				className={styles.checkbox({
 					size,
+					variant,
 					intent,
+					rounded,
 					checked,
 				})}
 			>

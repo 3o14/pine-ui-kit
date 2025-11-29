@@ -47,7 +47,6 @@ const checkboxBase = style({
 	alignItems: "center",
 	justifyContent: "center",
 	flexShrink: 0,
-	borderRadius: themeContract.radius.sm,
 	border: "2px solid",
 	transition: "all 0.2s ease-in-out",
 	backgroundColor: "transparent",
@@ -68,18 +67,27 @@ export const checkbox = recipe({
 
 	variants: {
 		size: {
-			sm: {
+			small: {
 				width: "16px",
 				height: "16px",
 			},
-			md: {
+			medium: {
 				width: "20px",
 				height: "20px",
 			},
-			lg: {
+			large: {
 				width: "24px",
 				height: "24px",
 			},
+			xlarge: {
+				width: "28px",
+				height: "28px",
+			},
+		},
+
+		variant: {
+			solid: {},
+			weak: {},
 		},
 
 		intent: {
@@ -89,6 +97,18 @@ export const checkbox = recipe({
 			warning: {},
 			danger: {},
 			neutral: {},
+		},
+
+		rounded: {
+			small: {
+				borderRadius: themeContract.radius.sm,
+			},
+			medium: {
+				borderRadius: themeContract.radius.md,
+			},
+			large: {
+				borderRadius: themeContract.radius.lg,
+			},
 		},
 
 		checked: {
@@ -217,11 +237,139 @@ export const checkbox = recipe({
 				backgroundColor: themeContract.color.neutral.surface,
 			},
 		},
+
+		// Weak variants - Primary
+		{
+			variants: { variant: "weak", intent: "primary", checked: false },
+			style: {
+				borderColor: themeContract.color.primary.weak,
+				selectors: {
+					"input:hover:not(:disabled) + &": {
+						borderColor: themeContract.color.primary.surface,
+					},
+				},
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "primary", checked: true },
+			style: {
+				borderColor: themeContract.color.primary.weak,
+				backgroundColor: themeContract.color.primary.weak,
+				color: themeContract.color.primary.surface,
+			},
+		},
+
+		// Weak variants - Secondary
+		{
+			variants: { variant: "weak", intent: "secondary", checked: false },
+			style: {
+				borderColor: themeContract.color.secondary.weak,
+				selectors: {
+					"input:hover:not(:disabled) + &": {
+						borderColor: themeContract.color.secondary.surface,
+					},
+				},
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "secondary", checked: true },
+			style: {
+				borderColor: themeContract.color.secondary.weak,
+				backgroundColor: themeContract.color.secondary.weak,
+				color: themeContract.color.secondary.surface,
+			},
+		},
+
+		// Weak variants - Success
+		{
+			variants: { variant: "weak", intent: "success", checked: false },
+			style: {
+				borderColor: themeContract.color.success.weak,
+				selectors: {
+					"input:hover:not(:disabled) + &": {
+						borderColor: themeContract.color.success.surface,
+					},
+				},
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "success", checked: true },
+			style: {
+				borderColor: themeContract.color.success.weak,
+				backgroundColor: themeContract.color.success.weak,
+				color: themeContract.color.success.surface,
+			},
+		},
+
+		// Weak variants - Warning
+		{
+			variants: { variant: "weak", intent: "warning", checked: false },
+			style: {
+				borderColor: themeContract.color.warning.weak,
+				selectors: {
+					"input:hover:not(:disabled) + &": {
+						borderColor: themeContract.color.warning.surface,
+					},
+				},
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "warning", checked: true },
+			style: {
+				borderColor: themeContract.color.warning.weak,
+				backgroundColor: themeContract.color.warning.weak,
+				color: themeContract.color.warning.surface,
+			},
+		},
+
+		// Weak variants - Danger
+		{
+			variants: { variant: "weak", intent: "danger", checked: false },
+			style: {
+				borderColor: themeContract.color.danger.weak,
+				selectors: {
+					"input:hover:not(:disabled) + &": {
+						borderColor: themeContract.color.danger.surface,
+					},
+				},
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "danger", checked: true },
+			style: {
+				borderColor: themeContract.color.danger.weak,
+				backgroundColor: themeContract.color.danger.weak,
+				color: themeContract.color.danger.surface,
+			},
+		},
+
+		// Weak variants - Neutral
+		{
+			variants: { variant: "weak", intent: "neutral", checked: false },
+			style: {
+				borderColor: themeContract.color.neutral.weak,
+				selectors: {
+					"input:hover:not(:disabled) + &": {
+						borderColor: themeContract.color.neutral.surface,
+					},
+				},
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "neutral", checked: true },
+			style: {
+				borderColor: themeContract.color.neutral.weak,
+				backgroundColor: themeContract.color.neutral.weak,
+				color: themeContract.color.neutral.surface,
+			},
+		},
 	],
 
 	defaultVariants: {
-		size: "md",
+		size: "medium",
+		variant: "solid",
 		intent: "primary",
+		rounded: "medium",
 		checked: false,
 	},
 });
@@ -248,16 +396,20 @@ export const label = style({
 });
 
 export const labelSize = styleVariants({
-	sm: {
+	small: {
 		fontSize: themeContract.typography.fontSize.sm,
 		lineHeight: themeContract.typography.lineHeight.sm,
 	},
-	md: {
+	medium: {
 		fontSize: themeContract.typography.fontSize.md,
 		lineHeight: themeContract.typography.lineHeight.md,
 	},
-	lg: {
+	large: {
 		fontSize: themeContract.typography.fontSize.lg,
 		lineHeight: themeContract.typography.lineHeight.lg,
+	},
+	xlarge: {
+		fontSize: themeContract.typography.fontSize.xl,
+		lineHeight: themeContract.typography.lineHeight.xl,
 	},
 });

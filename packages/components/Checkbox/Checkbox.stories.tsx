@@ -1,4 +1,3 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
 
@@ -9,14 +8,31 @@ const meta = {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
+	args: {
+		size: "medium",
+		variant: "solid",
+		intent: "primary",
+		rounded: "medium",
+		checked: false,
+		disabled: false,
+	},
 	argTypes: {
 		size: {
 			control: "select",
-			options: ["sm", "md", "lg"],
+			options: ["small", "medium", "large", "xlarge"],
 			description: "체크박스 크기",
 			table: {
 				type: { summary: "CheckboxSize" },
-				defaultValue: { summary: "md" },
+				defaultValue: { summary: "medium" },
+			},
+		},
+		variant: {
+			control: "select",
+			options: ["solid", "weak"],
+			description: "체크박스 variant 스타일",
+			table: {
+				type: { summary: "CheckboxVariant" },
+				defaultValue: { summary: "solid" },
 			},
 		},
 		intent: {
@@ -33,6 +49,15 @@ const meta = {
 			table: {
 				type: { summary: "CheckboxIntent" },
 				defaultValue: { summary: "primary" },
+			},
+		},
+		rounded: {
+			control: "select",
+			options: ["small", "medium", "large"],
+			description: "체크박스 모서리 둥글기",
+			table: {
+				type: { summary: "CheckboxRounded" },
+				defaultValue: { summary: "medium" },
 			},
 		},
 		label: {
@@ -56,15 +81,6 @@ const meta = {
 			table: {
 				type: { summary: "boolean" },
 				defaultValue: { summary: "false" },
-			},
-		},
-		mode: {
-			control: "select",
-			options: ["light", "dark"],
-			description: "테마 모드",
-			table: {
-				type: { summary: '"light" | "dark"' },
-				defaultValue: { summary: "light" },
 			},
 		},
 	},
@@ -132,9 +148,22 @@ export const DisabledChecked: Story = {
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<Checkbox size="sm" label="Small (16px)" checked />
-			<Checkbox size="md" label="Medium (20px)" checked />
-			<Checkbox size="lg" label="Large (24px)" checked />
+			<Checkbox size="small" label="Small (16px)" checked />
+			<Checkbox size="medium" label="Medium (20px)" checked />
+			<Checkbox size="large" label="Large (24px)" checked />
+			<Checkbox size="xlarge" label="XLarge (28px)" checked />
+		</div>
+	),
+};
+
+// Variants
+export const Variants: Story = {
+	render: () => (
+		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+			<Checkbox variant="solid" intent="primary" label="Solid Primary" checked />
+			<Checkbox variant="weak" intent="primary" label="Weak Primary" checked />
+			<Checkbox variant="solid" intent="success" label="Solid Success" checked />
+			<Checkbox variant="weak" intent="success" label="Weak Success" checked />
 		</div>
 	),
 };
@@ -159,30 +188,101 @@ export const SizesAndIntents: Story = {
 		<div style={{ display: "flex", gap: "2rem" }}>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
-				<Checkbox size="sm" intent="primary" label="Primary" checked />
-				<Checkbox size="sm" intent="secondary" label="Secondary" checked />
-				<Checkbox size="sm" intent="success" label="Success" checked />
-				<Checkbox size="sm" intent="warning" label="Warning" checked />
-				<Checkbox size="sm" intent="danger" label="Danger" checked />
-				<Checkbox size="sm" intent="neutral" label="Neutral" checked />
+				<Checkbox size="small" intent="primary" label="Primary" checked />
+				<Checkbox size="small" intent="secondary" label="Secondary" checked />
+				<Checkbox size="small" intent="success" label="Success" checked />
+				<Checkbox size="small" intent="warning" label="Warning" checked />
+				<Checkbox size="small" intent="danger" label="Danger" checked />
+				<Checkbox size="small" intent="neutral" label="Neutral" checked />
 			</div>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
-				<Checkbox size="md" intent="primary" label="Primary" checked />
-				<Checkbox size="md" intent="secondary" label="Secondary" checked />
-				<Checkbox size="md" intent="success" label="Success" checked />
-				<Checkbox size="md" intent="warning" label="Warning" checked />
-				<Checkbox size="md" intent="danger" label="Danger" checked />
-				<Checkbox size="md" intent="neutral" label="Neutral" checked />
+				<Checkbox size="medium" intent="primary" label="Primary" checked />
+				<Checkbox size="medium" intent="secondary" label="Secondary" checked />
+				<Checkbox size="medium" intent="success" label="Success" checked />
+				<Checkbox size="medium" intent="warning" label="Warning" checked />
+				<Checkbox size="medium" intent="danger" label="Danger" checked />
+				<Checkbox size="medium" intent="neutral" label="Neutral" checked />
 			</div>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
-				<Checkbox size="lg" intent="primary" label="Primary" checked />
-				<Checkbox size="lg" intent="secondary" label="Secondary" checked />
-				<Checkbox size="lg" intent="success" label="Success" checked />
-				<Checkbox size="lg" intent="warning" label="Warning" checked />
-				<Checkbox size="lg" intent="danger" label="Danger" checked />
-				<Checkbox size="lg" intent="neutral" label="Neutral" checked />
+				<Checkbox size="large" intent="primary" label="Primary" checked />
+				<Checkbox size="large" intent="secondary" label="Secondary" checked />
+				<Checkbox size="large" intent="success" label="Success" checked />
+				<Checkbox size="large" intent="warning" label="Warning" checked />
+				<Checkbox size="large" intent="danger" label="Danger" checked />
+				<Checkbox size="large" intent="neutral" label="Neutral" checked />
+			</div>
+			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>XLarge</h4>
+				<Checkbox size="xlarge" intent="primary" label="Primary" checked />
+				<Checkbox size="xlarge" intent="secondary" label="Secondary" checked />
+				<Checkbox size="xlarge" intent="success" label="Success" checked />
+				<Checkbox size="xlarge" intent="warning" label="Warning" checked />
+				<Checkbox size="xlarge" intent="danger" label="Danger" checked />
+				<Checkbox size="xlarge" intent="neutral" label="Neutral" checked />
+			</div>
+		</div>
+	),
+};
+
+// Variants and Intents
+export const VariantsAndIntents: Story = {
+	render: () => (
+		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Solid</h4>
+				<div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+					<Checkbox variant="solid" intent="primary" label="Primary" checked />
+					<Checkbox variant="solid" intent="secondary" label="Secondary" checked />
+					<Checkbox variant="solid" intent="success" label="Success" checked />
+					<Checkbox variant="solid" intent="warning" label="Warning" checked />
+					<Checkbox variant="solid" intent="danger" label="Danger" checked />
+					<Checkbox variant="solid" intent="neutral" label="Neutral" checked />
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Weak</h4>
+				<div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+					<Checkbox variant="weak" intent="primary" label="Primary" checked />
+					<Checkbox variant="weak" intent="secondary" label="Secondary" checked />
+					<Checkbox variant="weak" intent="success" label="Success" checked />
+					<Checkbox variant="weak" intent="warning" label="Warning" checked />
+					<Checkbox variant="weak" intent="danger" label="Danger" checked />
+					<Checkbox variant="weak" intent="neutral" label="Neutral" checked />
+				</div>
+			</div>
+		</div>
+	),
+};
+
+// Rounded
+export const Rounded: Story = {
+	render: () => (
+		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Checkbox rounded="small" label="Small" checked />
+					<Checkbox rounded="small" intent="primary" label="Primary" checked />
+					<Checkbox rounded="small" intent="success" label="Success" checked />
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Checkbox rounded="medium" label="Medium" checked />
+					<Checkbox rounded="medium" intent="primary" label="Primary" checked />
+					<Checkbox rounded="medium" intent="success" label="Success" checked />
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Checkbox rounded="large" label="Large" checked />
+					<Checkbox rounded="large" intent="primary" label="Primary" checked />
+					<Checkbox rounded="large" intent="success" label="Success" checked />
+				</div>
 			</div>
 		</div>
 	),
@@ -210,32 +310,6 @@ export const InteractiveStates: Story = {
 	),
 };
 
-// Dark Mode
-export const DarkMode: Story = {
-	render: () => (
-		<div
-			style={{
-				backgroundColor: "#1a1a1a",
-				padding: "2rem",
-				borderRadius: "8px",
-			}}
-		>
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<Checkbox mode="dark" label="Primary (Dark)" intent="primary" checked />
-				<Checkbox
-					mode="dark"
-					label="Secondary (Dark)"
-					intent="secondary"
-					checked
-				/>
-				<Checkbox mode="dark" label="Success (Dark)" intent="success" checked />
-				<Checkbox mode="dark" label="Warning (Dark)" intent="warning" checked />
-				<Checkbox mode="dark" label="Danger (Dark)" intent="danger" checked />
-				<Checkbox mode="dark" label="Neutral (Dark)" intent="neutral" checked />
-			</div>
-		</div>
-	),
-};
 
 // Form Example
 export const FormExample: Story = {
