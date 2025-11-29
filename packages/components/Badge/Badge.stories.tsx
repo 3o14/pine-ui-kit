@@ -1,4 +1,3 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./Badge";
 
@@ -20,7 +19,7 @@ const meta = {
 	argTypes: {
 		size: {
 			control: "select",
-			options: ["small", "medium", "large"],
+			options: ["small", "medium", "large", "xlarge"],
 			description: "Badge 크기",
 			table: {
 				type: { summary: "BadgeSize" },
@@ -54,7 +53,7 @@ const meta = {
 		},
 		rounded: {
 			control: "select",
-			options: ["small", "medium", "large", "xlarge"],
+			options: ["small", "medium", "large"],
 			description: "Badge 둥근 모서리 크기",
 			table: {
 				type: { summary: "BadgeRounded" },
@@ -88,6 +87,7 @@ export const Sizes: Story = {
 			<Badge size="small">Small</Badge>
 			<Badge size="medium">Medium</Badge>
 			<Badge size="large">Large</Badge>
+			<Badge size="xlarge">XLarge</Badge>
 		</div>
 	),
 };
@@ -263,24 +263,6 @@ export const Rounded: Story = {
 					</Badge>
 				</div>
 			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>XLarge (Pill)</h4>
-				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge rounded="xlarge">XLarge</Badge>
-					<Badge rounded="xlarge" intent="primary">
-						Primary
-					</Badge>
-					<Badge rounded="xlarge" intent="success">
-						Success
-					</Badge>
-					<Badge rounded="xlarge" intent="warning">
-						Warning
-					</Badge>
-					<Badge rounded="xlarge" intent="danger">
-						Danger
-					</Badge>
-				</div>
-			</div>
 		</div>
 	),
 };
@@ -312,16 +294,16 @@ export const WithDot: Story = {
 export const StatusBadges: Story = {
 	render: () => (
 		<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-			<Badge variant="subtle" intent="success" showDot rounded="xlarge">
+			<Badge variant="subtle" intent="success" showDot rounded="large">
 				Active
 			</Badge>
-			<Badge variant="subtle" intent="warning" showDot rounded="xlarge">
+			<Badge variant="subtle" intent="warning" showDot rounded="large">
 				Pending
 			</Badge>
-			<Badge variant="subtle" intent="danger" showDot rounded="xlarge">
+			<Badge variant="subtle" intent="danger" showDot rounded="large">
 				Inactive
 			</Badge>
-			<Badge variant="subtle" intent="primary" showDot rounded="xlarge">
+			<Badge variant="subtle" intent="primary" showDot rounded="large">
 				In Progress
 			</Badge>
 		</div>
@@ -353,7 +335,7 @@ export const DarkMode: Story = {
 					<Badge variant="subtle" intent="success">
 						Subtle
 					</Badge>
-					<Badge showDot intent="primary" rounded="xlarge">
+					<Badge showDot intent="primary" rounded="large">
 						With Dot
 					</Badge>
 				</div>
@@ -375,7 +357,7 @@ export const UseCases: Story = {
 						<Badge
 							size="small"
 							intent="danger"
-							rounded="xlarge"
+							rounded="large"
 							style={{ position: "absolute", top: -5, right: -10 }}
 						>
 							3
@@ -386,7 +368,7 @@ export const UseCases: Story = {
 						<Badge
 							size="small"
 							intent="primary"
-							rounded="xlarge"
+							rounded="large"
 							style={{ position: "absolute", top: -5, right: -10 }}
 						>
 							12

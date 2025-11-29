@@ -5,23 +5,26 @@ import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
-export type ButtonVariant = "solid" | "outline" | "ghost";
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonVariant = "solid" | "outline" | "ghost" | "weak";
+export type ButtonSize = "small" | "medium" | "large" | "xlarge";
 export type ButtonIntent = ColorIntent;
+export type ButtonRounded = "small" | "medium" | "large";
 
 export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: ButtonVariant;
 	size?: ButtonSize;
 	intent?: ButtonIntent;
+	rounded?: ButtonRounded;
 	fullWidth?: boolean;
 	disabled?: boolean;
 }
 
 export const Button = ({
 	variant = "solid",
-	size = "md",
+	size = "medium",
 	intent = "primary",
+	rounded = "medium",
 	fullWidth = false,
 	disabled = false,
 	children,
@@ -35,9 +38,12 @@ export const Button = ({
 		<button
 			className={clsx(
 				themeClass,
-				styles.base,
-				styles[variant][intent],
-				styles.size[size],
+				styles.button({
+					variant,
+					intent,
+					size,
+					rounded,
+				}),
 				fullWidth && styles.fullWidth,
 				className
 			)}

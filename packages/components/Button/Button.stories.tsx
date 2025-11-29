@@ -1,4 +1,3 @@
-import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 
@@ -9,16 +8,33 @@ const meta = {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
+	args: {
+		children: "Button",
+		variant: "solid",
+		size: "medium",
+		intent: "primary",
+		rounded: "medium",
+		fullWidth: false,
+		disabled: false,
+	},
 	argTypes: {
 		variant: {
 			control: "select",
-			options: ["solid", "outline", "ghost"],
+			options: ["solid", "outline", "ghost", "weak"],
 			description: "Button variant style",
+			table: {
+				type: { summary: "ButtonVariant" },
+				defaultValue: { summary: "solid" },
+			},
 		},
 		size: {
 			control: "select",
-			options: ["sm", "md", "lg"],
+			options: ["small", "medium", "large", "xlarge"],
 			description: "Button size",
+			table: {
+				type: { summary: "ButtonSize" },
+				defaultValue: { summary: "medium" },
+			},
 		},
 		intent: {
 			control: "select",
@@ -31,14 +47,34 @@ const meta = {
 				"neutral",
 			],
 			description: "Color intent based on design tokens",
+			table: {
+				type: { summary: "ButtonIntent" },
+				defaultValue: { summary: "primary" },
+			},
+		},
+		rounded: {
+			control: "select",
+			options: ["small", "medium", "large"],
+			description: "Button 둥근 모서리 크기",
+			table: {
+				type: { summary: "ButtonRounded" },
+			},
 		},
 		fullWidth: {
 			control: "boolean",
 			description: "Full width button",
+			table: {
+				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
+			},
 		},
 		disabled: {
 			control: "boolean",
 			description: "Disabled state",
+			table: {
+				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
+			},
 		},
 	},
 } satisfies Meta<typeof Button>;
@@ -52,7 +88,7 @@ export const Primary: Story = {
 		children: "Primary Button",
 		intent: "primary",
 		variant: "solid",
-		size: "lg",
+		size: "medium",
 	},
 };
 
@@ -69,6 +105,9 @@ export const Variants: Story = {
 			<Button {...args} variant="ghost">
 				Ghost
 			</Button>
+			<Button {...args} variant="weak">
+				Weak
+			</Button>
 		</div>
 	),
 	args: {
@@ -80,14 +119,17 @@ export const Variants: Story = {
 export const Sizes: Story = {
 	render: (args) => (
 		<div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-			<Button {...args} size="sm">
+			<Button {...args} size="small">
 				Small
 			</Button>
-			<Button {...args} size="md">
+			<Button {...args} size="medium">
 				Medium
 			</Button>
-			<Button {...args} size="lg">
+			<Button {...args} size="large">
 				Large
+			</Button>
+			<Button {...args} size="xlarge">
+				XLarge
 			</Button>
 		</div>
 	),
@@ -199,13 +241,58 @@ export const FullWidth: Story = {
 	},
 };
 
+// Rounded (Pill Shape)
+export const Rounded: Story = {
+	render: () => (
+		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Button rounded="small">Small</Button>
+					<Button rounded="small" intent="primary">
+						Primary
+					</Button>
+					<Button rounded="small" intent="success">
+						Success
+					</Button>
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Button rounded="medium">Medium</Button>
+					<Button rounded="medium" intent="primary">
+						Primary
+					</Button>
+					<Button rounded="medium" intent="success">
+						Success
+					</Button>
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Button rounded="large">Large</Button>
+					<Button rounded="large" intent="primary">
+						Primary
+					</Button>
+					<Button rounded="large" intent="success">
+						Success
+					</Button>
+				</div>
+			</div>
+		</div>
+	),
+};
+
 // Interactive playground
 export const Playground: Story = {
 	args: {
 		children: "Click me!",
 		intent: "primary",
 		variant: "solid",
-		size: "md",
+		size: "medium",
+		rounded: "medium",
 		disabled: false,
 		fullWidth: false,
 	},

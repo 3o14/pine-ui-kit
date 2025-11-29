@@ -40,6 +40,12 @@ export const badge = recipe({
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.md}`,
 				minHeight: "28px",
 			},
+			xlarge: {
+				fontSize: themeContract.typography.fontSize.lg,
+				lineHeight: themeContract.typography.lineHeight.lg,
+				padding: `${themeContract.spacing.sm} ${themeContract.spacing.lg}`,
+				minHeight: "32px",
+			},
 		},
 
 		variant: {
@@ -69,9 +75,6 @@ export const badge = recipe({
 			},
 			large: {
 				borderRadius: themeContract.radius.lg,
-			},
-			xlarge: {
-				borderRadius: themeContract.radius.xl,
 			},
 		},
 	},
