@@ -8,33 +8,67 @@ const meta = {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
+	args: {
+		size: "medium",
+		rounded: "medium",
+		variant: "outline",
+		status: "default",
+		disabled: false,
+		fullWidth: false,
+		placeholder: "Enter text...",
+	},
 	argTypes: {
 		size: {
 			control: "select",
-			options: ["sm", "md", "lg"],
+			options: ["small", "medium", "large", "xlarge"],
 			description: "TextField size",
+			table: {
+				type: { summary: "TextFieldSize" },
+				defaultValue: { summary: "medium" },
+			},
+		},
+		rounded: {
+			control: "select",
+			options: ["small", "medium", "large"],
+			description: "TextField border radius",
+			table: {
+				type: { summary: "TextFieldRounded" },
+				defaultValue: { summary: "medium" },
+			},
 		},
 		variant: {
 			control: "select",
 			options: ["outline", "filled"],
 			description: "TextField variant style",
+			table: {
+				type: { summary: "TextFieldVariant" },
+				defaultValue: { summary: "outline" },
+			},
 		},
 		status: {
 			control: "select",
 			options: ["default", "error", "success"],
 			description: "TextField status state",
+			table: {
+				type: { summary: "TextFieldStatus" },
+				defaultValue: { summary: "default" },
+			},
 		},
 		fullWidth: {
 			control: "boolean",
 			description: "Full width field",
+			table: {
+				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
+			},
 		},
 		disabled: {
 			control: "boolean",
 			description: "Disabled state",
-		},
-		error: {
-			control: "boolean",
-			description: "Error state (overrides status)",
+			table: {
+				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
+			},
 		},
 	},
 } satisfies Meta<typeof TextField>;
@@ -44,11 +78,7 @@ type Story = StoryObj<typeof meta>;
 
 // Default TextField
 export const Default: Story = {
-	args: {
-		placeholder: "Enter text...",
-		size: "md",
-		variant: "outline",
-	},
+	args: {},
 };
 
 // With Label
@@ -57,8 +87,6 @@ export const WithLabel: Story = {
 		label: "Email Address",
 		placeholder: "example@email.com",
 		type: "email",
-		size: "md",
-		variant: "outline",
 	},
 };
 
@@ -68,8 +96,6 @@ export const WithHelperText: Story = {
 		label: "Username",
 		placeholder: "johndoe",
 		helperText: "Choose a unique username",
-		size: "md",
-		variant: "outline",
 	},
 };
 
@@ -84,9 +110,30 @@ export const Sizes: Story = {
 				width: "300px",
 			}}
 		>
-			<TextField {...args} size="sm" label="Small" placeholder="Small size" />
-			<TextField {...args} size="md" label="Medium" placeholder="Medium size" />
-			<TextField {...args} size="lg" label="Large" placeholder="Large size" />
+			<TextField
+				{...args}
+				size="small"
+				label="Small"
+				placeholder="Small size"
+			/>
+			<TextField
+				{...args}
+				size="medium"
+				label="Medium"
+				placeholder="Medium size"
+			/>
+			<TextField
+				{...args}
+				size="large"
+				label="Large"
+				placeholder="Large size"
+			/>
+			<TextField
+				{...args}
+				size="xlarge"
+				label="XLarge"
+				placeholder="XLarge size"
+			/>
 		</div>
 	),
 	args: {
@@ -120,7 +167,7 @@ export const Variants: Story = {
 		</div>
 	),
 	args: {
-		size: "md",
+		size: "medium",
 	},
 };
 
@@ -169,9 +216,8 @@ export const Error: Story = {
 		label: "Password",
 		placeholder: "Enter password",
 		type: "password",
-		error: true,
+		status: "error",
 		helperText: "Password must be at least 8 characters",
-		variant: "outline",
 	},
 };
 
@@ -222,41 +268,34 @@ export const FullWidth: Story = {
 	},
 };
 
-// Dark Mode
-export const DarkMode: Story = {
+// Rounded
+export const Rounded: Story = {
 	render: (args) => (
 		<div
 			style={{
 				display: "flex",
 				flexDirection: "column",
 				gap: "16px",
-				padding: "24px",
-				backgroundColor: "#0b1120",
-				borderRadius: "8px",
 				width: "300px",
 			}}
 		>
 			<TextField
 				{...args}
-				label="Username"
-				placeholder="Enter username"
-				helperText="Choose a unique username"
+				rounded="small"
+				label="Small Rounded"
+				placeholder="Small border radius"
 			/>
 			<TextField
 				{...args}
-				label="Email"
-				type="email"
-				placeholder="your@email.com"
-				status="success"
-				helperText="Email is available"
+				rounded="medium"
+				label="Medium Rounded"
+				placeholder="Medium border radius"
 			/>
 			<TextField
 				{...args}
-				label="Password"
-				type="password"
-				placeholder="Enter password"
-				error
-				helperText="Password is too short"
+				rounded="large"
+				label="Large Rounded"
+				placeholder="Large border radius"
 			/>
 		</div>
 	),
@@ -316,11 +355,5 @@ export const Playground: Story = {
 		label: "Label",
 		placeholder: "Type something...",
 		helperText: "Helper text goes here",
-		size: "md",
-		variant: "outline",
-		status: "default",
-		disabled: false,
-		error: false,
-		fullWidth: false,
 	},
 };

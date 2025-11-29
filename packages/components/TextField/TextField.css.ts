@@ -16,46 +16,6 @@ export const containerVariants = styleVariants({
 	},
 });
 
-export const label = style({
-	fontFamily: themeContract.typography.fontFamily.sans,
-	fontWeight: themeContract.typography.fontWeight.medium,
-	color: themeContract.color.surface.text,
-	display: "block",
-});
-
-export const labelSize = styleVariants({
-	sm: {
-		fontSize: themeContract.typography.fontSize.xsmall,
-		marginBottom: themeContract.spacing.xxs,
-	},
-	md: {
-		fontSize: themeContract.typography.fontSize.small,
-		marginBottom: themeContract.spacing.xs,
-	},
-	lg: {
-		fontSize: themeContract.typography.fontSize.medium,
-		marginBottom: themeContract.spacing.xs,
-	},
-});
-
-export const helperText = style({
-	fontFamily: themeContract.typography.fontFamily.sans,
-	fontSize: themeContract.typography.fontSize.xsmall,
-	marginTop: themeContract.spacing.xxs,
-});
-
-export const helperTextStatus = styleVariants({
-	default: {
-		color: themeContract.color.surface.textMuted,
-	},
-	error: {
-		color: themeContract.color.danger.surface,
-	},
-	success: {
-		color: themeContract.color.success.surface,
-	},
-});
-
 export const inputBase = style({
 	fontFamily: themeContract.typography.fontFamily.sans,
 	fontWeight: themeContract.typography.fontWeight.regular,
@@ -75,32 +35,41 @@ export const input = recipe({
 
 	variants: {
 		size: {
-			sm: {
+			small: {
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
 				fontSize: themeContract.typography.fontSize.small,
 				lineHeight: themeContract.typography.lineHeight.small,
 			},
-			md: {
+			medium: {
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
 				fontSize: themeContract.typography.fontSize.medium,
 				lineHeight: themeContract.typography.lineHeight.medium,
 			},
-			lg: {
+			large: {
 				padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
 				fontSize: themeContract.typography.fontSize.large,
 				lineHeight: themeContract.typography.lineHeight.large,
 			},
+			xlarge: {
+				padding: `${themeContract.spacing.lg} ${themeContract.spacing.xl}`,
+				fontSize: themeContract.typography.fontSize.xlarge,
+				lineHeight: themeContract.typography.lineHeight.xlarge,
+			},
+		},
+
+		rounded: {
+			small: {},
+			medium: {},
+			large: {},
 		},
 
 		variant: {
-		outline: {
-			backgroundColor: "transparent",
-			borderRadius: themeContract.radius.medium,
-		},
-		filled: {
-			backgroundColor: themeContract.color.surface.backgroundElevated,
-			borderRadius: `${themeContract.radius.medium} ${themeContract.radius.medium} 0 0`,
-		},
+			outline: {
+				backgroundColor: "transparent",
+			},
+			filled: {
+				backgroundColor: themeContract.color.surface.backgroundElevated,
+			},
 		},
 
 		status: {
@@ -181,10 +150,51 @@ export const input = recipe({
 				},
 			},
 		},
+
+		// Rounded variants for outline
+		{
+			variants: { variant: "outline", rounded: "small" },
+			style: {
+				borderRadius: themeContract.radius.small,
+			},
+		},
+		{
+			variants: { variant: "outline", rounded: "medium" },
+			style: {
+				borderRadius: themeContract.radius.medium,
+			},
+		},
+		{
+			variants: { variant: "outline", rounded: "large" },
+			style: {
+				borderRadius: themeContract.radius.large,
+			},
+		},
+
+		// Rounded variants for filled
+		{
+			variants: { variant: "filled", rounded: "small" },
+			style: {
+				borderRadius: `${themeContract.radius.small} ${themeContract.radius.small} 0 0`,
+			},
+		},
+		{
+			variants: { variant: "filled", rounded: "medium" },
+			style: {
+				borderRadius: `${themeContract.radius.medium} ${themeContract.radius.medium} 0 0`,
+			},
+		},
+		{
+			variants: { variant: "filled", rounded: "large" },
+			style: {
+				borderRadius: `${themeContract.radius.large} ${themeContract.radius.large} 0 0`,
+			},
+		},
 	],
 
 	defaultVariants: {
-		size: "md",
+		size: "medium",
+		rounded: "medium",
 		variant: "outline",
 		status: "default",
 	},

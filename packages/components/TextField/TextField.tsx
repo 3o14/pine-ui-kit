@@ -1,39 +1,33 @@
 import React, { useContext } from "react";
 import clsx from "clsx";
-import {
-	container,
-	containerVariants,
-	label as labelStyle,
-	labelSize,
-	input,
-	helperText as helperTextStyle,
-	helperTextStatus,
-} from "./TextField.css";
+import { container, containerVariants, input } from "./TextField.css";
 import { lightTheme } from "../../tokens/theme.css";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
+import { Text } from "../Text/Text";
 
-export type TextFieldSize = "sm" | "md" | "lg";
+export type TextFieldSize = "small" | "medium" | "large" | "xlarge";
+export type TextFieldRounded = "small" | "medium" | "large";
 export type TextFieldVariant = "outline" | "filled";
 export type TextFieldStatus = "default" | "error" | "success";
 
 export interface TextFieldProps
 	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
 	size?: TextFieldSize;
+	rounded?: TextFieldRounded;
 	variant?: TextFieldVariant;
 	status?: TextFieldStatus;
 	label?: string;
 	helperText?: string;
-	error?: boolean;
 	fullWidth?: boolean;
 }
 
 export const TextField = ({
-	size = "md",
+	size = "medium",
+	rounded = "medium",
 	variant = "outline",
 	status = "default",
 	label,
 	helperText,
-	error = false,
 	fullWidth = false,
 	disabled = false,
 	className,
@@ -41,7 +35,23 @@ export const TextField = ({
 }: TextFieldProps) => {
 	const themeContext = useContext(ThemeContext);
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-	const finalStatus = error ? "error" : status;
+
+	const getHelperTextIntent = (): "inherit" | "danger" | "success" => {
+		if (status === "error") return "danger";
+		if (status === "success") return "success";
+		return "inherit";
+	};
+
+	const getLabelSize = (): "xsmall" | "small" | "medium" => {
+		if (size === "small") return "xsmall";
+		if (size === "medium") return "small";
+		return "medium";
+	};
+
+	const getHelperTextSize = (): "xsmall" | "small" => {
+		if (size === "small" || size === "medium") return "xsmall";
+		return "small";
+	};
 
 	return (
 		<div
@@ -53,21 +63,35 @@ export const TextField = ({
 			)}
 		>
 			{label && (
-				<label className={clsx(labelStyle, labelSize[size])}>{label}</label>
+				<Text
+					as="label"
+					size={getLabelSize()}
+					weight="medium"
+					intent="inherit"
+					style={{ display: "block", marginBottom: "4px" }}
+				>
+					{label}
+				</Text>
 			)}
 			<input
 				className={input({
 					size,
+					rounded,
 					variant,
-					status: finalStatus,
+					status,
 				})}
 				disabled={disabled}
 				{...props}
 			/>
 			{helperText && (
-				<span className={clsx(helperTextStyle, helperTextStatus[finalStatus])}>
+				<Text
+					as="span"
+					size={getHelperTextSize()}
+					intent={getHelperTextIntent()}
+					style={{ display: "block", marginTop: "4px" }}
+				>
 					{helperText}
-				</span>
+				</Text>
 			)}
 		</div>
 	);

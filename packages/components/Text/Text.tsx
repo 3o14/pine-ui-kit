@@ -17,7 +17,8 @@ export type TextElement =
 	| "h6"
 	| "p"
 	| "span"
-	| "div";
+	| "div"
+	| "label";
 
 export interface TextProps {
 	as?: TextElement;
