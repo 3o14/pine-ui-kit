@@ -10,7 +10,6 @@ const badgeBase = style({
 	gap: themeContract.spacing.xxs,
 	fontFamily: themeContract.typography.fontFamily.sans,
 	fontWeight: themeContract.typography.fontWeight.medium,
-	borderRadius: themeContract.radius.md,
 	border: "1px solid transparent",
 	transition: "all 0.2s ease-in-out",
 	whiteSpace: "nowrap",
@@ -62,10 +61,18 @@ export const badge = recipe({
 		},
 
 		rounded: {
-			true: {
-				borderRadius: themeContract.radius.full,
+			small: {
+				borderRadius: themeContract.radius.sm,
 			},
-			false: {},
+			medium: {
+				borderRadius: themeContract.radius.md,
+			},
+			large: {
+				borderRadius: themeContract.radius.lg,
+			},
+			xlarge: {
+				borderRadius: themeContract.radius.xl,
+			},
 		},
 	},
 
@@ -251,7 +258,7 @@ export const badge = recipe({
 		size: "md",
 		variant: "solid",
 		intent: "primary",
-		rounded: false,
+		rounded: "medium",
 	},
 });
 

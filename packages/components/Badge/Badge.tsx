@@ -8,12 +8,13 @@ import { ThemeContext } from "../ThemeProvider/ThemeContext";
 export type BadgeSize = "sm" | "md" | "lg";
 export type BadgeVariant = "solid" | "outline" | "subtle" | "weak";
 export type BadgeIntent = ColorIntent;
+export type BadgeRounded = "small" | "medium" | "large" | "xlarge";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 	size?: BadgeSize;
 	variant?: BadgeVariant;
 	intent?: BadgeIntent;
-	rounded?: boolean;
+	rounded?: BadgeRounded;
 	showDot?: boolean;
 	children: React.ReactNode;
 }
@@ -22,7 +23,7 @@ export const Badge = ({
 	size = "md",
 	variant = "solid",
 	intent = "primary",
-	rounded = false,
+	rounded = "medium",
 	showDot = false,
 	children,
 	className,

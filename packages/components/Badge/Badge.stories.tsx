@@ -14,7 +14,7 @@ const meta = {
 		size: "md",
 		variant: "solid",
 		intent: "primary",
-		rounded: false,
+		rounded: "medium",
 		showDot: false,
 	},
 	argTypes: {
@@ -53,11 +53,11 @@ const meta = {
 			},
 		},
 		rounded: {
-			control: "boolean",
-			description: "완전히 둥근 모양 (pill 형태)",
+			control: "select",
+			options: ["small", "medium", "large", "xlarge"],
+			description: "Badge 둥근 모서리 크기",
 			table: {
-				type: { summary: "boolean" },
-				defaultValue: { summary: "false" },
+				type: { summary: "BadgeRounded" },
 			},
 		},
 		showDot: {
@@ -226,20 +226,61 @@ export const VariantsAndIntents: Story = {
 // Rounded (Pill Shape)
 export const Rounded: Story = {
 	render: () => (
-		<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-			<Badge rounded>Default</Badge>
-			<Badge rounded intent="primary">
-				Primary
-			</Badge>
-			<Badge rounded intent="success">
-				Success
-			</Badge>
-			<Badge rounded intent="warning">
-				Warning
-			</Badge>
-			<Badge rounded intent="danger">
-				Danger
-			</Badge>
+		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Badge rounded="small">Small</Badge>
+					<Badge rounded="small" intent="primary">
+						Primary
+					</Badge>
+					<Badge rounded="small" intent="success">
+						Success
+					</Badge>
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Badge rounded="medium">Medium</Badge>
+					<Badge rounded="medium" intent="primary">
+						Primary
+					</Badge>
+					<Badge rounded="medium" intent="success">
+						Success
+					</Badge>
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Badge rounded="large">Large</Badge>
+					<Badge rounded="large" intent="primary">
+						Primary
+					</Badge>
+					<Badge rounded="large" intent="success">
+						Success
+					</Badge>
+				</div>
+			</div>
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>XLarge (Pill)</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Badge rounded="xlarge">XLarge</Badge>
+					<Badge rounded="xlarge" intent="primary">
+						Primary
+					</Badge>
+					<Badge rounded="xlarge" intent="success">
+						Success
+					</Badge>
+					<Badge rounded="xlarge" intent="warning">
+						Warning
+					</Badge>
+					<Badge rounded="xlarge" intent="danger">
+						Danger
+					</Badge>
+				</div>
+			</div>
 		</div>
 	),
 };
@@ -271,16 +312,16 @@ export const WithDot: Story = {
 export const StatusBadges: Story = {
 	render: () => (
 		<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-			<Badge variant="subtle" intent="success" showDot rounded>
+			<Badge variant="subtle" intent="success" showDot rounded="xlarge">
 				Active
 			</Badge>
-			<Badge variant="subtle" intent="warning" showDot rounded>
+			<Badge variant="subtle" intent="warning" showDot rounded="xlarge">
 				Pending
 			</Badge>
-			<Badge variant="subtle" intent="danger" showDot rounded>
+			<Badge variant="subtle" intent="danger" showDot rounded="xlarge">
 				Inactive
 			</Badge>
-			<Badge variant="subtle" intent="primary" showDot rounded>
+			<Badge variant="subtle" intent="primary" showDot rounded="xlarge">
 				In Progress
 			</Badge>
 		</div>
@@ -312,7 +353,7 @@ export const DarkMode: Story = {
 					<Badge variant="subtle" intent="success">
 						Subtle
 					</Badge>
-					<Badge showDot intent="primary" rounded>
+					<Badge showDot intent="primary" rounded="xlarge">
 						With Dot
 					</Badge>
 				</div>
@@ -334,7 +375,7 @@ export const UseCases: Story = {
 						<Badge
 							size="sm"
 							intent="danger"
-							rounded
+							rounded="xlarge"
 							style={{ position: "absolute", top: -5, right: -10 }}
 						>
 							3
@@ -345,7 +386,7 @@ export const UseCases: Story = {
 						<Badge
 							size="sm"
 							intent="primary"
-							rounded
+							rounded="xlarge"
 							style={{ position: "absolute", top: -5, right: -10 }}
 						>
 							12
