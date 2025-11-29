@@ -33,7 +33,7 @@ const trackBase = style({
 	display: "inline-flex",
 	alignItems: "center",
 	flexShrink: 0,
-	borderRadius: themeContract.radius.xl,
+	borderRadius: themeContract.radius.xlarge,
 	transition: "background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
 	selectors: {
 		"input:focus-visible + &": {
@@ -179,9 +179,9 @@ export const track = recipe({
 // Switch thumb (sliding circle)
 const thumbBase = style({
 	backgroundColor: "white",
-	borderRadius: themeContract.radius.xl,
+	borderRadius: themeContract.radius.xlarge,
 	transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
-	boxShadow: themeContract.shadow.sm,
+	boxShadow: themeContract.shadow.small,
 });
 
 export const thumb = recipe({
@@ -248,15 +248,15 @@ export const label = style({
 
 export const labelSize = styleVariants({
 	sm: {
-		fontSize: themeContract.typography.fontSize.sm,
-		lineHeight: themeContract.typography.lineHeight.sm,
+		fontSize: themeContract.typography.fontSize.small,
+		lineHeight: themeContract.typography.lineHeight.small,
 	},
 	md: {
-		fontSize: themeContract.typography.fontSize.md,
-		lineHeight: themeContract.typography.lineHeight.md,
+		fontSize: themeContract.typography.fontSize.medium,
+		lineHeight: themeContract.typography.lineHeight.medium,
 	},
 	lg: {
-		fontSize: themeContract.typography.fontSize.lg,
-		lineHeight: themeContract.typography.lineHeight.lg,
+		fontSize: themeContract.typography.fontSize.large,
+		lineHeight: themeContract.typography.lineHeight.large,
 	},
 });

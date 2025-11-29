@@ -23,26 +23,26 @@ export const badge = recipe({
 	variants: {
 		size: {
 			small: {
-				fontSize: themeContract.typography.fontSize.xs,
-				lineHeight: themeContract.typography.lineHeight.xs,
+				fontSize: themeContract.typography.fontSize.xsmall,
+				lineHeight: themeContract.typography.lineHeight.xsmall,
 				padding: `${themeContract.spacing.xxxs} ${themeContract.spacing.xs}`,
 				minHeight: "20px",
 			},
 			medium: {
-				fontSize: themeContract.typography.fontSize.sm,
-				lineHeight: themeContract.typography.lineHeight.sm,
+				fontSize: themeContract.typography.fontSize.small,
+				lineHeight: themeContract.typography.lineHeight.small,
 				padding: `${themeContract.spacing.xxs} ${themeContract.spacing.sm}`,
 				minHeight: "24px",
 			},
 			large: {
-				fontSize: themeContract.typography.fontSize.md,
-				lineHeight: themeContract.typography.lineHeight.md,
+				fontSize: themeContract.typography.fontSize.medium,
+				lineHeight: themeContract.typography.lineHeight.medium,
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.md}`,
 				minHeight: "28px",
 			},
 			xlarge: {
-				fontSize: themeContract.typography.fontSize.lg,
-				lineHeight: themeContract.typography.lineHeight.lg,
+				fontSize: themeContract.typography.fontSize.large,
+				lineHeight: themeContract.typography.lineHeight.large,
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.lg}`,
 				minHeight: "32px",
 			},
@@ -68,13 +68,13 @@ export const badge = recipe({
 
 		rounded: {
 			small: {
-				borderRadius: themeContract.radius.sm,
+				borderRadius: themeContract.radius.small,
 			},
 			medium: {
-				borderRadius: themeContract.radius.md,
+				borderRadius: themeContract.radius.medium,
 			},
 			large: {
-				borderRadius: themeContract.radius.lg,
+				borderRadius: themeContract.radius.large,
 			},
 		},
 	},

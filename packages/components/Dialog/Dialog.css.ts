@@ -56,8 +56,8 @@ export const overlay = style({
 export const container = style({
 	position: "relative",
 	backgroundColor: themeContract.color.surface.background,
-	borderRadius: themeContract.radius.lg,
-	boxShadow: themeContract.shadow.xl,
+	borderRadius: themeContract.radius.large,
+	boxShadow: themeContract.shadow.xlarge,
 	display: "flex",
 	flexDirection: "column",
 	maxHeight: "90vh",
@@ -101,7 +101,7 @@ export const header = style({
 });
 
 export const title = style({
-	fontSize: themeContract.typography.fontSize.lg,
+	fontSize: themeContract.typography.fontSize.large,
 	fontWeight: themeContract.typography.fontWeight.semibold,
 	fontFamily: themeContract.typography.fontFamily.sans,
 	color: themeContract.color.surface.text,
@@ -115,7 +115,7 @@ export const closeButton = style({
 	justifyContent: "center",
 	width: "32px",
 	height: "32px",
-	borderRadius: themeContract.radius.md,
+	borderRadius: themeContract.radius.medium,
 	border: "none",
 	backgroundColor: "transparent",
 	color: themeContract.color.surface.textMuted,
@@ -138,8 +138,8 @@ export const body = style({
 	overflowY: "auto",
 	flex: 1,
 	fontFamily: themeContract.typography.fontFamily.sans,
-	fontSize: themeContract.typography.fontSize.md,
-	lineHeight: themeContract.typography.lineHeight.md,
+	fontSize: themeContract.typography.fontSize.medium,
+	lineHeight: themeContract.typography.lineHeight.medium,
 	color: themeContract.color.surface.text,
 });
 
@@ -155,7 +155,7 @@ export const footer = style({
 
 // Description (optional)
 export const description = style({
-	fontSize: themeContract.typography.fontSize.sm,
+	fontSize: themeContract.typography.fontSize.small,
 	fontFamily: themeContract.typography.fontFamily.sans,
 	color: themeContract.color.surface.textMuted,
 	marginTop: themeContract.spacing.xxs,

@@ -25,22 +25,22 @@ export const label = style({
 
 export const labelSize = styleVariants({
 	sm: {
-		fontSize: themeContract.typography.fontSize.xs,
+		fontSize: themeContract.typography.fontSize.xsmall,
 		marginBottom: themeContract.spacing.xxs,
 	},
 	md: {
-		fontSize: themeContract.typography.fontSize.sm,
+		fontSize: themeContract.typography.fontSize.small,
 		marginBottom: themeContract.spacing.xs,
 	},
 	lg: {
-		fontSize: themeContract.typography.fontSize.md,
+		fontSize: themeContract.typography.fontSize.medium,
 		marginBottom: themeContract.spacing.xs,
 	},
 });
 
 export const helperText = style({
 	fontFamily: themeContract.typography.fontFamily.sans,
-	fontSize: themeContract.typography.fontSize.xs,
+	fontSize: themeContract.typography.fontSize.xsmall,
 	marginTop: themeContract.spacing.xxs,
 });
 
@@ -77,30 +77,30 @@ export const input = recipe({
 		size: {
 			sm: {
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
-				fontSize: themeContract.typography.fontSize.sm,
-				lineHeight: themeContract.typography.lineHeight.sm,
+				fontSize: themeContract.typography.fontSize.small,
+				lineHeight: themeContract.typography.lineHeight.small,
 			},
 			md: {
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
-				fontSize: themeContract.typography.fontSize.md,
-				lineHeight: themeContract.typography.lineHeight.md,
+				fontSize: themeContract.typography.fontSize.medium,
+				lineHeight: themeContract.typography.lineHeight.medium,
 			},
 			lg: {
 				padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
-				fontSize: themeContract.typography.fontSize.lg,
-				lineHeight: themeContract.typography.lineHeight.lg,
+				fontSize: themeContract.typography.fontSize.large,
+				lineHeight: themeContract.typography.lineHeight.large,
 			},
 		},
 
 		variant: {
-			outline: {
-				backgroundColor: "transparent",
-				borderRadius: themeContract.radius.md,
-			},
-			filled: {
-				backgroundColor: themeContract.color.surface.backgroundElevated,
-				borderRadius: `${themeContract.radius.md} ${themeContract.radius.md} 0 0`,
-			},
+		outline: {
+			backgroundColor: "transparent",
+			borderRadius: themeContract.radius.medium,
+		},
+		filled: {
+			backgroundColor: themeContract.color.surface.backgroundElevated,
+			borderRadius: `${themeContract.radius.medium} ${themeContract.radius.medium} 0 0`,
+		},
 		},
 
 		status: {
