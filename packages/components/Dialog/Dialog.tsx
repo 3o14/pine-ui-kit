@@ -1,19 +1,39 @@
-import React, { useEffect, useRef, useState, useCallback, useContext } from "react";
+import React, {
+	useEffect,
+	useRef,
+	useState,
+	useCallback,
+	useContext,
+} from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import * as styles from "./Dialog.css";
 import { lightTheme } from "../../tokens/theme.css";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
+import { Text } from "../Text";
+import { Button } from "../Button";
+import type { ButtonVariant, ButtonIntent } from "../Button";
 
-export type DialogSize = "sm" | "md" | "lg" | "xl" | "full";
+export type DialogSize = "small" | "medium" | "large" | "xlarge" | "full";
+export type DialogRounded = "small" | "medium" | "large";
+
+export interface DialogAction {
+	label: string;
+	onClick: () => void;
+	variant?: ButtonVariant;
+	intent?: ButtonIntent;
+	disabled?: boolean;
+}
 
 export interface DialogProps {
 	open: boolean;
 	onClose: () => void;
 	size?: DialogSize;
+	rounded?: DialogRounded;
 	title?: string;
 	description?: string;
 	children: React.ReactNode;
+	actions?: DialogAction[];
 	footer?: React.ReactNode;
 	showCloseButton?: boolean;
 	closeOnOverlayClick?: boolean;
@@ -24,10 +44,12 @@ export interface DialogProps {
 export const Dialog = ({
 	open,
 	onClose,
-	size = "md",
+	size = "medium",
+	rounded = "medium",
 	title,
 	description,
 	children,
+	actions,
 	footer,
 	showCloseButton = true,
 	closeOnOverlayClick = true,
@@ -100,6 +122,7 @@ export const Dialog = ({
 					themeClass,
 					styles.container,
 					styles.sizeVariants[size],
+					styles.roundedVariants[rounded],
 					className
 				)}
 				role="dialog"
@@ -107,19 +130,29 @@ export const Dialog = ({
 				aria-labelledby={title ? "dialog-title" : undefined}
 				aria-describedby={description ? "dialog-description" : undefined}
 			>
-				{/* Header */}
 				{(title || showCloseButton) && (
 					<div className={styles.header}>
 						<div style={{ flex: 1 }}>
 							{title && (
-								<h2 id="dialog-title" className={styles.title}>
+								<Text
+									as="h2"
+									id="dialog-title"
+									size="large"
+									weight="semibold"
+									className={styles.title}
+								>
 									{title}
-								</h2>
+								</Text>
 							)}
 							{description && (
-								<p id="dialog-description" className={styles.description}>
+								<Text
+									as="p"
+									id="dialog-description"
+									size="small"
+									className={styles.description}
+								>
 									{description}
-								</p>
+								</Text>
 							)}
 						</div>
 						{showCloseButton && (
@@ -149,11 +182,25 @@ export const Dialog = ({
 					</div>
 				)}
 
-				{/* Body */}
 				<div className={styles.body}>{children}</div>
 
-				{/* Footer */}
-				{footer && <div className={styles.footer}>{footer}</div>}
+				{(actions || footer) && (
+					<div className={styles.footer}>
+						{actions
+							? actions.map((action, index) => (
+									<Button
+										key={index}
+										variant={action.variant ?? "solid"}
+										intent={action.intent ?? "primary"}
+										onClick={action.onClick}
+										disabled={action.disabled}
+									>
+										{action.label}
+									</Button>
+								))
+							: footer}
+					</div>
+				)}
 			</div>
 		</div>
 	);

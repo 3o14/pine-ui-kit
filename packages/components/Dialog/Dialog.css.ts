@@ -1,7 +1,6 @@
 import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 import { themeContract } from "../../tokens/theme.css";
 
-// Animations
 const fadeIn = keyframes({
 	from: { opacity: 0 },
 	to: { opacity: 1 },
@@ -34,7 +33,6 @@ const scaleOut = keyframes({
 	},
 });
 
-// Overlay (배경)
 export const overlay = style({
 	position: "fixed",
 	inset: 0,
@@ -52,11 +50,9 @@ export const overlay = style({
 	},
 });
 
-// Dialog container
 export const container = style({
 	position: "relative",
 	backgroundColor: themeContract.color.surface.background,
-	borderRadius: themeContract.radius.large,
 	boxShadow: themeContract.shadow.xlarge,
 	display: "flex",
 	flexDirection: "column",
@@ -70,18 +66,17 @@ export const container = style({
 	},
 });
 
-// Size variants
 export const sizeVariants = styleVariants({
-	sm: {
+	small: {
 		maxWidth: "400px",
 	},
-	md: {
+	medium: {
 		maxWidth: "600px",
 	},
-	lg: {
+	large: {
 		maxWidth: "800px",
 	},
-	xl: {
+	xlarge: {
 		maxWidth: "1000px",
 	},
 	full: {
@@ -90,7 +85,18 @@ export const sizeVariants = styleVariants({
 	},
 });
 
-// Header
+export const roundedVariants = styleVariants({
+	small: {
+		borderRadius: themeContract.radius.small,
+	},
+	medium: {
+		borderRadius: themeContract.radius.medium,
+	},
+	large: {
+		borderRadius: themeContract.radius.large,
+	},
+});
+
 export const header = style({
 	display: "flex",
 	alignItems: "center",
@@ -101,10 +107,6 @@ export const header = style({
 });
 
 export const title = style({
-	fontSize: themeContract.typography.fontSize.large,
-	fontWeight: themeContract.typography.fontWeight.semibold,
-	fontFamily: themeContract.typography.fontFamily.sans,
-	color: themeContract.color.surface.text,
 	margin: 0,
 	flex: 1,
 });
@@ -132,7 +134,6 @@ export const closeButton = style({
 	},
 });
 
-// Body
 export const body = style({
 	padding: themeContract.spacing.lg,
 	overflowY: "auto",
@@ -143,7 +144,6 @@ export const body = style({
 	color: themeContract.color.surface.text,
 });
 
-// Footer
 export const footer = style({
 	display: "flex",
 	alignItems: "center",
@@ -153,10 +153,6 @@ export const footer = style({
 	borderTop: `1px solid ${themeContract.color.surface.divider}`,
 });
 
-// Description (optional)
 export const description = style({
-	fontSize: themeContract.typography.fontSize.small,
-	fontFamily: themeContract.typography.fontFamily.sans,
-	color: themeContract.color.surface.textMuted,
 	marginTop: themeContract.spacing.xxs,
 });
