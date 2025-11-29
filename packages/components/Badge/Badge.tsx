@@ -5,7 +5,7 @@ import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
-export type BadgeSize = "sm" | "md" | "lg";
+export type BadgeSize = "small" | "medium" | "large";
 export type BadgeVariant = "solid" | "outline" | "subtle" | "weak";
 export type BadgeIntent = ColorIntent;
 export type BadgeRounded = "small" | "medium" | "large" | "xlarge";
@@ -20,7 +20,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 export const Badge = ({
-	size = "md",
+	size = "medium",
 	variant = "solid",
 	intent = "primary",
 	rounded = "medium",

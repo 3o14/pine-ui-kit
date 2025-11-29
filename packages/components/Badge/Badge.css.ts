@@ -22,19 +22,19 @@ export const badge = recipe({
 
 	variants: {
 		size: {
-			sm: {
+			small: {
 				fontSize: themeContract.typography.fontSize.xs,
 				lineHeight: themeContract.typography.lineHeight.xs,
 				padding: `${themeContract.spacing.xxxs} ${themeContract.spacing.xs}`,
 				minHeight: "20px",
 			},
-			md: {
+			medium: {
 				fontSize: themeContract.typography.fontSize.sm,
 				lineHeight: themeContract.typography.lineHeight.sm,
 				padding: `${themeContract.spacing.xxs} ${themeContract.spacing.sm}`,
 				minHeight: "24px",
 			},
-			lg: {
+			large: {
 				fontSize: themeContract.typography.fontSize.md,
 				lineHeight: themeContract.typography.lineHeight.md,
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.md}`,
@@ -209,7 +209,7 @@ export const badge = recipe({
 			},
 		},
 
-		// Weak variants (파스텔톤 - solid보다 연한 색상, 흰색과 혼합하여 밝게)
+		// Weak variants
 		{
 			variants: { variant: "weak", intent: "primary" },
 			style: {
@@ -255,7 +255,7 @@ export const badge = recipe({
 	],
 
 	defaultVariants: {
-		size: "md",
+		size: "medium",
 		variant: "solid",
 		intent: "primary",
 		rounded: "medium",

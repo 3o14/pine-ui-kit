@@ -11,7 +11,7 @@ const meta = {
 	tags: ["autodocs"],
 	args: {
 		children: "Badge",
-		size: "md",
+		size: "medium",
 		variant: "solid",
 		intent: "primary",
 		rounded: "medium",
@@ -20,11 +20,11 @@ const meta = {
 	argTypes: {
 		size: {
 			control: "select",
-			options: ["sm", "md", "lg"],
+			options: ["small", "medium", "large"],
 			description: "Badge 크기",
 			table: {
 				type: { summary: "BadgeSize" },
-				defaultValue: { summary: "md" },
+				defaultValue: { summary: "medium" },
 			},
 		},
 		variant: {
@@ -85,9 +85,9 @@ export const Default: Story = {
 export const Sizes: Story = {
 	render: () => (
 		<div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-			<Badge size="sm">Small</Badge>
-			<Badge size="md">Medium</Badge>
-			<Badge size="lg">Large</Badge>
+			<Badge size="small">Small</Badge>
+			<Badge size="medium">Medium</Badge>
+			<Badge size="large">Large</Badge>
 		</div>
 	),
 };
@@ -373,7 +373,7 @@ export const UseCases: Story = {
 					<div style={{ position: "relative", display: "inline-block" }}>
 						<span style={{ fontSize: "1.5rem" }}>🔔</span>
 						<Badge
-							size="sm"
+							size="small"
 							intent="danger"
 							rounded="xlarge"
 							style={{ position: "absolute", top: -5, right: -10 }}
@@ -384,7 +384,7 @@ export const UseCases: Story = {
 					<div style={{ position: "relative", display: "inline-block" }}>
 						<span style={{ fontSize: "1.5rem" }}>💬</span>
 						<Badge
-							size="sm"
+							size="small"
 							intent="primary"
 							rounded="xlarge"
 							style={{ position: "absolute", top: -5, right: -10 }}
@@ -422,19 +422,19 @@ export const UseCases: Story = {
 				>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>John Doe</span>
-						<Badge size="sm" variant="subtle" intent="success" showDot>
+						<Badge size="small" variant="subtle" intent="success" showDot>
 							Online
 						</Badge>
 					</div>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>Jane Smith</span>
-						<Badge size="sm" variant="subtle" intent="warning" showDot>
+						<Badge size="small" variant="subtle" intent="warning" showDot>
 							Away
 						</Badge>
 					</div>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>Bob Johnson</span>
-						<Badge size="sm" variant="subtle" intent="neutral" showDot>
+						<Badge size="small" variant="subtle" intent="neutral" showDot>
 							Offline
 						</Badge>
 					</div>
