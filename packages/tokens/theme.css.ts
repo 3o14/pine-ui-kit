@@ -13,20 +13,22 @@ import {
 
 // Define theme contract (structure)
 export const themeContract = createThemeContract({
-	color: {
-		primary: {
-			surface: null,
-			surfaceHover: null,
-			surfaceActive: null,
-			text: null,
-			border: null,
-		},
+		color: {
+			primary: {
+				surface: null,
+				surfaceHover: null,
+				surfaceActive: null,
+				text: null,
+				border: null,
+				weak: null,
+			},
 		secondary: {
 			surface: null,
 			surfaceHover: null,
 			surfaceActive: null,
 			text: null,
 			border: null,
+			weak: null,
 		},
 		success: {
 			surface: null,
@@ -34,6 +36,7 @@ export const themeContract = createThemeContract({
 			surfaceActive: null,
 			text: null,
 			border: null,
+			weak: null,
 		},
 		warning: {
 			surface: null,
@@ -41,6 +44,7 @@ export const themeContract = createThemeContract({
 			surfaceActive: null,
 			text: null,
 			border: null,
+			weak: null,
 		},
 		danger: {
 			surface: null,
@@ -48,6 +52,7 @@ export const themeContract = createThemeContract({
 			surfaceActive: null,
 			text: null,
 			border: null,
+			weak: null,
 		},
 		neutral: {
 			surface: null,
@@ -55,6 +60,7 @@ export const themeContract = createThemeContract({
 			surfaceActive: null,
 			text: null,
 			border: null,
+			weak: null,
 		},
 		surface: {
 			background: null,

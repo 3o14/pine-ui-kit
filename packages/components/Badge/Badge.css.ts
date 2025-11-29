@@ -213,42 +213,42 @@ export const badge = recipe({
 		{
 			variants: { variant: "weak", intent: "primary" },
 			style: {
-				backgroundColor: `color-mix(in srgb, ${themeContract.color.primary.surface} 25%, white)`,
+				backgroundColor: themeContract.color.primary.weak,
 				color: themeContract.color.primary.surface,
 			},
 		},
 		{
 			variants: { variant: "weak", intent: "secondary" },
 			style: {
-				backgroundColor: `color-mix(in srgb, ${themeContract.color.secondary.surface} 25%, white)`,
+				backgroundColor: themeContract.color.secondary.weak,
 				color: themeContract.color.secondary.surface,
 			},
 		},
 		{
 			variants: { variant: "weak", intent: "success" },
 			style: {
-				backgroundColor: `color-mix(in srgb, ${themeContract.color.success.surface} 25%, white)`,
+				backgroundColor: themeContract.color.success.weak,
 				color: themeContract.color.success.surface,
 			},
 		},
 		{
 			variants: { variant: "weak", intent: "warning" },
 			style: {
-				backgroundColor: `color-mix(in srgb, ${themeContract.color.warning.surface} 25%, white)`,
+				backgroundColor: themeContract.color.warning.weak,
 				color: themeContract.color.warning.surface,
 			},
 		},
 		{
 			variants: { variant: "weak", intent: "danger" },
 			style: {
-				backgroundColor: `color-mix(in srgb, ${themeContract.color.danger.surface} 25%, white)`,
+				backgroundColor: themeContract.color.danger.weak,
 				color: themeContract.color.danger.surface,
 			},
 		},
 		{
 			variants: { variant: "weak", intent: "neutral" },
 			style: {
-				backgroundColor: `color-mix(in srgb, ${themeContract.color.neutral.surface} 25%, white)`,
+				backgroundColor: themeContract.color.neutral.weak,
 				color: themeContract.color.neutral.surface,
 			},
 		},
