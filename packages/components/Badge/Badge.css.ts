@@ -49,6 +49,7 @@ export const badge = recipe({
 				backgroundColor: "transparent",
 			},
 			subtle: {},
+			weak: {},
 		},
 
 		intent: {
@@ -197,6 +198,50 @@ export const badge = recipe({
 			variants: { variant: "subtle", intent: "neutral" },
 			style: {
 				backgroundColor: `${themeContract.color.neutral.surface}20`,
+				color: themeContract.color.neutral.surface,
+			},
+		},
+
+		// Weak variants (파스텔톤 - solid보다 연한 색상, 흰색과 혼합하여 밝게)
+		{
+			variants: { variant: "weak", intent: "primary" },
+			style: {
+				backgroundColor: `color-mix(in srgb, ${themeContract.color.primary.surface} 25%, white)`,
+				color: themeContract.color.primary.surface,
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "secondary" },
+			style: {
+				backgroundColor: `color-mix(in srgb, ${themeContract.color.secondary.surface} 25%, white)`,
+				color: themeContract.color.secondary.surface,
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "success" },
+			style: {
+				backgroundColor: `color-mix(in srgb, ${themeContract.color.success.surface} 25%, white)`,
+				color: themeContract.color.success.surface,
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "warning" },
+			style: {
+				backgroundColor: `color-mix(in srgb, ${themeContract.color.warning.surface} 25%, white)`,
+				color: themeContract.color.warning.surface,
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "danger" },
+			style: {
+				backgroundColor: `color-mix(in srgb, ${themeContract.color.danger.surface} 25%, white)`,
+				color: themeContract.color.danger.surface,
+			},
+		},
+		{
+			variants: { variant: "weak", intent: "neutral" },
+			style: {
+				backgroundColor: `color-mix(in srgb, ${themeContract.color.neutral.surface} 25%, white)`,
 				color: themeContract.color.neutral.surface,
 			},
 		},

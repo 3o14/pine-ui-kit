@@ -6,7 +6,7 @@ import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type BadgeSize = "sm" | "md" | "lg";
-export type BadgeVariant = "solid" | "outline" | "subtle";
+export type BadgeVariant = "solid" | "outline" | "subtle" | "weak";
 export type BadgeIntent = ColorIntent;
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {

@@ -11,6 +11,11 @@ const meta = {
 	tags: ["autodocs"],
 	args: {
 		children: "Badge",
+		size: "md",
+		variant: "solid",
+		intent: "primary",
+		rounded: false,
+		showDot: false,
 	},
 	argTypes: {
 		size: {
@@ -24,7 +29,7 @@ const meta = {
 		},
 		variant: {
 			control: "select",
-			options: ["solid", "outline", "subtle"],
+			options: ["solid", "outline", "subtle", "weak"],
 			description: "Badge 스타일 variant",
 			table: {
 				type: { summary: "BadgeVariant" },
@@ -33,7 +38,14 @@ const meta = {
 		},
 		intent: {
 			control: "select",
-			options: ["primary", "secondary", "success", "warning", "danger", "neutral"],
+			options: [
+				"primary",
+				"secondary",
+				"success",
+				"warning",
+				"danger",
+				"neutral",
+			],
 			description: "Badge 색상 테마",
 			table: {
 				type: { summary: "BadgeIntent" },
@@ -88,6 +100,7 @@ export const Variants: Story = {
 				<Badge variant="solid">Solid</Badge>
 				<Badge variant="outline">Outline</Badge>
 				<Badge variant="subtle">Subtle</Badge>
+				<Badge variant="weak">Weak</Badge>
 			</div>
 		</div>
 	),
@@ -178,6 +191,30 @@ export const VariantsAndIntents: Story = {
 						Danger
 					</Badge>
 					<Badge variant="subtle" intent="neutral">
+						Neutral
+					</Badge>
+				</div>
+			</div>
+
+			<div>
+				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Weak</h4>
+				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+					<Badge variant="weak" intent="primary">
+						Primary
+					</Badge>
+					<Badge variant="weak" intent="secondary">
+						Secondary
+					</Badge>
+					<Badge variant="weak" intent="success">
+						Success
+					</Badge>
+					<Badge variant="weak" intent="warning">
+						Warning
+					</Badge>
+					<Badge variant="weak" intent="danger">
+						Danger
+					</Badge>
+					<Badge variant="weak" intent="neutral">
 						Neutral
 					</Badge>
 				</div>
@@ -339,7 +376,9 @@ export const UseCases: Story = {
 			{/* User Status */}
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>User Status</h4>
-				<div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+				<div
+					style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+				>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>John Doe</span>
 						<Badge size="sm" variant="subtle" intent="success" showDot>
@@ -363,4 +402,3 @@ export const UseCases: Story = {
 		</div>
 	),
 };
-
