@@ -1,4 +1,4 @@
-import { style, styleVariants, keyframes } from "@vanilla-extract/css";
+import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "../../tokens/theme.css";
 
@@ -47,7 +47,6 @@ const checkboxBase = style({
 	alignItems: "center",
 	justifyContent: "center",
 	flexShrink: 0,
-	borderRadius: themeContract.radius.sm,
 	border: "2px solid",
 	transition: "all 0.2s ease-in-out",
 	backgroundColor: "transparent",
@@ -68,17 +67,30 @@ export const checkbox = recipe({
 
 	variants: {
 		size: {
-			sm: {
+			small: {
 				width: "16px",
 				height: "16px",
 			},
-			md: {
+			medium: {
 				width: "20px",
 				height: "20px",
 			},
-			lg: {
+			large: {
 				width: "24px",
 				height: "24px",
+			},
+			xlarge: {
+				width: "28px",
+				height: "28px",
+			},
+		},
+
+		variant: {
+			circle: {
+				borderRadius: "50%",
+			},
+			square: {
+				borderRadius: themeContract.radius.small,
 			},
 		},
 
@@ -217,10 +229,12 @@ export const checkbox = recipe({
 				backgroundColor: themeContract.color.neutral.surface,
 			},
 		},
+
 	],
 
 	defaultVariants: {
-		size: "md",
+		size: "medium",
+		variant: "square",
 		intent: "primary",
 		checked: false,
 	},
@@ -240,24 +254,3 @@ export const checkmarkIcon = style({
 	},
 });
 
-// Label text
-export const label = style({
-	fontFamily: themeContract.typography.fontFamily.sans,
-	fontWeight: themeContract.typography.fontWeight.regular,
-	color: themeContract.color.surface.text,
-});
-
-export const labelSize = styleVariants({
-	sm: {
-		fontSize: themeContract.typography.fontSize.sm,
-		lineHeight: themeContract.typography.lineHeight.sm,
-	},
-	md: {
-		fontSize: themeContract.typography.fontSize.md,
-		lineHeight: themeContract.typography.lineHeight.md,
-	},
-	lg: {
-		fontSize: themeContract.typography.fontSize.lg,
-		lineHeight: themeContract.typography.lineHeight.lg,
-	},
-});

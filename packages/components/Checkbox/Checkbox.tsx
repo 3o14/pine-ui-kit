@@ -4,13 +4,16 @@ import * as styles from "./Checkbox.css";
 import { lightTheme } from "../../tokens/theme.css";
 import type { ColorIntent } from "../../tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
+import { Text } from "../Text/Text";
 
-export type CheckboxSize = "sm" | "md" | "lg";
+export type CheckboxSize = "small" | "medium" | "large" | "xlarge";
+export type CheckboxVariant = "circle" | "square";
 export type CheckboxIntent = ColorIntent;
 
 export interface CheckboxProps
 	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
 	size?: CheckboxSize;
+	variant?: CheckboxVariant;
 	intent?: CheckboxIntent;
 	label?: string;
 	checked?: boolean;
@@ -18,7 +21,8 @@ export interface CheckboxProps
 }
 
 export const Checkbox = ({
-	size = "md",
+	size = "medium",
+	variant = "square",
 	intent = "primary",
 	label,
 	checked: controlledChecked,
@@ -55,6 +59,7 @@ export const Checkbox = ({
 			<span
 				className={styles.checkbox({
 					size,
+					variant,
 					intent,
 					checked,
 				})}
@@ -79,9 +84,9 @@ export const Checkbox = ({
 				</svg>
 			</span>
 			{label && (
-				<span className={clsx(styles.label, styles.labelSize[size])}>
+				<Text as="span" size={size} intent="inherit">
 					{label}
-				</span>
+				</Text>
 			)}
 		</label>
 	);

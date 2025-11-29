@@ -16,37 +16,37 @@ export const base = style({
 
 // Size variants
 export const sizeVariants = styleVariants({
-	xs: {
-		fontSize: fontSize.xs,
-		lineHeight: lineHeight.xs,
+	xsmall: {
+		fontSize: fontSize.xsmall,
+		lineHeight: lineHeight.xsmall,
 	},
-	sm: {
-		fontSize: fontSize.sm,
-		lineHeight: lineHeight.sm,
+	small: {
+		fontSize: fontSize.small,
+		lineHeight: lineHeight.small,
 	},
-	md: {
-		fontSize: fontSize.md,
-		lineHeight: lineHeight.md,
+	medium: {
+		fontSize: fontSize.medium,
+		lineHeight: lineHeight.medium,
 	},
-	lg: {
-		fontSize: fontSize.lg,
-		lineHeight: lineHeight.lg,
+	large: {
+		fontSize: fontSize.large,
+		lineHeight: lineHeight.large,
 	},
-	xl: {
-		fontSize: fontSize.xl,
-		lineHeight: lineHeight.xl,
+	xlarge: {
+		fontSize: fontSize.xlarge,
+		lineHeight: lineHeight.xlarge,
 	},
-	"display-sm": {
-		fontSize: fontSize["display-sm"],
-		lineHeight: lineHeight["display-sm"],
+	"display-small": {
+		fontSize: fontSize["display-small"],
+		lineHeight: lineHeight["display-small"],
 	},
-	"display-md": {
-		fontSize: fontSize["display-md"],
-		lineHeight: lineHeight["display-md"],
+	"display-medium": {
+		fontSize: fontSize["display-medium"],
+		lineHeight: lineHeight["display-medium"],
 	},
-	"display-lg": {
-		fontSize: fontSize["display-lg"],
-		lineHeight: lineHeight["display-lg"],
+	"display-large": {
+		fontSize: fontSize["display-large"],
+		lineHeight: lineHeight["display-large"],
 	},
 });
 
