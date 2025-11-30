@@ -86,6 +86,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.primary.surface,
 				color: themeContract.color.primary.text,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -93,6 +94,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.secondary.surface,
 				color: themeContract.color.secondary.text,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -100,6 +102,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.success.surface,
 				color: themeContract.color.success.text,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -107,6 +110,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.warning.surface,
 				color: themeContract.color.warning.text,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -114,6 +118,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.danger.surface,
 				color: themeContract.color.danger.text,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -121,6 +126,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.neutral.surface,
 				color: themeContract.color.neutral.text,
+				borderColor: "transparent",
 			},
 		},
 
@@ -174,6 +180,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: `${themeContract.color.primary.surface}20`,
 				color: themeContract.color.primary.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -181,6 +188,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: `${themeContract.color.secondary.surface}20`,
 				color: themeContract.color.secondary.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -188,6 +196,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: `${themeContract.color.success.surface}20`,
 				color: themeContract.color.success.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -195,6 +204,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: `${themeContract.color.warning.surface}20`,
 				color: themeContract.color.warning.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -202,6 +212,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: `${themeContract.color.danger.surface}20`,
 				color: themeContract.color.danger.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -209,6 +220,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: `${themeContract.color.neutral.surface}20`,
 				color: themeContract.color.neutral.surface,
+				borderColor: "transparent",
 			},
 		},
 
@@ -218,6 +230,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.primary.weak,
 				color: themeContract.color.primary.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -225,6 +238,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.secondary.weak,
 				color: themeContract.color.secondary.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -232,6 +246,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.success.weak,
 				color: themeContract.color.success.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -239,6 +254,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.warning.weak,
 				color: themeContract.color.warning.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -246,6 +262,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.danger.weak,
 				color: themeContract.color.danger.surface,
+				borderColor: "transparent",
 			},
 		},
 		{
@@ -253,6 +270,7 @@ export const badge = recipe({
 			style: {
 				backgroundColor: themeContract.color.neutral.weak,
 				color: themeContract.color.neutral.surface,
+				borderColor: "transparent",
 			},
 		},
 	],
