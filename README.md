@@ -20,7 +20,6 @@
 
 - **Token-First Design** — Consistent theming through design tokens
 - **Light & Dark Mode** — Built-in theme variants out of the box
-- **Accessible** — WCAG 2.1 compliant components
 - **Tree-Shakeable** — Import only what you need
 - **TypeScript Native** — First-class TypeScript support
 - **Zero-Runtime CSS** — Powered by Vanilla Extract
@@ -97,7 +96,7 @@ pnpm run storybook
 
 Built with modern tools for optimal developer experience:
 
-- [React 18](https://react.dev/) — UI library
+- [React 19](https://react.dev/) — UI library
 - [TypeScript](https://www.typescriptlang.org/) — Type safety
 - [Vanilla Extract](https://vanilla-extract.style/) — Zero-runtime CSS-in-TS
 - [Vite](https://vitejs.dev/) — Lightning-fast build tool
@@ -113,16 +112,14 @@ If you'd like to contribute:
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request 
+5. Open a Pull Request
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE) — feel free to use it in your projects!
 
----
 
 <div align="center">
-  <p>Built with ❤️ for the design systems community</p>
   <p>
     <a href="https://3o14.github.io/pine-ui-kit/">Documentation</a> •
     <a href="https://github.com/3o14/pine-ui-kit">GitHub</a> •
