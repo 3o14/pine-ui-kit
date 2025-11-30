@@ -4,7 +4,7 @@ import { Dialog } from "./Dialog";
 import { Button } from "../Button";
 
 const meta = {
-	title: "Components/Dialog",
+	title: "Overlay/Dialog",
 	component: Dialog,
 	parameters: {
 		layout: "centered",
