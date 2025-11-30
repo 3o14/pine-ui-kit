@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"license": "MIT",
-	"description": "React + TypeScript UI component library with design tokens",
+	"description": "UI component library with design tokens",
 	"author": "3o14",
 	"repository": {
 		"type": "git",
