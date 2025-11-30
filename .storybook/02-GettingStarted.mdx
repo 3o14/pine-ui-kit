@@ -1,262 +1,266 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Title, Subtitle, Heading, Source } from "@storybook/blocks";
+import { useState } from "react";
 
 <Meta title="Getting Started" />
 
-# 🚀 Getting Started
+<Title>Getting Started</Title>
 
-Pie UI를 프로젝트에 설치하고 사용하는 방법을 안내합니다.
-
----
-
-## 📦 설치
-
-### npm
-```bash
-npm install pie-ui
-```
-
-### yarn
-```bash
-yarn add pie-ui
-```
-
-### pnpm
-```bash
-pnpm add pie-ui
-```
+<Subtitle>Learn how to install and use Pine UI in your project</Subtitle>
 
 ---
 
-## 🎨 기본 사용법
+<Heading>Installation</Heading>
 
-### 1. 컴포넌트 import
+Install Pine UI using your preferred package manager:
 
-```tsx
-import { Button, Badge, Switch, TextField } from 'pie-ui';
-```
+<Source
+	code={`npm install pine-ui-kit
+# or
+pnpm add pine-ui-kit
+# or
+yarn add pine-ui-kit`}
+	language="bash"
+/>
 
-### 2. 컴포넌트 사용
+---
 
-```tsx
-function App() {
+<Heading>Basic Usage</Heading>
+
+### Import Components and Styles
+
+<Source
+	code={`import { Button, Badge, Switch, TextField } from "pine-ui-kit";
+import "pine-ui-kit/style.css";`}
+	language="tsx"
+/>
+
+### Use Components
+
+<Source
+  code={`function App() {
   return (
     <div>
-      <Button intent="primary" size="md">
+      <Button intent="primary" size="medium">
         Primary Button
       </Button>
-      
-      <Badge variant="subtle" intent="success">
+
+      <Badge variant="solid" intent="success">
         New Feature
       </Badge>
-      
+
       <Switch label="Enable notifications" />
-      
-      <TextField 
+
+      <TextField
         label="Email"
         placeholder="Enter your email"
         helperText="We'll never share your email"
       />
     </div>
   );
-}
-```
+}`}
+language="tsx"
+/>
 
 ---
 
-## 🎨 테마 사용
+<Heading>Theme Support</Heading>
 
-### Light/Dark Mode
+Pine UI supports light and dark themes through the `ThemeProvider` component.
 
-모든 컴포넌트는 `mode` prop으로 테마를 제어할 수 있습니다:
+### Basic Theme Provider
 
-```tsx
-<Button mode="dark" intent="primary">
-  Dark Mode Button
-</Button>
-```
+<Source
+  code={`import { ThemeProvider } from "pine-ui-kit";
 
-### 글로벌 테마 Provider (예정)
+function App() {
+  return (
+    <ThemeProvider defaultMode="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`
+} language="tsx" />
 
-향후 버전에서 ThemeProvider를 제공할 예정입니다:
+### Automatic System Theme Detection
 
-```tsx
-// 예정된 API
-<ThemeProvider theme="dark">
-  <App />
-</ThemeProvider>
-```
+You can enable automatic system theme detection:
+
+<Source
+	code={`<ThemeProvider syncWithSystem={true}>
+  <YourApp />
+</ThemeProvider>`}
+	language="tsx"
+/>
+
+### Controlled Theme
+
+For controlled theme mode:
+
+<Source
+  code={`import { useState } from "react";
+import { ThemeProvider } from "pine-ui-kit";
+
+function App() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  return (
+    <ThemeProvider mode={theme} onModeChange={setTheme}>
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+language="tsx" />
 
 ---
 
-## 🎯 디자인 토큰
+<Heading>Design Tokens</Heading>
 
-### Intent (색상 테마)
+### Intent (Color Theme)
 
-모든 컴포넌트는 6가지 intent를 지원합니다:
+All components support these color intents:
 
-- `primary` - 주요 액션
-- `secondary` - 보조 액션
-- `success` - 성공, 완료
-- `warning` - 주의, 경고
-- `danger` - 위험, 삭제
-- `neutral` - 중립적인 정보
+- `primary` - Primary actions
+- `secondary` - Secondary actions
+- `success` - Success, completion
+- `warning` - Warning, caution
+- `danger` - Danger, deletion
+- `neutral` - Neutral information
 
-```tsx
-<Button intent="primary">Primary</Button>
+<Source
+	code={`<Button intent="primary">Primary</Button>
 <Button intent="success">Success</Button>
-<Button intent="danger">Delete</Button>
-```
+<Button intent="danger">Delete</Button>`}
+	language="tsx"
+/>
 
 ### Size
 
-대부분의 컴포넌트는 3가지 크기를 지원합니다:
+Most components support these sizes:
 
-- `sm` - Small
-- `md` - Medium (기본)
-- `lg` - Large
+- `small` - Small
+- `medium` - Medium (default)
+- `large` - Large
+- `xlarge` - Extra large
 
-```tsx
-<Button size="sm">Small</Button>
-<Button size="md">Medium</Button>
-<Button size="lg">Large</Button>
-```
+<Source
+	code={`<Button size="small">Small</Button>
+<Button size="medium">Medium</Button>
+<Button size="large">Large</Button>`}
+	language="tsx"
+/>
+
+### Variants
+
+Components support different visual variants:
+
+**Button variants:**
+
+- `solid` - Filled button (default)
+- `outline` - Outlined button
+- `ghost` - Transparent button
+- `weak` - Subtle button
+
+**Badge variants:**
+
+- `solid` - Filled badge (default)
+- `outline` - Outlined badge
+- `subtle` - Subtle badge
+- `weak` - Weak badge
+
+<Source
+	code={`<Button variant="solid">Solid</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>`}
+	language="tsx"
+/>
 
 ---
 
-## 🔧 TypeScript
+<Heading>TypeScript</Heading>
 
-Pie UI는 TypeScript로 작성되어 완벽한 타입 지원을 제공합니다:
+Pine UI is written in TypeScript and provides full type support:
 
-```tsx
-import type { ButtonProps, BadgeProps } from 'pie-ui';
+<Source
+  code={`import type { ButtonProps } from "pine-ui-kit";
+import { Button } from "pine-ui-kit";
 
-const MyButton: React.FC<ButtonProps> = (props) => {
+const MyButton = (props: ButtonProps) => {
   return <Button {...props} />;
 };
-```
-
----
-
-## ♿ 접근성
-
-모든 컴포넌트는 WCAG 2.1 가이드라인을 준수합니다:
-
-- ✅ 키보드 네비게이션
-- ✅ 스크린 리더 지원
-- ✅ Focus indicators
-- ✅ ARIA 속성
-
-```tsx
-// 자동으로 접근성 속성이 적용됩니다
-<Switch 
-  label="Enable feature"
-  aria-label="Enable feature toggle"
+`}
+language="tsx"
 />
-```
 
 ---
 
-## 📱 반응형
+<Heading>Examples</Heading>
 
-컴포넌트는 반응형을 지원하지만, 레이아웃은 사용자가 직접 제어합니다:
+### Login Form
 
-```tsx
-<div style={{ 
-  display: 'flex', 
-  flexDirection: 'column',
-  gap: '1rem'
-}}>
-  <Button fullWidth>Full Width Button</Button>
-  <TextField fullWidth placeholder="Full width input" />
-</div>
-```
+<Source
+  code={`import { useState } from "react";
+import { Button, TextField, Checkbox } from "pine-ui-kit";
 
----
-
-## 🎭 스타일 커스터마이징
-
-### className 사용
-
-모든 컴포넌트는 `className` prop을 지원합니다:
-
-```tsx
-<Button className="my-custom-class">
-  Custom Styled Button
-</Button>
-```
-
-### style prop 사용
-
-인라인 스타일도 지원합니다:
-
-```tsx
-<Badge style={{ marginLeft: '8px' }}>
-  Custom Badge
-</Badge>
-```
-
----
-
-## 💡 예제
-
-### 로그인 폼
-
-```tsx
 function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
-
+  
   return (
     <form>
       <TextField
-        type="email"
         label="Email"
+        type="email"
+        placeholder="your@email.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         fullWidth
       />
-      
+
       <TextField
         type="password"
         label="Password"
+        placeholder="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         fullWidth
       />
-      
+
       <Checkbox
         label="Remember me"
         checked={remember}
         onChange={(e) => setRemember(e.target.checked)}
       />
-      
+
       <Button type="submit" intent="primary" fullWidth>
         Sign In
       </Button>
     </form>
   );
-}
-```
+}`}
+language="tsx"
+/>
 
-### 알림 카운트
+### Notification Badge
 
-```tsx
+<Source
+  code={`import { Badge } from "pine-ui-kit";
+import { useState } from "react";
+
 function NotificationIcon() {
-  const [count, setCount] = useState(5);
-  
+  const count = 5;
+
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
-      <span style={{ fontSize: '1.5rem' }}>🔔</span>
+    <div style={{ position: "relative", display: "inline-block" }}>
+      <span style={{ fontSize: "1.5rem" }}>🔔</span>
       {count > 0 && (
         <Badge
-          size="sm"
+          size="small"
           intent="danger"
-          rounded
-          style={{ 
-            position: 'absolute', 
-            top: -5, 
-            right: -10 
+          style={{
+            position: "absolute",
+            top: -5,
+            right: -10,
           }}
         >
           {count}
@@ -264,22 +268,107 @@ function NotificationIcon() {
       )}
     </div>
   );
-}
-```
+}`} language="tsx" />
+
+### Form with Validation
+
+<Source
+  code={`import { TextField, Button } from "pine-ui-kit";
+
+function ContactForm() {
+  return (
+    <form>
+      <TextField
+        label="Email"
+        type="email"
+        placeholder="your@email.com"
+        helperText="We'll never share your email"
+        status="default"
+        fullWidth
+      />
+
+      <TextField
+        label="Email (Error State)"
+        type="email"
+        placeholder="invalid-email"
+        helperText="Please enter a valid email address"
+        status="error"
+        fullWidth
+      />
+
+      <TextField
+        label="Email (Success State)"
+        type="email"
+        value="valid@email.com"
+        helperText="Email is valid"
+        status="success"
+        fullWidth
+      />
+
+      <Button type="submit" intent="primary">
+        Submit
+      </Button>
+    </form>
+  );
+}`}
+language="tsx"
+/>
 
 ---
 
-## 🐛 문제 해결
+<Heading>Styling</Heading>
 
-### Storybook과 함께 사용
+### Custom Class Names
 
-Storybook 환경에서는 이미 설정되어 있습니다. 추가 설정이 필요하지 않습니다.
+All components support the `className` prop:
 
-### Next.js와 함께 사용
+<Source
+	code={`<Button className="my-custom-class">
+  Custom Styled Button
+</Button>`}
+	language="tsx"
+/>
 
-```tsx
-// app/layout.tsx
-import 'pie-ui/styles.css'; // 예정된 기능
+### Inline Styles
+
+You can also use inline styles:
+
+<Source
+	code={`<Badge style={{ marginLeft: "8px" }}>
+  Custom Badge
+</Badge>`}
+	language="tsx"
+/>
+
+---
+
+<Heading>Layout</Heading>
+
+Components support full-width layouts:
+
+<Source
+	code={`<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+  }}
+>
+  <Button fullWidth>Full Width Button</Button>
+  <TextField fullWidth placeholder="Full width input" />
+</div>`}
+	language="tsx"
+/>
+
+---
+
+<Heading>Troubleshooting</Heading>
+
+### Next.js Integration
+
+<Source
+  code={`// app/layout.tsx
+import "pine-ui-kit/style.css";
 
 export default function RootLayout({ children }) {
   return (
@@ -287,18 +376,29 @@ export default function RootLayout({ children }) {
       <body>{children}</body>
     </html>
   );
-}
-```
+}`}
+  language="tsx"
+/>
+
+### Vite Integration
+
+<Source
+  code={`// main.tsx
+import "pine-ui-kit/style.css";
+import { createRoot } from "react-dom/client";
+
+createRoot(document.getElementById("root")!).render(<App />);`}
+language="tsx"
+/>
 
 ---
 
-## 📚 다음 단계
+<Heading>Next Steps</Heading>
 
-- [Changelog](/story/changelog--page) - 버전 히스토리 확인
-- [Components](/story/components-badge--default) - 모든 컴포넌트 둘러보기
-- GitHub - 소스 코드 확인 (예정)
+- [Components](/story/components-badge--default) - Explore all components
+- [Introduction](/story/introduction--docs) - Learn about Pine UI
+- [Changelog](/story/changelog--page) - View version history
 
 ---
 
-궁금한 점이 있으시면 GitHub Issues에 남겨주세요!
-
+Have questions? Check out our [GitHub repository](https://github.com/3o14/pine-ui-kit) or open an issue!
