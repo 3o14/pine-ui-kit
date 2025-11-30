@@ -116,8 +116,7 @@ If you'd like to contribute:
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) — feel free to use it in your projects!
-
+This project is licensed under the [MIT License](LICENSE) — feel free to use it in your projects! :D
 
 <div align="center">
   <p>
