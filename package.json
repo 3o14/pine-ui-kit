@@ -39,11 +39,9 @@
 		"access": "public"
 	},
 	"scripts": {
-		"dev": "vite",
 		"build": "vite build && tsc --project tsconfig.build.json",
 		"build:lib": "pnpm run build",
 		"lint": "eslint .",
-		"preview": "vite preview",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "pnpm run sync-readme && storybook build",
 		"sync-readme": "node scripts/sync-readme.js",
