@@ -9,8 +9,8 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve(__dirname, "packages/components/index.ts"),
-			name: "PieUI",
-			fileName: (format) => `pie-ui.${format}.js`,
+			name: "PineUI",
+			fileName: (format) => `pine-ui.${format}.js`,
 			formats: ["es", "cjs"],
 		},
 		rollupOptions: {

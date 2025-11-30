@@ -1,4 +1,4 @@
-# @3o14/pie-ui
+# pine-ui-kit
 
 ## 2.0.0
 
