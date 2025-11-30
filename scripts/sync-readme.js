@@ -29,8 +29,8 @@ const mdxContent = `import { Meta } from '@storybook/blocks';
 ${readme}
 `;
 
-// Write to Introduction.mdx
-const introPath = join(rootDir, '.storybook', 'Introduction.mdx');
+// Write to 01-Introduction.mdx
+const introPath = join(rootDir, '.storybook', '01-Introduction.mdx');
 writeFileSync(introPath, mdxContent, 'utf-8');
 
 console.log('✅ README synced to Storybook Introduction!');
