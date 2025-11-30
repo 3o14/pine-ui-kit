@@ -16,7 +16,41 @@ const rootDir = join(__dirname, "..");
 const readmePath = join(rootDir, "README.md");
 let readme = readFileSync(readmePath, "utf-8");
 
-// Convert markdown tables to Storybook Table components
+// Convert markdown code blocks to Storybook Source components
+// Pattern: ```language\ncode\n```
+const codeBlockPattern = /```(\w+)\n([\s\S]*?)```/g;
+
+readme = readme.replace(codeBlockPattern, (match, language, code) => {
+	// Remove trailing newline from code if present
+	const cleanCode = code.trimEnd();
+	
+	// Normalize indentation to 2 spaces
+	const lines = cleanCode.split("\n");
+	const minIndent = Math.min(
+		...lines
+			.filter((line) => line.trim().length > 0)
+			.map((line) => line.match(/^(\s*)/)?.[1]?.length || 0)
+	);
+	
+	const normalizedCode = lines
+		.map((line) => {
+			if (line.trim().length === 0) return "";
+			const indent = line.match(/^(\s*)/)?.[1]?.length || 0;
+			const newIndent = indent - minIndent;
+			return "  ".repeat(newIndent) + line.trimStart();
+		})
+		.join("\n");
+	
+	// Escape backticks in the code
+	const escapedCode = normalizedCode.replace(/`/g, "\\`");
+	
+	return `<Source
+  code={\`${escapedCode}\`}
+  language="${language}"
+/>`;
+});
+
+// Convert markdown tables to HTML table components
 // Pattern: | Header1 | Header2 | ... followed by |---| and then data rows
 const tablePattern = /(\|.+\|\n\|[-\s|]+\|\n(?:\|.+\|\n?)+)/g;
 
@@ -73,7 +107,7 @@ readme = readme.replace(tablePattern, (match) => {
 });
 
 // Convert README to MDX format
-const mdxContent = `import { Meta } from '@storybook/blocks';
+const mdxContent = `import { Meta, Source } from '@storybook/blocks';
 
 <Meta title="Introduction" />
 

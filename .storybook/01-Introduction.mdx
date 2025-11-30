@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Source } from '@storybook/blocks';
 
 <Meta title="Introduction" />
 
@@ -37,39 +37,41 @@ import { Meta } from '@storybook/blocks';
 
 Install Pine UI using your preferred package manager:
 
-```bash
-npm install pine-ui-kit
+<Source
+  code={`npm install pine-ui-kit
 # or
 pnpm add pine-ui-kit
 # or
-yarn add pine-ui-kit
-```
+yarn add pine-ui-kit`}
+  language="bash"
+/>
 
 Import components and start building:
 
-```tsx
-import { Button, Badge, TextField, Switch } from "pine-ui-kit";
+<Source
+  code={`import { Button, Badge, TextField, Switch } from "pine-ui-kit";
 import "pine-ui-kit/style.css";
 
 function App() {
-	return (
-		<div>
-			<Button intent="primary" size="md">
-				Get Started
-			</Button>
-			<Badge variant="solid" intent="success">
-				New
-			</Badge>
-			<Switch size="md" intent="primary" />
-			<TextField
-				label="Email"
-				placeholder="you@example.com"
-				variant="outline"
-			/>
-		</div>
-	);
-}
-```
+  return (
+    <div>
+      <Button intent="primary" size="md">
+        Get Started
+      </Button>
+      <Badge variant="solid" intent="success">
+        New
+      </Badge>
+      <Switch size="md" intent="primary" />
+      <TextField
+        label="Email"
+        placeholder="you@example.com"
+        variant="outline"
+      />
+    </div>
+  );
+}`}
+  language="tsx"
+/>
 
 ## Documentation
 
@@ -82,12 +84,13 @@ function App() {
 
 To run Storybook locally:
 
-```bash
-git clone https://github.com/3o14/pine-ui-kit.git
+<Source
+  code={`git clone https://github.com/3o14/pine-ui-kit.git
 cd pine-ui-kit
 pnpm install
-pnpm run storybook
-```
+pnpm run storybook`}
+  language="bash"
+/>
 
 ## Components
 
