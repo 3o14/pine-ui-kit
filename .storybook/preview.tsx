@@ -33,14 +33,18 @@ const preview: Preview = {
 				order: [
 					"Components",
 					[
-						"Badge",
+						// Buttons
 						"Button",
-						"Checkbox",
-						"Dialog",
-						"Dropdown",
 						"Switch",
-						"Text",
+						// Forms
 						"TextField",
+						"Checkbox",
+						"Dropdown",
+						// Feedback
+						"Badge",
+						"Dialog",
+						// Typography
+						"Text",
 					],
 				],
 			},

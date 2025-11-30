@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Text } from "./Text";
 
 const meta = {
-	title: "Components/Text",
+	title: "Display & Feedback/Text",
 	component: Text,
 	parameters: {
 		layout: "centered",
@@ -232,7 +232,14 @@ export const Truncation: Story = {
 // Typography showcase
 export const TypographyShowcase: Story = {
 	render: () => (
-		<div style={{ maxWidth: "600px", display: "flex", flexDirection: "column", gap: "24px" }}>
+		<div
+			style={{
+				maxWidth: "600px",
+				display: "flex",
+				flexDirection: "column",
+				gap: "24px",
+			}}
+		>
 			<div>
 				<Text as="h1" size="display-large" weight="bold" intent="primary">
 					Typography System
@@ -288,4 +295,3 @@ export const Playground: Story = {
 		truncate: false,
 	},
 };
-
