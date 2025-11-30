@@ -14,7 +14,8 @@ const buttonBase = style({
 	gap: themeContract.spacing.xs,
 	outline: "none",
 	position: "relative",
-	border: "none",
+	border: "1px solid transparent",
+	boxSizing: "border-box",
 	selectors: {
 		"&:disabled": {
 			opacity: 0.5,
@@ -58,7 +59,7 @@ export const button = recipe({
 			},
 			ghost: {
 				backgroundColor: "transparent",
-				border: "none",
+				borderColor: "transparent",
 				boxShadow: "none",
 			},
 			weak: {},
@@ -93,6 +94,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.primary.surface,
 				color: themeContract.color.primary.text,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -111,6 +113,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.secondary.surface,
 				color: themeContract.color.secondary.text,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -129,6 +132,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.success.surface,
 				color: themeContract.color.success.text,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -147,6 +151,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.warning.surface,
 				color: themeContract.color.warning.text,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -165,6 +170,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.danger.surface,
 				color: themeContract.color.danger.text,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -183,6 +189,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.neutral.surface,
 				color: themeContract.color.neutral.text,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -202,7 +209,7 @@ export const button = recipe({
 			variants: { variant: "outline", intent: "primary" },
 			style: {
 				color: themeContract.color.primary.surface,
-				border: `1px solid ${themeContract.color.primary.border}`,
+				borderColor: themeContract.color.primary.border,
 				boxShadow: "none",
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -220,7 +227,7 @@ export const button = recipe({
 			variants: { variant: "outline", intent: "secondary" },
 			style: {
 				color: themeContract.color.secondary.surface,
-				border: `1px solid ${themeContract.color.secondary.border}`,
+				borderColor: themeContract.color.secondary.border,
 				boxShadow: "none",
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -238,7 +245,7 @@ export const button = recipe({
 			variants: { variant: "outline", intent: "success" },
 			style: {
 				color: themeContract.color.success.surface,
-				border: `1px solid ${themeContract.color.success.border}`,
+				borderColor: themeContract.color.success.border,
 				boxShadow: "none",
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -256,7 +263,7 @@ export const button = recipe({
 			variants: { variant: "outline", intent: "warning" },
 			style: {
 				color: themeContract.color.warning.surface,
-				border: `1px solid ${themeContract.color.warning.border}`,
+				borderColor: themeContract.color.warning.border,
 				boxShadow: "none",
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -274,7 +281,7 @@ export const button = recipe({
 			variants: { variant: "outline", intent: "danger" },
 			style: {
 				color: themeContract.color.danger.surface,
-				border: `1px solid ${themeContract.color.danger.border}`,
+				borderColor: themeContract.color.danger.border,
 				boxShadow: "none",
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -292,7 +299,7 @@ export const button = recipe({
 			variants: { variant: "outline", intent: "neutral" },
 			style: {
 				color: themeContract.color.neutral.surface,
-				border: `1px solid ${themeContract.color.neutral.border}`,
+				borderColor: themeContract.color.neutral.border,
 				boxShadow: "none",
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -399,6 +406,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.primary.weak,
 				color: themeContract.color.primary.surface,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -417,6 +425,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.secondary.weak,
 				color: themeContract.color.secondary.surface,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -435,6 +444,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.success.weak,
 				color: themeContract.color.success.surface,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -453,6 +463,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.warning.weak,
 				color: themeContract.color.warning.surface,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -471,6 +482,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.danger.weak,
 				color: themeContract.color.danger.surface,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
@@ -489,6 +501,7 @@ export const button = recipe({
 			style: {
 				backgroundColor: themeContract.color.neutral.weak,
 				color: themeContract.color.neutral.surface,
+				borderColor: "transparent",
 				boxShadow: themeContract.shadow.small,
 				selectors: {
 					"&:hover:not(:disabled)": {
