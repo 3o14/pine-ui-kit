@@ -1,10 +1,21 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, {
+	useEffect,
+	useState,
+	useMemo,
+	useCallback,
+	useRef,
+} from "react";
 import { lightTheme, darkTheme } from "../../tokens/theme.css";
 import {
 	ThemeContext,
 	type ThemeMode,
 	type ThemeContextValue,
 } from "./ThemeContext";
+import {
+	applyPrimaryColorFromHex,
+	applyPrimaryColorVars,
+} from "../../tokens/utils";
+import { lightColors, darkColors } from "../../tokens/colors";
 import clsx from "clsx";
 
 export interface ThemeProviderProps {
@@ -17,6 +28,11 @@ export interface ThemeProviderProps {
 	 * @default true
 	 */
 	syncWithSystem?: boolean;
+	/**
+	 * primary 색상을 hex 형식으로 설정합니다 (예: "#8b5cf6")
+	 * 설정하면 해당 색상으로부터 variant 색상들이 자동으로 계산됩니다
+	 */
+	primaryColor?: string;
 	className?: string;
 	style?: React.CSSProperties;
 }
@@ -50,6 +66,14 @@ const getSystemTheme = (): ThemeMode => {
  *   <App />
  * </ThemeProvider>
  * ```
+ *
+ * @example 커스텀 primary 색상 설정
+ * ```tsx
+ * <ThemeProvider primaryColor="#3b82f6">
+ *   <App />
+ * </ThemeProvider>
+ * ```
+ * primary 색상을 설정하면 solid, outline, ghost, weak variant의 색상이 자동으로 계산됩니다.
  */
 export const ThemeProvider = ({
 	children,
@@ -57,6 +81,7 @@ export const ThemeProvider = ({
 	mode: controlledMode,
 	onModeChange,
 	syncWithSystem = true,
+	primaryColor,
 	className,
 	style,
 }: ThemeProviderProps) => {
@@ -69,6 +94,7 @@ export const ThemeProvider = ({
 	};
 
 	const [internalMode, setInternalMode] = useState<ThemeMode>(getInitialMode);
+	const containerRef = useRef<HTMLDivElement>(null);
 
 	// controlledMode가 변경되면 즉시 내부 상태 업데이트
 	useEffect(() => {
@@ -119,14 +145,55 @@ export const ThemeProvider = ({
 		return mode === "dark" ? darkTheme : lightTheme;
 	}, [mode]);
 
+	// primary 색상이 제공되면 동적으로 색상 스케일 생성 및 CSS 변수 설정
+	// 컨테이너 요소에 CSS 변수를 설정하여 각 ThemeProvider가 독립적으로 작동하도록 함
+	useEffect(() => {
+		if (!containerRef.current) {
+			return;
+		}
+
+		const container = containerRef.current;
+		const isDark = mode === "dark";
+
+		if (primaryColor) {
+			try {
+				applyPrimaryColorFromHex(primaryColor, isDark, container);
+			} catch (error) {
+				console.warn(
+					"Failed to generate color scale from primaryColor:",
+					error
+				);
+				// 에러 발생 시 기본값으로 복원
+				const defaultColors = isDark
+					? darkColors.palette.primary
+					: lightColors.palette.primary;
+				applyPrimaryColorVars(defaultColors, container);
+			}
+		} else {
+			// primaryColor가 없으면 기본값으로 설정
+			const defaultColors = isDark
+				? darkColors.palette.primary
+				: lightColors.palette.primary;
+
+			applyPrimaryColorVars(defaultColors, container);
+		}
+	}, [primaryColor, mode]);
+
 	// vanilla-extract CSS 변수를 위해 document root와 동기화
 	// 테마가 변경될 때 실행되도록 mode를 직접 의존성으로 사용합니다
+	// CSS 변수 설정 후에 테마 클래스를 적용해야 함
 	useEffect(() => {
+		if (typeof document === "undefined") {
+			return;
+		}
+
+		const root = document.documentElement;
+
 		// 두 테마 클래스를 모두 제거합니다
-		document.documentElement.classList.remove(lightTheme, darkTheme);
+		root.classList.remove(lightTheme, darkTheme);
 
 		// 올바른 테마 클래스를 추가합니다
-		document.documentElement.classList.add(themeClass);
+		root.classList.add(themeClass);
 	}, [mode, themeClass]);
 
 	const setMode = useCallback(
@@ -149,7 +216,11 @@ export const ThemeProvider = ({
 
 	return (
 		<ThemeContext.Provider value={value}>
-			<div className={clsx(themeClass, className)} style={style}>
+			<div
+				ref={containerRef}
+				className={clsx(themeClass, className)}
+				style={style}
+			>
 				{children}
 			</div>
 		</ThemeContext.Provider>
