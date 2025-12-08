@@ -305,7 +305,7 @@ export const CustomPrimaryColor: Story = {
 		<div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
 			<div>
 				<h3 style={{ margin: 0, marginBottom: "1rem" }}>
-					Blue Primary (#3b82f6)
+					Gray Primary (#D3D1CC)
 				</h3>
 				<ThemeProvider primaryColor="#D3D1CC">
 					<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
