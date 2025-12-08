@@ -11,17 +11,39 @@ import {
 	shadow,
 } from "./index";
 
+// Primary 색상을 위한 CSS 변수 이름 상수 (런타임 설정용)
+// vanilla-extract에서 var() 함수로 참조
+export const PRIMARY_COLOR_CSS_VAR_NAMES = {
+	surface: "--pie-primary-surface",
+	surfaceHover: "--pie-primary-surface-hover",
+	surfaceActive: "--pie-primary-surface-active",
+	text: "--pie-primary-text",
+	border: "--pie-primary-border",
+	weak: "--pie-primary-weak",
+} as const;
+
+// Primary 색상을 위한 CSS 변수 참조 (vanilla-extract에서 사용)
+// var() 함수를 사용하여 전역 CSS 변수 참조
+export const primaryColorVars = {
+	surface: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surface})`,
+	surfaceHover: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surfaceHover})`,
+	surfaceActive: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surfaceActive})`,
+	text: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.text})`,
+	border: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.border})`,
+	weak: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.weak})`,
+} as const;
+
 // Define theme contract (structure)
 export const themeContract = createThemeContract({
-		color: {
-			primary: {
-				surface: null,
-				surfaceHover: null,
-				surfaceActive: null,
-				text: null,
-				border: null,
-				weak: null,
-			},
+	color: {
+		primary: {
+			surface: null,
+			surfaceHover: null,
+			surfaceActive: null,
+			text: null,
+			border: null,
+			weak: null,
+		},
 		secondary: {
 			surface: null,
 			surfaceHover: null,
@@ -136,7 +158,15 @@ export const themeContract = createThemeContract({
 // Light theme
 export const lightTheme = createTheme(themeContract, {
 	color: {
-		primary: lightColors.palette.primary,
+		// primary는 CSS 변수를 사용하여 런타임에 설정 가능
+		primary: {
+			surface: primaryColorVars.surface,
+			surfaceHover: primaryColorVars.surfaceHover,
+			surfaceActive: primaryColorVars.surfaceActive,
+			text: primaryColorVars.text,
+			border: primaryColorVars.border,
+			weak: primaryColorVars.weak,
+		},
 		secondary: lightColors.palette.secondary,
 		success: lightColors.palette.success,
 		warning: lightColors.palette.warning,
@@ -169,7 +199,15 @@ export const lightTheme = createTheme(themeContract, {
 // Dark theme
 export const darkTheme = createTheme(themeContract, {
 	color: {
-		primary: darkColors.palette.primary,
+		// primary는 CSS 변수를 사용하여 런타임에 설정 가능
+		primary: {
+			surface: primaryColorVars.surface,
+			surfaceHover: primaryColorVars.surfaceHover,
+			surfaceActive: primaryColorVars.surfaceActive,
+			text: primaryColorVars.text,
+			border: primaryColorVars.border,
+			weak: primaryColorVars.weak,
+		},
 		secondary: darkColors.palette.secondary,
 		success: darkColors.palette.success,
 		warning: darkColors.palette.warning,
