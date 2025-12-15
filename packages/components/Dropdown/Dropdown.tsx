@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, useCallback, useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Dropdown.css";
-import { lightTheme } from "../../tokens/theme.css";
-import type { ColorIntent } from "../../tokens";
+import { lightTheme } from "@/tokens";
+import type { ColorIntent } from "@/tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type DropdownSize = "small" | "medium" | "large";

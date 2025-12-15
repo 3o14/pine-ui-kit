@@ -1,8 +1,8 @@
 import React from "react";
 import clsx from "clsx";
 import * as styles from "./Text.css";
-import type { ColorIntent } from "../../tokens";
-import type { FontSizeToken, FontWeightToken } from "../../tokens/typography";
+import type { ColorIntent } from "@/tokens";
+import type { FontSizeToken, FontWeightToken } from "@/tokens/typography";
 
 export type TextSize = FontSizeToken;
 export type TextWeight = FontWeightToken;
