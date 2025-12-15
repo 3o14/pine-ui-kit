@@ -3,13 +3,12 @@ import React, {
 	useRef,
 	useState,
 	useCallback,
-	useContext,
 } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import * as styles from "./Dialog.css";
 import { lightTheme } from "@/tokens";
-import { ThemeContext } from "../ThemeProvider/ThemeContext";
+import { useTheme } from "@/providers";
 import { Text } from "../Text";
 import { Button } from "../Button";
 import type { ButtonVariant, ButtonIntent } from "../Button";
@@ -59,7 +58,7 @@ export const Dialog = ({
 	const [isClosing, setIsClosing] = useState(false);
 	const [mounted, setMounted] = useState(false);
 	const dialogRef = useRef<HTMLDivElement>(null);
-	const themeContext = useContext(ThemeContext);
+	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	useEffect(() => {
