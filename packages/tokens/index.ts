@@ -4,4 +4,3 @@ export * from "./spacing";
 export * from "./radius";
 export * from "./shadow";
 export * from "./appearanceTheme";
-export * from "./theme.css";

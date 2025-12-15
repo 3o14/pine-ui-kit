@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import { container, containerVariants, input } from "./TextField.css";
-import { lightTheme } from "@/tokens";
-import { useTheme } from "@/providers";
+import { lightTheme } from "../../tokens/theme.css";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 import { Text } from "../Text/Text";
 
 export type TextFieldSize = "small" | "medium" | "large" | "xlarge";
@@ -33,7 +33,7 @@ export const TextField = ({
 	className,
 	...props
 }: TextFieldProps) => {
-	const themeContext = useTheme();
+	const themeContext = useContext(ThemeContext);
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	const getHelperTextIntent = (): "inherit" | "danger" | "success" => {
