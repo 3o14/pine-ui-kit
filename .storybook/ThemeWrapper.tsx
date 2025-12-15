@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider } from "../packages/components/ThemeProvider";
+import { ThemeProvider } from "../packages/providers";
 import {
 	appearanceTheme,
 	applyAppearanceTheme,
