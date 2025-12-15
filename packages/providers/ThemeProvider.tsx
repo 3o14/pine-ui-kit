@@ -63,14 +63,14 @@ const getSystemTheme = (): ThemeMode => {
  * @example 시스템 테마 자동 감지
  * ```tsx
  * <ThemeProvider syncWithSystem={true}>
- *   <App />
+ *   <YourApp />
  * </ThemeProvider>
  * ```
  *
  * @example 커스텀 primary 색상 설정
  * ```tsx
  * <ThemeProvider primaryColor="#3b82f6">
- *   <App />
+ *   <YourApp />
  * </ThemeProvider>
  * ```
  * primary 색상을 설정하면 solid, outline, ghost, weak variant의 색상이 자동으로 계산됩니다.
@@ -226,3 +226,4 @@ export const ThemeProvider = ({
 		</ThemeContext.Provider>
 	);
 };
+

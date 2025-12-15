@@ -1,5 +1,5 @@
 import { style, styleVariants, keyframes } from "@vanilla-extract/css";
-import { themeContract } from "../../tokens/theme.css";
+import { themeContract } from "@/tokens";
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },

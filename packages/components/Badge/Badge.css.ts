@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract } from "../../tokens/theme.css";
+import { themeContract } from "@/tokens";
 
 // Base badge style
 const badgeBase = style({
@@ -49,15 +49,19 @@ export const badge = recipe({
 		},
 
 		variant: {
+			// 스타일은 compoundVariants에서 variant + intent 조합으로 정의됨
 			solid: {},
 			outline: {
+				// outline variant는 투명 배경이 항상 필요
 				backgroundColor: "transparent",
 			},
-			subtle: {},
-			weak: {},
+			subtle: {}, // compoundVariants에서 정의됨
+			weak: {}, // compoundVariants에서 정의됨
 		},
 
 		intent: {
+			// intent만으로는 색상이 결정되지 않음
+			// 실제 색상은 compoundVariants에서 variant + intent 조합으로 정의됨
 			primary: {},
 			secondary: {},
 			success: {},
