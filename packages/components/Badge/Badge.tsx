@@ -28,7 +28,6 @@ export const Badge = ({
 	className,
 	...props
 }: BadgeProps) => {
-	// ThemeProvider의 테마를 자동으로 감지 (없으면 기본값 사용)
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
