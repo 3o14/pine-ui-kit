@@ -1,5 +1,15 @@
 # pine-ui-kit
 
+## 0.1.1
+
+### Patch Changes
+
+- d58af62: refactor: move ThemeProvider to providers package for better dependency hierarchy
+  - Moved ThemeProvider from components/ to providers/ package
+  - Components now use useTheme hook instead of direct ThemeContext imports
+  - Improved encapsulation and clearer dependency direction
+  - No breaking changes - public API remains unchanged
+
 ## 0.1.0
 
 ### Minor Changes
