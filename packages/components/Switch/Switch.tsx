@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Switch.css";
-import { lightTheme, type ColorIntent } from "@/tokens";
-import { useTheme } from "@/providers";
+import { lightTheme } from "../../tokens/theme.css";
+import type { ColorIntent } from "../../tokens";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 import { Text } from "../Text/Text";
 
 export type SwitchSize = "small" | "medium" | "large" | "xlarge";
@@ -27,7 +28,7 @@ export const Switch = ({
 	onChange,
 	...props
 }: SwitchProps) => {
-	const themeContext = useTheme();
+	const themeContext = useContext(ThemeContext);
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	// Uncontrolled 모드 지원

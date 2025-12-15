@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Dropdown.css";
-import { lightTheme, type ColorIntent } from "@/tokens";
-import { useTheme } from "@/providers";
+import { lightTheme } from "../../tokens/theme.css";
+import type { ColorIntent } from "../../tokens";
+import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type DropdownSize = "small" | "medium" | "large";
 export type DropdownRounded = "small" | "medium" | "large";
@@ -44,7 +45,7 @@ export const Dropdown = ({
 	const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const menuRef = useRef<HTMLDivElement>(null);
-	const themeContext = useTheme();
+	const themeContext = useContext(ThemeContext);
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	const selectedOption = options.find((opt) => opt.value === value);

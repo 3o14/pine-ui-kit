@@ -1,11 +1,11 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { themeContract } from "@/tokens";
+import { themeContract } from "../../tokens/theme.css";
 import {
 	fontSize,
 	fontWeight,
 	lineHeight,
 	fontFamily,
-} from "@/tokens";
+} from "../../tokens/typography";
 
 // Base text styles
 export const base = style({

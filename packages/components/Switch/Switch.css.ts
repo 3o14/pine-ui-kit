@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract } from "@/tokens";
+import { themeContract } from "../../tokens/theme.css";
 
 export const container = style({
 	display: "inline-flex",
