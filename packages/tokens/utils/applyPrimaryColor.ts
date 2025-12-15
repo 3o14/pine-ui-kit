@@ -1,5 +1,5 @@
 import { type ColorScale } from "../colors";
-import { PRIMARY_COLOR_CSS_VAR_NAMES } from "../theme.css";
+import { PRIMARY_COLOR_CSS_VAR_NAMES } from "./constants";
 import { generateColorScale } from "./generateColorScale";
 
 /**
