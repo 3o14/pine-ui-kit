@@ -6,11 +6,6 @@ import { resolve } from "path";
 // https://vite.dev/config/
 export default defineConfig({
 	plugins: [react(), vanillaExtractPlugin()],
-	resolve: {
-		alias: {
-			"@": resolve(__dirname, "./packages"),
-		},
-	},
 	build: {
 		lib: {
 			entry: resolve(__dirname, "packages/components/index.ts"),

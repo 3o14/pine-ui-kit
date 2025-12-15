@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract } from "@/tokens";
+import { themeContract } from "../../tokens/theme.css";
 
 // Base button style
 const buttonBase = style({
