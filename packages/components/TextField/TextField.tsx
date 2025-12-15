@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import clsx from "clsx";
 import { container, containerVariants, input } from "./TextField.css";
-import { lightTheme } from "../../tokens/theme.css";
+import { lightTheme } from "@/tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 import { Text } from "../Text/Text";
 

@@ -5,7 +5,7 @@ import React, {
 	useCallback,
 	useRef,
 } from "react";
-import { lightTheme, darkTheme } from "../../tokens/theme.css";
+import { lightTheme, darkTheme } from "@/tokens";
 import {
 	ThemeContext,
 	type ThemeMode,
@@ -14,8 +14,8 @@ import {
 import {
 	applyPrimaryColorFromHex,
 	applyPrimaryColorVars,
-} from "../../tokens/utils";
-import { lightColors, darkColors } from "../../tokens/colors";
+} from "@/tokens/utils";
+import { lightColors, darkColors } from "@/tokens/colors";
 import clsx from "clsx";
 
 export interface ThemeProviderProps {

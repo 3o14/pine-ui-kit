@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Badge.css";
-import { lightTheme } from "../../tokens/theme.css";
-import type { ColorIntent } from "../../tokens";
+import { lightTheme, type ColorIntent } from "@/tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 
 export type BadgeSize = "small" | "medium" | "large" | "xlarge";

@@ -8,7 +8,7 @@ import React, {
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import * as styles from "./Dialog.css";
-import { lightTheme } from "../../tokens/theme.css";
+import { lightTheme } from "@/tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 import { Text } from "../Text";
 import { Button } from "../Button";

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import clsx from "clsx";
 import * as styles from "./Switch.css";
-import { lightTheme } from "../../tokens/theme.css";
-import type { ColorIntent } from "../../tokens";
+import { lightTheme } from "@/tokens";
+import type { ColorIntent } from "@/tokens";
 import { ThemeContext } from "../ThemeProvider/ThemeContext";
 import { Text } from "../Text/Text";
 
