@@ -1,5 +1,11 @@
 # pine-ui-kit
 
+## 0.1.2
+
+### Patch Changes
+
+- dbd8174: provider export
+
 ## 0.1.1
 
 ### Patch Changes
