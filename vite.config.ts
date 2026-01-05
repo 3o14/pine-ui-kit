@@ -8,12 +8,12 @@ export default defineConfig({
 	plugins: [react(), vanillaExtractPlugin()],
 	resolve: {
 		alias: {
-			"@": resolve(__dirname, "./packages"),
+			"@": resolve(__dirname, "./src"),
 		},
 	},
 	build: {
 		lib: {
-			entry: resolve(__dirname, "packages/components/index.ts"),
+			entry: resolve(__dirname, "src/components/index.ts"),
 			name: "PineUI",
 			fileName: (format) => `pine-ui.${format}.js`,
 			formats: ["es", "cjs"],
