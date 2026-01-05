@@ -1,4 +1,5 @@
 import React from "react";
+import { Button as BaseButton } from "@base-ui/react/button";
 import clsx from "clsx";
 import * as styles from "./Button.css";
 import { lightTheme, type ColorIntent } from "@/tokens";
@@ -10,7 +11,7 @@ export type ButtonIntent = ColorIntent;
 export type ButtonRounded = "small" | "medium" | "large";
 
 export interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+	extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
 	variant?: ButtonVariant;
 	size?: ButtonSize;
 	intent?: ButtonIntent;
@@ -19,6 +20,16 @@ export interface ButtonProps
 	disabled?: boolean;
 }
 
+/**
+ * Button component built on Base UI
+ * 
+ * @example
+ * ```tsx
+ * <Button intent="primary" size="medium">
+ *   Click me
+ * </Button>
+ * ```
+ */
 export const Button = ({
 	variant = "solid",
 	size = "medium",
@@ -34,7 +45,7 @@ export const Button = ({
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
 	return (
-		<button
+		<BaseButton
 			className={clsx(
 				themeClass,
 				styles.button({
@@ -50,6 +61,6 @@ export const Button = ({
 			{...props}
 		>
 			{children}
-		</button>
+		</BaseButton>
 	);
 };
