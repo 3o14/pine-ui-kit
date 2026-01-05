@@ -51,6 +51,7 @@
 		"release": "pnpm run version && pnpm run build:lib && npm publish --access public"
 	},
 	"dependencies": {
+		"@base-ui/react": "^1.0.0",
 		"clsx": "^2.1.1"
 	},
 	"peerDependencies": {
