@@ -22,7 +22,7 @@ export interface ButtonProps
 
 /**
  * Button component built on Base UI
- * 
+ *
  * @example
  * ```tsx
  * <Button intent="primary" size="medium">
