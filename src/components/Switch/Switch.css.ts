@@ -16,16 +16,9 @@ export const container = style({
 	},
 });
 
-export const hiddenInput = style({
-	position: "absolute",
-	width: "1px",
-	height: "1px",
-	padding: 0,
-	margin: "-1px",
-	overflow: "hidden",
-	clip: "rect(0, 0, 0, 0)",
-	whiteSpace: "nowrap",
-	border: 0,
+export const switchRoot = style({
+	all: "unset",
+	display: "inline-block",
 });
 
 const trackBase = style({
@@ -36,11 +29,11 @@ const trackBase = style({
 	borderRadius: themeContract.radius.xlarge,
 	transition: "background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
 	selectors: {
-		"input:focus-visible + &": {
+		"button:focus-visible &": {
 			outline: `2px solid ${themeContract.color.primary.surface}`,
 			outlineOffset: "2px",
 		},
-		"input:disabled + &": {
+		"button:disabled &": {
 			cursor: "not-allowed",
 		},
 	},
@@ -74,110 +67,72 @@ export const track = recipe({
 		},
 
 		intent: {
-			primary: {},
-			secondary: {},
-			success: {},
-			warning: {},
-			danger: {},
-			neutral: {},
-		},
-
-		checked: {
-			true: {},
-			false: {},
+			primary: {
+				selectors: {
+					"&[data-state='unchecked']": {
+						backgroundColor: themeContract.color.surface.outline,
+					},
+					"&[data-state='checked']": {
+						backgroundColor: themeContract.color.primary.surface,
+					},
+				},
+			},
+			secondary: {
+				selectors: {
+					"&[data-state='unchecked']": {
+						backgroundColor: themeContract.color.surface.outline,
+					},
+					"&[data-state='checked']": {
+						backgroundColor: themeContract.color.secondary.surface,
+					},
+				},
+			},
+			success: {
+				selectors: {
+					"&[data-state='unchecked']": {
+						backgroundColor: themeContract.color.surface.outline,
+					},
+					"&[data-state='checked']": {
+						backgroundColor: themeContract.color.success.surface,
+					},
+				},
+			},
+			warning: {
+				selectors: {
+					"&[data-state='unchecked']": {
+						backgroundColor: themeContract.color.surface.outline,
+					},
+					"&[data-state='checked']": {
+						backgroundColor: themeContract.color.warning.surface,
+					},
+				},
+			},
+			danger: {
+				selectors: {
+					"&[data-state='unchecked']": {
+						backgroundColor: themeContract.color.surface.outline,
+					},
+					"&[data-state='checked']": {
+						backgroundColor: themeContract.color.danger.surface,
+					},
+				},
+			},
+			neutral: {
+				selectors: {
+					"&[data-state='unchecked']": {
+						backgroundColor: themeContract.color.surface.outline,
+					},
+					"&[data-state='checked']": {
+						backgroundColor: themeContract.color.neutral.surface,
+					},
+				},
+			},
 		},
 	},
-
-	compoundVariants: [
-		// Primary
-		{
-			variants: { intent: "primary", checked: false },
-			style: {
-				backgroundColor: themeContract.color.surface.outline,
-			},
-		},
-		{
-			variants: { intent: "primary", checked: true },
-			style: {
-				backgroundColor: themeContract.color.primary.surface,
-			},
-		},
-
-		// Secondary
-		{
-			variants: { intent: "secondary", checked: false },
-			style: {
-				backgroundColor: themeContract.color.surface.outline,
-			},
-		},
-		{
-			variants: { intent: "secondary", checked: true },
-			style: {
-				backgroundColor: themeContract.color.secondary.surface,
-			},
-		},
-
-		// Success
-		{
-			variants: { intent: "success", checked: false },
-			style: {
-				backgroundColor: themeContract.color.surface.outline,
-			},
-		},
-		{
-			variants: { intent: "success", checked: true },
-			style: {
-				backgroundColor: themeContract.color.success.surface,
-			},
-		},
-
-		// Warning
-		{
-			variants: { intent: "warning", checked: false },
-			style: {
-				backgroundColor: themeContract.color.surface.outline,
-			},
-		},
-		{
-			variants: { intent: "warning", checked: true },
-			style: {
-				backgroundColor: themeContract.color.warning.surface,
-			},
-		},
-
-		// Danger
-		{
-			variants: { intent: "danger", checked: false },
-			style: {
-				backgroundColor: themeContract.color.surface.outline,
-			},
-		},
-		{
-			variants: { intent: "danger", checked: true },
-			style: {
-				backgroundColor: themeContract.color.danger.surface,
-			},
-		},
-
-		// Neutral
-		{
-			variants: { intent: "neutral", checked: false },
-			style: {
-				backgroundColor: themeContract.color.surface.outline,
-			},
-		},
-		{
-			variants: { intent: "neutral", checked: true },
-			style: {
-				backgroundColor: themeContract.color.neutral.surface,
-			},
-		},
-	],
 
 	defaultVariants: {
 		size: "medium",
 		intent: "primary",
-		checked: false,
 	},
 });
 
@@ -197,59 +152,55 @@ export const thumb = recipe({
 			small: {
 				width: "14px",
 				height: "14px",
+				selectors: {
+					"&[data-state='unchecked']": {
+						transform: "translateX(0)",
+					},
+					"&[data-state='checked']": {
+						transform: "translateX(16px)",
+					},
+				},
 			},
 			medium: {
 				width: "20px",
 				height: "20px",
+				selectors: {
+					"&[data-state='unchecked']": {
+						transform: "translateX(0)",
+					},
+					"&[data-state='checked']": {
+						transform: "translateX(22px)",
+					},
+				},
 			},
 			large: {
 				width: "24px",
 				height: "24px",
+				selectors: {
+					"&[data-state='unchecked']": {
+						transform: "translateX(0)",
+					},
+					"&[data-state='checked']": {
+						transform: "translateX(28px)",
+					},
+				},
 			},
 			xlarge: {
 				width: "28px",
 				height: "28px",
-			},
-		},
-
-		checked: {
-			true: {},
-			false: {
-				transform: "translateX(0)",
+				selectors: {
+					"&[data-state='unchecked']": {
+						transform: "translateX(0)",
+					},
+					"&[data-state='checked']": {
+						transform: "translateX(34px)",
+					},
+				},
 			},
 		},
 	},
 
-	compoundVariants: [
-		// Checked state - move thumb to right based on size
-		{
-			variants: { size: "small", checked: true },
-			style: {
-				transform: "translateX(16px)",
-			},
-		},
-		{
-			variants: { size: "medium", checked: true },
-			style: {
-				transform: "translateX(22px)",
-			},
-		},
-		{
-			variants: { size: "large", checked: true },
-			style: {
-				transform: "translateX(28px)",
-			},
-		},
-		{
-			variants: { size: "xlarge", checked: true },
-			style: {
-				transform: "translateX(34px)",
-			},
-		},
-	],
-
 	defaultVariants: {
 		size: "medium",
-		checked: false,
 	},
 });

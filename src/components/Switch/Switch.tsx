@@ -1,4 +1,4 @@
-import React from "react";
+import { Switch as BaseSwitch } from "@base-ui/react/switch";
 import clsx from "clsx";
 import * as styles from "./Switch.css";
 import { lightTheme, type ColorIntent } from "@/tokens";
@@ -8,65 +8,75 @@ import { Text } from "../Text/Text";
 export type SwitchSize = "small" | "medium" | "large" | "xlarge";
 export type SwitchIntent = ColorIntent;
 
-export interface SwitchProps
-	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+export interface SwitchProps {
 	size?: SwitchSize;
 	intent?: SwitchIntent;
 	label?: string;
 	checked?: boolean;
+	defaultChecked?: boolean;
 	disabled?: boolean;
+	onCheckedChange?: (checked: boolean) => void;
+	className?: string;
+	name?: string;
+	required?: boolean;
+	readOnly?: boolean;
 }
 
+/**
+ * Switch component built on Base UI
+ * 
+ * @example
+ * ```tsx
+ * <Switch 
+ *   label="Enable notifications" 
+ *   intent="primary" 
+ *   size="medium"
+ *   onCheckedChange={(checked) => console.log(checked)}
+ * />
+ * ```
+ */
 export const Switch = ({
 	size = "medium",
 	intent = "primary",
 	label,
-	checked: controlledChecked,
+	checked,
+	defaultChecked,
 	disabled = false,
+	onCheckedChange,
 	className,
-	onChange,
-	...props
+	name,
+	required,
+	readOnly,
 }: SwitchProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
-	// Uncontrolled 모드 지원
-	const [internalChecked, setInternalChecked] = React.useState(false);
-	const isControlled = controlledChecked !== undefined;
-	const checked = isControlled ? controlledChecked : internalChecked;
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (!isControlled) {
-			setInternalChecked(e.target.checked);
-		}
-		onChange?.(e);
-	};
-
 	return (
 		<label className={clsx(themeClass, styles.container, className)}>
-			<input
-				type="checkbox"
-				role="switch"
-				className={styles.hiddenInput}
+			<BaseSwitch.Root
 				checked={checked}
+				defaultChecked={defaultChecked}
 				disabled={disabled}
-				onChange={handleChange}
-				{...props}
-			/>
-			<span
-				className={styles.track({
-					size,
-					intent,
-					checked,
-				})}
+				onCheckedChange={onCheckedChange}
+				name={name}
+				required={required}
+				readOnly={readOnly}
+				className={styles.switchRoot}
 			>
 				<span
-					className={styles.thumb({
+					className={styles.track({
 						size,
-						checked,
+						intent,
 					})}
-				/>
-			</span>
+					data-state={checked ? "checked" : "unchecked"}
+				>
+					<BaseSwitch.Thumb
+						className={styles.thumb({
+							size,
+						})}
+					/>
+				</span>
+			</BaseSwitch.Root>
 			{label && (
 				<Text as="span" size={size} intent="inherit">
 					{label}
