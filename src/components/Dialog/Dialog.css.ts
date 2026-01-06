@@ -37,30 +37,33 @@ export const overlay = style({
 	position: "fixed",
 	inset: 0,
 	backgroundColor: "rgba(0, 0, 0, 0.5)",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
 	zIndex: 1000,
-	padding: themeContract.spacing.lg,
 	animation: `${fadeIn} 0.2s ease-out`,
 	selectors: {
 		"&[data-state='closing']": {
+			animation: `${fadeOut} 0.2s ease-in`,
+		},
+		"&[data-ending-style]": {
 			animation: `${fadeOut} 0.2s ease-in`,
 		},
 	},
 });
 
 export const container = style({
-	position: "relative",
+	position: "fixed",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
 	backgroundColor: themeContract.color.surface.background,
 	boxShadow: themeContract.shadow.xlarge,
 	display: "flex",
 	flexDirection: "column",
 	maxHeight: "90vh",
 	width: "100%",
+	zIndex: 1001,
 	animation: `${scaleIn} 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)`,
 	selectors: {
-		"[data-state='closing'] &": {
+		"&[data-ending-style]": {
 			animation: `${scaleOut} 0.2s ease-in`,
 		},
 	},
@@ -109,6 +112,11 @@ export const header = style({
 export const title = style({
 	margin: 0,
 	flex: 1,
+	fontFamily: themeContract.typography.fontFamily.sans,
+	fontSize: themeContract.typography.fontSize.large,
+	fontWeight: themeContract.typography.fontWeight.semibold,
+	lineHeight: themeContract.typography.lineHeight.large,
+	color: themeContract.color.surface.text,
 });
 
 export const closeButton = style({
@@ -155,4 +163,8 @@ export const footer = style({
 
 export const description = style({
 	marginTop: themeContract.spacing.xxs,
+	fontFamily: themeContract.typography.fontFamily.sans,
+	fontSize: themeContract.typography.fontSize.small,
+	lineHeight: themeContract.typography.lineHeight.small,
+	color: themeContract.color.surface.textMuted,
 });

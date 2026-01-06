@@ -1,15 +1,8 @@
-import React, {
-	useEffect,
-	useRef,
-	useState,
-	useCallback,
-} from "react";
-import { createPortal } from "react-dom";
+import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import clsx from "clsx";
 import * as styles from "./Dialog.css";
 import { lightTheme } from "@/tokens";
 import { useTheme } from "@/providers";
-import { Text } from "../Text";
 import { Button } from "../Button";
 import type { ButtonVariant, ButtonIntent } from "../Button";
 
@@ -26,7 +19,8 @@ export interface DialogAction {
 
 export interface DialogProps {
 	open: boolean;
-	onClose: () => void;
+	onOpenChange?: (open: boolean) => void;
+	onClose?: () => void;
 	size?: DialogSize;
 	rounded?: DialogRounded;
 	title?: string;
@@ -40,8 +34,28 @@ export interface DialogProps {
 	className?: string;
 }
 
+/**
+ * Dialog component built on Base UI
+ * 
+ * @example
+ * ```tsx
+ * <Dialog 
+ *   open={isOpen} 
+ *   onOpenChange={setIsOpen}
+ *   title="Confirm Action"
+ *   description="Are you sure you want to proceed?"
+ *   actions={[
+ *     { label: "Cancel", variant: "outline", onClick: () => setIsOpen(false) },
+ *     { label: "Confirm", variant: "solid", intent: "primary", onClick: handleConfirm }
+ *   ]}
+ * >
+ *   <p>This action cannot be undone.</p>
+ * </Dialog>
+ * ```
+ */
 export const Dialog = ({
 	open,
+	onOpenChange,
 	onClose,
 	size = "medium",
 	rounded = "medium",
@@ -55,68 +69,25 @@ export const Dialog = ({
 	closeOnEscape = true,
 	className,
 }: DialogProps) => {
-	const [isClosing, setIsClosing] = useState(false);
-	const [mounted, setMounted] = useState(false);
-	const dialogRef = useRef<HTMLDivElement>(null);
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
-	useEffect(() => {
-		setMounted(true);
-		return () => setMounted(false);
-	}, []);
-
-	const handleClose = useCallback(() => {
-		setIsClosing(true);
-		setTimeout(() => {
-			setIsClosing(false);
-			onClose();
-		}, 200);
-	}, [onClose]);
-
-	useEffect(() => {
-		if (!open || !closeOnEscape) return;
-
-		const handleEscape = (e: KeyboardEvent) => {
-			if (e.key === "Escape") {
-				handleClose();
-			}
-		};
-
-		document.addEventListener("keydown", handleEscape);
-		return () => document.removeEventListener("keydown", handleEscape);
-	}, [open, closeOnEscape, handleClose]);
-
-	useEffect(() => {
-		if (open) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "";
-		}
-
-		return () => {
-			document.body.style.overflow = "";
-		};
-	}, [open]);
-
-	const handleOverlayClick = (e: React.MouseEvent) => {
-		if (closeOnOverlayClick && e.target === e.currentTarget) {
-			handleClose();
+	const handleOpenChange = (newOpen: boolean) => {
+		onOpenChange?.(newOpen);
+		if (!newOpen) {
+			onClose?.();
 		}
 	};
 
-	if (!open && !isClosing) return null;
-	if (!mounted) return null;
-
-	const dialogContent = (
-		<div
-			className={styles.overlay}
-			onClick={handleOverlayClick}
-			data-state={isClosing ? "closing" : "open"}
-			role="presentation"
+	return (
+		<BaseDialog.Root
+			open={open}
+			onOpenChange={handleOpenChange}
+			disablePointerDismissal={!closeOnOverlayClick}
+			modal={closeOnEscape}
 		>
-			<div
-				ref={dialogRef}
+			<BaseDialog.Backdrop className={styles.overlay} />
+			<BaseDialog.Popup
 				className={clsx(
 					themeClass,
 					styles.container,
@@ -124,49 +95,30 @@ export const Dialog = ({
 					styles.roundedVariants[rounded],
 					className
 				)}
-				role="dialog"
-				aria-modal="true"
-				aria-labelledby={title ? "dialog-title" : undefined}
-				aria-describedby={description ? "dialog-description" : undefined}
 			>
 				{(title || showCloseButton) && (
 					<div className={styles.header}>
 						<div style={{ flex: 1 }}>
 							{title && (
-								<Text
-									as="h2"
-									id="dialog-title"
-									size="large"
-									weight="semibold"
-									className={styles.title}
-								>
+								<BaseDialog.Title className={styles.title}>
 									{title}
-								</Text>
+								</BaseDialog.Title>
 							)}
 							{description && (
-								<Text
-									as="p"
-									id="dialog-description"
-									size="small"
-									className={styles.description}
-								>
+								<BaseDialog.Description className={styles.description}>
 									{description}
-								</Text>
+								</BaseDialog.Description>
 							)}
 						</div>
 						{showCloseButton && (
-							<button
-								type="button"
-								className={styles.closeButton}
-								onClick={handleClose}
-								aria-label="Close dialog"
-							>
+							<BaseDialog.Close className={styles.closeButton}>
 								<svg
 									width="20"
 									height="20"
 									viewBox="0 0 20 20"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
+									aria-hidden="true"
 								>
 									<path
 										d="M15 5L5 15M5 5L15 15"
@@ -176,7 +128,7 @@ export const Dialog = ({
 										strokeLinejoin="round"
 									/>
 								</svg>
-							</button>
+							</BaseDialog.Close>
 						)}
 					</div>
 				)}
@@ -200,9 +152,7 @@ export const Dialog = ({
 							: footer}
 					</div>
 				)}
-			</div>
-		</div>
+			</BaseDialog.Popup>
+		</BaseDialog.Root>
 	);
-
-	return createPortal(dialogContent, document.body);
 };
