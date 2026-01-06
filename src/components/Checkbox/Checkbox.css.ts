@@ -27,17 +27,10 @@ export const container = style({
 	},
 });
 
-// Hidden native checkbox
-export const hiddenInput = style({
-	position: "absolute",
-	width: "1px",
-	height: "1px",
-	padding: 0,
-	margin: "-1px",
-	overflow: "hidden",
-	clip: "rect(0, 0, 0, 0)",
-	whiteSpace: "nowrap",
-	border: 0,
+// Checkbox root (Base UI)
+export const checkboxRoot = style({
+	all: "unset",
+	display: "inline-block",
 });
 
 // Custom checkbox box base
@@ -51,11 +44,11 @@ const checkboxBase = style({
 	transition: "all 0.2s ease-in-out",
 	backgroundColor: "transparent",
 	selectors: {
-		"input:focus-visible + &": {
+		"button:focus-visible &": {
 			outline: `2px solid ${themeContract.color.primary.surface}`,
 			outlineOffset: "2px",
 		},
-		"input:disabled + &": {
+		"button:disabled &": {
 			cursor: "not-allowed",
 		},
 	},
@@ -128,7 +121,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.primary.surface,
 					},
 				},
@@ -139,6 +132,12 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.primary.surface,
 				backgroundColor: themeContract.color.primary.surface,
+				selectors: {
+					"&[data-state='checked']": {
+						borderColor: themeContract.color.primary.surface,
+						backgroundColor: themeContract.color.primary.surface,
+					},
+				},
 			},
 		},
 
@@ -148,7 +147,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.secondary.surface,
 					},
 				},
@@ -168,7 +167,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.success.surface,
 					},
 				},
@@ -188,7 +187,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.warning.surface,
 					},
 				},
@@ -208,7 +207,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.danger.surface,
 					},
 				},
@@ -228,7 +227,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.neutral.surface,
 					},
 				},
@@ -248,7 +247,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.primary.weak,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.primary.surface,
 					},
 				},
@@ -269,7 +268,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.secondary.weak,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.secondary.surface,
 					},
 				},
@@ -290,7 +289,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.success.weak,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.success.surface,
 					},
 				},
@@ -311,7 +310,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.warning.weak,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.warning.surface,
 					},
 				},
@@ -332,7 +331,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.danger.weak,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.danger.surface,
 					},
 				},
@@ -353,7 +352,7 @@ export const checkbox = recipe({
 			style: {
 				borderColor: themeContract.color.neutral.weak,
 				selectors: {
-					"input:hover:not(:disabled) + &": {
+					"button:hover:not(:disabled) &": {
 						borderColor: themeContract.color.neutral.surface,
 					},
 				},
@@ -378,16 +377,24 @@ export const checkbox = recipe({
 	},
 });
 
-// Checkmark icon (SVG)
-export const checkmarkIcon = style({
+// Indicator container
+export const indicatorContainer = style({
 	display: "none",
 	width: "100%",
 	height: "100%",
-	color: "white",
+	alignItems: "center",
+	justifyContent: "center",
 	selectors: {
-		"input:checked + * > &": {
-			display: "block",
-			animation: `${checkmark} 0.2s ease-in-out`,
+		"&[data-state='checked']": {
+			display: "flex",
 		},
 	},
+});
+
+// Checkmark icon (SVG)
+export const checkmarkIcon = style({
+	width: "100%",
+	height: "100%",
+	color: "white",
+	animation: `${checkmark} 0.2s ease-in-out`,
 });
