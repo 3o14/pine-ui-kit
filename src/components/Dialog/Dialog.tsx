@@ -86,16 +86,17 @@ export const Dialog = ({
 			disablePointerDismissal={!closeOnOverlayClick}
 			modal={closeOnEscape}
 		>
-			<BaseDialog.Backdrop className={styles.overlay} />
-			<BaseDialog.Popup
-				className={clsx(
-					themeClass,
-					styles.container,
-					styles.sizeVariants[size],
-					styles.roundedVariants[rounded],
-					className
-				)}
-			>
+			<BaseDialog.Portal>
+				<BaseDialog.Backdrop className={styles.overlay} />
+				<BaseDialog.Popup
+					className={clsx(
+						themeClass,
+						styles.container,
+						styles.sizeVariants[size],
+						styles.roundedVariants[rounded],
+						className
+					)}
+				>
 				{(title || showCloseButton) && (
 					<div className={styles.header}>
 						<div style={{ flex: 1 }}>
@@ -152,7 +153,8 @@ export const Dialog = ({
 							: footer}
 					</div>
 				)}
-			</BaseDialog.Popup>
+				</BaseDialog.Popup>
+			</BaseDialog.Portal>
 		</BaseDialog.Root>
 	);
 };
