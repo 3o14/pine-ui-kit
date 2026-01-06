@@ -1,9 +1,9 @@
-import React from "react";
+import { Field } from "@base-ui/react/field";
+import { Input } from "@base-ui/react/input";
 import clsx from "clsx";
-import { container, containerVariants, input } from "./TextField.css";
+import { container, containerVariants, input, label, helperText } from "./TextField.css";
 import { lightTheme } from "@/tokens";
 import { useTheme } from "@/providers";
-import { Text } from "../Text/Text";
 
 export type TextFieldSize = "small" | "medium" | "large" | "xlarge";
 export type TextFieldRounded = "small" | "medium" | "large";
@@ -19,80 +19,84 @@ export interface TextFieldProps
 	label?: string;
 	helperText?: string;
 	fullWidth?: boolean;
+	name?: string;
+	required?: boolean;
+	validate?: (
+		value: unknown,
+		formValues: Record<string, unknown>
+	) => string | string[] | Promise<string | string[] | null> | null;
 }
 
+/**
+ * TextField component built on Base UI
+ * 
+ * @example
+ * ```tsx
+ * <TextField 
+ *   label="Email"
+ *   placeholder="Enter your email"
+ *   type="email"
+ *   helperText="We'll never share your email"
+ * />
+ * ```
+ */
 export const TextField = ({
 	size = "medium",
 	rounded = "medium",
 	variant = "outline",
 	status = "default",
-	label,
-	helperText,
+	label: labelText,
+	helperText: helperTextContent,
 	fullWidth = false,
 	disabled = false,
 	className,
+	name,
+	required,
+	validate,
 	...props
 }: TextFieldProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
-	const getHelperTextIntent = (): "inherit" | "danger" | "success" => {
-		if (status === "error") return "danger";
-		if (status === "success") return "success";
-		return "inherit";
-	};
-
-	const getLabelSize = (): "xsmall" | "small" | "medium" => {
-		if (size === "small") return "xsmall";
-		if (size === "medium") return "small";
-		return "medium";
-	};
-
-	const getHelperTextSize = (): "xsmall" | "small" => {
-		if (size === "small" || size === "medium") return "xsmall";
-		return "small";
-	};
-
 	return (
-		<div
+		<Field.Root
 			className={clsx(
 				themeClass,
 				container,
 				containerVariants[fullWidth ? "fullWidth" : "default"],
 				className
 			)}
+			name={name}
+			disabled={disabled}
+			validate={validate}
 		>
-			{label && (
-				<Text
-					as="label"
-					size={getLabelSize()}
-					weight="medium"
-					intent="inherit"
-					style={{ display: "block", marginBottom: "4px" }}
-				>
-					{label}
-				</Text>
+			{labelText && (
+				<Field.Label className={label({ size })}>
+					{labelText}
+					{required && " *"}
+				</Field.Label>
 			)}
-			<input
-				className={input({
-					size,
-					rounded,
-					variant,
-					status,
-				})}
-				disabled={disabled}
+			<Field.Control
+				render={(props) => (
+					<Input
+						{...props}
+						className={input({
+							size,
+							rounded,
+							variant,
+							status,
+						})}
+						required={required}
+					/>
+				)}
 				{...props}
 			/>
-			{helperText && (
-				<Text
-					as="span"
-					size={getHelperTextSize()}
-					intent={getHelperTextIntent()}
-					style={{ display: "block", marginTop: "4px" }}
-				>
-					{helperText}
-				</Text>
+			{helperTextContent && status !== "error" && (
+				<Field.Description className={helperText({ size, status })}>
+					{helperTextContent}
+				</Field.Description>
 			)}
-		</div>
+			<Field.Error className={helperText({ size, status: "error" })} />
+		</Field.Root>
 	);
 };

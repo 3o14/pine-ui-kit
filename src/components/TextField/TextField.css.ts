@@ -2,6 +2,82 @@ import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 
+export const label = recipe({
+	base: {
+		display: "block",
+		marginBottom: "4px",
+		fontFamily: themeContract.typography.fontFamily.sans,
+		fontWeight: themeContract.typography.fontWeight.medium,
+		color: themeContract.color.surface.text,
+	},
+	variants: {
+		size: {
+			small: {
+				fontSize: themeContract.typography.fontSize.xsmall,
+				lineHeight: themeContract.typography.lineHeight.xsmall,
+			},
+			medium: {
+				fontSize: themeContract.typography.fontSize.small,
+				lineHeight: themeContract.typography.lineHeight.small,
+			},
+			large: {
+				fontSize: themeContract.typography.fontSize.medium,
+				lineHeight: themeContract.typography.lineHeight.medium,
+			},
+			xlarge: {
+				fontSize: themeContract.typography.fontSize.medium,
+				lineHeight: themeContract.typography.lineHeight.medium,
+			},
+		},
+	},
+	defaultVariants: {
+		size: "medium",
+	},
+});
+
+export const helperText = recipe({
+	base: {
+		display: "block",
+		marginTop: "4px",
+		fontFamily: themeContract.typography.fontFamily.sans,
+	},
+	variants: {
+		size: {
+			small: {
+				fontSize: themeContract.typography.fontSize.xsmall,
+				lineHeight: themeContract.typography.lineHeight.xsmall,
+			},
+			medium: {
+				fontSize: themeContract.typography.fontSize.xsmall,
+				lineHeight: themeContract.typography.lineHeight.xsmall,
+			},
+			large: {
+				fontSize: themeContract.typography.fontSize.small,
+				lineHeight: themeContract.typography.lineHeight.small,
+			},
+			xlarge: {
+				fontSize: themeContract.typography.fontSize.small,
+				lineHeight: themeContract.typography.lineHeight.small,
+			},
+		},
+		status: {
+			default: {
+				color: themeContract.color.surface.textMuted,
+			},
+			error: {
+				color: themeContract.color.danger.surface,
+			},
+			success: {
+				color: themeContract.color.success.surface,
+			},
+		},
+	},
+	defaultVariants: {
+		size: "medium",
+		status: "default",
+	},
+});
+
 export const container = style({
 	display: "flex",
 	flexDirection: "column",
