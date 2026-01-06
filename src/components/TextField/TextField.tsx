@@ -76,19 +76,14 @@ export const TextField = ({
 					{required && " *"}
 				</Field.Label>
 			)}
-			<Field.Control
-				render={(props) => (
-					<Input
-						{...props}
-						className={input({
-							size,
-							rounded,
-							variant,
-							status,
-						})}
-						required={required}
-					/>
-				)}
+			<Input
+				className={input({
+					size,
+					rounded,
+					variant,
+					status,
+				})}
+				required={required}
 				{...props}
 			/>
 			{helperTextContent && status !== "error" && (
