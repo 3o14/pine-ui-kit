@@ -1,0 +1,26 @@
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    // TypeScript/React 컴포넌트 네스팅
+    "*.tsx": "${capture}.css.ts, ${capture}.spec.tsx, ${capture}.stories.tsx, ${capture}.test.tsx",
+    "*.ts": "${capture}.spec.ts, ${capture}.test.ts",
+    
+    // 인덱스 파일 네스팅 (컴포넌트 폴더의 index.ts는 네스팅하지 않음)
+    
+    // 설정 파일 네스팅
+    "package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock, .npmrc, .nvmrc, .node-version",
+    "tsconfig.json": "tsconfig.*.json",
+    "vite.config.*": "vitest.config.*, vitest.setup.*",
+    ".eslintrc.*": ".eslintignore, .prettierrc*, .prettierignore",
+    
+    // Git 관련
+    ".gitignore": ".gitattributes, .gitmodules",
+    
+    // README 및 문서
+    "README.md": "CHANGELOG.md, LICENSE, CONTRIBUTING.md",
+    
+    // Storybook 설정
+    ".storybook": "storybook-static"
+  }
+}
