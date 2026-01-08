@@ -26,6 +26,8 @@ jobs:
 
           # 변경된 파일 목록 가져오기
           git fetch origin ${{ github.base_ref }}
+          # main 브랜치를 로컬에 명시적으로 생성 (changeset status를 위해 필요)
+          git fetch origin ${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
           CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
 
           # 문서, CI, 설정 파일만 변경된 경우 체크
@@ -82,4 +84,4 @@ jobs:
 
       - name: Validate changeset format
         if: steps.check-skip.outputs.skip != 'true'
-        run: pnpm changeset status --verbose
+        run: pnpm changeset status --since=origin/${{ github.base_ref }} --verbose
