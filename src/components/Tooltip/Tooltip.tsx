@@ -91,7 +91,7 @@ export const Tooltip = ({
 	return (
 		<BaseUITooltip.Provider>
 			<BaseUITooltip.Root disabled={disabled}>
-				{children}
+				<BaseUITooltip.Trigger>{children}</BaseUITooltip.Trigger>
 				<BaseUITooltip.Portal>
 					<BaseUITooltip.Positioner
 						side={side}

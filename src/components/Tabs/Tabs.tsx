@@ -50,7 +50,7 @@ export interface TabsProps {
 
 /**
  * Tabs component built on Base UI
- * 
+ *
  * @example
  * ```tsx
  * <Tabs
@@ -111,4 +111,3 @@ export const Tabs = ({
 		</BaseUITabs.Root>
 	);
 };
-
