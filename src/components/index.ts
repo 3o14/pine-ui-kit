@@ -7,6 +7,5 @@ export * from "./Switch";
 export * from "./Tabs";
 export * from "./Text";
 export * from "./TextField";
-export * from "./Tooltip";
 
 export * from "../providers";
