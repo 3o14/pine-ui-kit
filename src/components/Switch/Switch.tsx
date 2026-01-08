@@ -63,19 +63,19 @@ export const Switch = ({
 				readOnly={readOnly}
 				className={styles.switchRoot}
 			>
-				<span
-					className={styles.track({
-						size,
-						intent,
-					})}
+			<span
+				className={styles.track({
+					size,
+					intent,
+				})}
 					data-state={checked ? "checked" : "unchecked"}
-				>
+			>
 					<BaseSwitch.Thumb
-						className={styles.thumb({
-							size,
-						})}
-					/>
-				</span>
+					className={styles.thumb({
+						size,
+					})}
+				/>
+			</span>
 			</BaseSwitch.Root>
 			{label && (
 				<Text as="span" size={size} intent="inherit">

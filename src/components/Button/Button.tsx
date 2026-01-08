@@ -10,8 +10,10 @@ export type ButtonSize = "small" | "medium" | "large" | "xlarge";
 export type ButtonIntent = ColorIntent;
 export type ButtonRounded = "small" | "medium" | "large";
 
-export interface ButtonProps
-	extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
+export interface ButtonProps extends Omit<
+	React.ButtonHTMLAttributes<HTMLButtonElement>,
+	"color"
+> {
 	variant?: ButtonVariant;
 	size?: ButtonSize;
 	intent?: ButtonIntent;
@@ -30,37 +32,45 @@ export interface ButtonProps
  * </Button>
  * ```
  */
-export const Button = ({
-	variant = "solid",
-	size = "medium",
-	intent = "primary",
-	rounded = "medium",
-	fullWidth = false,
-	disabled = false,
-	children,
-	className,
-	...props
-}: ButtonProps) => {
-	const themeContext = useTheme();
-	const themeClass = themeContext?.themeClass ?? lightTheme;
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+	(
+		{
+			variant = "solid",
+			size = "medium",
+			intent = "primary",
+			rounded = "medium",
+			fullWidth = false,
+			disabled = false,
+			children,
+			className,
+			...props
+		},
+		ref
+	) => {
+		const themeContext = useTheme();
+		const themeClass = themeContext?.themeClass ?? lightTheme;
 
-	return (
-		<BaseButton
-			className={clsx(
-				themeClass,
-				styles.button({
-					variant,
-					intent,
-					size,
-					rounded,
-				}),
-				fullWidth && styles.fullWidth,
-				className
-			)}
-			disabled={disabled}
-			{...props}
-		>
-			{children}
-		</BaseButton>
-	);
-};
+		return (
+			<BaseButton
+				ref={ref}
+				className={clsx(
+					themeClass,
+					styles.button({
+						variant,
+						intent,
+						size,
+						rounded,
+					}),
+					fullWidth && styles.fullWidth,
+					className
+				)}
+				disabled={disabled}
+				{...props}
+			>
+				{children}
+			</BaseButton>
+		);
+	}
+);
+
+Button.displayName = "Button";

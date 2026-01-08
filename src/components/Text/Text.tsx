@@ -18,7 +18,10 @@ export type TextElement =
 	| "p"
 	| "span"
 	| "div"
-	| "label";
+	| "label"
+	| "li"
+	| "ul"
+	| "ol";
 
 export interface TextProps {
 	as?: TextElement;

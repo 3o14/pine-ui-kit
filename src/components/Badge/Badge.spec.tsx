@@ -128,7 +128,7 @@ describe("Badge", () => {
 		});
 
 		it("renders with dot when showDot is true", () => {
-			const { container } = render(<Badge showDot>With Dot</Badge>);
+			render(<Badge showDot>With Dot</Badge>);
 			const badge = screen.getByText("With Dot");
 			const dot = badge.querySelector("span");
 			expect(dot).toBeInTheDocument();

@@ -92,7 +92,7 @@ export const Checked: Story = {
 			<Switch
 				{...args}
 				checked={checked}
-				onChange={(e) => setChecked(e.target.checked)}
+				onCheckedChange={(checked) => setChecked(checked)}
 			/>
 		);
 	},
@@ -320,7 +320,7 @@ export const ControlledExample: Story = {
 				<Switch
 					label="Toggle me"
 					checked={checked}
-					onChange={(e) => setChecked(e.target.checked)}
+					onCheckedChange={(checked) => setChecked(checked)}
 				/>
 				<p>Current state: {checked ? "🟢 ON" : "⚪ OFF"}</p>
 				<button
@@ -352,7 +352,7 @@ export const Playground: Story = {
 			<Switch
 				{...args}
 				checked={checked}
-				onChange={(e) => setChecked(e.target.checked)}
+				onCheckedChange={(checked) => setChecked(checked)}
 			/>
 		);
 	},

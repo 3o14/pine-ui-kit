@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 import { Checkbox } from "./Checkbox";
 
 const meta = {
@@ -344,11 +345,11 @@ export const ControlledExample: Story = {
 
 		return (
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<Checkbox
-					label="Toggle me"
-					checked={checked}
-					onChange={(e) => setChecked(e.target.checked)}
-				/>
+			<Checkbox
+				label="Toggle me"
+				checked={checked}
+				onCheckedChange={(checked) => setChecked(checked)}
+			/>
 				<p>Current state: {checked ? "✅ Checked" : "⬜ Unchecked"}</p>
 				<button
 					type="button"

@@ -50,7 +50,7 @@ export interface TabProps {
 
 /**
  * Tab component built on Base UI
- * 
+ *
  * @example
  * ```tsx
  * <Tab

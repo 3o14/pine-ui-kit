@@ -120,9 +120,9 @@ export const Basic: Story = {
 				<Dropdown
 					{...args}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Select a fruit"}
 				/>
@@ -148,9 +148,9 @@ export const WithDefaultValue: Story = {
 				<Dropdown
 					{...args}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 				/>
 			</div>
@@ -177,21 +177,21 @@ export const Sizes: Story = {
 				<Dropdown
 					options={sampleOptions}
 					value={value1}
-					onChange={setValue1}
+					onValueChange={setValue1}
 					size="small"
 					placeholder="Small"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
-					onChange={setValue2}
+					onValueChange={setValue2}
 					size="medium"
 					placeholder="Medium"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
-					onChange={setValue3}
+					onValueChange={setValue3}
 					size="large"
 					placeholder="Large"
 				/>
@@ -222,42 +222,42 @@ export const Intents: Story = {
 				<Dropdown
 					options={sampleOptions}
 					value={value1}
-					onChange={setValue1}
+					onValueChange={setValue1}
 					intent="primary"
 					placeholder="Primary"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
-					onChange={setValue2}
+					onValueChange={setValue2}
 					intent="secondary"
 					placeholder="Secondary"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
-					onChange={setValue3}
+					onValueChange={setValue3}
 					intent="success"
 					placeholder="Success"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value4}
-					onChange={setValue4}
+					onValueChange={setValue4}
 					intent="warning"
 					placeholder="Warning"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value5}
-					onChange={setValue5}
+					onValueChange={setValue5}
 					intent="danger"
 					placeholder="Danger"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value6}
-					onChange={setValue6}
+					onValueChange={setValue6}
 					intent="neutral"
 					placeholder="Neutral"
 				/>
@@ -285,21 +285,21 @@ export const Rounded: Story = {
 				<Dropdown
 					options={sampleOptions}
 					value={value1}
-					onChange={setValue1}
+					onValueChange={setValue1}
 					rounded="small"
 					placeholder="Small rounded"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
-					onChange={setValue2}
+					onValueChange={setValue2}
 					rounded="medium"
 					placeholder="Medium rounded"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
-					onChange={setValue3}
+					onValueChange={setValue3}
 					rounded="large"
 					placeholder="Large rounded"
 				/>
@@ -325,9 +325,9 @@ export const FullWidth: Story = {
 				<Dropdown
 					{...args}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Full width dropdown"}
 				/>
@@ -374,9 +374,9 @@ export const WithDisabledOptions: Story = {
 					{...args}
 					options={optionsWithDisabled}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Select a fruit"}
 				/>
@@ -405,9 +405,9 @@ export const ManyOptions: Story = {
 					{...args}
 					options={manyOptions}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Select an option"}
 				/>
@@ -469,7 +469,7 @@ export const FormExample: Story = {
 					<Dropdown
 						options={countries}
 						value={country}
-						onChange={setCountry}
+						onValueChange={setCountry}
 						placeholder="Select your country"
 						fullWidth
 					/>
@@ -489,7 +489,7 @@ export const FormExample: Story = {
 					<Dropdown
 						options={cities}
 						value={city}
-						onChange={setCity}
+						onValueChange={setCity}
 						placeholder="Select your city"
 						fullWidth
 					/>
@@ -509,7 +509,7 @@ export const FormExample: Story = {
 					<Dropdown
 						options={languages}
 						value={language}
-						onChange={setLanguage}
+						onValueChange={setLanguage}
 						placeholder="Select language"
 						fullWidth
 					/>
@@ -561,9 +561,9 @@ export const ControlledExample: Story = {
 				<Dropdown
 					{...args}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 				/>
 				<p>
@@ -614,9 +614,9 @@ export const Playground: Story = {
 				<Dropdown
 					{...args}
 					value={value}
-					onChange={(newValue) => {
+					onValueChange={(newValue) => {
 						setValue(newValue);
-						args.onChange?.(newValue);
+						args.onValueChange?.(newValue);
 					}}
 				/>
 			</div>

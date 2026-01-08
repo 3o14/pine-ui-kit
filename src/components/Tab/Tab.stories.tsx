@@ -11,14 +11,21 @@ const meta = {
 	argTypes: {
 		intent: {
 			control: "select",
-			options: ["primary", "secondary", "success", "warning", "danger", "neutral"],
+			options: [
+				"primary",
+				"secondary",
+				"success",
+				"warning",
+				"danger",
+				"neutral",
+			],
 		},
 		orientation: {
 			control: "select",
 			options: ["horizontal", "vertical"],
 		},
 	},
-} satisfies Meta<typeof Tabs>;
+} satisfies Meta<typeof Tab>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -32,7 +39,9 @@ const sampleTabs = [
 	{
 		value: "tab2",
 		label: "Tab 2",
-		content: <div>Content for Tab 2. This is another sample content panel.</div>,
+		content: (
+			<div>Content for Tab 2. This is another sample content panel.</div>
+		),
 	},
 	{
 		value: "tab3",
@@ -49,6 +58,10 @@ export const Default: Story = {
 };
 
 export const Intents: Story = {
+	args: {
+		tabs: sampleTabs,
+		defaultValue: "tab1",
+	},
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
 			<Tab tabs={sampleTabs} defaultValue="tab1" intent="primary" />
@@ -123,4 +136,3 @@ export const RichContent: Story = {
 		defaultValue: "profile",
 	},
 };
-
