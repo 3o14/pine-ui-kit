@@ -49,15 +49,16 @@
 		"build-storybook": "pnpm run sync-readme && storybook build",
 		"sync-readme": "node scripts/sync-readme.js",
 		"prepublishOnly": "pnpm run build:lib",
-	"changeset": "changeset",
-	"changeset:auto": "./scripts/auto-changeset.sh",
-	"version": "changeset version",
-	"release": "pnpm run version && pnpm run build:lib && npm publish --access public",
-	"pr": "./scripts/create-pr.sh"
+		"changeset": "changeset",
+		"changeset:auto": "./scripts/auto-changeset.sh",
+		"version": "changeset version",
+		"release": "pnpm run version && pnpm run build:lib && npm publish --access public",
+		"pr": "./scripts/create-pr.sh"
 	},
 	"dependencies": {
 		"@base-ui/react": "^1.0.0",
-		"clsx": "^2.1.1"
+		"clsx": "^2.1.1",
+		"gh": "^2.8.9"
 	},
 	"peerDependencies": {
 		"react": "^18.0.0 || ^19.0.0",
