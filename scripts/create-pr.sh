@@ -58,8 +58,9 @@ COMMIT_MESSAGES=$(git log main..HEAD --pretty=format:"%s" | head -5)
 # 5. Extract changeset information
 if [[ -n "$CHANGESET_FILES" ]]; then
   CHANGESET_CONTENT=$(cat $(echo "$CHANGESET_FILES" | head -1))
-  CHANGESET_TYPE=$(echo "$CHANGESET_CONTENT" | grep -oP '"\K[^"]+(?=":)' | head -1 || echo "pine-ui-kit")
-  CHANGESET_VERSION=$(echo "$CHANGESET_CONTENT" | grep -oP '": \K\w+' | head -1 || echo "patch")
+  # BSD grep compatible (macOS)
+  CHANGESET_TYPE=$(echo "$CHANGESET_CONTENT" | grep -o '"[^"]*"' | head -1 | tr -d '"' || echo "pine-ui-kit")
+  CHANGESET_VERSION=$(echo "$CHANGESET_CONTENT" | grep -o ': [a-z]*' | head -1 | sed 's/: //' || echo "patch")
   CHANGESET_DESC=$(echo "$CHANGESET_CONTENT" | tail -n +4)
 else
   CHANGESET_TYPE="pine-ui-kit"

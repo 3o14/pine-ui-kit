@@ -62,18 +62,18 @@ HAS_FEAT=false
 HAS_FIX=false
 
 while IFS= read -r commit; do
-  # Check for breaking changes
-  if echo "$commit" | grep -qE "^[a-z]+(\(.+\))?!:|BREAKING CHANGE:"; then
+  # Check for breaking changes (BSD grep compatible)
+  if echo "$commit" | grep -q "!" || echo "$commit" | grep -q "BREAKING CHANGE:"; then
     HAS_BREAKING=true
   fi
   
   # Check for features
-  if echo "$commit" | grep -qE "^feat(\(.+\))?:"; then
+  if echo "$commit" | grep -q "^feat"; then
     HAS_FEAT=true
   fi
   
   # Check for fixes and other changes
-  if echo "$commit" | grep -qE "^(fix|docs|style|refactor|perf|test|chore)(\(.+\))?:"; then
+  if echo "$commit" | grep -qE "^(fix|docs|style|refactor|perf|test|chore)"; then
     HAS_FIX=true
   fi
 done <<< "$COMMITS"
@@ -102,20 +102,20 @@ echo -e "\n${BLUE}📝 Generating changeset summary...${NC}"
 SUMMARY=""
 DETAILS=""
 
-# Group commits by type
-FEAT_COMMITS=$(echo "$COMMITS" | grep -E "^feat(\(.+\))?:" || echo "")
-FIX_COMMITS=$(echo "$COMMITS" | grep -E "^fix(\(.+\))?:" || echo "")
-OTHER_COMMITS=$(echo "$COMMITS" | grep -vE "^(feat|fix)(\(.+\))?:" || echo "")
+# Group commits by type (BSD grep compatible)
+FEAT_COMMITS=$(echo "$COMMITS" | grep "^feat" || echo "")
+FIX_COMMITS=$(echo "$COMMITS" | grep "^fix" || echo "")
+OTHER_COMMITS=$(echo "$COMMITS" | grep -vE "^(feat|fix)" || echo "")
 
 # Create summary from first significant commit
 FIRST_COMMIT=$(echo "$COMMITS" | head -1)
 SUMMARY=$(echo "$FIRST_COMMIT" | sed -E 's/^[a-z]+(\(.+\))?!?: //' | sed 's/^./\u&/')
 
-# Create detailed description
+# Create detailed description (BSD sed compatible)
 if [[ -n "$FEAT_COMMITS" ]]; then
   DETAILS="${DETAILS}**New Features:**\n"
   while IFS= read -r commit; do
-    DESC=$(echo "$commit" | sed -E 's/^feat(\(.+\))?!?: //')
+    DESC=$(echo "$commit" | sed 's/^feat[^:]*: //')
     DETAILS="${DETAILS}- ${DESC}\n"
   done <<< "$FEAT_COMMITS"
   DETAILS="${DETAILS}\n"
@@ -124,7 +124,7 @@ fi
 if [[ -n "$FIX_COMMITS" ]]; then
   DETAILS="${DETAILS}**Bug Fixes:**\n"
   while IFS= read -r commit; do
-    DESC=$(echo "$commit" | sed -E 's/^fix(\(.+\))?!?: //')
+    DESC=$(echo "$commit" | sed 's/^fix[^:]*: //')
     DETAILS="${DETAILS}- ${DESC}\n"
   done <<< "$FIX_COMMITS"
   DETAILS="${DETAILS}\n"
@@ -133,7 +133,7 @@ fi
 if [[ -n "$OTHER_COMMITS" ]]; then
   DETAILS="${DETAILS}**Other Changes:**\n"
   while IFS= read -r commit; do
-    DESC=$(echo "$commit" | sed -E 's/^[a-z]+(\(.+\))?!?: //')
+    DESC=$(echo "$commit" | sed 's/^[a-z]*[^:]*: //')
     DETAILS="${DETAILS}- ${DESC}\n"
   done <<< "$OTHER_COMMITS"
 fi
