@@ -153,22 +153,41 @@ echo -e "${GREEN}✓${NC} Push complete"
 # 11. Create PR
 echo -e "\n${BLUE}🎉 Creating PR...${NC}"
 
-# Check if GitHub CLI is available
-if ! command -v gh &> /dev/null; then
-  echo -e "${RED}❌ GitHub CLI (gh) is not installed.${NC}"
-  echo "Install: brew install gh"
-  echo ""
-  echo "Or create PR manually:"
-  echo "https://github.com/$(git remote get-url origin | sed 's/.*github.com[:/]\(.*\)\.git/\1/')/compare/main...$CURRENT_BRANCH"
+# Use Homebrew's gh explicitly (avoid npm package conflict)
+GH_CMD="/opt/homebrew/bin/gh"
+
+# Fallback to system gh if Homebrew version not found
+if [[ ! -f "$GH_CMD" ]]; then
+  if command -v gh &> /dev/null; then
+    GH_CMD="gh"
+  else
+    echo -e "${RED}❌ GitHub CLI (gh) is not installed.${NC}"
+    echo "Install: brew install gh"
+    echo "Then authenticate: gh auth login"
+    echo ""
+    echo "Or create PR manually:"
+    echo "https://github.com/$(git remote get-url origin | sed 's/.*github.com[:/]\(.*\)\.git/\1/')/compare/main...$CURRENT_BRANCH"
+    exit 1
+  fi
+fi
+
+# Check authentication
+if ! "$GH_CMD" auth status &> /dev/null; then
+  echo -e "${RED}❌ Not authenticated with GitHub.${NC}"
+  echo "Please run: gh auth login"
   exit 1
 fi
 
 # Create PR
-gh pr create \
+if "$GH_CMD" pr create \
   --title "$PR_TITLE" \
   --body "$PR_BODY" \
   --base main \
-  --head "$CURRENT_BRANCH"
-
-echo -e "\n${GREEN}✅ PR created successfully!${NC}"
-echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+  --head "$CURRENT_BRANCH"; then
+  echo -e "\n${GREEN}✅ PR created successfully!${NC}"
+  echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+else
+  echo -e "\n${RED}❌ Failed to create PR.${NC}"
+  echo "Please check the error message above."
+  exit 1
+fi
