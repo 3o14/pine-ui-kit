@@ -1,0 +1,85 @@
+name: Changeset Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  changeset-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if changeset is required
+        id: check-skip
+        run: |
+          # PR에 'skip-changeset' 라벨이 있는지 확인
+          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'skip-changeset') }}" == "true" ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "⏭️  Skipping changeset check due to 'skip-changeset' label"
+            exit 0
+          fi
+
+          # 변경된 파일 목록 가져오기
+          git fetch origin ${{ github.base_ref }}
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+
+          # 문서, CI, 설정 파일만 변경된 경우 체크
+          if echo "$CHANGED_FILES" | grep -qvE '^(\.github/|\.changeset/|\.vscode/|docs/|README\.md|LICENSE|\.gitignore|\.prettierrc|\.eslintrc|package\.json|tsconfig\.json|vite\.config\.ts)'; then
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "📦 Source code changes detected - changeset required"
+          else
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "⏭️  Only docs/config changes detected - skipping changeset check"
+          fi
+
+      - name: Setup pnpm
+        if: steps.check-skip.outputs.skip != 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        if: steps.check-skip.outputs.skip != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        if: steps.check-skip.outputs.skip != 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Check for changesets
+        if: steps.check-skip.outputs.skip != 'true'
+        run: |
+          # .changeset 디렉토리에 있는 .md 파일 개수 확인 (config.json, README.md 제외)
+          CHANGESET_COUNT=$(find .changeset -name "*.md" ! -name "README.md" | wc -l)
+
+          echo "Found $CHANGESET_COUNT changeset(s)"
+
+          if [ "$CHANGESET_COUNT" -eq 0 ]; then
+            echo "❌ Error: No changeset found!"
+            echo ""
+            echo "Please add a changeset to describe your changes:"
+            echo "  pnpm changeset"
+            echo ""
+            echo "This helps us maintain a proper changelog and version history."
+            echo ""
+            echo "If you believe this PR doesn't need a changeset (docs/config only),"
+            echo "please add the 'skip-changeset' label to this PR."
+            exit 1
+          else
+            echo "✅ Changeset found!"
+            echo ""
+            echo "Changeset files:"
+            find .changeset -name "*.md" ! -name "README.md" -exec echo "  - {}" \;
+          fi
+
+      - name: Validate changeset format
+        if: steps.check-skip.outputs.skip != 'true'
+        run: pnpm changeset status --verbose
