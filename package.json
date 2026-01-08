@@ -50,6 +50,7 @@
 		"sync-readme": "node scripts/sync-readme.js",
 		"prepublishOnly": "pnpm run build:lib",
 	"changeset": "changeset",
+	"changeset:auto": "./scripts/auto-changeset.sh",
 	"version": "changeset version",
 	"release": "pnpm run version && pnpm run build:lib && npm publish --access public",
 	"pr": "./scripts/create-pr.sh"
