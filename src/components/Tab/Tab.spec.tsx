@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Tabs } from "./Tabs";
+import { Tab } from "./Tab";
 
-describe("Tabs", () => {
+describe("Tab", () => {
 	const sampleTabs = [
 		{ value: "tab1", label: "Tab 1", content: <div>Content 1</div> },
 		{ value: "tab2", label: "Tab 2", content: <div>Content 2</div> },
@@ -12,14 +12,14 @@ describe("Tabs", () => {
 
 	describe("Rendering", () => {
 		it("renders all tabs", () => {
-			render(<Tabs tabs={sampleTabs} defaultValue="tab1" />);
+			render(<Tab tabs={sampleTabs} defaultValue="tab1" />);
 			expect(screen.getByRole("tab", { name: "Tab 1" })).toBeInTheDocument();
 			expect(screen.getByRole("tab", { name: "Tab 2" })).toBeInTheDocument();
 			expect(screen.getByRole("tab", { name: "Tab 3" })).toBeInTheDocument();
 		});
 
 		it("renders initial content", () => {
-			render(<Tabs tabs={sampleTabs} defaultValue="tab1" />);
+			render(<Tab tabs={sampleTabs} defaultValue="tab1" />);
 			expect(screen.getByText("Content 1")).toBeInTheDocument();
 		});
 	});
@@ -27,7 +27,7 @@ describe("Tabs", () => {
 	describe("Interactions", () => {
 		it("switches content on tab click", async () => {
 			const user = userEvent.setup();
-			render(<Tabs tabs={sampleTabs} defaultValue="tab1" />);
+			render(<Tab tabs={sampleTabs} defaultValue="tab1" />);
 
 			await user.click(screen.getByRole("tab", { name: "Tab 2" }));
 			expect(screen.getByText("Content 2")).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe("Tabs", () => {
 				...sampleTabs,
 				{ value: "tab4", label: "Disabled", content: <div>Content 4</div>, disabled: true },
 			];
-			render(<Tabs tabs={tabsWithDisabled} defaultValue="tab1" />);
+			render(<Tab tabs={tabsWithDisabled} defaultValue="tab1" />);
 
 			const disabledTab = screen.getByRole("tab", { name: "Disabled" });
 			expect(disabledTab).toHaveAttribute("data-disabled");

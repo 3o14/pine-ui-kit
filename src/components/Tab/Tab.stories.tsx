@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tabs } from "./Tabs";
+import { Tab } from "./Tab";
 
 const meta = {
-	title: "Components/Tabs",
-	component: Tabs,
+	title: "Components/Tab",
+	component: Tab,
 	parameters: {
 		layout: "padded",
 	},
@@ -51,12 +51,12 @@ export const Default: Story = {
 export const Intents: Story = {
 	render: () => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-			<Tabs tabs={sampleTabs} defaultValue="tab1" intent="primary" />
-			<Tabs tabs={sampleTabs} defaultValue="tab1" intent="secondary" />
-			<Tabs tabs={sampleTabs} defaultValue="tab1" intent="success" />
-			<Tabs tabs={sampleTabs} defaultValue="tab1" intent="warning" />
-			<Tabs tabs={sampleTabs} defaultValue="tab1" intent="danger" />
-			<Tabs tabs={sampleTabs} defaultValue="tab1" intent="neutral" />
+			<Tab tabs={sampleTabs} defaultValue="tab1" intent="primary" />
+			<Tab tabs={sampleTabs} defaultValue="tab1" intent="secondary" />
+			<Tab tabs={sampleTabs} defaultValue="tab1" intent="success" />
+			<Tab tabs={sampleTabs} defaultValue="tab1" intent="warning" />
+			<Tab tabs={sampleTabs} defaultValue="tab1" intent="danger" />
+			<Tab tabs={sampleTabs} defaultValue="tab1" intent="neutral" />
 		</div>
 	),
 };

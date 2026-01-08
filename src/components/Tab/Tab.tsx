@@ -1,25 +1,25 @@
 import React from "react";
 import clsx from "clsx";
 import { Tabs as BaseUITabs } from "@base-ui/react/tabs";
-import * as styles from "./Tabs.css";
+import * as styles from "./Tab.css";
 import { lightTheme, type ColorIntent } from "@/tokens";
 import { useTheme } from "@/providers";
 
-export type TabsIntent = ColorIntent;
-export type TabsOrientation = "horizontal" | "vertical";
+export type TabIntent = ColorIntent;
+export type TabOrientation = "horizontal" | "vertical";
 
-export interface Tab {
+export interface TabItem {
 	value: string;
 	label: React.ReactNode;
 	content: React.ReactNode;
 	disabled?: boolean;
 }
 
-export interface TabsProps {
+export interface TabProps {
 	/**
 	 * Array of tab objects
 	 */
-	tabs: Tab[];
+	tabs: TabItem[];
 	/**
 	 * The currently selected tab value
 	 */
@@ -36,12 +36,12 @@ export interface TabsProps {
 	 * Color intent
 	 * @default "primary"
 	 */
-	intent?: TabsIntent;
+	intent?: TabIntent;
 	/**
 	 * Orientation of tabs
 	 * @default "horizontal"
 	 */
-	orientation?: TabsOrientation;
+	orientation?: TabOrientation;
 	/**
 	 * Custom class name
 	 */
@@ -49,11 +49,11 @@ export interface TabsProps {
 }
 
 /**
- * Tabs component built on Base UI
- *
+ * Tab component built on Base UI
+ * 
  * @example
  * ```tsx
- * <Tabs
+ * <Tab
  *   tabs={[
  *     { value: "tab1", label: "Tab 1", content: <div>Content 1</div> },
  *     { value: "tab2", label: "Tab 2", content: <div>Content 2</div> }
@@ -62,7 +62,7 @@ export interface TabsProps {
  * />
  * ```
  */
-export const Tabs = ({
+export const Tab = ({
 	tabs,
 	value,
 	defaultValue,
@@ -70,7 +70,7 @@ export const Tabs = ({
 	intent = "primary",
 	orientation = "horizontal",
 	className,
-}: TabsProps) => {
+}: TabProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
 
