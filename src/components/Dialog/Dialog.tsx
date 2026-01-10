@@ -17,7 +17,7 @@ export interface DialogAction {
 	disabled?: boolean;
 }
 
-export interface DialogProps {
+export interface DialogProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
 	open: boolean;
 	onOpenChange?: (open: boolean) => void;
 	onClose?: () => void;
@@ -31,7 +31,6 @@ export interface DialogProps {
 	showCloseButton?: boolean;
 	closeOnOverlayClick?: boolean;
 	closeOnEscape?: boolean;
-	className?: string;
 }
 
 /**

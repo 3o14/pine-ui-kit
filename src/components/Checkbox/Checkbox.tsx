@@ -10,7 +10,10 @@ export type CheckboxVariant = "circle" | "square";
 export type CheckboxIntent = ColorIntent;
 export type CheckboxRounded = "small" | "medium" | "large";
 
-export interface CheckboxProps {
+export interface CheckboxProps extends Omit<
+	React.HTMLAttributes<HTMLElement>,
+	"onChange"
+> {
 	size?: CheckboxSize;
 	variant?: CheckboxVariant;
 	intent?: CheckboxIntent;
@@ -20,7 +23,6 @@ export interface CheckboxProps {
 	defaultChecked?: boolean;
 	disabled?: boolean;
 	onCheckedChange?: (checked: boolean) => void;
-	className?: string;
 	name?: string;
 	required?: boolean;
 	readOnly?: boolean;

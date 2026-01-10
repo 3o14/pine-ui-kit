@@ -23,7 +23,7 @@ export type TextElement =
 	| "ul"
 	| "ol";
 
-export interface TextProps {
+export interface TextProps extends React.HTMLAttributes<HTMLElement> {
 	as?: TextElement;
 	size?: TextSize;
 	weight?: TextWeight;
@@ -31,7 +31,6 @@ export interface TextProps {
 	align?: TextAlign;
 	truncate?: boolean;
 	children?: React.ReactNode;
-	className?: string;
 }
 
 /**

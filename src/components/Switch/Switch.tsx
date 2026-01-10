@@ -8,7 +8,8 @@ import { Text } from "../Text/Text";
 export type SwitchSize = "small" | "medium" | "large" | "xlarge";
 export type SwitchIntent = ColorIntent;
 
-export interface SwitchProps {
+export interface SwitchProps
+	extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
 	size?: SwitchSize;
 	intent?: SwitchIntent;
 	label?: string;
@@ -16,7 +17,6 @@ export interface SwitchProps {
 	defaultChecked?: boolean;
 	disabled?: boolean;
 	onCheckedChange?: (checked: boolean) => void;
-	className?: string;
 	name?: string;
 	required?: boolean;
 	readOnly?: boolean;

@@ -14,7 +14,8 @@ export interface DropdownOption {
 	disabled?: boolean;
 }
 
-export interface DropdownProps {
+export interface DropdownProps
+	extends Omit<React.HTMLAttributes<HTMLElement>, "onChange" | "defaultValue"> {
 	options: DropdownOption[];
 	value?: string;
 	defaultValue?: string;
@@ -25,7 +26,6 @@ export interface DropdownProps {
 	intent?: DropdownIntent;
 	fullWidth?: boolean;
 	disabled?: boolean;
-	className?: string;
 	name?: string;
 	required?: boolean;
 }

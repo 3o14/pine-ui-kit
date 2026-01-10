@@ -49,19 +49,15 @@ export const badge = recipe({
 		},
 
 		variant: {
-			// 스타일은 compoundVariants에서 variant + intent 조합으로 정의됨
 			solid: {},
 			outline: {
-				// outline variant는 투명 배경이 항상 필요
 				backgroundColor: "transparent",
 			},
-			subtle: {}, // compoundVariants에서 정의됨
-			weak: {}, // compoundVariants에서 정의됨
+			subtle: {},
+			weak: {},
 		},
 
 		intent: {
-			// intent만으로는 색상이 결정되지 않음
-			// 실제 색상은 compoundVariants에서 variant + intent 조합으로 정의됨
 			primary: {},
 			secondary: {},
 			success: {},

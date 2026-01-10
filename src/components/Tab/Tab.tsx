@@ -15,14 +15,16 @@ export interface TabItem {
 	disabled?: boolean;
 }
 
-export interface TabProps {
+export interface TabProps extends Omit<
+	React.HTMLAttributes<HTMLElement>,
+	"onChange"
+> {
 	tabs: TabItem[];
 	value?: string;
 	defaultValue?: string;
 	onChange?: (value: string) => void;
 	intent?: TabIntent;
 	orientation?: TabOrientation;
-	className?: string;
 }
 
 /**
