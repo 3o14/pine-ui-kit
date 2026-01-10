@@ -1,7 +1,13 @@
 import { Field } from "@base-ui/react/field";
 import { Input } from "@base-ui/react/input";
 import clsx from "clsx";
-import { container, containerVariants, input, label, helperText } from "./TextField.css";
+import {
+	container,
+	containerVariants,
+	input,
+	label,
+	helperText,
+} from "./TextField.css";
 import { lightTheme } from "@/tokens";
 import { useTheme } from "@/providers";
 
@@ -10,8 +16,10 @@ export type TextFieldRounded = "small" | "medium" | "large";
 export type TextFieldVariant = "outline" | "filled";
 export type TextFieldStatus = "default" | "error" | "success";
 
-export interface TextFieldProps
-	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+export interface TextFieldProps extends Omit<
+	React.InputHTMLAttributes<HTMLInputElement>,
+	"size"
+> {
 	size?: TextFieldSize;
 	rounded?: TextFieldRounded;
 	variant?: TextFieldVariant;
@@ -28,17 +36,19 @@ export interface TextFieldProps
 }
 
 /**
- * TextField component built on Base UI
- * 
- * @example
- * ```tsx
- * <TextField 
- *   label="Email"
- *   placeholder="Enter your email"
- *   type="email"
- *   helperText="We'll never share your email"
- * />
- * ```
+ * TextField component for text input.
+ *
+ * @param TextFieldProps
+ * @param label - Label text for the input field
+ * @param placeholder - Placeholder text
+ * @param value - Current input value (controlled)
+ * @param type - Input type (text, email, password, etc.)
+ * @param size - Size of the input (small, medium, large, xlarge)
+ * @param rounded - Border radius size (small, medium, large)
+ * @param variant - Visual style variant (outline, filled)
+ * @param status - Validation status (default, error, success)
+ * @param disabled - Whether the input is disabled
+ * @param helperText - Helper text displayed below the input
  */
 export const TextField = ({
 	size = "medium",

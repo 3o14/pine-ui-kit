@@ -35,23 +35,17 @@ export interface DialogProps {
 }
 
 /**
- * Dialog component built on Base UI
- * 
- * @example
- * ```tsx
- * <Dialog 
- *   open={isOpen} 
- *   onOpenChange={setIsOpen}
- *   title="Confirm Action"
- *   description="Are you sure you want to proceed?"
- *   actions={[
- *     { label: "Cancel", variant: "outline", onClick: () => setIsOpen(false) },
- *     { label: "Confirm", variant: "solid", intent: "primary", onClick: handleConfirm }
- *   ]}
- * >
- *   <p>This action cannot be undone.</p>
- * </Dialog>
- * ```
+ * Dialog component for modal interactions.
+ *
+ * @param DialogProps
+ * @param open - Whether the dialog is open
+ * @param onOpenChange - Callback when open state changes
+ * @param title - Dialog title
+ * @param description - Dialog description text
+ * @param size - Size of the dialog (small, medium, large, xlarge, full)
+ * @param rounded - Border radius size (small, medium, large)
+ * @param actions - Array of action buttons to display
+ * @param closeOnEscape - Whether to close on Escape key press
  */
 export const Dialog = ({
 	open,
@@ -97,62 +91,62 @@ export const Dialog = ({
 						className
 					)}
 				>
-				{(title || showCloseButton) && (
-					<div className={styles.header}>
-						<div style={{ flex: 1 }}>
-							{title && (
-								<BaseDialog.Title className={styles.title}>
-									{title}
-								</BaseDialog.Title>
-							)}
-							{description && (
-								<BaseDialog.Description className={styles.description}>
-									{description}
-								</BaseDialog.Description>
+					{(title || showCloseButton) && (
+						<div className={styles.header}>
+							<div style={{ flex: 1 }}>
+								{title && (
+									<BaseDialog.Title className={styles.title}>
+										{title}
+									</BaseDialog.Title>
+								)}
+								{description && (
+									<BaseDialog.Description className={styles.description}>
+										{description}
+									</BaseDialog.Description>
+								)}
+							</div>
+							{showCloseButton && (
+								<BaseDialog.Close className={styles.closeButton}>
+									<svg
+										width="20"
+										height="20"
+										viewBox="0 0 20 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+										aria-hidden="true"
+									>
+										<path
+											d="M15 5L5 15M5 5L15 15"
+											stroke="currentColor"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										/>
+									</svg>
+								</BaseDialog.Close>
 							)}
 						</div>
-						{showCloseButton && (
-							<BaseDialog.Close className={styles.closeButton}>
-								<svg
-									width="20"
-									height="20"
-									viewBox="0 0 20 20"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-									aria-hidden="true"
-								>
-									<path
-										d="M15 5L5 15M5 5L15 15"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-								</svg>
-							</BaseDialog.Close>
-						)}
-					</div>
-				)}
+					)}
 
-				<div className={styles.body}>{children}</div>
+					<div className={styles.body}>{children}</div>
 
-				{(actions || footer) && (
-					<div className={styles.footer}>
-						{actions
-							? actions.map((action, index) => (
-									<Button
-										key={index}
-										variant={action.variant ?? "solid"}
-										intent={action.intent ?? "primary"}
-										onClick={action.onClick}
-										disabled={action.disabled}
-									>
-										{action.label}
-									</Button>
-								))
-							: footer}
-					</div>
-				)}
+					{(actions || footer) && (
+						<div className={styles.footer}>
+							{actions
+								? actions.map((action, index) => (
+										<Button
+											key={index}
+											variant={action.variant ?? "solid"}
+											intent={action.intent ?? "primary"}
+											onClick={action.onClick}
+											disabled={action.disabled}
+										>
+											{action.label}
+										</Button>
+									))
+								: footer}
+						</div>
+					)}
 				</BaseDialog.Popup>
 			</BaseDialog.Portal>
 		</BaseDialog.Root>

@@ -34,6 +34,17 @@ export interface TextProps {
 	className?: string;
 }
 
+/**
+ * Text component for rendering semantic text elements with consistent typography.
+ *
+ * @param TextProps
+ * @param as - HTML element to render (h1-h6, p, span, div, label, li, ul, ol)
+ * @param size - Font size token (xsmall, small, medium, large, xlarge, xxlarge, xxxlarge)
+ * @param weight - Font weight (regular, medium, semibold, bold)
+ * @param intent - Text color intent (inherit, primary, secondary, success, warning, danger, neutral, muted, subdued, disabled)
+ * @param align - Text alignment (left, center, right)
+ * @param truncate - Whether to truncate text with ellipsis
+ */
 export const Text = ({
 	as: Component = "p",
 	size = "medium",

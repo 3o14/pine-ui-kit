@@ -23,17 +23,15 @@ export interface SwitchProps {
 }
 
 /**
- * Switch component built on Base UI
- * 
- * @example
- * ```tsx
- * <Switch 
- *   label="Enable notifications" 
- *   intent="primary" 
- *   size="medium"
- *   onCheckedChange={(checked) => console.log(checked)}
- * />
- * ```
+ * Switch component for toggle controls.
+ *
+ * @param SwitchProps
+ * @param size - Size of the switch (small, medium, large, xlarge)
+ * @param intent - Color intent (primary, secondary, success, warning, danger, neutral)
+ * @param label - Label text for the switch
+ * @param checked - Controlled checked state
+ * @param disabled - Whether the switch is disabled
+ * @param onCheckedChange - Callback when checked state changes
  */
 export const Switch = ({
 	size = "medium",
@@ -63,19 +61,19 @@ export const Switch = ({
 				readOnly={readOnly}
 				className={styles.switchRoot}
 			>
-			<span
-				className={styles.track({
-					size,
-					intent,
-				})}
-					data-state={checked ? "checked" : "unchecked"}
-			>
-					<BaseSwitch.Thumb
-					className={styles.thumb({
+				<span
+					className={styles.track({
 						size,
+						intent,
 					})}
-				/>
-			</span>
+					data-state={checked ? "checked" : "unchecked"}
+				>
+					<BaseSwitch.Thumb
+						className={styles.thumb({
+							size,
+						})}
+					/>
+				</span>
 			</BaseSwitch.Root>
 			{label && (
 				<Text as="span" size={size} intent="inherit">

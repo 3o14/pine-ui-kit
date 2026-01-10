@@ -16,51 +16,25 @@ export interface TabItem {
 }
 
 export interface TabProps {
-	/**
-	 * Array of tab objects
-	 */
 	tabs: TabItem[];
-	/**
-	 * The currently selected tab value
-	 */
 	value?: string;
-	/**
-	 * Default selected tab value (uncontrolled)
-	 */
 	defaultValue?: string;
-	/**
-	 * Callback when tab changes
-	 */
 	onChange?: (value: string) => void;
-	/**
-	 * Color intent
-	 * @default "primary"
-	 */
 	intent?: TabIntent;
-	/**
-	 * Orientation of tabs
-	 * @default "horizontal"
-	 */
 	orientation?: TabOrientation;
-	/**
-	 * Custom class name
-	 */
 	className?: string;
 }
 
 /**
- * Tab component built on Base UI
+ * Tab component for organizing content into switchable panels.
  *
- * @example
- * ```tsx
- * <Tab
- *   tabs={[
- *     { value: "tab1", label: "Tab 1", content: <div>Content 1</div> },
- *     { value: "tab2", label: "Tab 2", content: <div>Content 2</div> }
- *   ]}
- *   defaultValue="tab1"
- * />
- * ```
+ * @param TabProps
+ * @param tabs - Array of tab items with value, label, and content
+ * @param value - Currently selected tab value (controlled)
+ * @param defaultValue - Default selected tab value (uncontrolled)
+ * @param onChange - Callback when selected tab changes
+ * @param intent - Color intent for active tab (primary, secondary, success, warning, danger, neutral)
+ * @param orientation - Tab layout orientation (horizontal, vertical)
  */
 export const Tab = ({
 	tabs,

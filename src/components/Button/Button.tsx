@@ -23,14 +23,15 @@ export interface ButtonProps extends Omit<
 }
 
 /**
- * Button component built on Base UI
+ * Button component for user interactions.
  *
- * @example
- * ```tsx
- * <Button intent="primary" size="medium">
- *   Click me
- * </Button>
- * ```
+ * @param ButtonProps
+ * @param variant - Visual style variant (solid, outline, ghost, weak)
+ * @param size - Size of the button (small, medium, large, xlarge)
+ * @param intent - Color intent (primary, secondary, success, warning, danger, neutral)
+ * @param rounded - Border radius size (small, medium, large)
+ * @param disabled - Whether the button is disabled
+ * @param fullWidth - Whether the button should take full width
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 	(

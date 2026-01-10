@@ -31,20 +31,17 @@ export interface DropdownProps {
 }
 
 /**
- * Dropdown component built on Base UI Select
- * 
- * @example
- * ```tsx
- * <Dropdown 
- *   options={[
- *     { value: "1", label: "Option 1" },
- *     { value: "2", label: "Option 2" }
- *   ]}
- *   value={selectedValue}
- *   onValueChange={setSelectedValue}
- *   placeholder="Select an option"
- * />
- * ```
+ * Dropdown component for option selection.
+ *
+ * @param DropdownProps
+ * @param options - Array of selectable options
+ * @param value - Currently selected value (controlled)
+ * @param placeholder - Placeholder text when no option is selected
+ * @param size - Size of the dropdown (small, medium, large)
+ * @param rounded - Border radius size (small, medium, large)
+ * @param intent - Color intent (primary, secondary, success, warning, danger, neutral)
+ * @param disabled - Whether the dropdown is disabled
+ * @param onValueChange - Callback when selected value changes
  */
 export const Dropdown = ({
 	options,
@@ -93,7 +90,9 @@ export const Dropdown = ({
 				>
 					<BaseSelect.Value>
 						{(selectedValue: string | null) => {
-							const selected = options.find((opt) => opt.value === selectedValue);
+							const selected = options.find(
+								(opt) => opt.value === selectedValue
+							);
 							return selected?.label || placeholder;
 						}}
 					</BaseSelect.Value>

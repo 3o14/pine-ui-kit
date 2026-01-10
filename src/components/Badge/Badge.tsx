@@ -18,6 +18,17 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 	children: React.ReactNode;
 }
 
+/**
+ * Badge component for displaying labels, tags, or status indicators.
+ *
+ * @param BadgeProps
+ * @param variant - Visual style variant (solid, outline, subtle, weak)
+ * @param size - Size of the badge (small, medium, large, xlarge)
+ * @param intent - Color intent (primary, secondary, success, warning, danger, neutral)
+ * @param rounded - Border radius size (small, medium, large)
+ * @param showDot - Whether to show a dot indicator
+ * @param children - Badge content
+ */
 export const Badge = ({
 	size = "medium",
 	variant = "solid",

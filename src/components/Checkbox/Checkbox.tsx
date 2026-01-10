@@ -27,17 +27,17 @@ export interface CheckboxProps {
 }
 
 /**
- * Checkbox component built on Base UI
- * 
- * @example
- * ```tsx
- * <Checkbox 
- *   label="Accept terms" 
- *   intent="primary" 
- *   size="medium"
- *   onCheckedChange={(checked) => console.log(checked)}
- * />
- * ```
+ * Checkbox component for selection controls.
+ *
+ * @param CheckboxProps
+ * @param size - Size of the checkbox (small, medium, large, xlarge)
+ * @param variant - Shape variant (circle, square)
+ * @param intent - Color intent (primary, secondary, success, warning, danger, neutral)
+ * @param rounded - Border radius size (small, medium, large)
+ * @param label - Label text for the checkbox
+ * @param checked - Controlled checked state
+ * @param disabled - Whether the checkbox is disabled
+ * @param onCheckedChange - Callback when checked state changes
  */
 export const Checkbox = ({
 	size = "medium",
