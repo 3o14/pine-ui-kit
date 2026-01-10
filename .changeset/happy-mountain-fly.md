@@ -2,39 +2,19 @@
 "pine-ui-kit": minor
 ---
 
-uauto changeset
+Component updates and improvements
 
-**New Features:**
-- auto changeset
-- auto pr
-- add Tooltip and Tabs components with Base UI
-- add iOS 26+ Safari support for Base UI backdrops
-- add CSS isolation for Base UI overlay components
-- migrate to @base-ui/react for better form handling
-- migrate to @base-ui/react for better accessibility
-- migrate to @base-ui/react for better accessibility
-- migrate to @base-ui/react for better accessibility
-- migrate to @base-ui/react for better accessibility
-- migrate to @base-ui/react for better accessibility
-- add @base-ui/react for headless component primitives
+## New Components
 
-**Bug Fixes:**
-- add missing Tooltip.Trigger for proper hover/click interaction
-- update import paths from packages to src
+- **Tab**: Added tab interface component for organizing content
 
-**Other Changes:**
-- changeset check ci
-- type error
-- rename Tabs to Tab for better semantics
-- delete tooltip
-- add VS Code file nesting configuration
-- add comprehensive test suite
-- add comprehensive test suite
-- add comprehensive test suite
-- add comprehensive test suite
-- add comprehensive test suite
-- add comprehensive test suite
-- add comprehensive test suite
-- add comprehensive test suite with vitest
-- rename packages to src for better structure
+## Component Improvements
 
+- **Base UI Migration**: Migrated all interactive components to Base UI for better accessibility and form handling
+  - Enhanced Button, Switch, Checkbox, Dialog, Dropdown, and TextField components
+  - Improved keyboard navigation and screen reader support
+  - Better form validation and state management
+
+## Browser Support
+
+- **iOS 26+ Safari**: Added backdrop support for overlay components like Dialog and Dropdown
