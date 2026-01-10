@@ -6,5 +6,4 @@ export * from "./shadow";
 export * from "./appearanceTheme";
 export * from "./theme.css";
 
-// Import global styles for Base UI
 import "./global.css";
