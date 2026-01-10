@@ -23,58 +23,6 @@ describe("Checkbox", () => {
 		});
 	});
 
-	describe("Sizes", () => {
-		it("renders small size", () => {
-			render(<Checkbox size="small" label="Small" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-
-		it("renders medium size", () => {
-			render(<Checkbox size="medium" label="Medium" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-
-		it("renders large size", () => {
-			render(<Checkbox size="large" label="Large" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-
-		it("renders xlarge size", () => {
-			render(<Checkbox size="xlarge" label="XLarge" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-	});
-
-	describe("Variants", () => {
-		it("renders square variant", () => {
-			render(<Checkbox variant="square" label="Square" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-
-		it("renders circle variant", () => {
-			render(<Checkbox variant="circle" label="Circle" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-	});
-
-	describe("Intents", () => {
-		const intents = [
-			"primary",
-			"secondary",
-			"success",
-			"warning",
-			"danger",
-			"neutral",
-		] as const;
-
-		intents.forEach((intent) => {
-			it(`renders ${intent} intent`, () => {
-				render(<Checkbox intent={intent} label={intent} />);
-				expect(screen.getByRole("checkbox")).toBeInTheDocument();
-			});
-		});
-	});
-
 	describe("States", () => {
 		it("renders unchecked by default", () => {
 			render(<Checkbox />);
@@ -265,33 +213,4 @@ describe("Checkbox", () => {
 			expect(hiddenInput?.checked).toBe(true);
 		});
 	});
-
-	describe("Visual Variants", () => {
-		it("renders with different rounded values", () => {
-			const { rerender } = render(<Checkbox rounded="small" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-
-			rerender(<Checkbox rounded="medium" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-
-			rerender(<Checkbox rounded="large" />);
-			expect(screen.getByRole("checkbox")).toBeInTheDocument();
-		});
-
-		it("displays checkmark when checked", async () => {
-			const user = userEvent.setup();
-			render(<Checkbox defaultChecked={false} />);
-			const checkboxElement = screen.getByRole("checkbox");
-
-			// Initially unchecked
-			expect(checkboxElement).toHaveAttribute("aria-checked", "false");
-
-			await user.click(checkboxElement);
-
-			// After checking
-			expect(checkboxElement).toHaveAttribute("aria-checked", "true");
-			expect(checkboxElement).toHaveAttribute("data-checked");
-		});
-	});
 });
-

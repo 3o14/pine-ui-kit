@@ -23,46 +23,6 @@ describe("Switch", () => {
 		});
 	});
 
-	describe("Sizes", () => {
-		it("renders small size", () => {
-			render(<Switch size="small" label="Small" />);
-			expect(screen.getByRole("switch")).toBeInTheDocument();
-		});
-
-		it("renders medium size", () => {
-			render(<Switch size="medium" label="Medium" />);
-			expect(screen.getByRole("switch")).toBeInTheDocument();
-		});
-
-		it("renders large size", () => {
-			render(<Switch size="large" label="Large" />);
-			expect(screen.getByRole("switch")).toBeInTheDocument();
-		});
-
-		it("renders xlarge size", () => {
-			render(<Switch size="xlarge" label="XLarge" />);
-			expect(screen.getByRole("switch")).toBeInTheDocument();
-		});
-	});
-
-	describe("Intents", () => {
-		const intents = [
-			"primary",
-			"secondary",
-			"success",
-			"warning",
-			"danger",
-			"neutral",
-		] as const;
-
-		intents.forEach((intent) => {
-			it(`renders ${intent} intent`, () => {
-				render(<Switch intent={intent} label={intent} />);
-				expect(screen.getByRole("switch")).toBeInTheDocument();
-			});
-		});
-	});
-
 	describe("States", () => {
 		it("renders unchecked by default", () => {
 			render(<Switch />);

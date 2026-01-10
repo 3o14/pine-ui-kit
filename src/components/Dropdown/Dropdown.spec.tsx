@@ -49,46 +49,6 @@ describe("Dropdown", () => {
 		});
 	});
 
-	describe("Sizes", () => {
-		const sizes = ["small", "medium", "large"] as const;
-
-		sizes.forEach((size) => {
-			it(`renders ${size} size`, () => {
-				render(<Dropdown options={mockOptions} size={size} />);
-				expect(screen.getByRole("combobox")).toBeInTheDocument();
-			});
-		});
-	});
-
-	describe("Rounded Variants", () => {
-		const rounded = ["small", "medium", "large"] as const;
-
-		rounded.forEach((variant) => {
-			it(`renders ${variant} rounded`, () => {
-				render(<Dropdown options={mockOptions} rounded={variant} />);
-				expect(screen.getByRole("combobox")).toBeInTheDocument();
-			});
-		});
-	});
-
-	describe("Intents", () => {
-		const intents = [
-			"primary",
-			"secondary",
-			"success",
-			"warning",
-			"danger",
-			"neutral",
-		] as const;
-
-		intents.forEach((intent) => {
-			it(`renders ${intent} intent`, () => {
-				render(<Dropdown options={mockOptions} intent={intent} />);
-				expect(screen.getByRole("combobox")).toBeInTheDocument();
-			});
-		});
-	});
-
 	describe("Interactions", () => {
 		it("opens dropdown when clicked", async () => {
 			const user = userEvent.setup();

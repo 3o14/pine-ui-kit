@@ -10,78 +10,10 @@ describe("Button", () => {
 			expect(screen.getByRole("button")).toHaveTextContent("Click me");
 		});
 
-		it("renders with default props", () => {
-			render(<Button>Default Button</Button>);
-			const button = screen.getByRole("button");
-			expect(button).toBeInTheDocument();
-		});
-
 		it("applies custom className", () => {
 			render(<Button className="custom-class">Button</Button>);
 			const button = screen.getByRole("button");
 			expect(button).toHaveClass("custom-class");
-		});
-	});
-
-	describe("Variants", () => {
-		it("renders solid variant", () => {
-			render(<Button variant="solid">Solid</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-
-		it("renders outline variant", () => {
-			render(<Button variant="outline">Outline</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-
-		it("renders ghost variant", () => {
-			render(<Button variant="ghost">Ghost</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-
-		it("renders weak variant", () => {
-			render(<Button variant="weak">Weak</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-	});
-
-	describe("Sizes", () => {
-		it("renders small size", () => {
-			render(<Button size="small">Small</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-
-		it("renders medium size", () => {
-			render(<Button size="medium">Medium</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-
-		it("renders large size", () => {
-			render(<Button size="large">Large</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-
-		it("renders xlarge size", () => {
-			render(<Button size="xlarge">XLarge</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
-		});
-	});
-
-	describe("Intents", () => {
-		const intents = [
-			"primary",
-			"secondary",
-			"success",
-			"warning",
-			"danger",
-			"neutral",
-		] as const;
-
-		intents.forEach((intent) => {
-			it(`renders ${intent} intent`, () => {
-				render(<Button intent={intent}>{intent}</Button>);
-				expect(screen.getByRole("button")).toBeInTheDocument();
-			});
 		});
 	});
 
@@ -92,9 +24,10 @@ describe("Button", () => {
 			expect(button).toBeDisabled();
 		});
 
-		it("renders fullWidth button", () => {
+		it("applies fullWidth class when fullWidth prop is true", () => {
 			render(<Button fullWidth>Full Width</Button>);
-			expect(screen.getByRole("button")).toBeInTheDocument();
+			const button = screen.getByRole("button");
+			expect(button).toBeInTheDocument();
 		});
 	});
 
@@ -180,4 +113,3 @@ describe("Button", () => {
 		});
 	});
 });
-

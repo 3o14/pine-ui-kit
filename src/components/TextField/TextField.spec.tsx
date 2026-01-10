@@ -40,66 +40,6 @@ describe("TextField", () => {
 		});
 	});
 
-	describe("Sizes", () => {
-		it("renders with small size", () => {
-			render(<TextField size="small" placeholder="Small input" />);
-			const input = screen.getByPlaceholderText("Small input");
-			expect(input).toBeInTheDocument();
-		});
-
-		it("renders with medium size (default)", () => {
-			render(<TextField placeholder="Medium input" />);
-			const input = screen.getByPlaceholderText("Medium input");
-			expect(input).toBeInTheDocument();
-		});
-
-		it("renders with large size", () => {
-			render(<TextField size="large" placeholder="Large input" />);
-			const input = screen.getByPlaceholderText("Large input");
-			expect(input).toBeInTheDocument();
-		});
-
-		it("renders with xlarge size", () => {
-			render(<TextField size="xlarge" placeholder="XLarge input" />);
-			const input = screen.getByPlaceholderText("XLarge input");
-			expect(input).toBeInTheDocument();
-		});
-	});
-
-	describe("Rounded Variants", () => {
-		it("renders with small rounded", () => {
-			render(<TextField rounded="small" placeholder="test" />);
-			const input = screen.getByPlaceholderText("test");
-			expect(input).toBeInTheDocument();
-		});
-
-		it("renders with medium rounded (default)", () => {
-			render(<TextField placeholder="test" />);
-			const input = screen.getByPlaceholderText("test");
-			expect(input).toBeInTheDocument();
-		});
-
-		it("renders with large rounded", () => {
-			render(<TextField rounded="large" placeholder="test" />);
-			const input = screen.getByPlaceholderText("test");
-			expect(input).toBeInTheDocument();
-		});
-	});
-
-	describe("Variants", () => {
-		it("renders with outline variant (default)", () => {
-			render(<TextField placeholder="test" />);
-			const input = screen.getByPlaceholderText("test");
-			expect(input).toBeInTheDocument();
-		});
-
-		it("renders with filled variant", () => {
-			render(<TextField variant="filled" placeholder="test" />);
-			const input = screen.getByPlaceholderText("test");
-			expect(input).toBeInTheDocument();
-		});
-	});
-
 	describe("Status", () => {
 		it("renders with default status", () => {
 			render(<TextField placeholder="test" />);

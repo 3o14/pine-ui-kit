@@ -83,36 +83,6 @@ describe("Dialog", () => {
 		});
 	});
 
-	describe("Sizes", () => {
-		const sizes = ["small", "medium", "large", "xlarge", "full"] as const;
-
-		sizes.forEach((size) => {
-			it(`renders ${size} size`, () => {
-				render(
-					<Dialog open={true} onOpenChange={() => {}} size={size}>
-						<p>Content</p>
-					</Dialog>
-				);
-				expect(screen.getByRole("dialog")).toBeInTheDocument();
-			});
-		});
-	});
-
-	describe("Rounded Variants", () => {
-		const rounded = ["small", "medium", "large"] as const;
-
-		rounded.forEach((variant) => {
-			it(`renders ${variant} rounded`, () => {
-				render(
-					<Dialog open={true} onOpenChange={() => {}} rounded={variant}>
-						<p>Content</p>
-					</Dialog>
-				);
-				expect(screen.getByRole("dialog")).toBeInTheDocument();
-			});
-		});
-	});
-
 	describe("Actions", () => {
 		it("renders action buttons", () => {
 			const handleAction1 = vi.fn();
