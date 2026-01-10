@@ -1,10 +1,10 @@
 import React from "react";
-import { ThemeProvider } from "../packages/providers";
+import { ThemeProvider } from "../src/providers";
 import {
 	appearanceTheme,
 	applyAppearanceTheme,
 	type AppearanceMode,
-} from "../packages/tokens/appearanceTheme";
+} from "../src/tokens/appearanceTheme";
 
 interface ThemeWrapperProps {
 	mode: AppearanceMode;

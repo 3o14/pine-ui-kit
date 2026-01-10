@@ -1,11 +1,11 @@
 import React from "react";
 import type { Decorator, Preview } from "@storybook/react";
-import "../packages/tokens/theme.css";
+import "../src/tokens/theme.css";
 import { ThemeWrapper } from "./ThemeWrapper";
 import {
 	appearanceTheme,
 	type AppearanceMode,
-} from "../packages/tokens/appearanceTheme";
+} from "../src/tokens/appearanceTheme";
 
 const withTheme: Decorator = (Story, context) => {
 	const theme = (context.globals?.theme || "light") as AppearanceMode;

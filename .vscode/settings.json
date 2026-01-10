@@ -1,0 +1,15 @@
+{
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.expand": false,
+	"explorer.fileNesting.patterns": {
+		"*.tsx": "${capture}.css.ts, ${capture}.spec.tsx, ${capture}.stories.tsx, ${capture}.test.tsx",
+		"*.ts": "${capture}.spec.ts, ${capture}.test.ts",
+		"package.json": "package-lock.json, pnpm-lock.yaml, yarn.lock, .npmrc, .nvmrc, .node-version",
+		"tsconfig.json": "tsconfig.*.json",
+		"vite.config.*": "vitest.config.*, vitest.setup.*",
+		".eslintrc.*": ".eslintignore, .prettierrc*, .prettierignore",
+		".gitignore": ".gitattributes, .gitmodules",
+		"README.md": "CHANGELOG.md, LICENSE, CONTRIBUTING.md",
+		".storybook": "storybook-static"
+	}
+}
