@@ -69,60 +69,61 @@ export const track = recipe({
 		intent: {
 			primary: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					// Base UI는 data-checked/data-unchecked 속성을 사용
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.primary.surface,
 					},
 				},
 			},
 			secondary: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.secondary.surface,
 					},
 				},
 			},
 			success: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.success.surface,
 					},
 				},
 			},
 			warning: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.warning.surface,
 					},
 				},
 			},
 			danger: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.danger.surface,
 					},
 				},
 			},
 			neutral: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.neutral.surface,
 					},
 				},
@@ -153,11 +154,13 @@ export const thumb = recipe({
 				width: "14px",
 				height: "14px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					// Base UI는 data-checked/data-unchecked 속성을 사용
+					// 계산: track width(30px) - right padding(4px) - thumb width(14px) = 12px
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
-						transform: "translateX(16px)",
+					"[role='switch'][data-checked] &": {
+						transform: "translateX(12px)",
 					},
 				},
 			},
@@ -165,11 +168,12 @@ export const thumb = recipe({
 				width: "20px",
 				height: "20px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					// 계산: track width(43px) - right padding(3px) - thumb width(20px) = 20px
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
-						transform: "translateX(22px)",
+					"[role='switch'][data-checked] &": {
+						transform: "translateX(20px)",
 					},
 				},
 			},
@@ -177,11 +181,12 @@ export const thumb = recipe({
 				width: "24px",
 				height: "24px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					// 계산: track width(54px) - right padding(4px) - thumb width(24px) = 26px
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
-						transform: "translateX(28px)",
+					"[role='switch'][data-checked] &": {
+						transform: "translateX(26px)",
 					},
 				},
 			},
@@ -189,10 +194,11 @@ export const thumb = recipe({
 				width: "28px",
 				height: "28px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					// 계산: track width(66px) - right padding(4px) - thumb width(28px) = 34px
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						transform: "translateX(34px)",
 					},
 				},

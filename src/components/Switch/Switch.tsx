@@ -74,7 +74,6 @@ export const Switch = ({
 						isCrayonTheme && styles.crayonSwitchTrackBefore,
 						isCrayonTheme && styles.crayonSwitchTrackAfter
 					)}
-					data-state={checked ? "checked" : "unchecked"}
 				>
 					<BaseSwitch.Thumb
 						className={styles.thumb({

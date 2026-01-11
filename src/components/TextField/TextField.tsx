@@ -85,10 +85,10 @@ export const TextField = ({
 			<Input
 				className={clsx(
 					input({
-						size,
-						rounded,
-						variant,
-						status,
+					size,
+					rounded,
+					variant,
+					status,
 					}),
 					isCrayonTheme && styles.crayonTextFieldStyle,
 					isCrayonTheme && styles.crayonTextFieldBefore,

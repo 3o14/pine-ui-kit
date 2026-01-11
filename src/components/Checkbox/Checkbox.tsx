@@ -75,10 +75,10 @@ export const Checkbox = ({
 				<span
 					className={clsx(
 						styles.checkbox({
-							size,
-							variant,
-							intent,
-							rounded: variant === "circle" ? undefined : rounded,
+						size,
+						variant,
+						intent,
+						rounded: variant === "circle" ? undefined : rounded,
 						}),
 						isCrayonTheme && styles.crayonCheckboxStyle,
 						isCrayonTheme && styles.crayonCheckboxBefore,
