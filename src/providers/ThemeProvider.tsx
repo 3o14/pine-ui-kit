@@ -5,10 +5,10 @@ import React, {
 	useCallback,
 	useRef,
 } from "react";
-import { lightTheme, darkTheme } from "@/tokens";
 import {
 	ThemeContext,
 	type ThemeMode,
+	type ThemeName,
 	type ThemeContextValue,
 } from "./ThemeContext";
 import {
@@ -16,6 +16,14 @@ import {
 	applyPrimaryColorVars,
 } from "@/tokens/utils";
 import { lightColors, darkColors } from "@/tokens/colors";
+import {
+	basicLightTheme,
+	basicDarkTheme,
+	gameLightTheme,
+	gameDarkTheme,
+	crayonLightTheme,
+	crayonDarkTheme,
+} from "@/tokens/themes";
 import clsx from "clsx";
 
 export interface ThemeProviderProps {
@@ -28,6 +36,13 @@ export interface ThemeProviderProps {
 	 * @default true
 	 */
 	syncWithSystem?: boolean;
+	/**
+	 * 테마 이름 (basic, game, crayon)
+	 * @default "basic"
+	 */
+	theme?: ThemeName;
+	defaultTheme?: ThemeName;
+	onThemeChange?: (theme: ThemeName) => void;
 	/**
 	 * primary 색상을 hex 형식으로 설정합니다 (예: "#8b5cf6")
 	 * 설정하면 해당 색상으로부터 variant 색상들이 자동으로 계산됩니다
@@ -81,6 +96,9 @@ export const ThemeProvider = ({
 	mode: controlledMode,
 	onModeChange,
 	syncWithSystem = true,
+	theme: controlledTheme,
+	defaultTheme = "basic",
+	onThemeChange,
 	primaryColor,
 	className,
 	style,
@@ -94,6 +112,7 @@ export const ThemeProvider = ({
 	};
 
 	const [internalMode, setInternalMode] = useState<ThemeMode>(getInitialMode);
+	const [internalTheme, setInternalTheme] = useState<ThemeName>(defaultTheme);
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	// controlledMode가 변경되면 즉시 내부 상태 업데이트
@@ -141,9 +160,22 @@ export const ThemeProvider = ({
 		return controlledMode ?? internalMode;
 	}, [controlledMode, internalMode]);
 
+	// 제어된 테마가 제공되면 사용하고, 그렇지 않으면 내부 상태를 사용
+	const theme = useMemo(() => {
+		return controlledTheme ?? internalTheme;
+	}, [controlledTheme, internalTheme]);
+
+	// 테마와 모드에 따라 테마 클래스 결정
 	const themeClass = useMemo(() => {
-		return mode === "dark" ? darkTheme : lightTheme;
-	}, [mode]);
+		if (theme === "game") {
+			return mode === "dark" ? gameDarkTheme : gameLightTheme;
+		}
+		if (theme === "crayon") {
+			return mode === "dark" ? crayonDarkTheme : crayonLightTheme;
+		}
+		// basic (기본)
+		return mode === "dark" ? basicDarkTheme : basicLightTheme;
+	}, [theme, mode]);
 
 	// primary 색상이 제공되면 동적으로 색상 스케일 생성 및 CSS 변수 설정
 	// 컨테이너 요소에 CSS 변수를 설정하여 각 ThemeProvider가 독립적으로 작동하도록 함
@@ -180,7 +212,7 @@ export const ThemeProvider = ({
 	}, [primaryColor, mode]);
 
 	// vanilla-extract CSS 변수를 위해 document root와 동기화
-	// 테마가 변경될 때 실행되도록 mode를 직접 의존성으로 사용합니다
+	// 테마가 변경될 때 실행되도록 mode와 theme을 직접 의존성으로 사용합니다
 	// CSS 변수 설정 후에 테마 클래스를 적용해야 함
 	useEffect(() => {
 		if (typeof document === "undefined") {
@@ -189,12 +221,19 @@ export const ThemeProvider = ({
 
 		const root = document.documentElement;
 
-		// 두 테마 클래스를 모두 제거합니다
-		root.classList.remove(lightTheme, darkTheme);
+		// 모든 테마 클래스를 제거합니다
+		root.classList.remove(
+			basicLightTheme,
+			basicDarkTheme,
+			gameLightTheme,
+			gameDarkTheme,
+			crayonLightTheme,
+			crayonDarkTheme
+		);
 
 		// 올바른 테마 클래스를 추가합니다
 		root.classList.add(themeClass);
-	}, [mode, themeClass]);
+	}, [mode, theme, themeClass]);
 
 	const setMode = useCallback(
 		(newMode: ThemeMode) => {
@@ -206,13 +245,25 @@ export const ThemeProvider = ({
 		[controlledMode, onModeChange]
 	);
 
+	const setTheme = useCallback(
+		(newTheme: ThemeName) => {
+			if (!controlledTheme) {
+				setInternalTheme(newTheme);
+			}
+			onThemeChange?.(newTheme);
+		},
+		[controlledTheme, onThemeChange]
+	);
+
 	const value: ThemeContextValue = useMemo(() => {
 		return {
 			mode,
 			setMode,
+			theme,
+			setTheme,
 			themeClass,
 		};
-	}, [mode, themeClass, setMode]);
+	}, [mode, theme, themeClass, setMode, setTheme]);
 
 	return (
 		<ThemeContext.Provider value={value}>

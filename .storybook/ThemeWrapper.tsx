@@ -5,13 +5,19 @@ import {
 	applyAppearanceTheme,
 	type AppearanceMode,
 } from "../src/tokens/appearanceTheme";
+import type { ThemeName } from "../src/providers/ThemeContext";
 
 interface ThemeWrapperProps {
 	mode: AppearanceMode;
+	theme?: ThemeName;
 	children: React.ReactNode;
 }
 
-export const ThemeWrapper = ({ mode, children }: ThemeWrapperProps) => {
+export const ThemeWrapper = ({
+	mode,
+	theme = "basic",
+	children,
+}: ThemeWrapperProps) => {
 	const { bodyBackground, bodyText } = appearanceTheme[mode];
 
 	React.useEffect(() => {
@@ -21,6 +27,7 @@ export const ThemeWrapper = ({ mode, children }: ThemeWrapperProps) => {
 	return (
 		<ThemeProvider
 			mode={mode}
+			theme={theme}
 			syncWithSystem={false}
 			style={{
 				backgroundColor: bodyBackground,

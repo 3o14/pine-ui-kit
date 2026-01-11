@@ -1,4 +1,5 @@
 import { lightColors, darkColors, type ColorTokens } from "./colors";
+import type { ThemeName } from "./themes";
 
 export type AppearanceMode = "light" | "dark";
 
@@ -34,6 +35,10 @@ const buildCssVariables = (colors: ColorTokens): CssVariableMap => {
 	return variables;
 };
 
+/**
+ * 기본 appearance theme (basic 테마용)
+ * Backward compatibility를 위해 유지
+ */
 export const appearanceTheme: Record<AppearanceMode, AppearanceThemeConfig> = {
 	light: {
 		cssVariables: buildCssVariables(lightColors),
@@ -45,6 +50,19 @@ export const appearanceTheme: Record<AppearanceMode, AppearanceThemeConfig> = {
 		bodyBackground: darkColors.surface.background,
 		bodyText: darkColors.surface.text,
 	},
+};
+
+/**
+ * 테마별 appearance theme
+ * 각 테마의 light/dark 모드별 설정
+ */
+export const getAppearanceTheme = (
+	theme: ThemeName,
+	appearance: AppearanceMode
+): AppearanceThemeConfig => {
+	// 기본적으로 basic 테마의 appearance theme 사용
+	// 향후 각 테마별로 다른 설정이 필요하면 여기서 분기 처리
+	return appearanceTheme[appearance];
 };
 
 export const applyAppearanceTheme = (mode: AppearanceMode) => {
