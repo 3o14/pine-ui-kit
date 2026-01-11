@@ -1,13 +1,8 @@
 import { Field } from "@base-ui/react/field";
 import { Input } from "@base-ui/react/input";
 import clsx from "clsx";
-import {
-	container,
-	containerVariants,
-	input,
-	label,
-	helperText,
-} from "./TextField.css";
+import * as styles from "./TextField.css";
+const { container, containerVariants, input, label, helperText } = styles;
 import { lightTheme } from "@/tokens";
 import { useTheme } from "@/providers";
 
@@ -67,6 +62,7 @@ export const TextField = ({
 }: TextFieldProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
+	const isCrayonTheme = themeContext?.theme === "crayon";
 
 	return (
 		<Field.Root
@@ -87,12 +83,17 @@ export const TextField = ({
 				</Field.Label>
 			)}
 			<Input
-				className={input({
-					size,
-					rounded,
-					variant,
-					status,
-				})}
+				className={clsx(
+					input({
+						size,
+						rounded,
+						variant,
+						status,
+					}),
+					isCrayonTheme && styles.crayonTextFieldStyle,
+					isCrayonTheme && styles.crayonTextFieldBefore,
+					isCrayonTheme && styles.crayonTextFieldAfter
+				)}
 				required={required}
 				{...props}
 			/>

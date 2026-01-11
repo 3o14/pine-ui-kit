@@ -204,3 +204,84 @@ export const thumb = recipe({
 		size: "medium",
 	},
 });
+
+// 크레용 테마 스타일
+// 크레용 Switch track 외곽선 효과 (::after)
+export const crayonSwitchTrackAfter = style({
+	selectors: {
+		"[class*='crayonLightTheme'] &::after, [class*='crayonDarkTheme'] &::after":
+			{
+				content: '""',
+				position: "absolute",
+				top: "-1px",
+				left: "-1px",
+				right: "-1px",
+				bottom: "-1px",
+				borderRadius: "inherit",
+				border: "1px solid currentColor",
+				opacity: 0.4,
+				filter: "url(#crayon-edge)",
+				pointerEvents: "none",
+				zIndex: -1,
+			},
+	},
+});
+
+// 크레용 Switch track 스타일
+export const crayonSwitchTrackStyle = style({
+	position: "relative",
+	selectors: {
+		"[class*='crayonLightTheme'] &, [class*='crayonDarkTheme'] &": {
+			filter: "url(#crayon-texture)",
+			border: "3px solid currentColor !important",
+			boxShadow: `
+				0 2px 0 0 rgba(0, 0, 0, 0.1),
+				0 3px 8px rgba(0, 0, 0, 0.12)
+			`,
+		},
+	},
+});
+
+// 크레용 Switch track 텍스처 오버레이 (::before)
+export const crayonSwitchTrackBefore = style({
+	selectors: {
+		"[class*='crayonLightTheme'] &::before, [class*='crayonDarkTheme'] &::before":
+			{
+				content: '""',
+				position: "absolute",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+				borderRadius: "inherit",
+				backgroundImage: `
+				repeating-linear-gradient(
+					90deg,
+					transparent,
+					transparent 1px,
+					rgba(255, 255, 255, 0.08) 1px,
+					rgba(255, 255, 255, 0.08) 2px
+				),
+				repeating-linear-gradient(
+					0deg,
+					transparent,
+					transparent 1px,
+					rgba(0, 0, 0, 0.04) 1px,
+					rgba(0, 0, 0, 0.04) 2px
+				),
+				radial-gradient(
+					circle at 20% 30%,
+					rgba(255, 255, 255, 0.15) 0%,
+					transparent 50%
+				),
+				radial-gradient(
+					circle at 80% 70%,
+					rgba(0, 0, 0, 0.08) 0%,
+					transparent 50%
+				)
+			`,
+				pointerEvents: "none",
+				mixBlendMode: "overlay",
+			},
+	},
+});

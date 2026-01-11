@@ -51,6 +51,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		const themeContext = useTheme();
 		const themeClass = themeContext?.themeClass ?? lightTheme;
 
+		const isCrayonTheme = themeContext?.theme === "crayon";
+
 		return (
 			<BaseButton
 				ref={ref}
@@ -62,6 +64,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 						size,
 						rounded,
 					}),
+					isCrayonTheme && styles.crayonButtonStyle, // 크레용 테마 기본 스타일
+					isCrayonTheme && styles.crayonButtonAfter, // 크레용 외곽선 효과
+					isCrayonTheme && variant === "solid" && styles.crayonSolidStyle, // 크레용 Solid 스타일
+					isCrayonTheme &&
+						variant === "solid" &&
+						styles.crayonSolidBefore, // 크레용 Solid 텍스처 오버레이
+					isCrayonTheme &&
+						(variant === "outline" || variant === "ghost") &&
+						styles.crayonOutlineStyle, // 크레용 Outline/Ghost 스타일
+					isCrayonTheme &&
+						(variant === "outline" || variant === "ghost") &&
+						styles.crayonOutlineBefore, // 크레용 Outline/Ghost 텍스처
 					fullWidth && styles.fullWidth,
 					className
 				)}

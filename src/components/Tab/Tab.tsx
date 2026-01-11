@@ -49,6 +49,7 @@ export const Tab = ({
 }: TabProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
+	const isCrayonTheme = themeContext?.theme === "crayon";
 
 	return (
 		<BaseUITabs.Root
@@ -68,7 +69,12 @@ export const Tab = ({
 						key={tab.value}
 						value={tab.value}
 						disabled={tab.disabled}
-						className={styles.tab({ intent, orientation })}
+						className={clsx(
+							styles.tab({ intent, orientation }),
+							isCrayonTheme && styles.crayonTabStyle,
+							isCrayonTheme && styles.crayonTabBefore,
+							isCrayonTheme && styles.crayonTabAfter
+						)}
 					>
 						{tab.label}
 					</BaseUITabs.Tab>

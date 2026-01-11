@@ -58,6 +58,7 @@ export const Checkbox = ({
 }: CheckboxProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
+	const isCrayonTheme = themeContext?.theme === "crayon";
 
 	return (
 		<label className={clsx(themeClass, styles.container, className)}>
@@ -72,12 +73,17 @@ export const Checkbox = ({
 				className={styles.checkboxRoot}
 			>
 				<span
-					className={styles.checkbox({
-						size,
-						variant,
-						intent,
-						rounded: variant === "circle" ? undefined : rounded,
-					})}
+					className={clsx(
+						styles.checkbox({
+							size,
+							variant,
+							intent,
+							rounded: variant === "circle" ? undefined : rounded,
+						}),
+						isCrayonTheme && styles.crayonCheckboxStyle,
+						isCrayonTheme && styles.crayonCheckboxBefore,
+						isCrayonTheme && styles.crayonCheckboxAfter
+					)}
 				>
 					<BaseCheckbox.Indicator className={styles.indicatorContainer}>
 						<svg

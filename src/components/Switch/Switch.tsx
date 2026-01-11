@@ -8,8 +8,10 @@ import { Text } from "../Text/Text";
 export type SwitchSize = "small" | "medium" | "large" | "xlarge";
 export type SwitchIntent = ColorIntent;
 
-export interface SwitchProps
-	extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+export interface SwitchProps extends Omit<
+	React.HTMLAttributes<HTMLElement>,
+	"onChange"
+> {
 	size?: SwitchSize;
 	intent?: SwitchIntent;
 	label?: string;
@@ -48,6 +50,7 @@ export const Switch = ({
 }: SwitchProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
+	const isCrayonTheme = themeContext?.theme === "crayon";
 
 	return (
 		<label className={clsx(themeClass, styles.container, className)}>
@@ -62,10 +65,15 @@ export const Switch = ({
 				className={styles.switchRoot}
 			>
 				<span
-					className={styles.track({
-						size,
-						intent,
-					})}
+					className={clsx(
+						styles.track({
+							size,
+							intent,
+						}),
+						isCrayonTheme && styles.crayonSwitchTrackStyle,
+						isCrayonTheme && styles.crayonSwitchTrackBefore,
+						isCrayonTheme && styles.crayonSwitchTrackAfter
+					)}
 					data-state={checked ? "checked" : "unchecked"}
 				>
 					<BaseSwitch.Thumb

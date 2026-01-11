@@ -24,6 +24,7 @@ import {
 	crayonLightTheme,
 	crayonDarkTheme,
 } from "@/tokens/themes";
+import { CrayonThemeFilters } from "./CrayonThemeFilters";
 import clsx from "clsx";
 
 export interface ThemeProviderProps {
@@ -272,6 +273,8 @@ export const ThemeProvider = ({
 				className={clsx(themeClass, className)}
 				style={style}
 			>
+				{/* 크레용 테마일 때만 SVG 필터 주입 */}
+				{theme === "crayon" && <CrayonThemeFilters />}
 				{children}
 			</div>
 		</ThemeContext.Provider>
