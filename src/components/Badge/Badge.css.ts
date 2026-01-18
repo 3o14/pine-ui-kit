@@ -14,6 +14,8 @@ const badgeBase = style({
 	transition: "all 0.2s ease-in-out",
 	whiteSpace: "nowrap",
 	verticalAlign: "middle",
+	boxShadow: themeContract.shadow.pixelBox,
+	margin: themeContract.shadow.pixelBoxMargin,
 });
 
 // Badge recipe
@@ -290,4 +292,3 @@ export const dot = style({
 	borderRadius: themeContract.radius.full,
 	backgroundColor: "currentColor",
 });
-

@@ -134,6 +134,8 @@ export const semanticTokens = createThemeContract({
 		medium: null,
 		large: null,
 		xlarge: null,
+		pixelBox: null,
+		pixelBoxMargin: null,
 	},
 	// Component-specific semantic tokens
 	component: {

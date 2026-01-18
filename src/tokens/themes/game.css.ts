@@ -77,7 +77,7 @@ export const gameLightTheme = createTheme(semanticTokens, {
 	spacing: foundation.spacing,
 	typography: {
 		fontFamily: {
-			sans: foundation.fontFamily.sans,
+			sans: foundation.fontFamily.pixel,
 			mono: foundation.fontFamily.mono,
 			crayon: foundation.fontFamily.crayon,
 		},
@@ -116,7 +116,11 @@ export const gameLightTheme = createTheme(semanticTokens, {
 		xlarge: foundation.radius.lg, // 12px
 		full: foundation.radius.full,
 	},
-	shadow: foundation.shadow,
+	shadow: {
+		...foundation.shadow,
+		pixelBox: `calc(-4px) 0 0 0 black, 4px 0 0 0 black, 0 4px 0 0 black, 0 calc(-4px) 0 0 black`,
+		pixelBoxMargin: foundation.spacing.xxs, // 4px
+	},
 	component: {
 		button: {
 			padding: {
@@ -200,7 +204,7 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 	spacing: foundation.spacing,
 	typography: {
 		fontFamily: {
-			sans: foundation.fontFamily.sans,
+			sans: foundation.fontFamily.pixel,
 			mono: foundation.fontFamily.mono,
 			crayon: foundation.fontFamily.crayon,
 		},
@@ -239,7 +243,11 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 		xlarge: foundation.radius.lg, // 12px
 		full: foundation.radius.full,
 	},
-	shadow: foundation.shadow,
+	shadow: {
+		...foundation.shadow,
+		pixelBox: `calc(-4px) 0 0 0 ${foundation.slate[800]}, 4px 0 0 0 ${foundation.slate[800]}, 0 4px 0 0 ${foundation.slate[800]}, 0 calc(-4px) 0 0 ${foundation.slate[800]}`,
+		pixelBoxMargin: foundation.spacing.xxs, // 4px
+	},
 	component: {
 		button: {
 			padding: {

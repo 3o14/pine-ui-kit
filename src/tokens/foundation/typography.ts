@@ -8,6 +8,8 @@ export const fontFamily = {
 	mono: "'Roboto Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
 	// Crayon 테마용 폰트
 	crayon: "'Human-Beomseok Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+	// Game 테마용 pixel 폰트
+	pixel: "'Press Start 2P', system-ui, -apple-system, sans-serif",
 } as const;
 
 export const fontWeight = {
