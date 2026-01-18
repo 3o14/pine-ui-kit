@@ -237,15 +237,15 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 	},
 	radius: {
 		none: foundation.radius.none,
-		small: foundation.radius.xs, // 4px
-		medium: foundation.radius.sm, // 6px
-		large: foundation.radius.md, // 8px
-		xlarge: foundation.radius.lg, // 12px
+		small: foundation.radius.none, // 0px - 각진 느낌
+		medium: foundation.radius.none, // 0px - 각진 느낌
+		large: foundation.radius.none, // 0px - 각진 느낌
+		xlarge: foundation.radius.none, // 0px - 각진 느낌
 		full: foundation.radius.full,
 	},
 	shadow: {
 		...foundation.shadow,
-		pixelBox: `calc(-4px) 0 0 0 ${foundation.slate[800]}, 4px 0 0 0 ${foundation.slate[800]}, 0 4px 0 0 ${foundation.slate[800]}, 0 calc(-4px) 0 0 ${foundation.slate[800]}`,
+		pixelBox: `calc(-4px) 0 0 0 ${foundation.neutral.white}, 4px 0 0 0 ${foundation.neutral.white}, 0 4px 0 0 ${foundation.neutral.white}, 0 calc(-4px) 0 0 ${foundation.neutral.white}`,
 		pixelBoxMargin: foundation.spacing.xxs, // 4px
 	},
 	component: {
@@ -257,17 +257,17 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 				xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
 			},
 			radius: {
-				small: foundation.radius.xs,
-				medium: foundation.radius.sm,
-				large: foundation.radius.md,
+				small: foundation.radius.none, // 0px - 각진 느낌
+				medium: foundation.radius.none, // 0px - 각진 느낌
+				large: foundation.radius.none, // 0px - 각진 느낌
 			},
 		},
 		card: {
-			radius: foundation.radius.sm,
+			radius: foundation.radius.none, // 0px - 각진 느낌
 			padding: foundation.spacing.md,
 		},
 		input: {
-			radius: foundation.radius.xs,
+			radius: foundation.radius.none, // 0px - 각진 느낌
 			padding: foundation.spacing.sm,
 		},
 	},

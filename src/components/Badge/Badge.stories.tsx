@@ -54,7 +54,8 @@ const meta = {
 		rounded: {
 			control: "select",
 			options: ["small", "medium", "large"],
-			description: "Badge 둥근 모서리 크기",
+			description:
+				"Badge 둥근 모서리 크기 (game 테마에서는 적용 불가 - 모든 radius가 0)",
 			table: {
 				type: { summary: "BadgeRounded" },
 			},
@@ -306,40 +307,6 @@ export const StatusBadges: Story = {
 			<Badge variant="subtle" intent="primary" showDot rounded="large">
 				In Progress
 			</Badge>
-		</div>
-	),
-};
-
-// Dark Mode
-export const DarkMode: Story = {
-	render: () => (
-		<div
-			style={{
-				backgroundColor: "#1a1a1a",
-				padding: "2rem",
-				borderRadius: "8px",
-			}}
-		>
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge intent="primary">Primary</Badge>
-					<Badge intent="secondary">Secondary</Badge>
-					<Badge intent="success">Success</Badge>
-					<Badge intent="warning">Warning</Badge>
-					<Badge intent="danger">Danger</Badge>
-				</div>
-				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge variant="outline" intent="primary">
-						Outline
-					</Badge>
-					<Badge variant="subtle" intent="success">
-						Subtle
-					</Badge>
-					<Badge showDot intent="primary" rounded="large">
-						With Dot
-					</Badge>
-				</div>
-			</div>
 		</div>
 	),
 };
