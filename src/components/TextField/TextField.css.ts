@@ -1,6 +1,11 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+// 게임 테마 클래스 이름을 문자열로 변환
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 export const label = recipe({
 	base: {
@@ -165,6 +170,14 @@ export const input = recipe({
 					borderColor: themeContract.color.primary.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.primary.surface}20`,
 				},
+				selectors: {
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.surface.outline}, 4px 0 0 0 ${themeContract.color.surface.outline}, 0 4px 0 0 ${themeContract.color.surface.outline}, 0 calc(-4px) 0 0 ${themeContract.color.surface.outline}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+				},
 			},
 		},
 		// Outline - Error
@@ -176,6 +189,14 @@ export const input = recipe({
 					borderColor: themeContract.color.danger.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.danger.surface}20`,
 				},
+				selectors: {
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+				},
 			},
 		},
 		// Outline - Success
@@ -186,6 +207,14 @@ export const input = recipe({
 				":focus": {
 					borderColor: themeContract.color.success.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.success.surface}20`,
+				},
+				selectors: {
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
 				},
 			},
 		},
@@ -275,6 +304,3 @@ export const input = recipe({
 		status: "default",
 	},
 });
-
-
-
