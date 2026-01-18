@@ -1,6 +1,11 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+
+// 크레용 테마 클래스 이름을 문자열로 변환
+const crayonLightThemeClass = String(crayonLightTheme);
+const crayonDarkThemeClass = String(crayonDarkTheme);
 
 // Base button style
 const buttonBase = style({
@@ -21,6 +26,48 @@ const buttonBase = style({
 			opacity: 0.5,
 			cursor: "not-allowed",
 		},
+		// 크레용 테마: Solid/Weak variant에 질감 적용
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			filter: "url(#crayon-texture)",
+		},
+		[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
+			{
+				content: '""',
+				position: "absolute",
+				top: 0,
+				left: 0,
+				right: 0,
+				bottom: 0,
+				borderRadius: "inherit",
+				backgroundImage: `
+					repeating-linear-gradient(
+						90deg,
+						transparent,
+						transparent 1px,
+						rgba(255, 255, 255, 0.08) 1px,
+						rgba(255, 255, 255, 0.08) 2px
+					),
+					repeating-linear-gradient(
+						0deg,
+						transparent,
+						transparent 1px,
+						rgba(0, 0, 0, 0.04) 1px,
+						rgba(0, 0, 0, 0.04) 2px
+					),
+					radial-gradient(
+						circle at 20% 30%,
+						rgba(255, 255, 255, 0.15) 0%,
+						transparent 50%
+					),
+					radial-gradient(
+						circle at 80% 70%,
+						rgba(0, 0, 0, 0.08) 0%,
+						transparent 50%
+					)
+				`,
+				pointerEvents: "none",
+				mixBlendMode: "overlay",
+			},
 	},
 });
 
@@ -220,6 +267,65 @@ export const button = recipe({
 						backgroundColor: `${themeContract.color.primary.surface}10`,
 						borderColor: themeContract.color.primary.surfaceActive,
 					},
+					// 크레용 테마: Outline variant에 테두리 + 질감 적용 (base 스타일 override)
+					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+						filter: "url(#crayon-edge) !important",
+						borderWidth: "3px",
+					},
+					[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
+						{
+							backgroundImage: `
+								repeating-linear-gradient(
+									45deg,
+									transparent,
+									transparent 3px,
+									rgba(0, 0, 0, 0.02) 3px,
+									rgba(0, 0, 0, 0.02) 4px
+								)
+							`,
+							mixBlendMode: "normal",
+						},
+					[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]:
+						{
+							content: '""',
+							position: "absolute",
+							top: "-2px",
+							left: "-2px",
+							right: "-2px",
+							bottom: "-2px",
+							borderRadius: "inherit",
+							border: "2px solid currentColor",
+							opacity: 0.4,
+							filter: "url(#crayon-edge)",
+							pointerEvents: "none",
+							zIndex: -1,
+						},
+					[`.${crayonLightThemeClass} &:disabled::after, .${crayonDarkThemeClass} &:disabled::after`]:
+						{
+							opacity: 0.2,
+						},
+					// base 스타일의 ::before를 override하여 outline용 텍스처로 변경
+					[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
+						{
+							content: '""',
+							position: "absolute",
+							top: 0,
+							left: 0,
+							right: 0,
+							bottom: 0,
+							borderRadius: "inherit",
+							backgroundImage: `
+								repeating-linear-gradient(
+									45deg,
+									transparent,
+									transparent 3px,
+									rgba(0, 0, 0, 0.02) 3px,
+									rgba(0, 0, 0, 0.02) 4px
+								)
+							`,
+							pointerEvents: "none",
+							mixBlendMode: "normal",
+						},
 				},
 			},
 		},
@@ -326,6 +432,44 @@ export const button = recipe({
 					"&:active:not(:disabled)": {
 						backgroundColor: `${themeContract.color.primary.surface}15`,
 					},
+					// 크레용 테마: Ghost variant에 테두리 + 질감 적용 (base 스타일 override)
+					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+						filter: "url(#crayon-edge) !important",
+						borderWidth: "3px",
+					},
+					[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]:
+						{
+							content: '""',
+							position: "absolute",
+							top: "-2px",
+							left: "-2px",
+							right: "-2px",
+							bottom: "-2px",
+							borderRadius: "inherit",
+							border: "2px solid currentColor",
+							opacity: 0.4,
+							filter: "url(#crayon-edge)",
+							pointerEvents: "none",
+							zIndex: -1,
+						},
+					[`.${crayonLightThemeClass} &:disabled::after, .${crayonDarkThemeClass} &:disabled::after`]:
+						{
+							opacity: 0.2,
+						},
+					// base 스타일의 ::before를 override하여 outline용 텍스처로 변경
+					[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
+						{
+							backgroundImage: `
+								repeating-linear-gradient(
+									45deg,
+									transparent,
+									transparent 3px,
+									rgba(0, 0, 0, 0.02) 3px,
+									rgba(0, 0, 0, 0.02) 4px
+								)
+							`,
+							mixBlendMode: "normal",
+						},
 				},
 			},
 		},
@@ -527,174 +671,4 @@ export const button = recipe({
 
 export const fullWidth = style({
 	width: "100%",
-});
-
-// 크레용 테마 스타일
-// 크레용 테마일 때만 적용되는 기본 스타일
-export const crayonButtonStyle = style({
-	selectors: {
-		// Disabled 상태
-		"[class*='crayonLightTheme'] &:disabled, [class*='crayonDarkTheme'] &:disabled":
-			{
-				opacity: "0.4 !important",
-				filter: "grayscale(0.5) !important",
-			},
-	},
-});
-
-// 크레용 버튼 외곽선 효과 (::after)
-export const crayonButtonAfter = style({
-	selectors: {
-		"[class*='crayonLightTheme'] &::after, [class*='crayonDarkTheme'] &::after":
-			{
-				content: '""',
-				position: "absolute",
-				top: "-1px",
-				left: "-1px",
-				right: "-1px",
-				bottom: "-1px",
-				borderRadius: "inherit",
-				border: "1px solid currentColor",
-				opacity: 0.4,
-				filter: "url(#crayon-edge)",
-				pointerEvents: "none",
-				zIndex: -1,
-			},
-		"[class*='crayonLightTheme'] &:disabled::after, [class*='crayonDarkTheme'] &:disabled::after":
-			{
-				opacity: 0.2,
-			},
-	},
-});
-
-// 크레용 Solid 버튼 스타일
-export const crayonSolidStyle = style({
-	selectors: {
-		"[class*='crayonLightTheme'] &, [class*='crayonDarkTheme'] &": {
-			filter: "url(#crayon-texture)",
-			border: "3px solid currentColor !important",
-			boxShadow: `
-				0 2px 0 0 rgba(0, 0, 0, 0.1),
-				0 3px 8px rgba(0, 0, 0, 0.12)
-			`,
-		},
-		// Hover 상태
-		"[class*='crayonLightTheme'] &:hover:not(:disabled), [class*='crayonDarkTheme'] &:hover:not(:disabled)":
-			{
-				transform: "scale(1.02) translateY(-1px)",
-				filter: "url(#crayon-texture) brightness(1.08) contrast(1.05)",
-			},
-		// Active 상태
-		"[class*='crayonLightTheme'] &:active:not(:disabled), [class*='crayonDarkTheme'] &:active:not(:disabled)":
-			{
-				transform: "scale(0.98) translateY(1px)",
-				filter: "url(#crayon-texture) brightness(0.92) contrast(1.1)",
-				boxShadow: `
-				0 1px 0 0 rgba(0, 0, 0, 0.15),
-				0 2px 4px rgba(0, 0, 0, 0.1)
-			`,
-			},
-	},
-});
-
-// 크레용 Solid 버튼 텍스처 오버레이 (::before)
-export const crayonSolidBefore = style({
-	selectors: {
-		"[class*='crayonLightTheme'] &::before, [class*='crayonDarkTheme'] &::before":
-			{
-				content: '""',
-				position: "absolute",
-				top: 0,
-				left: 0,
-				right: 0,
-				bottom: 0,
-				borderRadius: "inherit",
-				backgroundImage: `
-				repeating-linear-gradient(
-					90deg,
-					transparent,
-					transparent 1px,
-					rgba(255, 255, 255, 0.08) 1px,
-					rgba(255, 255, 255, 0.08) 2px
-				),
-				repeating-linear-gradient(
-					0deg,
-					transparent,
-					transparent 1px,
-					rgba(0, 0, 0, 0.04) 1px,
-					rgba(0, 0, 0, 0.04) 2px
-				),
-				radial-gradient(
-					circle at 20% 30%,
-					rgba(255, 255, 255, 0.15) 0%,
-					transparent 50%
-				),
-				radial-gradient(
-					circle at 80% 70%,
-					rgba(0, 0, 0, 0.08) 0%,
-					transparent 50%
-				)
-			`,
-				pointerEvents: "none",
-				mixBlendMode: "overlay",
-			},
-	},
-});
-
-// 크레용 Outline/Ghost 버튼 스타일
-export const crayonOutlineStyle = style({
-	selectors: {
-		"[class*='crayonLightTheme'] &, [class*='crayonDarkTheme'] &": {
-			background: "rgba(255, 255, 255, 0.6) !important",
-			backdropFilter: "blur(10px)",
-			border: "3px solid currentColor !important",
-			filter: "url(#crayon-edge)",
-			boxShadow: `
-				0 1px 0 0 rgba(0, 0, 0, 0.05),
-				inset 0 1px 0 rgba(255, 255, 255, 0.8)
-			`,
-		},
-		// Hover 상태
-		"[class*='crayonLightTheme'] &:hover:not(:disabled), [class*='crayonDarkTheme'] &:hover:not(:disabled)":
-			{
-				background: "rgba(255, 255, 255, 0.85) !important",
-				filter: "url(#crayon-edge) brightness(1.05)",
-				boxShadow: `
-				0 2px 0 0 rgba(0, 0, 0, 0.08),
-				inset 0 1px 0 rgba(255, 255, 255, 0.9)
-			`,
-			},
-		// Active 상태
-		"[class*='crayonLightTheme'] &:active:not(:disabled), [class*='crayonDarkTheme'] &:active:not(:disabled)":
-			{
-				background: "rgba(255, 255, 255, 0.5) !important",
-				filter: "url(#crayon-edge) brightness(0.95)",
-			},
-	},
-});
-
-// 크레용 Outline/Ghost 버튼 텍스처 (::before)
-export const crayonOutlineBefore = style({
-	selectors: {
-		"[class*='crayonLightTheme'] &::before, [class*='crayonDarkTheme'] &::before":
-			{
-				content: '""',
-				position: "absolute",
-				top: 0,
-				left: 0,
-				right: 0,
-				bottom: 0,
-				borderRadius: "inherit",
-				backgroundImage: `
-				repeating-linear-gradient(
-					45deg,
-					transparent,
-					transparent 3px,
-					rgba(0, 0, 0, 0.02) 3px,
-					rgba(0, 0, 0, 0.02) 4px
-				)
-			`,
-				pointerEvents: "none",
-			},
-	},
 });

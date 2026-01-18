@@ -64,8 +64,6 @@ export const Dialog = ({
 }: DialogProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-	const isCrayonTheme = themeContext?.theme === "crayon";
-
 	const handleOpenChange = (newOpen: boolean) => {
 		onOpenChange?.(newOpen);
 		if (!newOpen) {
@@ -88,9 +86,6 @@ export const Dialog = ({
 						styles.container,
 						styles.sizeVariants[size],
 						styles.roundedVariants[rounded],
-						isCrayonTheme && styles.crayonDialogContainerStyle,
-						isCrayonTheme && styles.crayonDialogContainerBefore,
-						isCrayonTheme && styles.crayonDialogContainerAfter,
 						className
 					)}
 				>

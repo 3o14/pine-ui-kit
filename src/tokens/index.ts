@@ -17,3 +17,4 @@ export * from "./appearanceTheme";
 export * from "./theme.css";
 
 import "./global.css";
+import "./crayon.css";

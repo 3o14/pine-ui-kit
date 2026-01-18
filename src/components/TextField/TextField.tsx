@@ -62,8 +62,6 @@ export const TextField = ({
 }: TextFieldProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-	const isCrayonTheme = themeContext?.theme === "crayon";
-
 	return (
 		<Field.Root
 			className={clsx(
@@ -89,10 +87,7 @@ export const TextField = ({
 					rounded,
 					variant,
 					status,
-					}),
-					isCrayonTheme && styles.crayonTextFieldStyle,
-					isCrayonTheme && styles.crayonTextFieldBefore,
-					isCrayonTheme && styles.crayonTextFieldAfter
+					})
 				)}
 				required={required}
 				{...props}

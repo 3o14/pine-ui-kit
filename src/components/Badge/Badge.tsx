@@ -41,7 +41,6 @@ export const Badge = ({
 }: BadgeProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-	const isCrayonTheme = themeContext?.theme === "crayon";
 
 	return (
 		<span
@@ -53,18 +52,6 @@ export const Badge = ({
 					intent,
 					rounded,
 				}),
-				isCrayonTheme && styles.crayonBadgeStyle,
-				isCrayonTheme && styles.crayonBadgeAfter,
-				isCrayonTheme && variant === "solid" && styles.crayonBadgeSolidStyle,
-				isCrayonTheme &&
-					variant === "solid" &&
-					styles.crayonBadgeSolidBefore,
-				isCrayonTheme &&
-					variant === "outline" &&
-					styles.crayonBadgeOutlineStyle,
-				isCrayonTheme &&
-					variant === "outline" &&
-					styles.crayonBadgeOutlineBefore,
 				className
 			)}
 			{...props}

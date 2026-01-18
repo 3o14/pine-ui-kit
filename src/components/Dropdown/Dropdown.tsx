@@ -60,8 +60,6 @@ export const Dropdown = ({
 }: DropdownProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-	const isCrayonTheme = themeContext?.theme === "crayon";
-
 	return (
 		<BaseSelect.Root
 			value={value}
@@ -86,10 +84,7 @@ export const Dropdown = ({
 							rounded,
 							intent,
 						}),
-						fullWidth && styles.triggerFullWidth,
-						isCrayonTheme && styles.crayonDropdownTriggerStyle,
-						isCrayonTheme && styles.crayonDropdownTriggerBefore,
-						isCrayonTheme && styles.crayonDropdownTriggerAfter
+						fullWidth && styles.triggerFullWidth
 					)}
 				>
 					<BaseSelect.Value>
@@ -123,10 +118,7 @@ export const Dropdown = ({
 					<BaseSelect.Positioner sideOffset={4}>
 						<BaseSelect.Popup
 							className={clsx(
-								styles.menu,
-								isCrayonTheme && styles.crayonDropdownMenuStyle,
-								isCrayonTheme && styles.crayonDropdownMenuBefore
-							)}
+								styles.menu							)}
 							data-intent={intent}
 						>
 							<BaseSelect.List>

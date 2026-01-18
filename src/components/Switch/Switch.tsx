@@ -50,8 +50,6 @@ export const Switch = ({
 }: SwitchProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-	const isCrayonTheme = themeContext?.theme === "crayon";
-
 	return (
 		<label className={clsx(themeClass, styles.container, className)}>
 			<BaseSwitch.Root
@@ -69,10 +67,7 @@ export const Switch = ({
 						styles.track({
 							size,
 							intent,
-						}),
-						isCrayonTheme && styles.crayonSwitchTrackStyle,
-						isCrayonTheme && styles.crayonSwitchTrackBefore,
-						isCrayonTheme && styles.crayonSwitchTrackAfter
+						})
 					)}
 				>
 					<BaseSwitch.Thumb

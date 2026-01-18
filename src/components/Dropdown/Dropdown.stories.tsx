@@ -11,7 +11,7 @@ const sampleOptions = [
 ];
 
 const meta = {
-	title: "Selection/Dropdown",
+	title: "Navigation/Dropdown",
 	component: Dropdown,
 	parameters: {
 		layout: "centered",
