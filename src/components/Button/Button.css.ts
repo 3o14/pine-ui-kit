@@ -2,10 +2,15 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
 // 크레용 테마 클래스 이름을 문자열로 변환
 const crayonLightThemeClass = String(crayonLightTheme);
 const crayonDarkThemeClass = String(crayonDarkTheme);
+
+// 게임 테마 클래스 이름을 문자열로 변환
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 // Base button style
 const buttonBase = style({
@@ -152,6 +157,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.primary.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: solid variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: themeContract.shadow.pixelBox,
+						},
 				},
 			},
 		},
@@ -171,6 +186,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.secondary.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: solid variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: themeContract.shadow.pixelBox,
+						},
 				},
 			},
 		},
@@ -190,6 +215,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.success.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: solid variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: themeContract.shadow.pixelBox,
+						},
 				},
 			},
 		},
@@ -209,6 +244,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.warning.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: solid variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: themeContract.shadow.pixelBox,
+						},
 				},
 			},
 		},
@@ -228,6 +273,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.danger.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: solid variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: themeContract.shadow.pixelBox,
+						},
 				},
 			},
 		},
@@ -247,6 +302,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.neutral.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: solid variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: themeContract.shadow.pixelBox,
+						},
 				},
 			},
 		},
@@ -266,6 +331,12 @@ export const button = recipe({
 					"&:active:not(:disabled)": {
 						backgroundColor: `${themeContract.color.primary.surface}10`,
 						borderColor: themeContract.color.primary.surfaceActive,
+					},
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderColor: "transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
 					},
 					// 크레용 테마: Outline variant에 테두리 + 질감 적용 (base 스타일 override)
 					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
@@ -344,6 +415,12 @@ export const button = recipe({
 						backgroundColor: `${themeContract.color.secondary.surface}10`,
 						borderColor: themeContract.color.secondary.surfaceActive,
 					},
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderColor: "transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
 				},
 			},
 		},
@@ -361,6 +438,12 @@ export const button = recipe({
 					"&:active:not(:disabled)": {
 						backgroundColor: `${themeContract.color.success.surface}10`,
 						borderColor: themeContract.color.success.surfaceActive,
+					},
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderColor: "transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
 					},
 				},
 			},
@@ -380,6 +463,12 @@ export const button = recipe({
 						backgroundColor: `${themeContract.color.warning.surface}10`,
 						borderColor: themeContract.color.warning.surfaceActive,
 					},
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderColor: "transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
 				},
 			},
 		},
@@ -398,6 +487,12 @@ export const button = recipe({
 						backgroundColor: `${themeContract.color.danger.surface}10`,
 						borderColor: themeContract.color.danger.surfaceActive,
 					},
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderColor: "transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
 				},
 			},
 		},
@@ -415,6 +510,12 @@ export const button = recipe({
 					"&:active:not(:disabled)": {
 						backgroundColor: `${themeContract.color.neutral.surface}10`,
 						borderColor: themeContract.color.neutral.surfaceActive,
+					},
+					// Game 테마: outline을 pixelBox shadow로 대체
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderColor: "transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
 					},
 				},
 			},
@@ -561,6 +662,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.primary.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: weak variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
+						},
 				},
 			},
 		},
@@ -580,6 +691,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.secondary.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: weak variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border}`,
+						},
 				},
 			},
 		},
@@ -599,6 +720,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.success.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: weak variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
+						},
 				},
 			},
 		},
@@ -618,6 +749,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.warning.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: weak variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border}`,
+						},
 				},
 			},
 		},
@@ -637,6 +778,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.danger.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: weak variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
+						},
 				},
 			},
 		},
@@ -656,6 +807,16 @@ export const button = recipe({
 						backgroundColor: themeContract.color.neutral.surfaceActive,
 						transform: "scale(0.98)",
 					},
+					// Game 테마: weak variant에 pixelBox shadow 적용
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					// Game 테마: hover 상태에서도 pixelBox shadow 유지
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]:
+						{
+							boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border}`,
+						},
 				},
 			},
 		},
