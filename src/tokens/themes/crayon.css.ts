@@ -249,27 +249,27 @@ export const crayonDarkTheme = createTheme(semanticTokens, {
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},
-		component: {
-			button: {
-				padding: {
-					small: `${foundation.spacing.xs} ${foundation.spacing.sm}`,
-					medium: `${foundation.spacing.sm} ${foundation.spacing.md}`,
-					large: `${foundation.spacing.md} ${foundation.spacing.lg}`,
-					xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
-				},
-				radius: {
-					small: foundation.radius.xxl,
-					medium: foundation.radius.xxxl,
-					large: foundation.radius.xxxl,
-				},
+	component: {
+		button: {
+			padding: {
+				small: `${foundation.spacing.xs} ${foundation.spacing.sm}`,
+				medium: `${foundation.spacing.sm} ${foundation.spacing.md}`,
+				large: `${foundation.spacing.md} ${foundation.spacing.lg}`,
+				xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
 			},
-			card: {
-				radius: foundation.radius.xxxl,
-				padding: foundation.spacing.md,
-			},
-			input: {
-				radius: foundation.radius.xxl,
-				padding: foundation.spacing.sm,
+			radius: {
+				small: foundation.radius.xxl,
+				medium: foundation.radius.xxxl,
+				large: foundation.radius.xxxl,
 			},
 		},
-	});
+		card: {
+			radius: foundation.radius.xxxl,
+			padding: foundation.spacing.md,
+		},
+		input: {
+			radius: foundation.radius.xxl,
+			padding: foundation.spacing.sm,
+		},
+	},
+});

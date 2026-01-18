@@ -121,30 +121,30 @@ export const basicLightTheme = createTheme(semanticTokens, {
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},
-		component: {
-			button: {
-				padding: {
-					small: `${foundation.spacing.xs} ${foundation.spacing.sm}`,
-					medium: `${foundation.spacing.sm} ${foundation.spacing.md}`,
-					large: `${foundation.spacing.md} ${foundation.spacing.lg}`,
-					xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
-				},
-				radius: {
-					small: foundation.radius.sm,
-					medium: foundation.radius.xl,
-					large: foundation.radius.xxl,
-				},
+	component: {
+		button: {
+			padding: {
+				small: `${foundation.spacing.xs} ${foundation.spacing.sm}`,
+				medium: `${foundation.spacing.sm} ${foundation.spacing.md}`,
+				large: `${foundation.spacing.md} ${foundation.spacing.lg}`,
+				xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
 			},
-			card: {
-				radius: foundation.radius.xl,
-				padding: foundation.spacing.md,
-			},
-			input: {
-				radius: foundation.radius.md,
-				padding: foundation.spacing.sm,
+			radius: {
+				small: foundation.radius.sm,
+				medium: foundation.radius.xl,
+				large: foundation.radius.xxl,
 			},
 		},
-	});
+		card: {
+			radius: foundation.radius.xl,
+			padding: foundation.spacing.md,
+		},
+		input: {
+			radius: foundation.radius.md,
+			padding: foundation.spacing.sm,
+		},
+	},
+});
 
 /**
  * Basic Theme - Dark Mode
@@ -248,27 +248,27 @@ export const basicDarkTheme = createTheme(semanticTokens, {
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},
-		component: {
-			button: {
-				padding: {
-					small: `${foundation.spacing.xs} ${foundation.spacing.sm}`,
-					medium: `${foundation.spacing.sm} ${foundation.spacing.md}`,
-					large: `${foundation.spacing.md} ${foundation.spacing.lg}`,
-					xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
-				},
-				radius: {
-					small: foundation.radius.sm,
-					medium: foundation.radius.xl,
-					large: foundation.radius.xxl,
-				},
+	component: {
+		button: {
+			padding: {
+				small: `${foundation.spacing.xs} ${foundation.spacing.sm}`,
+				medium: `${foundation.spacing.sm} ${foundation.spacing.md}`,
+				large: `${foundation.spacing.md} ${foundation.spacing.lg}`,
+				xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
 			},
-			card: {
-				radius: foundation.radius.xl,
-				padding: foundation.spacing.md,
-			},
-			input: {
-				radius: foundation.radius.md,
-				padding: foundation.spacing.sm,
+			radius: {
+				small: foundation.radius.sm,
+				medium: foundation.radius.xl,
+				large: foundation.radius.xxl,
 			},
 		},
-	});
+		card: {
+			radius: foundation.radius.xl,
+			padding: foundation.spacing.md,
+		},
+		input: {
+			radius: foundation.radius.md,
+			padding: foundation.spacing.sm,
+		},
+	},
+});
