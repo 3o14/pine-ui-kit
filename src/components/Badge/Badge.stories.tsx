@@ -83,25 +83,41 @@ export const Default: Story = {
 
 // Sizes
 export const Sizes: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-			<Badge size="small">Small</Badge>
-			<Badge size="medium">Medium</Badge>
-			<Badge size="large">Large</Badge>
-			<Badge size="xlarge">XLarge</Badge>
+			<Badge {...args} size="small">
+				Small
+			</Badge>
+			<Badge {...args} size="medium">
+				Medium
+			</Badge>
+			<Badge {...args} size="large">
+				Large
+			</Badge>
+			<Badge {...args} size="xlarge">
+				XLarge
+			</Badge>
 		</div>
 	),
 };
 
 // Variants
 export const Variants: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 			<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-				<Badge variant="solid">Solid</Badge>
-				<Badge variant="outline">Outline</Badge>
-				<Badge variant="subtle">Subtle</Badge>
-				<Badge variant="weak">Weak</Badge>
+				<Badge {...args} variant="solid">
+					Solid
+				</Badge>
+				<Badge {...args} variant="outline">
+					Outline
+				</Badge>
+				<Badge {...args} variant="subtle">
+					Subtle
+				</Badge>
+				<Badge {...args} variant="weak">
+					Weak
+				</Badge>
 			</div>
 		</div>
 	),
@@ -109,41 +125,53 @@ export const Variants: Story = {
 
 // Intents (Colors)
 export const Intents: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-			<Badge intent="primary">Primary</Badge>
-			<Badge intent="secondary">Secondary</Badge>
-			<Badge intent="success">Success</Badge>
-			<Badge intent="warning">Warning</Badge>
-			<Badge intent="danger">Danger</Badge>
-			<Badge intent="neutral">Neutral</Badge>
+			<Badge {...args} intent="primary">
+				Primary
+			</Badge>
+			<Badge {...args} intent="secondary">
+				Secondary
+			</Badge>
+			<Badge {...args} intent="success">
+				Success
+			</Badge>
+			<Badge {...args} intent="warning">
+				Warning
+			</Badge>
+			<Badge {...args} intent="danger">
+				Danger
+			</Badge>
+			<Badge {...args} intent="neutral">
+				Neutral
+			</Badge>
 		</div>
 	),
 };
 
 // All Variants with All Intents
 export const VariantsAndIntents: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Solid</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge variant="solid" intent="primary">
+					<Badge {...args} variant="solid" intent="primary">
 						Primary
 					</Badge>
-					<Badge variant="solid" intent="secondary">
+					<Badge {...args} variant="solid" intent="secondary">
 						Secondary
 					</Badge>
-					<Badge variant="solid" intent="success">
+					<Badge {...args} variant="solid" intent="success">
 						Success
 					</Badge>
-					<Badge variant="solid" intent="warning">
+					<Badge {...args} variant="solid" intent="warning">
 						Warning
 					</Badge>
-					<Badge variant="solid" intent="danger">
+					<Badge {...args} variant="solid" intent="danger">
 						Danger
 					</Badge>
-					<Badge variant="solid" intent="neutral">
+					<Badge {...args} variant="solid" intent="neutral">
 						Neutral
 					</Badge>
 				</div>
@@ -152,22 +180,22 @@ export const VariantsAndIntents: Story = {
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Outline</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge variant="outline" intent="primary">
+					<Badge {...args} variant="outline" intent="primary">
 						Primary
 					</Badge>
-					<Badge variant="outline" intent="secondary">
+					<Badge {...args} variant="outline" intent="secondary">
 						Secondary
 					</Badge>
-					<Badge variant="outline" intent="success">
+					<Badge {...args} variant="outline" intent="success">
 						Success
 					</Badge>
-					<Badge variant="outline" intent="warning">
+					<Badge {...args} variant="outline" intent="warning">
 						Warning
 					</Badge>
-					<Badge variant="outline" intent="danger">
+					<Badge {...args} variant="outline" intent="danger">
 						Danger
 					</Badge>
-					<Badge variant="outline" intent="neutral">
+					<Badge {...args} variant="outline" intent="neutral">
 						Neutral
 					</Badge>
 				</div>
@@ -176,22 +204,22 @@ export const VariantsAndIntents: Story = {
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Subtle</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge variant="subtle" intent="primary">
+					<Badge {...args} variant="subtle" intent="primary">
 						Primary
 					</Badge>
-					<Badge variant="subtle" intent="secondary">
+					<Badge {...args} variant="subtle" intent="secondary">
 						Secondary
 					</Badge>
-					<Badge variant="subtle" intent="success">
+					<Badge {...args} variant="subtle" intent="success">
 						Success
 					</Badge>
-					<Badge variant="subtle" intent="warning">
+					<Badge {...args} variant="subtle" intent="warning">
 						Warning
 					</Badge>
-					<Badge variant="subtle" intent="danger">
+					<Badge {...args} variant="subtle" intent="danger">
 						Danger
 					</Badge>
-					<Badge variant="subtle" intent="neutral">
+					<Badge {...args} variant="subtle" intent="neutral">
 						Neutral
 					</Badge>
 				</div>
@@ -200,22 +228,22 @@ export const VariantsAndIntents: Story = {
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Weak</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge variant="weak" intent="primary">
+					<Badge {...args} variant="weak" intent="primary">
 						Primary
 					</Badge>
-					<Badge variant="weak" intent="secondary">
+					<Badge {...args} variant="weak" intent="secondary">
 						Secondary
 					</Badge>
-					<Badge variant="weak" intent="success">
+					<Badge {...args} variant="weak" intent="success">
 						Success
 					</Badge>
-					<Badge variant="weak" intent="warning">
+					<Badge {...args} variant="weak" intent="warning">
 						Warning
 					</Badge>
-					<Badge variant="weak" intent="danger">
+					<Badge {...args} variant="weak" intent="danger">
 						Danger
 					</Badge>
-					<Badge variant="weak" intent="neutral">
+					<Badge {...args} variant="weak" intent="neutral">
 						Neutral
 					</Badge>
 				</div>
@@ -226,16 +254,18 @@ export const VariantsAndIntents: Story = {
 
 // Rounded (Pill Shape)
 export const Rounded: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge rounded="small">Small</Badge>
-					<Badge rounded="small" intent="primary">
+					<Badge {...args} rounded="small">
+						Small
+					</Badge>
+					<Badge {...args} rounded="small" intent="primary">
 						Primary
 					</Badge>
-					<Badge rounded="small" intent="success">
+					<Badge {...args} rounded="small" intent="success">
 						Success
 					</Badge>
 				</div>
@@ -243,11 +273,13 @@ export const Rounded: Story = {
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge rounded="medium">Medium</Badge>
-					<Badge rounded="medium" intent="primary">
+					<Badge {...args} rounded="medium">
+						Medium
+					</Badge>
+					<Badge {...args} rounded="medium" intent="primary">
 						Primary
 					</Badge>
-					<Badge rounded="medium" intent="success">
+					<Badge {...args} rounded="medium" intent="success">
 						Success
 					</Badge>
 				</div>
@@ -255,11 +287,13 @@ export const Rounded: Story = {
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge rounded="large">Large</Badge>
-					<Badge rounded="large" intent="primary">
+					<Badge {...args} rounded="large">
+						Large
+					</Badge>
+					<Badge {...args} rounded="large" intent="primary">
 						Primary
 					</Badge>
-					<Badge rounded="large" intent="success">
+					<Badge {...args} rounded="large" intent="success">
 						Success
 					</Badge>
 				</div>
@@ -270,21 +304,21 @@ export const Rounded: Story = {
 
 // With Dot
 export const WithDot: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-			<Badge showDot intent="primary">
+			<Badge {...args} showDot intent="primary">
 				Online
 			</Badge>
-			<Badge showDot intent="success">
+			<Badge {...args} showDot intent="success">
 				Available
 			</Badge>
-			<Badge showDot intent="warning">
+			<Badge {...args} showDot intent="warning">
 				Away
 			</Badge>
-			<Badge showDot intent="danger">
+			<Badge {...args} showDot intent="danger">
 				Offline
 			</Badge>
-			<Badge showDot intent="neutral">
+			<Badge {...args} showDot intent="neutral">
 				Idle
 			</Badge>
 		</div>
@@ -293,18 +327,36 @@ export const WithDot: Story = {
 
 // Status Badges
 export const StatusBadges: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-			<Badge variant="subtle" intent="success" showDot rounded="large">
+			<Badge
+				{...args}
+				variant="subtle"
+				intent="success"
+				showDot
+				rounded="large"
+			>
 				Active
 			</Badge>
-			<Badge variant="subtle" intent="warning" showDot rounded="large">
+			<Badge
+				{...args}
+				variant="subtle"
+				intent="warning"
+				showDot
+				rounded="large"
+			>
 				Pending
 			</Badge>
-			<Badge variant="subtle" intent="danger" showDot rounded="large">
+			<Badge {...args} variant="subtle" intent="danger" showDot rounded="large">
 				Inactive
 			</Badge>
-			<Badge variant="subtle" intent="primary" showDot rounded="large">
+			<Badge
+				{...args}
+				variant="subtle"
+				intent="primary"
+				showDot
+				rounded="large"
+			>
 				In Progress
 			</Badge>
 		</div>
@@ -313,7 +365,7 @@ export const StatusBadges: Story = {
 
 // Use Cases
 export const UseCases: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
 			{/* Notifications */}
 			<div>
@@ -322,6 +374,7 @@ export const UseCases: Story = {
 					<div style={{ position: "relative", display: "inline-block" }}>
 						<span style={{ fontSize: "1.5rem" }}>🔔</span>
 						<Badge
+							{...args}
 							size="small"
 							intent="danger"
 							rounded="large"
@@ -333,6 +386,7 @@ export const UseCases: Story = {
 					<div style={{ position: "relative", display: "inline-block" }}>
 						<span style={{ fontSize: "1.5rem" }}>💬</span>
 						<Badge
+							{...args}
 							size="small"
 							intent="primary"
 							rounded="large"
@@ -348,16 +402,16 @@ export const UseCases: Story = {
 			<div>
 				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Tags</h4>
 				<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-					<Badge variant="subtle" intent="primary">
+					<Badge {...args} variant="subtle" intent="primary">
 						React
 					</Badge>
-					<Badge variant="subtle" intent="secondary">
+					<Badge {...args} variant="subtle" intent="secondary">
 						TypeScript
 					</Badge>
-					<Badge variant="subtle" intent="success">
+					<Badge {...args} variant="subtle" intent="success">
 						Vite
 					</Badge>
-					<Badge variant="subtle" intent="neutral">
+					<Badge {...args} variant="subtle" intent="neutral">
 						Storybook
 					</Badge>
 				</div>
@@ -371,19 +425,37 @@ export const UseCases: Story = {
 				>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>John Doe</span>
-						<Badge size="small" variant="subtle" intent="success" showDot>
+						<Badge
+							{...args}
+							size="small"
+							variant="subtle"
+							intent="success"
+							showDot
+						>
 							Online
 						</Badge>
 					</div>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>Jane Smith</span>
-						<Badge size="small" variant="subtle" intent="warning" showDot>
+						<Badge
+							{...args}
+							size="small"
+							variant="subtle"
+							intent="warning"
+							showDot
+						>
 							Away
 						</Badge>
 					</div>
 					<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 						<span>Bob Johnson</span>
-						<Badge size="small" variant="subtle" intent="neutral" showDot>
+						<Badge
+							{...args}
+							size="small"
+							variant="subtle"
+							intent="neutral"
+							showDot
+						>
 							Offline
 						</Badge>
 					</div>
