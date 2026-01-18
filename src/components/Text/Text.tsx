@@ -3,6 +3,8 @@ import clsx from "clsx";
 import * as styles from "./Text.css";
 import type { ColorIntent } from "@/tokens";
 import type { FontSizeToken, FontWeightToken } from "@/tokens/typography";
+import { lightTheme } from "@/tokens";
+import { useTheme } from "@/providers";
 
 export type TextSize = FontSizeToken;
 export type TextWeight = FontWeightToken;
@@ -55,9 +57,13 @@ export const Text = ({
 	className,
 	...props
 }: TextProps & React.HTMLAttributes<HTMLElement>) => {
+	const themeContext = useTheme();
+	const themeClass = themeContext?.themeClass ?? lightTheme;
+
 	return (
 		<Component
 			className={clsx(
+				themeClass,
 				styles.base,
 				styles.sizeVariants[size],
 				styles.weightVariants[weight],

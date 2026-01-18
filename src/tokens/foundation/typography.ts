@@ -25,16 +25,16 @@ export const fontWeight = {
 } as const;
 
 export const fontSize = {
-	xxs: "0.625rem", // 10px
-	xs: "0.75rem", // 12px
-	sm: "0.875rem", // 14px
-	base: "1rem", // 16px
-	lg: "1.125rem", // 18px
-	xl: "1.25rem", // 20px
-	"2xl": "1.5rem", // 24px
-	"3xl": "1.875rem", // 30px
-	"4xl": "2.25rem", // 36px
-	"5xl": "3rem", // 48px
+	"2xsmall": "0.625rem", // 10px
+	xsmall: "0.75rem", // 12px
+	small: "0.875rem", // 14px
+	medium: "1rem", // 16px
+	large: "1.125rem", // 18px
+	xlarge: "1.25rem", // 20px
+	"2xlarge": "1.5rem", // 24px
+	"3xlarge": "1.875rem", // 30px
+	"4xlarge": "2.25rem", // 36px
+	"5xlarge": "3rem", // 48px
 } as const;
 
 export const lineHeight = {

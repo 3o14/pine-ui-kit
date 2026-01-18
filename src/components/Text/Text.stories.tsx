@@ -96,34 +96,34 @@ export const Default: Story = {
 
 // All sizes
 export const Sizes: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-			<Text size="xsmall">Extra Small (xsmall) - 0.75rem</Text>
-			<Text size="small">Small (small) - 0.875rem</Text>
-			<Text size="medium">Medium (medium) - 1rem</Text>
-			<Text size="large">Large (large) - 1.125rem</Text>
-			<Text size="xlarge">Extra Large (xlarge) - 1.25rem</Text>
-			<Text size="display-small">Display Small - 1.5rem</Text>
-			<Text size="display-medium">Display Medium - 1.875rem</Text>
-			<Text size="display-large">Display Large - 2.25rem</Text>
+			<Text {...args} size="xsmall">Extra Small (xsmall) - 0.75rem</Text>
+			<Text {...args} size="small">Small (small) - 0.875rem</Text>
+			<Text {...args} size="medium">Medium (medium) - 1rem</Text>
+			<Text {...args} size="large">Large (large) - 1.125rem</Text>
+			<Text {...args} size="xlarge">Extra Large (xlarge) - 1.25rem</Text>
+			<Text {...args} size="display-small">Display Small - 1.5rem</Text>
+			<Text {...args} size="display-medium">Display Medium - 1.875rem</Text>
+			<Text {...args} size="display-large">Display Large - 2.25rem</Text>
 		</div>
 	),
 };
 
 // All weights
 export const Weights: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-			<Text weight="regular" size="large">
+			<Text {...args} weight="regular" size="large">
 				Regular Weight (400)
 			</Text>
-			<Text weight="medium" size="large">
+			<Text {...args} weight="medium" size="large">
 				Medium Weight (500)
 			</Text>
-			<Text weight="semibold" size="large">
+			<Text {...args} weight="semibold" size="large">
 				Semibold Weight (600)
 			</Text>
-			<Text weight="bold" size="large">
+			<Text {...args} weight="bold" size="large">
 				Bold Weight (700)
 			</Text>
 		</div>
@@ -132,27 +132,27 @@ export const Weights: Story = {
 
 // All intents
 export const Intents: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-			<Text intent="primary" size="large">
+			<Text {...args} intent="primary" size="large">
 				Primary Color
 			</Text>
-			<Text intent="secondary" size="large">
+			<Text {...args} intent="secondary" size="large">
 				Secondary Color
 			</Text>
-			<Text intent="success" size="large">
+			<Text {...args} intent="success" size="large">
 				Success Color
 			</Text>
-			<Text intent="warning" size="large">
+			<Text {...args} intent="warning" size="large">
 				Warning Color
 			</Text>
-			<Text intent="danger" size="large">
+			<Text {...args} intent="danger" size="large">
 				Danger Color
 			</Text>
-			<Text intent="neutral" size="large">
+			<Text {...args} intent="neutral" size="large">
 				Neutral Color
 			</Text>
-			<Text intent="inherit" size="large">
+			<Text {...args} intent="inherit" size="large">
 				Inherit Color (default)
 			</Text>
 		</div>
@@ -161,24 +161,24 @@ export const Intents: Story = {
 
 // Headings
 export const Headings: Story = {
-	render: () => (
+	render: (args) => (
 		<div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-			<Text as="h1" size="display-large" weight="bold">
+			<Text {...args} as="h1" size="display-large" weight="bold">
 				Heading 1
 			</Text>
-			<Text as="h2" size="display-medium" weight="bold">
+			<Text {...args} as="h2" size="display-medium" weight="bold">
 				Heading 2
 			</Text>
-			<Text as="h3" size="display-small" weight="semibold">
+			<Text {...args} as="h3" size="display-small" weight="semibold">
 				Heading 3
 			</Text>
-			<Text as="h4" size="xlarge" weight="semibold">
+			<Text {...args} as="h4" size="xlarge" weight="semibold">
 				Heading 4
 			</Text>
-			<Text as="h5" size="large" weight="medium">
+			<Text {...args} as="h5" size="large" weight="medium">
 				Heading 5
 			</Text>
-			<Text as="h6" size="medium" weight="medium">
+			<Text {...args} as="h6" size="medium" weight="medium">
 				Heading 6
 			</Text>
 		</div>
@@ -187,7 +187,7 @@ export const Headings: Story = {
 
 // Alignment
 export const Alignment: Story = {
-	render: () => (
+	render: (args) => (
 		<div
 			style={{
 				display: "flex",
@@ -198,16 +198,16 @@ export const Alignment: Story = {
 				padding: "16px",
 			}}
 		>
-			<Text align="left">Left aligned text (default)</Text>
-			<Text align="center">Center aligned text</Text>
-			<Text align="right">Right aligned text</Text>
+			<Text {...args} align="left">Left aligned text (default)</Text>
+			<Text {...args} align="center">Center aligned text</Text>
+			<Text {...args} align="right">Right aligned text</Text>
 		</div>
 	),
 };
 
 // Truncate
 export const Truncation: Story = {
-	render: () => (
+	render: (args) => (
 		<div
 			style={{
 				display: "flex",
@@ -216,12 +216,12 @@ export const Truncation: Story = {
 				width: "300px",
 			}}
 		>
-			<Text truncate={false}>
+			<Text {...args} truncate={false}>
 				This is a very long text that will wrap to multiple lines when it
 				exceeds the container width. No truncation applied.
 			</Text>
 			<div style={{ height: "1px", background: "#ccc" }} />
-			<Text truncate>
+			<Text {...args} truncate>
 				This is a very long text that will be truncated with ellipsis when it
 				exceeds the container width. Truncation applied.
 			</Text>
@@ -231,7 +231,7 @@ export const Truncation: Story = {
 
 // Typography showcase
 export const TypographyShowcase: Story = {
-	render: () => (
+	render: (args) => (
 		<div
 			style={{
 				maxWidth: "600px",
@@ -241,19 +241,19 @@ export const TypographyShowcase: Story = {
 			}}
 		>
 			<div>
-				<Text as="h1" size="display-large" weight="bold" intent="primary">
+				<Text {...args} as="h1" size="display-large" weight="bold" intent="primary">
 					Typography System
 				</Text>
-				<Text size="large" intent="neutral">
+				<Text {...args} size="large" intent="neutral">
 					A comprehensive text component with design tokens
 				</Text>
 			</div>
 
 			<div>
-				<Text as="h2" size="display-small" weight="semibold">
+				<Text {...args} as="h2" size="display-small" weight="semibold">
 					Introduction
 				</Text>
-				<Text>
+				<Text {...args}>
 					The Text component provides a consistent way to render text across
 					your application. It supports various sizes, weights, colors, and
 					semantic HTML elements.
@@ -261,37 +261,24 @@ export const TypographyShowcase: Story = {
 			</div>
 
 			<div>
-				<Text as="h3" size="xlarge" weight="semibold">
+				<Text {...args} as="h3" size="xlarge" weight="semibold">
 					Features
 				</Text>
 				<ul style={{ marginTop: "8px" }}>
-					<Text as="li">Semantic HTML elements (h1-h6, p, span, div)</Text>
-					<Text as="li">8 size options from xs to display-lg</Text>
-					<Text as="li">4 weight options from regular to bold</Text>
-					<Text as="li">6 intent colors plus inherit</Text>
-					<Text as="li">Text alignment and truncation support</Text>
+					<Text {...args} as="li">Semantic HTML elements (h1-h6, p, span, div)</Text>
+					<Text {...args} as="li">8 size options from xs to display-lg</Text>
+					<Text {...args} as="li">4 weight options from regular to bold</Text>
+					<Text {...args} as="li">6 intent colors plus inherit</Text>
+					<Text {...args} as="li">Text alignment and truncation support</Text>
 				</ul>
 			</div>
 
 			<div>
-				<Text size="small" intent="neutral">
+				<Text {...args} size="small" intent="neutral">
 					Built with TypeScript and Vanilla Extract for type safety and
 					zero-runtime CSS.
 				</Text>
 			</div>
 		</div>
 	),
-};
-
-// Interactive playground
-export const Playground: Story = {
-	args: {
-		children: "Customize me!",
-		as: "p",
-		size: "medium",
-		weight: "regular",
-		intent: "inherit",
-		align: "left",
-		truncate: false,
-	},
 };
