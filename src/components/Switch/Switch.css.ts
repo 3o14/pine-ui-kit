@@ -1,6 +1,11 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+// Game 테마 클래스 이름을 문자열로 변환
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 export const container = style({
 	display: "inline-flex",
@@ -35,6 +40,12 @@ const trackBase = style({
 		},
 		"button:disabled &": {
 			cursor: "not-allowed",
+		},
+		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
 		},
 	},
 });
@@ -143,6 +154,13 @@ const thumbBase = style({
 	borderRadius: themeContract.radius.xlarge,
 	transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
 	boxShadow: themeContract.shadow.small,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
+		},
+	},
 });
 
 export const thumb = recipe({
@@ -154,8 +172,6 @@ export const thumb = recipe({
 				width: "14px",
 				height: "14px",
 				selectors: {
-					// Base UI는 data-checked/data-unchecked 속성을 사용
-					// 계산: track width(30px) - right padding(4px) - thumb width(14px) = 12px
 					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
@@ -168,7 +184,6 @@ export const thumb = recipe({
 				width: "20px",
 				height: "20px",
 				selectors: {
-					// 계산: track width(43px) - right padding(3px) - thumb width(20px) = 20px
 					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
@@ -181,7 +196,6 @@ export const thumb = recipe({
 				width: "24px",
 				height: "24px",
 				selectors: {
-					// 계산: track width(54px) - right padding(4px) - thumb width(24px) = 26px
 					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
@@ -194,7 +208,6 @@ export const thumb = recipe({
 				width: "28px",
 				height: "28px",
 				selectors: {
-					// 계산: track width(66px) - right padding(4px) - thumb width(28px) = 34px
 					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},

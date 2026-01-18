@@ -119,7 +119,7 @@ export const gameLightTheme = createTheme(semanticTokens, {
 	shadow: {
 		...foundation.shadow,
 		pixelBox: `calc(-4px) 0 0 0 black, 4px 0 0 0 black, 0 4px 0 0 black, 0 calc(-4px) 0 0 black`,
-		pixelBoxMargin: foundation.spacing.xxs, // 4px
+		pixelBoxMargin: "0",
 	},
 	component: {
 		button: {
@@ -246,7 +246,7 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 	shadow: {
 		...foundation.shadow,
 		pixelBox: `calc(-4px) 0 0 0 ${foundation.neutral.white}, 4px 0 0 0 ${foundation.neutral.white}, 0 4px 0 0 ${foundation.neutral.white}, 0 calc(-4px) 0 0 ${foundation.neutral.white}`,
-		pixelBoxMargin: foundation.spacing.xxs, // 4px
+		pixelBoxMargin: "0",
 	},
 	component: {
 		button: {
