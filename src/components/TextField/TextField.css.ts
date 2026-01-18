@@ -304,3 +304,14 @@ export const input = recipe({
 		status: "default",
 	},
 });
+
+// Textarea 전용 스타일
+export const textarea = style({
+	resize: "none",
+	minHeight: "80px",
+	scrollbarWidth: "none", // Firefox
+	"::-webkit-scrollbar": {
+		display: "none", // Chrome, Safari, Edge
+	},
+	overflow: "auto",
+});

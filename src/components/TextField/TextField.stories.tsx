@@ -70,6 +70,22 @@ const meta = {
 				defaultValue: { summary: "false" },
 			},
 		},
+		multiline: {
+			control: "boolean",
+			description: "Whether to render as textarea",
+			table: {
+				type: { summary: "boolean" },
+				defaultValue: { summary: "false" },
+			},
+		},
+		rows: {
+			control: "number",
+			description: "Number of rows for textarea (only when multiline is true)",
+			table: {
+				type: { summary: "number" },
+				defaultValue: { summary: "3" },
+			},
+		},
 	},
 } satisfies Meta<typeof TextField>;
 
@@ -327,20 +343,133 @@ export const FormExample: Story = {
 				placeholder="Doe"
 				helperText="Enter your last name"
 			/>
+		<TextField
+			variant={args.variant}
+			size={args.size}
+			rounded={args.rounded}
+			status="success"
+			label="Email"
+			type="email"
+			placeholder="john.doe@example.com"
+			helperText="Email format is correct"
+		/>
+		<TextField
+			variant={args.variant}
+			size={args.size}
+			rounded={args.rounded}
+			label="Phone"
+			type="tel"
+			placeholder="+1 (555) 000-0000"
+			helperText="Include country code"
+		/>
+		</div>
+	),
+	args: {
+		variant: "outline",
+	},
+};
+
+// Multiline (Textarea)
+export const Multiline: Story = {
+	render: (args) => (
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				gap: "16px",
+				width: "400px",
+			}}
+		>
 			<TextField
-				{...args}
-				label="Email"
-				type="email"
-				placeholder="john.doe@example.com"
-				status="success"
-				helperText="Email format is correct"
+				variant={args.variant}
+				size={args.size}
+				rounded={args.rounded}
+				multiline
+				rows={3}
+				label="Message"
+				placeholder="Enter your message..."
+				helperText="This is a textarea"
+			/>
+		</div>
+	),
+	args: {
+		variant: "outline",
+	},
+};
+
+// Multiline with Different Rows
+export const MultilineRows: Story = {
+	render: (args) => (
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				gap: "16px",
+				width: "400px",
+			}}
+		>
+			<TextField
+				variant={args.variant}
+				size={args.size}
+				rounded={args.rounded}
+				multiline
+				rows={2}
+				label="Short Message (2 rows)"
+				placeholder="Short message..."
 			/>
 			<TextField
-				{...args}
-				label="Phone"
-				type="tel"
-				placeholder="+1 (555) 000-0000"
-				helperText="Include country code"
+				variant={args.variant}
+				size={args.size}
+				rounded={args.rounded}
+				multiline
+				rows={4}
+				label="Medium Message (4 rows)"
+				placeholder="Medium message..."
+			/>
+			<TextField
+				variant={args.variant}
+				size={args.size}
+				rounded={args.rounded}
+				multiline
+				rows={6}
+				label="Long Message (6 rows)"
+				placeholder="Long message..."
+			/>
+		</div>
+	),
+	args: {
+		variant: "outline",
+	},
+};
+
+// Multiline Variants
+export const MultilineVariants: Story = {
+	render: (args) => (
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				gap: "16px",
+				width: "400px",
+			}}
+		>
+			<TextField
+				variant="outline"
+				size={args.size}
+				rounded={args.rounded}
+				multiline
+				rows={3}
+				label="Outline Textarea"
+				placeholder="Outline variant..."
+			/>
+			<TextField
+				variant="filled"
+				size={args.size}
+				rounded={args.rounded}
+				multiline
+				rows={3}
+				label="Filled Textarea"
+				placeholder="Filled variant..."
 			/>
 		</div>
 	),
