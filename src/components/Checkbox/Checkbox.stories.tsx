@@ -11,9 +11,7 @@ const meta = {
 	tags: ["autodocs"],
 	args: {
 		size: "medium",
-		variant: "square",
 		intent: "primary",
-		rounded: "medium",
 		checked: false,
 		disabled: false,
 	},
@@ -25,15 +23,6 @@ const meta = {
 			table: {
 				type: { summary: "CheckboxSize" },
 				defaultValue: { summary: "medium" },
-			},
-		},
-		variant: {
-			control: "select",
-			options: ["circle", "square"],
-			description: "체크박스 모양 (동그라미/네모)",
-			table: {
-				type: { summary: "CheckboxVariant" },
-				defaultValue: { summary: "square" },
 			},
 		},
 		intent: {
@@ -50,15 +39,6 @@ const meta = {
 			table: {
 				type: { summary: "CheckboxIntent" },
 				defaultValue: { summary: "primary" },
-			},
-		},
-		rounded: {
-			control: "select",
-			options: ["small", "medium", "large"],
-			description: "체크박스 모서리 둥글기",
-			table: {
-				type: { summary: "CheckboxRounded" },
-				defaultValue: { summary: "medium" },
 			},
 		},
 		label: {
@@ -94,6 +74,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	args: {
 		label: "Default Checkbox (Uncontrolled)",
+		checked: true,
 	},
 };
 
@@ -123,7 +104,7 @@ export const Uncontrolled: Story = {
 // Without Label
 export const WithoutLabel: Story = {
 	args: {
-		checked: false,
+		checked: true,
 	},
 };
 
@@ -157,37 +138,6 @@ export const Sizes: Story = {
 	),
 };
 
-// Variants
-export const Variants: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<Checkbox
-				variant="square"
-				intent="primary"
-				label="Square Primary"
-				checked
-			/>
-			<Checkbox
-				variant="circle"
-				intent="primary"
-				label="Circle Primary"
-				checked
-			/>
-			<Checkbox
-				variant="square"
-				intent="success"
-				label="Square Success"
-				checked
-			/>
-			<Checkbox
-				variant="circle"
-				intent="success"
-				label="Circle Success"
-				checked
-			/>
-		</div>
-	),
-};
 
 // Intents (Colors)
 export const Intents: Story = {
@@ -247,49 +197,6 @@ export const SizesAndIntents: Story = {
 	),
 };
 
-// Variants and Intents
-export const VariantsAndIntents: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Square</h4>
-				<div
-					style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-				>
-					<Checkbox variant="square" intent="primary" label="Primary" checked />
-					<Checkbox
-						variant="square"
-						intent="secondary"
-						label="Secondary"
-						checked
-					/>
-					<Checkbox variant="square" intent="success" label="Success" checked />
-					<Checkbox variant="square" intent="warning" label="Warning" checked />
-					<Checkbox variant="square" intent="danger" label="Danger" checked />
-					<Checkbox variant="square" intent="neutral" label="Neutral" checked />
-				</div>
-			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Circle</h4>
-				<div
-					style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-				>
-					<Checkbox variant="circle" intent="primary" label="Primary" checked />
-					<Checkbox
-						variant="circle"
-						intent="secondary"
-						label="Secondary"
-						checked
-					/>
-					<Checkbox variant="circle" intent="success" label="Success" checked />
-					<Checkbox variant="circle" intent="warning" label="Warning" checked />
-					<Checkbox variant="circle" intent="danger" label="Danger" checked />
-					<Checkbox variant="circle" intent="neutral" label="Neutral" checked />
-				</div>
-			</div>
-		</div>
-	),
-};
 
 // Interactive States
 export const InteractiveStates: Story = {
