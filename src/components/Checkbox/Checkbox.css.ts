@@ -1,6 +1,11 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+// Game 테마 클래스 이름을 문자열로 변환
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 // Animations
 const checkmark = keyframes({
@@ -50,6 +55,12 @@ const checkboxBase = style({
 		},
 		"&:disabled": {
 			cursor: "not-allowed",
+		},
+		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
 		},
 	},
 });
@@ -221,5 +232,7 @@ export const checkmarkIcon = style({
 	color: "white",
 	animation: `${checkmark} 0.2s ease-in-out`,
 });
+
+
 
 
