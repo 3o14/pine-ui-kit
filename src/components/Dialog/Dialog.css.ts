@@ -119,10 +119,10 @@ export const header = style({
 	borderBottom: `1px solid ${themeContract.color.surface.divider}`,
 	gap: themeContract.spacing.md,
 	selectors: {
-		// Game 테마: 구분선을 pixelBox shadow로 대체
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			borderBottom: "1px solid transparent",
 			boxShadow: `0 4px 0 0 ${themeContract.color.surface.divider}`,
+			padding: themeContract.spacing.md,
 		},
 	},
 });
@@ -168,6 +168,11 @@ export const body = style({
 	fontSize: themeContract.typography.fontSize.medium,
 	lineHeight: themeContract.typography.lineHeight.medium,
 	color: themeContract.color.surface.text,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			padding: themeContract.spacing.md,
+		},
+	},
 });
 
 export const footer = style({
@@ -178,10 +183,10 @@ export const footer = style({
 	padding: themeContract.spacing.lg,
 	borderTop: `1px solid ${themeContract.color.surface.divider}`,
 	selectors: {
-		// Game 테마: 구분선을 pixelBox shadow로 대체
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			borderTop: "1px solid transparent",
 			boxShadow: `0 -4px 0 0 ${themeContract.color.surface.divider}`,
+			padding: themeContract.spacing.md,
 		},
 	},
 });

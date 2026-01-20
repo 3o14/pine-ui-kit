@@ -120,21 +120,41 @@ export const input = recipe({
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
 				fontSize: themeContract.typography.fontSize.small,
 				lineHeight: themeContract.typography.lineHeight.small,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.xxxs} ${themeContract.spacing.xs}`,
+					},
+				},
 			},
 			medium: {
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
 				fontSize: themeContract.typography.fontSize.medium,
 				lineHeight: themeContract.typography.lineHeight.medium,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
+					},
+				},
 			},
 			large: {
 				padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
 				fontSize: themeContract.typography.fontSize.large,
 				lineHeight: themeContract.typography.lineHeight.large,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
+					},
+				},
 			},
 			xlarge: {
 				padding: `${themeContract.spacing.lg} ${themeContract.spacing.xl}`,
 				fontSize: themeContract.typography.fontSize.xlarge,
 				lineHeight: themeContract.typography.lineHeight.xlarge,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
+					},
+				},
 			},
 		},
 
