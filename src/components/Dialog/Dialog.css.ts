@@ -1,5 +1,10 @@
 import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+// Game 테마 클래스 이름을 문자열로 변환
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },
@@ -66,6 +71,12 @@ export const container = style({
 		"&[data-ending-style]": {
 			animation: `${scaleOut} 0.2s ease-in forwards`,
 		},
+		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: "0 !important",
+		},
 	},
 });
 
@@ -107,6 +118,13 @@ export const header = style({
 	padding: themeContract.spacing.lg,
 	borderBottom: `1px solid ${themeContract.color.surface.divider}`,
 	gap: themeContract.spacing.md,
+	selectors: {
+		// Game 테마: 구분선을 pixelBox shadow로 대체
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			borderBottom: "1px solid transparent",
+			boxShadow: `0 4px 0 0 ${themeContract.color.surface.divider}`,
+		},
+	},
 });
 
 export const title = style({
@@ -159,6 +177,13 @@ export const footer = style({
 	gap: themeContract.spacing.sm,
 	padding: themeContract.spacing.lg,
 	borderTop: `1px solid ${themeContract.color.surface.divider}`,
+	selectors: {
+		// Game 테마: 구분선을 pixelBox shadow로 대체
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			borderTop: "1px solid transparent",
+			boxShadow: `0 -4px 0 0 ${themeContract.color.surface.divider}`,
+		},
+	},
 });
 
 export const description = style({
