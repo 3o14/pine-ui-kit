@@ -1,6 +1,11 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+// Game 테마 클래스 이름을 문자열로 변환
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 const slideDown = keyframes({
 	from: {
@@ -52,6 +57,15 @@ const triggerBase = style({
 		opacity: 0.5,
 		cursor: "not-allowed",
 	},
+	selectors: {
+		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			border: "1px solid transparent",
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
+		},
+	},
 });
 
 export const trigger = recipe({
@@ -64,18 +78,36 @@ export const trigger = recipe({
 				fontSize: themeContract.typography.fontSize.small,
 				lineHeight: themeContract.typography.lineHeight.small,
 				minHeight: "32px",
+				selectors: {
+					// Game 테마: padding 감소
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.xxxs} ${themeContract.spacing.xs}`,
+					},
+				},
 			},
 			medium: {
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
 				fontSize: themeContract.typography.fontSize.medium,
 				lineHeight: themeContract.typography.lineHeight.medium,
 				minHeight: "40px",
+				selectors: {
+					// Game 테마: padding 감소
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
+					},
+				},
 			},
 			large: {
 				padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
 				fontSize: themeContract.typography.fontSize.large,
 				lineHeight: themeContract.typography.lineHeight.large,
 				minHeight: "48px",
+				selectors: {
+					// Game 테마: padding 감소
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
+					},
+				},
 			},
 		},
 
@@ -115,6 +147,17 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.primary.surface}`,
 					},
+					// Game 테마: Trigger 테두리는 검정색으로 고정
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
 				},
 			},
 		},
@@ -130,6 +173,17 @@ export const trigger = recipe({
 					},
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.secondary.surface}`,
+					},
+					// Game 테마: Trigger 테두리는 검정색으로 고정
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
+						boxShadow: themeContract.shadow.pixelBox,
 					},
 				},
 			},
@@ -147,6 +201,17 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.success.surface}`,
 					},
+					// Game 테마: Trigger 테두리는 검정색으로 고정
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
 				},
 			},
 		},
@@ -162,6 +227,17 @@ export const trigger = recipe({
 					},
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.warning.surface}`,
+					},
+					// Game 테마: Trigger 테두리는 검정색으로 고정
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
+						boxShadow: themeContract.shadow.pixelBox,
 					},
 				},
 			},
@@ -179,6 +255,17 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.danger.surface}`,
 					},
+					// Game 테마: Trigger 테두리는 검정색으로 고정
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
 				},
 			},
 		},
@@ -194,6 +281,17 @@ export const trigger = recipe({
 					},
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.neutral.surface}`,
+					},
+					// Game 테마: Trigger 테두리는 검정색으로 고정
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
+						boxShadow: themeContract.shadow.pixelBox,
+					},
+					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
+						boxShadow: themeContract.shadow.pixelBox,
 					},
 				},
 			},
@@ -240,6 +338,61 @@ export const menu = style({
 	selectors: {
 		"&[data-state='closing']": {
 			animation: `${slideUp} 0.15s ease-in`,
+		},
+		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			border: "1px solid transparent",
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
+		},
+	},
+});
+
+// Game 테마: intent별 색상 pixelBox shadow 적용 (별도 style로 분리하여 우선순위 확보)
+export const menuPrimaryIntent = style({
+	selectors: {
+		[`.${gameLightThemeClass} &[data-intent='primary'], .${gameDarkThemeClass} &[data-intent='primary']`]: {
+			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border} !important`,
+		},
+	},
+});
+
+export const menuSecondaryIntent = style({
+	selectors: {
+		[`.${gameLightThemeClass} &[data-intent='secondary'], .${gameDarkThemeClass} &[data-intent='secondary']`]: {
+			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border} !important`,
+		},
+	},
+});
+
+export const menuSuccessIntent = style({
+	selectors: {
+		[`.${gameLightThemeClass} &[data-intent='success'], .${gameDarkThemeClass} &[data-intent='success']`]: {
+			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border} !important`,
+		},
+	},
+});
+
+export const menuWarningIntent = style({
+	selectors: {
+		[`.${gameLightThemeClass} &[data-intent='warning'], .${gameDarkThemeClass} &[data-intent='warning']`]: {
+			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border} !important`,
+		},
+	},
+});
+
+export const menuDangerIntent = style({
+	selectors: {
+		[`.${gameLightThemeClass} &[data-intent='danger'], .${gameDarkThemeClass} &[data-intent='danger']`]: {
+			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border} !important`,
+		},
+	},
+});
+
+export const menuNeutralIntent = style({
+	selectors: {
+		[`.${gameLightThemeClass} &[data-intent='neutral'], .${gameDarkThemeClass} &[data-intent='neutral']`]: {
+			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border} !important`,
 		},
 	},
 });

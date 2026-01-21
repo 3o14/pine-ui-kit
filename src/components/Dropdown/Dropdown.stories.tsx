@@ -121,7 +121,7 @@ export const Basic: Story = {
 					{...args}
 					value={value}
 					onValueChange={(newValue) => {
-						setValue(newValue);
+						setValue(newValue ?? "");
 						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Select a fruit"}
@@ -149,7 +149,7 @@ export const WithDefaultValue: Story = {
 					{...args}
 					value={value}
 					onValueChange={(newValue) => {
-						setValue(newValue);
+						setValue(newValue ?? "");
 						args.onValueChange?.(newValue);
 					}}
 				/>
@@ -177,21 +177,21 @@ export const Sizes: Story = {
 				<Dropdown
 					options={sampleOptions}
 					value={value1}
-					onValueChange={setValue1}
+					onValueChange={(value) => setValue1(value ?? "")}
 					size="small"
 					placeholder="Small"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
-					onValueChange={setValue2}
+					onValueChange={(value) => setValue2(value ?? "")}
 					size="medium"
 					placeholder="Medium"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
-					onValueChange={setValue3}
+					onValueChange={(value) => setValue3(value ?? "")}
 					size="large"
 					placeholder="Large"
 				/>
@@ -222,42 +222,42 @@ export const Intents: Story = {
 				<Dropdown
 					options={sampleOptions}
 					value={value1}
-					onValueChange={setValue1}
+					onValueChange={(value) => setValue1(value ?? "")}
 					intent="primary"
 					placeholder="Primary"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
-					onValueChange={setValue2}
+					onValueChange={(value) => setValue2(value ?? "")}
 					intent="secondary"
 					placeholder="Secondary"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
-					onValueChange={setValue3}
+					onValueChange={(value) => setValue3(value ?? "")}
 					intent="success"
 					placeholder="Success"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value4}
-					onValueChange={setValue4}
+					onValueChange={(value) => setValue4(value ?? "")}
 					intent="warning"
 					placeholder="Warning"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value5}
-					onValueChange={setValue5}
+					onValueChange={(value) => setValue5(value ?? "")}
 					intent="danger"
 					placeholder="Danger"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value6}
-					onValueChange={setValue6}
+					onValueChange={(value) => setValue6(value ?? "")}
 					intent="neutral"
 					placeholder="Neutral"
 				/>
@@ -285,21 +285,21 @@ export const Rounded: Story = {
 				<Dropdown
 					options={sampleOptions}
 					value={value1}
-					onValueChange={setValue1}
+					onValueChange={(value) => setValue1(value ?? "")}
 					rounded="small"
 					placeholder="Small rounded"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value2}
-					onValueChange={setValue2}
+					onValueChange={(value) => setValue2(value ?? "")}
 					rounded="medium"
 					placeholder="Medium rounded"
 				/>
 				<Dropdown
 					options={sampleOptions}
 					value={value3}
-					onValueChange={setValue3}
+					onValueChange={(value) => setValue3(value ?? "")}
 					rounded="large"
 					placeholder="Large rounded"
 				/>
@@ -326,7 +326,7 @@ export const FullWidth: Story = {
 					{...args}
 					value={value}
 					onValueChange={(newValue) => {
-						setValue(newValue);
+						setValue(newValue ?? "");
 						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Full width dropdown"}
@@ -375,41 +375,10 @@ export const WithDisabledOptions: Story = {
 					options={optionsWithDisabled}
 					value={value}
 					onValueChange={(newValue) => {
-						setValue(newValue);
+						setValue(newValue ?? "");
 						args.onValueChange?.(newValue);
 					}}
 					placeholder={args.placeholder ?? "Select a fruit"}
-				/>
-			</div>
-		);
-	},
-};
-
-// Many Options (Scrollable)
-export const ManyOptions: Story = {
-	render: function DropdownManyOptions(args) {
-		const [value, setValue] = React.useState<string>(args.value ?? "");
-
-		React.useEffect(() => {
-			setValue(args.value ?? "");
-		}, [args.value]);
-
-		const manyOptions = Array.from({ length: 20 }, (_, i) => ({
-			value: `option-${i + 1}`,
-			label: `Option ${i + 1}`,
-		}));
-
-		return (
-			<div style={{ width: "300px" }}>
-				<Dropdown
-					{...args}
-					options={manyOptions}
-					value={value}
-					onValueChange={(newValue) => {
-						setValue(newValue);
-						args.onValueChange?.(newValue);
-					}}
-					placeholder={args.placeholder ?? "Select an option"}
 				/>
 			</div>
 		);
@@ -469,7 +438,7 @@ export const FormExample: Story = {
 					<Dropdown
 						options={countries}
 						value={country}
-						onValueChange={setCountry}
+						onValueChange={(value) => setCountry(value ?? "")}
 						placeholder="Select your country"
 						fullWidth
 					/>
@@ -489,7 +458,7 @@ export const FormExample: Story = {
 					<Dropdown
 						options={cities}
 						value={city}
-						onValueChange={setCity}
+						onValueChange={(value) => setCity(value ?? "")}
 						placeholder="Select your city"
 						fullWidth
 					/>
@@ -509,7 +478,7 @@ export const FormExample: Story = {
 					<Dropdown
 						options={languages}
 						value={language}
-						onValueChange={setLanguage}
+						onValueChange={(value) => setLanguage(value ?? "")}
 						placeholder="Select language"
 						fullWidth
 					/>
@@ -533,93 +502,6 @@ export const FormExample: Story = {
 					Submit
 				</button>
 			</form>
-		);
-	},
-};
-
-// Controlled vs Uncontrolled
-export const ControlledExample: Story = {
-	args: {
-		value: "cherry",
-	},
-	render: function DropdownControlled(args) {
-		const [value, setValue] = React.useState<string>(args.value ?? "cherry");
-
-		React.useEffect(() => {
-			setValue(args.value ?? "cherry");
-		}, [args.value]);
-
-		return (
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					gap: "1rem",
-					width: "300px",
-				}}
-			>
-				<Dropdown
-					{...args}
-					value={value}
-					onValueChange={(newValue) => {
-						setValue(newValue);
-						args.onValueChange?.(newValue);
-					}}
-				/>
-				<p>
-					Selected value: <strong>{value || "None"}</strong>
-				</p>
-				<div style={{ display: "flex", gap: "0.5rem" }}>
-					<button
-						type="button"
-						onClick={() => setValue("apple")}
-						style={{
-							padding: "0.5rem 1rem",
-							borderRadius: "4px",
-							border: "1px solid #ddd",
-							cursor: "pointer",
-						}}
-					>
-						Select Apple
-					</button>
-					<button
-						type="button"
-						onClick={() => setValue("")}
-						style={{
-							padding: "0.5rem 1rem",
-							borderRadius: "4px",
-							border: "1px solid #ddd",
-							cursor: "pointer",
-						}}
-					>
-						Clear
-					</button>
-				</div>
-			</div>
-		);
-	},
-};
-
-// Playground - args를 직접 사용하여 Controls 패널에서 모든 props를 테스트할 수 있음
-export const Playground: Story = {
-	render: function DropdownPlayground(args) {
-		const [value, setValue] = React.useState<string>(args.value ?? "");
-
-		React.useEffect(() => {
-			setValue(args.value ?? "");
-		}, [args.value]);
-
-		return (
-			<div style={{ width: "300px" }}>
-				<Dropdown
-					{...args}
-					value={value}
-					onValueChange={(newValue) => {
-						setValue(newValue);
-						args.onValueChange?.(newValue);
-					}}
-				/>
-			</div>
 		);
 	},
 };

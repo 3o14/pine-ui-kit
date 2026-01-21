@@ -118,7 +118,14 @@ export const Dropdown = ({
 					<BaseSelect.Positioner sideOffset={4}>
 						<BaseSelect.Popup
 							className={clsx(
-								styles.menu							)}
+								styles.menu,
+								intent === "primary" && styles.menuPrimaryIntent,
+								intent === "secondary" && styles.menuSecondaryIntent,
+								intent === "success" && styles.menuSuccessIntent,
+								intent === "warning" && styles.menuWarningIntent,
+								intent === "danger" && styles.menuDangerIntent,
+								intent === "neutral" && styles.menuNeutralIntent
+							)}
 							data-intent={intent}
 						>
 							<BaseSelect.List>
