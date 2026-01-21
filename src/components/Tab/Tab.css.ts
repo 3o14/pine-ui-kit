@@ -8,11 +8,16 @@ export const root = style({
 	width: "100%",
 });
 
+export const tabListWrapper = style({
+	position: "relative",
+});
+
 export const tabList = recipe({
 	base: {
 		display: "flex",
 		gap: themeContract.spacing.xs,
 		borderBottom: `2px solid ${themeContract.color.surface.divider}`,
+		position: "relative",
 	},
 
 	variants: {
@@ -88,18 +93,6 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.primary.surface,
-						borderBottomColor: themeContract.color.primary.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "primary", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.primary.surface,
 					},
 				},
 			},
@@ -111,18 +104,6 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.secondary.surface,
-						borderBottomColor: themeContract.color.secondary.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "secondary", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.secondary.surface,
 					},
 				},
 			},
@@ -134,18 +115,6 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.success.surface,
-						borderBottomColor: themeContract.color.success.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "success", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.success.surface,
 					},
 				},
 			},
@@ -157,18 +126,6 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.warning.surface,
-						borderBottomColor: themeContract.color.warning.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "warning", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.warning.surface,
 					},
 				},
 			},
@@ -180,18 +137,6 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.danger.surface,
-						borderBottomColor: themeContract.color.danger.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "danger", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.danger.surface,
 					},
 				},
 			},
@@ -203,24 +148,57 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.neutral.surface,
-						borderBottomColor: themeContract.color.neutral.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "neutral", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.neutral.surface,
 					},
 				},
 			},
 		},
 	],
 
+	defaultVariants: {
+		intent: "primary",
+		orientation: "horizontal",
+	},
+});
+
+export const indicator = recipe({
+	base: {
+		position: "absolute",
+		backgroundColor: themeContract.color.primary.surface,
+		transition: "transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out, left 0.3s ease-in-out, top 0.3s ease-in-out",
+		zIndex: 1,
+	},
+	variants: {
+		intent: {
+			primary: {
+				backgroundColor: themeContract.color.primary.surface,
+			},
+			secondary: {
+				backgroundColor: themeContract.color.secondary.surface,
+			},
+			success: {
+				backgroundColor: themeContract.color.success.surface,
+			},
+			warning: {
+				backgroundColor: themeContract.color.warning.surface,
+			},
+			danger: {
+				backgroundColor: themeContract.color.danger.surface,
+			},
+			neutral: {
+				backgroundColor: themeContract.color.neutral.surface,
+			},
+		},
+		orientation: {
+			horizontal: {
+				bottom: 0,
+				height: "2px",
+			},
+			vertical: {
+				right: 0,
+				width: "2px",
+			},
+		},
+	},
 	defaultVariants: {
 		intent: "primary",
 		orientation: "horizontal",
