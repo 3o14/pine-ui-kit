@@ -2,8 +2,6 @@
 "pine-ui-kit": minor
 ---
 
-utab indicator
-
 **New Features:**
 - Tab indicator
 - game theming Dropdown
