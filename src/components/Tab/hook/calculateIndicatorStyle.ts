@@ -19,7 +19,6 @@ export function calculateIndicatorStyle(
 			left: `${tabRect.left - tabListRect.left}px`,
 			width: `${tabRect.width}px`,
 			height: "2px",
-			bottom: "0",
 		};
 	}
 
@@ -27,6 +26,5 @@ export function calculateIndicatorStyle(
 		top: `${tabRect.top - tabListRect.top}px`,
 		height: `${tabRect.height}px`,
 		width: "2px",
-		right: "0",
 	};
 }

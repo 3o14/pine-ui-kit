@@ -71,25 +71,29 @@ export const Tab = ({
 						orientation,
 					})}
 				>
-					{tabs.map((tab) => (
-						<BaseUITabs.Tab
-							key={tab.value}
-							ref={(el) => {
-								if (el && el instanceof HTMLButtonElement) {
-									tabRefs.current.set(tab.value, el);
-								} else {
-									tabRefs.current.delete(tab.value);
-								}
-							}}
-							value={tab.value}
-							disabled={tab.disabled}
-							className={clsx(
-								styles.tab({ intent, orientation })
-							)}
-						>
-							{tab.label}
-						</BaseUITabs.Tab>
-					))}
+					{tabs.map((tab) => {
+						const isSelected = currentValue === tab.value;
+						return (
+							<BaseUITabs.Tab
+								key={tab.value}
+								ref={(el) => {
+									if (el && el instanceof HTMLButtonElement) {
+										tabRefs.current.set(tab.value, el);
+									} else {
+										tabRefs.current.delete(tab.value);
+									}
+								}}
+								value={tab.value}
+								disabled={tab.disabled}
+								className={clsx(
+									styles.tab({ intent, orientation }),
+									isSelected && styles.tabSelected({ intent })
+								)}
+							>
+								{tab.label}
+							</BaseUITabs.Tab>
+						);
+					})}
 					<div
 						className={styles.indicator({
 							intent,
