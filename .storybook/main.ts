@@ -1,6 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import { mergeConfig } from "vite";
 import { resolve } from "path";
 
 const config: StorybookConfig = {

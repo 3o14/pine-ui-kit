@@ -3,20 +3,6 @@
  * 원시 색상 팔레트 정의 (테마와 무관한 순수 값)
  */
 
-// 색상 스케일 생성 헬퍼
-const createColorScale = (base: string) => ({
-	50: base + "0D", // 5% opacity
-	100: base + "1A", // 10% opacity
-	200: base + "33", // 20% opacity
-	300: base + "4D", // 30% opacity
-	400: base + "66", // 40% opacity
-	500: base, // base color
-	600: base + "CC", // 80% opacity (darker)
-	700: base + "B3", // 70% opacity
-	800: base + "99", // 60% opacity
-	900: base + "80", // 50% opacity
-});
-
 // Primary 색상 (Purple 계열)
 export const purple = {
 	50: "#faf5ff",

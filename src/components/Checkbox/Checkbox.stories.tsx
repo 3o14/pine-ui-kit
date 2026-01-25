@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Checkbox } from "./Checkbox";
 
 const meta = {
@@ -78,9 +78,6 @@ export const Default: Story = {
 	render: (args) => {
 		const Component = () => {
 			const [checked, setChecked] = useState(args.checked ?? false);
-			useEffect(() => {
-				setChecked(args.checked ?? false);
-			}, [args.checked]);
 			return (
 				<Checkbox
 					{...args}
@@ -101,9 +98,6 @@ export const Checked: Story = {
 	render: (args) => {
 		const Component = () => {
 			const [checked, setChecked] = useState(args.checked ?? true);
-			useEffect(() => {
-				setChecked(args.checked ?? true);
-			}, [args.checked]);
 			return (
 				<Checkbox
 					{...args}
