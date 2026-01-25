@@ -1,4 +1,5 @@
 import { lightColors, darkColors, type ColorTokens } from "./colors";
+import type { ThemeName } from "./themes";
 
 export type AppearanceMode = "light" | "dark";
 
@@ -45,6 +46,13 @@ export const appearanceTheme: Record<AppearanceMode, AppearanceThemeConfig> = {
 		bodyBackground: darkColors.surface.background,
 		bodyText: darkColors.surface.text,
 	},
+};
+
+export const getAppearanceTheme = (
+	_theme: ThemeName,
+	appearance: AppearanceMode
+): AppearanceThemeConfig => {
+	return appearanceTheme[appearance];
 };
 
 export const applyAppearanceTheme = (mode: AppearanceMode) => {

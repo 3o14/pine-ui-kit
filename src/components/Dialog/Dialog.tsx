@@ -64,7 +64,6 @@ export const Dialog = ({
 }: DialogProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-
 	const handleOpenChange = (newOpen: boolean) => {
 		onOpenChange?.(newOpen);
 		if (!newOpen) {

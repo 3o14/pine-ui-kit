@@ -1,6 +1,10 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 export const label = recipe({
 	base: {
@@ -115,21 +119,41 @@ export const input = recipe({
 				padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
 				fontSize: themeContract.typography.fontSize.small,
 				lineHeight: themeContract.typography.lineHeight.small,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.xxxs} ${themeContract.spacing.xs}`,
+					},
+				},
 			},
 			medium: {
 				padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
 				fontSize: themeContract.typography.fontSize.medium,
 				lineHeight: themeContract.typography.lineHeight.medium,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
+					},
+				},
 			},
 			large: {
 				padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
 				fontSize: themeContract.typography.fontSize.large,
 				lineHeight: themeContract.typography.lineHeight.large,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
+					},
+				},
 			},
 			xlarge: {
 				padding: `${themeContract.spacing.lg} ${themeContract.spacing.xl}`,
 				fontSize: themeContract.typography.fontSize.xlarge,
 				lineHeight: themeContract.typography.lineHeight.xlarge,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						padding: `${themeContract.spacing.md} ${themeContract.spacing.lg}`,
+					},
+				},
 			},
 		},
 
@@ -156,7 +180,6 @@ export const input = recipe({
 	},
 
 	compoundVariants: [
-		// Outline - Default
 		{
 			variants: { variant: "outline", status: "default" },
 			style: {
@@ -165,9 +188,15 @@ export const input = recipe({
 					borderColor: themeContract.color.primary.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.primary.surface}20`,
 				},
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.surface.outline}, 4px 0 0 0 ${themeContract.color.surface.outline}, 0 4px 0 0 ${themeContract.color.surface.outline}, 0 calc(-4px) 0 0 ${themeContract.color.surface.outline}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+				},
 			},
 		},
-		// Outline - Error
 		{
 			variants: { variant: "outline", status: "error" },
 			style: {
@@ -176,9 +205,15 @@ export const input = recipe({
 					borderColor: themeContract.color.danger.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.danger.surface}20`,
 				},
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+				},
 			},
 		},
-		// Outline - Success
 		{
 			variants: { variant: "outline", status: "success" },
 			style: {
@@ -187,10 +222,16 @@ export const input = recipe({
 					borderColor: themeContract.color.success.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.success.surface}20`,
 				},
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						border: "1px solid transparent",
+						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
+						margin: themeContract.shadow.pixelBoxMargin,
+					},
+				},
 			},
 		},
 
-		// Filled - Default
 		{
 			variants: { variant: "filled", status: "default" },
 			style: {
@@ -202,7 +243,6 @@ export const input = recipe({
 				},
 			},
 		},
-		// Filled - Error
 		{
 			variants: { variant: "filled", status: "error" },
 			style: {
@@ -214,7 +254,6 @@ export const input = recipe({
 				},
 			},
 		},
-		// Filled - Success
 		{
 			variants: { variant: "filled", status: "success" },
 			style: {
@@ -227,7 +266,6 @@ export const input = recipe({
 			},
 		},
 
-		// Rounded variants for outline
 		{
 			variants: { variant: "outline", rounded: "small" },
 			style: {
@@ -247,7 +285,6 @@ export const input = recipe({
 			},
 		},
 
-		// Rounded variants for filled
 		{
 			variants: { variant: "filled", rounded: "small" },
 			style: {
@@ -274,4 +311,14 @@ export const input = recipe({
 		variant: "outline",
 		status: "default",
 	},
+});
+
+export const textarea = style({
+	resize: "none",
+	minHeight: "80px",
+	scrollbarWidth: "none",
+	"::-webkit-scrollbar": {
+		display: "none",
+	},
+	overflow: "auto",
 });

@@ -8,8 +8,10 @@ import { Text } from "../Text/Text";
 export type SwitchSize = "small" | "medium" | "large" | "xlarge";
 export type SwitchIntent = ColorIntent;
 
-export interface SwitchProps
-	extends Omit<React.HTMLAttributes<HTMLElement>, "onChange"> {
+export interface SwitchProps extends Omit<
+	React.HTMLAttributes<HTMLElement>,
+	"onChange"
+> {
 	size?: SwitchSize;
 	intent?: SwitchIntent;
 	label?: string;
@@ -48,7 +50,6 @@ export const Switch = ({
 }: SwitchProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-
 	return (
 		<label className={clsx(themeClass, styles.container, className)}>
 			<BaseSwitch.Root
@@ -62,11 +63,12 @@ export const Switch = ({
 				className={styles.switchRoot}
 			>
 				<span
-					className={styles.track({
-						size,
-						intent,
-					})}
-					data-state={checked ? "checked" : "unchecked"}
+					className={clsx(
+						styles.track({
+							size,
+							intent,
+						})
+					)}
 				>
 					<BaseSwitch.Thumb
 						className={styles.thumb({

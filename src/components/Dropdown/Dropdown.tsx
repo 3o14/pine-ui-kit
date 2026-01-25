@@ -8,6 +8,15 @@ export type DropdownSize = "small" | "medium" | "large";
 export type DropdownRounded = "small" | "medium" | "large";
 export type DropdownIntent = ColorIntent;
 
+const menuIntentStyles: Record<ColorIntent, typeof styles.menuPrimaryIntent> = {
+	primary: styles.menuPrimaryIntent,
+	secondary: styles.menuSecondaryIntent,
+	success: styles.menuSuccessIntent,
+	warning: styles.menuWarningIntent,
+	danger: styles.menuDangerIntent,
+	neutral: styles.menuNeutralIntent,
+};
+
 export interface DropdownOption {
 	value: string;
 	label: string;
@@ -60,7 +69,6 @@ export const Dropdown = ({
 }: DropdownProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
-
 	return (
 		<BaseSelect.Root
 			value={value}
@@ -117,7 +125,10 @@ export const Dropdown = ({
 
 				<BaseSelect.Portal>
 					<BaseSelect.Positioner sideOffset={4}>
-						<BaseSelect.Popup className={styles.menu} data-intent={intent}>
+						<BaseSelect.Popup
+							className={clsx(styles.menu, menuIntentStyles[intent])}
+							data-intent={intent}
+						>
 							<BaseSelect.List>
 								{options.map((option) => (
 									<BaseSelect.Item

@@ -1,20 +1,14 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { themeContract } from "@/tokens";
-import {
-	fontSize,
-	fontWeight,
-	lineHeight,
-	fontFamily,
-} from "@/tokens";
+import { fontWeight } from "@/tokens";
+import { fontSize, lineHeight } from "@/tokens/typography";
 
-// Base text styles
 export const base = style({
-	fontFamily: fontFamily.sans,
+	fontFamily: themeContract.typography.fontFamily.sans,
 	margin: 0,
 	padding: 0,
 });
 
-// Size variants
 export const sizeVariants = styleVariants({
 	xsmall: {
 		fontSize: fontSize.xsmall,
@@ -50,7 +44,6 @@ export const sizeVariants = styleVariants({
 	},
 });
 
-// Weight variants
 export const weightVariants = styleVariants({
 	regular: {
 		fontWeight: fontWeight.regular,
@@ -66,32 +59,30 @@ export const weightVariants = styleVariants({
 	},
 });
 
-// Color/Intent variants
 export const intentVariants = styleVariants({
 	primary: {
-		color: themeContract.color.primary.text,
+		color: themeContract.color.primary.surface,
 	},
 	secondary: {
-		color: themeContract.color.secondary.text,
+		color: themeContract.color.secondary.surface,
 	},
 	success: {
-		color: themeContract.color.success.text,
+		color: themeContract.color.success.surface,
 	},
 	warning: {
-		color: themeContract.color.warning.text,
+		color: themeContract.color.warning.surface,
 	},
 	danger: {
-		color: themeContract.color.danger.text,
+		color: themeContract.color.danger.surface,
 	},
 	neutral: {
-		color: themeContract.color.neutral.text,
+		color: themeContract.color.neutral.surface,
 	},
 	inherit: {
 		color: "inherit",
 	},
 });
 
-// Align variants
 export const alignVariants = styleVariants({
 	left: {
 		textAlign: "left",
@@ -104,7 +95,6 @@ export const alignVariants = styleVariants({
 	},
 });
 
-// Truncate style
 export const truncate = style({
 	overflow: "hidden",
 	textOverflow: "ellipsis",

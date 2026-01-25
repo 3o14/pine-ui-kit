@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import { useState } from "react";
 import { Checkbox } from "./Checkbox";
 
 const meta = {
@@ -11,9 +11,7 @@ const meta = {
 	tags: ["autodocs"],
 	args: {
 		size: "medium",
-		variant: "square",
 		intent: "primary",
-		rounded: "medium",
 		checked: false,
 		disabled: false,
 	},
@@ -25,15 +23,6 @@ const meta = {
 			table: {
 				type: { summary: "CheckboxSize" },
 				defaultValue: { summary: "medium" },
-			},
-		},
-		variant: {
-			control: "select",
-			options: ["circle", "square"],
-			description: "체크박스 모양 (동그라미/네모)",
-			table: {
-				type: { summary: "CheckboxVariant" },
-				defaultValue: { summary: "square" },
 			},
 		},
 		intent: {
@@ -50,15 +39,6 @@ const meta = {
 			table: {
 				type: { summary: "CheckboxIntent" },
 				defaultValue: { summary: "primary" },
-			},
-		},
-		rounded: {
-			control: "select",
-			options: ["small", "medium", "large"],
-			description: "체크박스 모서리 둥글기",
-			table: {
-				type: { summary: "CheckboxRounded" },
-				defaultValue: { summary: "medium" },
 			},
 		},
 		label: {
@@ -90,44 +70,46 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default (Uncontrolled - 클릭하면 자동으로 토글됨)
 export const Default: Story = {
 	args: {
-		label: "Default Checkbox (Uncontrolled)",
-	},
-};
-
-// Checked (Controlled)
-export const Checked: Story = {
-	args: {
-		label: "Checked Checkbox (Controlled)",
-		checked: true,
-	},
-};
-
-// Uncontrolled (내부 상태 관리)
-export const Uncontrolled: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<p>
-				<strong>Uncontrolled 모드:</strong> checked prop 없이 사용하면 내부에서
-				상태를 관리합니다.
-			</p>
-			<Checkbox label="그냥 클릭해보세요! (상태 자동 관리)" />
-			<Checkbox label="이것도 클릭해보세요!" intent="success" />
-			<Checkbox label="체크박스 여러 개" intent="warning" />
-		</div>
-	),
-};
-
-// Without Label
-export const WithoutLabel: Story = {
-	args: {
+		label: "Default Checkbox (Click to toggle)",
 		checked: false,
 	},
+	render: (args) => {
+		const Component = () => {
+			const [checked, setChecked] = useState(args.checked ?? false);
+			return (
+				<Checkbox
+					{...args}
+					checked={checked}
+					onCheckedChange={(checked) => setChecked(checked)}
+				/>
+			);
+		};
+		return <Component />;
+	},
 };
 
-// Disabled
+export const Checked: Story = {
+	args: {
+		label: "Checked Checkbox (Click to toggle)",
+		checked: true,
+	},
+	render: (args) => {
+		const Component = () => {
+			const [checked, setChecked] = useState(args.checked ?? true);
+			return (
+				<Checkbox
+					{...args}
+					checked={checked}
+					onCheckedChange={(checked) => setChecked(checked)}
+				/>
+			);
+		};
+		return <Component />;
+	},
+};
+
 export const Disabled: Story = {
 	args: {
 		label: "Disabled Checkbox",
@@ -136,7 +118,6 @@ export const Disabled: Story = {
 	},
 };
 
-// Disabled Checked
 export const DisabledChecked: Story = {
 	args: {
 		label: "Disabled Checked",
@@ -145,225 +126,462 @@ export const DisabledChecked: Story = {
 	},
 };
 
-// Sizes
 export const Sizes: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<Checkbox size="small" label="Small (16px)" checked />
-			<Checkbox size="medium" label="Medium (20px)" checked />
-			<Checkbox size="large" label="Large (24px)" checked />
-			<Checkbox size="xlarge" label="XLarge (28px)" checked />
-		</div>
-	),
+	render: (args) => {
+		const Component = () => {
+			const [small, setSmall] = useState(true);
+			const [medium, setMedium] = useState(true);
+			const [large, setLarge] = useState(true);
+			const [xlarge, setXlarge] = useState(true);
+			return (
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<Checkbox
+						{...args}
+						size="small"
+						label="Small (16px)"
+						checked={small}
+						onCheckedChange={setSmall}
+					/>
+					<Checkbox
+						{...args}
+						size="medium"
+						label="Medium (20px)"
+						checked={medium}
+						onCheckedChange={setMedium}
+					/>
+					<Checkbox
+						{...args}
+						size="large"
+						label="Large (24px)"
+						checked={large}
+						onCheckedChange={setLarge}
+					/>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						label="XLarge (28px)"
+						checked={xlarge}
+						onCheckedChange={setXlarge}
+					/>
+				</div>
+			);
+		};
+		return <Component />;
+	},
 };
 
-// Variants
-export const Variants: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<Checkbox
-				variant="square"
-				intent="primary"
-				label="Square Primary"
-				checked
-			/>
-			<Checkbox
-				variant="circle"
-				intent="primary"
-				label="Circle Primary"
-				checked
-			/>
-			<Checkbox
-				variant="square"
-				intent="success"
-				label="Square Success"
-				checked
-			/>
-			<Checkbox
-				variant="circle"
-				intent="success"
-				label="Circle Success"
-				checked
-			/>
-		</div>
-	),
-};
 
-// Intents (Colors)
 export const Intents: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<Checkbox intent="primary" label="Primary" checked />
-			<Checkbox intent="secondary" label="Secondary" checked />
-			<Checkbox intent="success" label="Success" checked />
-			<Checkbox intent="warning" label="Warning" checked />
-			<Checkbox intent="danger" label="Danger" checked />
-			<Checkbox intent="neutral" label="Neutral" checked />
-		</div>
-	),
+	render: (args) => {
+		const Component = () => {
+			const [primary, setPrimary] = useState(true);
+			const [secondary, setSecondary] = useState(true);
+			const [success, setSuccess] = useState(true);
+			const [warning, setWarning] = useState(true);
+			const [danger, setDanger] = useState(true);
+			const [neutral, setNeutral] = useState(true);
+			return (
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<Checkbox
+						{...args}
+						intent="primary"
+						label="Primary"
+						checked={primary}
+						onCheckedChange={setPrimary}
+					/>
+					<Checkbox
+						{...args}
+						intent="secondary"
+						label="Secondary"
+						checked={secondary}
+						onCheckedChange={setSecondary}
+					/>
+					<Checkbox
+						{...args}
+						intent="success"
+						label="Success"
+						checked={success}
+						onCheckedChange={setSuccess}
+					/>
+					<Checkbox
+						{...args}
+						intent="warning"
+						label="Warning"
+						checked={warning}
+						onCheckedChange={setWarning}
+					/>
+					<Checkbox
+						{...args}
+						intent="danger"
+						label="Danger"
+						checked={danger}
+						onCheckedChange={setDanger}
+					/>
+					<Checkbox
+						{...args}
+						intent="neutral"
+						label="Neutral"
+						checked={neutral}
+						onCheckedChange={setNeutral}
+					/>
+				</div>
+			);
+		};
+		return <Component />;
+	},
 };
 
-// All Sizes with All Intents
 export const SizesAndIntents: Story = {
-	render: () => (
-		<div style={{ display: "flex", gap: "2rem" }}>
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
-				<Checkbox size="small" intent="primary" label="Primary" checked />
-				<Checkbox size="small" intent="secondary" label="Secondary" checked />
-				<Checkbox size="small" intent="success" label="Success" checked />
-				<Checkbox size="small" intent="warning" label="Warning" checked />
-				<Checkbox size="small" intent="danger" label="Danger" checked />
-				<Checkbox size="small" intent="neutral" label="Neutral" checked />
-			</div>
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
-				<Checkbox size="medium" intent="primary" label="Primary" checked />
-				<Checkbox size="medium" intent="secondary" label="Secondary" checked />
-				<Checkbox size="medium" intent="success" label="Success" checked />
-				<Checkbox size="medium" intent="warning" label="Warning" checked />
-				<Checkbox size="medium" intent="danger" label="Danger" checked />
-				<Checkbox size="medium" intent="neutral" label="Neutral" checked />
-			</div>
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
-				<Checkbox size="large" intent="primary" label="Primary" checked />
-				<Checkbox size="large" intent="secondary" label="Secondary" checked />
-				<Checkbox size="large" intent="success" label="Success" checked />
-				<Checkbox size="large" intent="warning" label="Warning" checked />
-				<Checkbox size="large" intent="danger" label="Danger" checked />
-				<Checkbox size="large" intent="neutral" label="Neutral" checked />
-			</div>
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>XLarge</h4>
-				<Checkbox size="xlarge" intent="primary" label="Primary" checked />
-				<Checkbox size="xlarge" intent="secondary" label="Secondary" checked />
-				<Checkbox size="xlarge" intent="success" label="Success" checked />
-				<Checkbox size="xlarge" intent="warning" label="Warning" checked />
-				<Checkbox size="xlarge" intent="danger" label="Danger" checked />
-				<Checkbox size="xlarge" intent="neutral" label="Neutral" checked />
-			</div>
-		</div>
-	),
-};
+	render: (args) => {
+		const Component = () => {
+			const [states, setStates] = useState<Record<string, boolean>>({
+				"small-primary": true,
+				"small-secondary": true,
+				"small-success": true,
+				"small-warning": true,
+				"small-danger": true,
+				"small-neutral": true,
+				"medium-primary": true,
+				"medium-secondary": true,
+				"medium-success": true,
+				"medium-warning": true,
+				"medium-danger": true,
+				"medium-neutral": true,
+				"large-primary": true,
+				"large-secondary": true,
+				"large-success": true,
+				"large-warning": true,
+				"large-danger": true,
+				"large-neutral": true,
+				"xlarge-primary": true,
+				"xlarge-secondary": true,
+				"xlarge-success": true,
+				"xlarge-warning": true,
+				"xlarge-danger": true,
+				"xlarge-neutral": true,
+			});
 
-// Variants and Intents
-export const VariantsAndIntents: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Square</h4>
-				<div
-					style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-				>
-					<Checkbox variant="square" intent="primary" label="Primary" checked />
+			const handleChange = (key: string) => (checked: boolean) => {
+				setStates((prev) => ({ ...prev, [key]: checked }));
+			};
+
+			return (
+			<div style={{ display: "flex", gap: "2rem" }}>
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
 					<Checkbox
-						variant="square"
+						{...args}
+						size="small"
+						intent="primary"
+						label="Primary"
+						checked={states["small-primary"]}
+						onCheckedChange={handleChange("small-primary")}
+					/>
+					<Checkbox
+						{...args}
+						size="small"
 						intent="secondary"
 						label="Secondary"
-						checked
+						checked={states["small-secondary"]}
+						onCheckedChange={handleChange("small-secondary")}
 					/>
-					<Checkbox variant="square" intent="success" label="Success" checked />
-					<Checkbox variant="square" intent="warning" label="Warning" checked />
-					<Checkbox variant="square" intent="danger" label="Danger" checked />
-					<Checkbox variant="square" intent="neutral" label="Neutral" checked />
-				</div>
-			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Circle</h4>
-				<div
-					style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
-				>
-					<Checkbox variant="circle" intent="primary" label="Primary" checked />
 					<Checkbox
-						variant="circle"
+						{...args}
+						size="small"
+						intent="success"
+						label="Success"
+						checked={states["small-success"]}
+						onCheckedChange={handleChange("small-success")}
+					/>
+					<Checkbox
+						{...args}
+						size="small"
+						intent="warning"
+						label="Warning"
+						checked={states["small-warning"]}
+						onCheckedChange={handleChange("small-warning")}
+					/>
+					<Checkbox
+						{...args}
+						size="small"
+						intent="danger"
+						label="Danger"
+						checked={states["small-danger"]}
+						onCheckedChange={handleChange("small-danger")}
+					/>
+					<Checkbox
+						{...args}
+						size="small"
+						intent="neutral"
+						label="Neutral"
+						checked={states["small-neutral"]}
+						onCheckedChange={handleChange("small-neutral")}
+					/>
+				</div>
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
+					<Checkbox
+						{...args}
+						size="medium"
+						intent="primary"
+						label="Primary"
+						checked={states["medium-primary"]}
+						onCheckedChange={handleChange("medium-primary")}
+					/>
+					<Checkbox
+						{...args}
+						size="medium"
 						intent="secondary"
 						label="Secondary"
-						checked
+						checked={states["medium-secondary"]}
+						onCheckedChange={handleChange("medium-secondary")}
 					/>
-					<Checkbox variant="circle" intent="success" label="Success" checked />
-					<Checkbox variant="circle" intent="warning" label="Warning" checked />
-					<Checkbox variant="circle" intent="danger" label="Danger" checked />
-					<Checkbox variant="circle" intent="neutral" label="Neutral" checked />
+					<Checkbox
+						{...args}
+						size="medium"
+						intent="success"
+						label="Success"
+						checked={states["medium-success"]}
+						onCheckedChange={handleChange("medium-success")}
+					/>
+					<Checkbox
+						{...args}
+						size="medium"
+						intent="warning"
+						label="Warning"
+						checked={states["medium-warning"]}
+						onCheckedChange={handleChange("medium-warning")}
+					/>
+					<Checkbox
+						{...args}
+						size="medium"
+						intent="danger"
+						label="Danger"
+						checked={states["medium-danger"]}
+						onCheckedChange={handleChange("medium-danger")}
+					/>
+					<Checkbox
+						{...args}
+						size="medium"
+						intent="neutral"
+						label="Neutral"
+						checked={states["medium-neutral"]}
+						onCheckedChange={handleChange("medium-neutral")}
+					/>
+				</div>
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
+					<Checkbox
+						{...args}
+						size="large"
+						intent="primary"
+						label="Primary"
+						checked={states["large-primary"]}
+						onCheckedChange={handleChange("large-primary")}
+					/>
+					<Checkbox
+						{...args}
+						size="large"
+						intent="secondary"
+						label="Secondary"
+						checked={states["large-secondary"]}
+						onCheckedChange={handleChange("large-secondary")}
+					/>
+					<Checkbox
+						{...args}
+						size="large"
+						intent="success"
+						label="Success"
+						checked={states["large-success"]}
+						onCheckedChange={handleChange("large-success")}
+					/>
+					<Checkbox
+						{...args}
+						size="large"
+						intent="warning"
+						label="Warning"
+						checked={states["large-warning"]}
+						onCheckedChange={handleChange("large-warning")}
+					/>
+					<Checkbox
+						{...args}
+						size="large"
+						intent="danger"
+						label="Danger"
+						checked={states["large-danger"]}
+						onCheckedChange={handleChange("large-danger")}
+					/>
+					<Checkbox
+						{...args}
+						size="large"
+						intent="neutral"
+						label="Neutral"
+						checked={states["large-neutral"]}
+						onCheckedChange={handleChange("large-neutral")}
+					/>
+				</div>
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>XLarge</h4>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						intent="primary"
+						label="Primary"
+						checked={states["xlarge-primary"]}
+						onCheckedChange={handleChange("xlarge-primary")}
+					/>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						intent="secondary"
+						label="Secondary"
+						checked={states["xlarge-secondary"]}
+						onCheckedChange={handleChange("xlarge-secondary")}
+					/>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						intent="success"
+						label="Success"
+						checked={states["xlarge-success"]}
+						onCheckedChange={handleChange("xlarge-success")}
+					/>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						intent="warning"
+						label="Warning"
+						checked={states["xlarge-warning"]}
+						onCheckedChange={handleChange("xlarge-warning")}
+					/>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						intent="danger"
+						label="Danger"
+						checked={states["xlarge-danger"]}
+						onCheckedChange={handleChange("xlarge-danger")}
+					/>
+					<Checkbox
+						{...args}
+						size="xlarge"
+						intent="neutral"
+						label="Neutral"
+						checked={states["xlarge-neutral"]}
+						onCheckedChange={handleChange("xlarge-neutral")}
+					/>
 				</div>
 			</div>
-		</div>
-	),
+			);
+		};
+		return <Component />;
+	},
 };
 
-// Interactive States
+
 export const InteractiveStates: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Unchecked</h4>
-				<Checkbox label="Hover me" checked={false} />
-			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Checked</h4>
-				<Checkbox label="Hover me" checked={true} />
-			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Disabled</h4>
-				<Checkbox label="Disabled unchecked" checked={false} disabled />
-				<br />
-				<Checkbox label="Disabled checked" checked={true} disabled />
-			</div>
-		</div>
-	),
+	render: (args) => {
+		const Component = () => {
+			const [unchecked, setUnchecked] = useState(false);
+			const [checked, setChecked] = useState(true);
+			return (
+				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+					<div>
+						<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Unchecked (Click to toggle)</h4>
+						<Checkbox
+							{...args}
+							label="Hover me"
+							checked={unchecked}
+							onCheckedChange={setUnchecked}
+						/>
+					</div>
+					<div>
+						<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Checked (Click to toggle)</h4>
+						<Checkbox
+							{...args}
+							label="Hover me"
+							checked={checked}
+							onCheckedChange={setChecked}
+						/>
+					</div>
+					<div>
+						<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Disabled</h4>
+						<Checkbox
+							{...args}
+							label="Disabled unchecked"
+							checked={false}
+							disabled
+						/>
+						<br />
+						<Checkbox
+							{...args}
+							label="Disabled checked"
+							checked={true}
+							disabled
+						/>
+					</div>
+				</div>
+			);
+		};
+		return <Component />;
+	},
 };
 
-// Form Example
 export const FormExample: Story = {
-	render: () => (
-		<form
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				gap: "1rem",
-				maxWidth: "300px",
-			}}
-		>
-			<fieldset style={{ border: "none", padding: 0, margin: 0 }}>
-				<legend style={{ marginBottom: "1rem", fontWeight: "bold" }}>
-					Select your interests:
-				</legend>
-				<Checkbox label="Web Development" />
-				<Checkbox label="Mobile Development" />
-				<Checkbox label="UI/UX Design" checked />
-				<Checkbox label="Backend Development" />
-				<Checkbox label="DevOps" />
-			</fieldset>
-		</form>
-	),
-};
-
-// Controlled Component Example
-export const ControlledExample: Story = {
-	render: function ControlledCheckbox() {
-		const [checked, setChecked] = React.useState(false);
-
-		return (
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<Checkbox
-					label="Toggle me"
-					checked={checked}
-				onCheckedChange={(checked) => setChecked(checked)}
-				/>
-				<p>Current state: {checked ? "✅ Checked" : "⬜ Unchecked"}</p>
-				<button
-					type="button"
-					onClick={() => setChecked(!checked)}
+	render: (args) => {
+		const Component = () => {
+			const [webDev, setWebDev] = useState(false);
+			const [mobileDev, setMobileDev] = useState(false);
+			const [uiux, setUiux] = useState(true);
+			const [backend, setBackend] = useState(false);
+			const [devops, setDevops] = useState(false);
+			return (
+				<form
 					style={{
-						padding: "0.5rem 1rem",
-						cursor: "pointer",
-						borderRadius: "4px",
-						border: "1px solid #ddd",
+						display: "flex",
+						flexDirection: "column",
+						gap: "1rem",
+						maxWidth: "300px",
 					}}
 				>
-					Toggle Programmatically
-				</button>
-			</div>
-		);
+					<fieldset style={{ border: "none", padding: 0, margin: 0 }}>
+						<legend style={{ marginBottom: "1rem", fontWeight: "bold" }}>
+							Select your interests:
+						</legend>
+						<Checkbox
+							{...args}
+							label="Web Development"
+							checked={webDev}
+							onCheckedChange={setWebDev}
+						/>
+						<Checkbox
+							{...args}
+							label="Mobile Development"
+							checked={mobileDev}
+							onCheckedChange={setMobileDev}
+						/>
+						<Checkbox
+							{...args}
+							label="UI/UX Design"
+							checked={uiux}
+							onCheckedChange={setUiux}
+						/>
+						<Checkbox
+							{...args}
+							label="Backend Development"
+							checked={backend}
+							onCheckedChange={setBackend}
+						/>
+						<Checkbox
+							{...args}
+							label="DevOps"
+							checked={devops}
+							onCheckedChange={setDevops}
+						/>
+					</fieldset>
+				</form>
+			);
+		};
+		return <Component />;
 	},
 };

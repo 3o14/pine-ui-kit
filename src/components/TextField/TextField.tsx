@@ -1,13 +1,8 @@
 import { Field } from "@base-ui/react/field";
 import { Input } from "@base-ui/react/input";
 import clsx from "clsx";
-import {
-	container,
-	containerVariants,
-	input,
-	label,
-	helperText,
-} from "./TextField.css";
+import * as styles from "./TextField.css";
+const { container, containerVariants, input, label, helperText } = styles;
 import { lightTheme } from "@/tokens";
 import { useTheme } from "@/providers";
 
@@ -16,10 +11,7 @@ export type TextFieldRounded = "small" | "medium" | "large";
 export type TextFieldVariant = "outline" | "filled";
 export type TextFieldStatus = "default" | "error" | "success";
 
-export interface TextFieldProps extends Omit<
-	React.InputHTMLAttributes<HTMLInputElement>,
-	"size"
-> {
+type BaseTextFieldProps = {
 	size?: TextFieldSize;
 	rounded?: TextFieldRounded;
 	variant?: TextFieldVariant;
@@ -33,7 +25,21 @@ export interface TextFieldProps extends Omit<
 		value: unknown,
 		formValues: Record<string, unknown>
 	) => string | string[] | Promise<string | string[] | null> | null;
-}
+};
+
+type InputTextFieldProps = BaseTextFieldProps &
+	Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> & {
+		multiline?: false;
+		rows?: never;
+	};
+
+type TextareaTextFieldProps = BaseTextFieldProps &
+	Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size" | "type"> & {
+		multiline: true;
+		rows?: number;
+	};
+
+export type TextFieldProps = InputTextFieldProps | TextareaTextFieldProps;
 
 /**
  * TextField component for text input.
@@ -48,6 +54,8 @@ export interface TextFieldProps extends Omit<
  * @param variant - Visual style variant (outline, filled)
  * @param status - Validation status (default, error, success)
  * @param disabled - Whether the input is disabled
+ * @param multiline - Whether to render as textarea (default: false)
+ * @param rows - Number of rows for textarea (default: 3, only when multiline is true)
  * @param helperText - Helper text displayed below the input
  */
 export const TextField = ({
@@ -59,6 +67,8 @@ export const TextField = ({
 	helperText: helperTextContent,
 	fullWidth = false,
 	disabled = false,
+	multiline = false,
+	rows = 3,
 	className,
 	name,
 	required,
@@ -67,6 +77,16 @@ export const TextField = ({
 }: TextFieldProps) => {
 	const themeContext = useTheme();
 	const themeClass = themeContext?.themeClass ?? lightTheme;
+
+	const inputClassName = clsx(
+		input({
+			size,
+			rounded,
+			variant,
+			status,
+		}),
+		multiline && styles.textarea
+	);
 
 	return (
 		<Field.Root
@@ -86,16 +106,21 @@ export const TextField = ({
 					{required && " *"}
 				</Field.Label>
 			)}
-			<Input
-				className={input({
-					size,
-					rounded,
-					variant,
-					status,
-				})}
-				required={required}
-				{...props}
-			/>
+			{multiline ? (
+				<textarea
+					className={inputClassName}
+					required={required}
+					disabled={disabled}
+					rows={rows}
+					{...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+				/>
+			) : (
+				<Input
+					className={inputClassName}
+					required={required}
+					{...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+				/>
+			)}
 			{helperTextContent && status !== "error" && (
 				<Field.Description className={helperText({ size, status })}>
 					{helperTextContent}

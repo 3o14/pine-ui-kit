@@ -1,8 +1,11 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// Animations
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
+
 const checkmark = keyframes({
 	"0%": {
 		strokeDashoffset: 16,
@@ -12,7 +15,6 @@ const checkmark = keyframes({
 	},
 });
 
-// Container (wrapper)
 export const container = style({
 	display: "inline-flex",
 	alignItems: "center",
@@ -27,13 +29,10 @@ export const container = style({
 	},
 });
 
-// Checkbox root (Base UI)
 export const checkboxRoot = style({
 	all: "unset",
-	display: "inline-block",
 });
 
-// Custom checkbox box base
 const checkboxBase = style({
 	position: "relative",
 	display: "inline-flex",
@@ -41,20 +40,25 @@ const checkboxBase = style({
 	justifyContent: "center",
 	flexShrink: 0,
 	border: "2px solid",
+	borderRadius: themeContract.radius.small,
 	transition: "all 0.2s ease-in-out",
 	backgroundColor: "transparent",
 	selectors: {
-		"button:focus-visible &": {
+		"&:focus-visible": {
 			outline: `2px solid ${themeContract.color.primary.surface}`,
 			outlineOffset: "2px",
 		},
-		"button:disabled &": {
+		"&:disabled": {
 			cursor: "not-allowed",
+		},
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
 		},
 	},
 });
 
-// Checkbox recipe with size and intent variants
 export const checkbox = recipe({
 	base: checkboxBase,
 
@@ -78,15 +82,6 @@ export const checkbox = recipe({
 			},
 		},
 
-		variant: {
-			circle: {
-				borderRadius: "50%",
-			},
-			square: {
-				borderRadius: themeContract.radius.small,
-			},
-		},
-
 		intent: {
 			primary: {},
 			secondary: {},
@@ -96,44 +91,18 @@ export const checkbox = recipe({
 			neutral: {},
 		},
 
-		rounded: {
-			small: {
-				borderRadius: themeContract.radius.small,
-			},
-			medium: {
-				borderRadius: themeContract.radius.medium,
-			},
-			large: {
-				borderRadius: themeContract.radius.large,
-			},
-		},
-
-		checked: {
-			true: {},
-			false: {},
-		},
 	},
 
 	compoundVariants: [
-		// Primary
 		{
-			variants: { intent: "primary", checked: false },
+			variants: { intent: "primary" },
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"button:hover:not(:disabled) &": {
+					"&:hover:not(:disabled)": {
 						borderColor: themeContract.color.primary.surface,
 					},
-				},
-			},
-		},
-		{
-			variants: { intent: "primary", checked: true },
-			style: {
-				borderColor: themeContract.color.primary.surface,
-				backgroundColor: themeContract.color.primary.surface,
-				selectors: {
-					"&[data-state='checked']": {
+					"&[data-checked]": {
 						borderColor: themeContract.color.primary.surface,
 						backgroundColor: themeContract.color.primary.surface,
 					},
@@ -141,243 +110,94 @@ export const checkbox = recipe({
 			},
 		},
 
-		// Secondary
 		{
-			variants: { intent: "secondary", checked: false },
+			variants: { intent: "secondary" },
 			style: {
 				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"button:hover:not(:disabled) &": {
+					"&:hover:not(:disabled)": {
 						borderColor: themeContract.color.secondary.surface,
 					},
-				},
-			},
-		},
-		{
-			variants: { intent: "secondary", checked: true },
-			style: {
-				borderColor: themeContract.color.secondary.surface,
-				backgroundColor: themeContract.color.secondary.surface,
-			},
-		},
-
-		// Success
-		{
-			variants: { intent: "success", checked: false },
-			style: {
-				borderColor: themeContract.color.surface.outline,
-				selectors: {
-					"button:hover:not(:disabled) &": {
-						borderColor: themeContract.color.success.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "success", checked: true },
-			style: {
-				borderColor: themeContract.color.success.surface,
-				backgroundColor: themeContract.color.success.surface,
-			},
-		},
-
-		// Warning
-		{
-			variants: { intent: "warning", checked: false },
-			style: {
-				borderColor: themeContract.color.surface.outline,
-				selectors: {
-					"button:hover:not(:disabled) &": {
-						borderColor: themeContract.color.warning.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "warning", checked: true },
-			style: {
-				borderColor: themeContract.color.warning.surface,
-				backgroundColor: themeContract.color.warning.surface,
-			},
-		},
-
-		// Danger
-		{
-			variants: { intent: "danger", checked: false },
-			style: {
-				borderColor: themeContract.color.surface.outline,
-				selectors: {
-					"button:hover:not(:disabled) &": {
-						borderColor: themeContract.color.danger.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "danger", checked: true },
-			style: {
-				borderColor: themeContract.color.danger.surface,
-				backgroundColor: themeContract.color.danger.surface,
-			},
-		},
-
-		// Neutral
-		{
-			variants: { intent: "neutral", checked: false },
-			style: {
-				borderColor: themeContract.color.surface.outline,
-				selectors: {
-					"button:hover:not(:disabled) &": {
-						borderColor: themeContract.color.neutral.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "neutral", checked: true },
-			style: {
-				borderColor: themeContract.color.neutral.surface,
-				backgroundColor: themeContract.color.neutral.surface,
-			},
-		},
-
-		// Weak variants - Primary
-		{
-			variants: { variant: "square", intent: "primary", checked: false },
-			style: {
-				borderColor: themeContract.color.primary.weak,
-				selectors: {
-					"button:hover:not(:disabled) &": {
-						borderColor: themeContract.color.primary.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { variant: "square", intent: "primary", checked: true },
-			style: {
-				borderColor: themeContract.color.primary.weak,
-				backgroundColor: themeContract.color.primary.weak,
-				color: themeContract.color.primary.surface,
-			},
-		},
-
-		// Weak variants - Secondary
-		{
-			variants: { variant: "square", intent: "secondary", checked: false },
-			style: {
-				borderColor: themeContract.color.secondary.weak,
-				selectors: {
-					"button:hover:not(:disabled) &": {
+					"&[data-checked]": {
 						borderColor: themeContract.color.secondary.surface,
+						backgroundColor: themeContract.color.secondary.surface,
 					},
 				},
 			},
 		},
-		{
-			variants: { variant: "square", intent: "secondary", checked: true },
-			style: {
-				borderColor: themeContract.color.secondary.weak,
-				backgroundColor: themeContract.color.secondary.weak,
-				color: themeContract.color.secondary.surface,
-			},
-		},
 
-		// Weak variants - Success
 		{
-			variants: { variant: "square", intent: "success", checked: false },
+			variants: { intent: "success" },
 			style: {
-				borderColor: themeContract.color.success.weak,
+				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"button:hover:not(:disabled) &": {
+					"&:hover:not(:disabled)": {
 						borderColor: themeContract.color.success.surface,
 					},
+					"&[data-checked]": {
+						borderColor: themeContract.color.success.surface,
+						backgroundColor: themeContract.color.success.surface,
+					},
 				},
 			},
 		},
-		{
-			variants: { variant: "square", intent: "success", checked: true },
-			style: {
-				borderColor: themeContract.color.success.weak,
-				backgroundColor: themeContract.color.success.weak,
-				color: themeContract.color.success.surface,
-			},
-		},
 
-		// Weak variants - Warning
 		{
-			variants: { variant: "square", intent: "warning", checked: false },
+			variants: { intent: "warning" },
 			style: {
-				borderColor: themeContract.color.warning.weak,
+				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"button:hover:not(:disabled) &": {
+					"&:hover:not(:disabled)": {
 						borderColor: themeContract.color.warning.surface,
 					},
+					"&[data-checked]": {
+						borderColor: themeContract.color.warning.surface,
+						backgroundColor: themeContract.color.warning.surface,
+					},
 				},
 			},
 		},
-		{
-			variants: { variant: "square", intent: "warning", checked: true },
-			style: {
-				borderColor: themeContract.color.warning.weak,
-				backgroundColor: themeContract.color.warning.weak,
-				color: themeContract.color.warning.surface,
-			},
-		},
 
-		// Weak variants - Danger
 		{
-			variants: { variant: "square", intent: "danger", checked: false },
+			variants: { intent: "danger" },
 			style: {
-				borderColor: themeContract.color.danger.weak,
+				borderColor: themeContract.color.surface.outline,
 				selectors: {
-					"button:hover:not(:disabled) &": {
+					"&:hover:not(:disabled)": {
 						borderColor: themeContract.color.danger.surface,
 					},
-				},
-			},
-		},
-		{
-			variants: { variant: "square", intent: "danger", checked: true },
-			style: {
-				borderColor: themeContract.color.danger.weak,
-				backgroundColor: themeContract.color.danger.weak,
-				color: themeContract.color.danger.surface,
-			},
-		},
-
-		// Weak variants - Neutral
-		{
-			variants: { variant: "square", intent: "neutral", checked: false },
-			style: {
-				borderColor: themeContract.color.neutral.weak,
-				selectors: {
-					"button:hover:not(:disabled) &": {
-						borderColor: themeContract.color.neutral.surface,
+					"&[data-checked]": {
+						borderColor: themeContract.color.danger.surface,
+						backgroundColor: themeContract.color.danger.surface,
 					},
 				},
 			},
 		},
+
 		{
-			variants: { variant: "square", intent: "neutral", checked: true },
+			variants: { intent: "neutral" },
 			style: {
-				borderColor: themeContract.color.neutral.weak,
-				backgroundColor: themeContract.color.neutral.weak,
-				color: themeContract.color.neutral.surface,
+				borderColor: themeContract.color.surface.outline,
+				selectors: {
+					"&:hover:not(:disabled)": {
+						borderColor: themeContract.color.neutral.surface,
+					},
+					"&[data-checked]": {
+						borderColor: themeContract.color.neutral.surface,
+						backgroundColor: themeContract.color.neutral.surface,
+					},
+				},
 			},
 		},
+
 	],
 
 	defaultVariants: {
 		size: "medium",
-		variant: "square",
 		intent: "primary",
-		rounded: "medium",
-		checked: false,
 	},
 });
 
-// Indicator container
 export const indicatorContainer = style({
 	display: "none",
 	width: "100%",
@@ -385,16 +205,19 @@ export const indicatorContainer = style({
 	alignItems: "center",
 	justifyContent: "center",
 	selectors: {
-		"&[data-state='checked']": {
+		"&[data-checked]": {
 			display: "flex",
 		},
 	},
 });
 
-// Checkmark icon (SVG)
 export const checkmarkIcon = style({
 	width: "100%",
 	height: "100%",
 	color: "white",
 	animation: `${checkmark} 0.2s ease-in-out`,
 });
+
+
+
+

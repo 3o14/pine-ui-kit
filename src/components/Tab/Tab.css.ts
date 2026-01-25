@@ -1,6 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 export const root = style({
 	display: "flex",
@@ -8,11 +12,23 @@ export const root = style({
 	width: "100%",
 });
 
+export const tabListWrapper = style({
+	position: "relative",
+});
+
 export const tabList = recipe({
 	base: {
 		display: "flex",
 		gap: themeContract.spacing.xs,
-		borderBottom: `2px solid ${themeContract.color.surface.divider}`,
+		borderBottom: `1px solid ${themeContract.color.surface.divider}`,
+		position: "relative",
+		selectors: {
+			[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+				borderBottom: "1px solid transparent",
+				boxShadow: `0 4px 0 0 ${themeContract.color.surface.divider}`,
+				margin: themeContract.shadow.pixelBoxMargin,
+			},
+		},
 	},
 
 	variants: {
@@ -23,7 +39,14 @@ export const tabList = recipe({
 			vertical: {
 				flexDirection: "column",
 				borderBottom: "none",
-				borderRight: `2px solid ${themeContract.color.surface.divider}`,
+				borderRight: `1px solid ${themeContract.color.surface.divider}`,
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						borderRight: "1px solid transparent",
+						borderBottom: "none",
+						boxShadow: `4px 0 0 0 ${themeContract.color.surface.divider}`,
+					},
+				},
 			},
 		},
 	},
@@ -48,9 +71,6 @@ export const tab = recipe({
 		whiteSpace: "nowrap",
 
 		selectors: {
-			"&:hover:not([data-disabled])": {
-				color: themeContract.color.surface.text,
-			},
 			"&[data-disabled]": {
 				opacity: 0.5,
 				cursor: "not-allowed",
@@ -58,6 +78,11 @@ export const tab = recipe({
 			"&[data-focus-visible]": {
 				outline: `2px solid ${themeContract.color.primary.surface}`,
 				outlineOffset: "2px",
+			},
+			[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+				borderRadius: 0,
+				boxShadow: themeContract.shadow.pixelBox,
+				margin: themeContract.shadow.pixelBoxMargin,
 			},
 		},
 	},
@@ -88,18 +113,7 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.primary.surface,
-						borderBottomColor: themeContract.color.primary.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "primary", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.primary.surface,
+						fontWeight: themeContract.typography.fontWeight.bold,
 					},
 				},
 			},
@@ -111,18 +125,7 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.secondary.surface,
-						borderBottomColor: themeContract.color.secondary.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "secondary", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.secondary.surface,
+						fontWeight: themeContract.typography.fontWeight.bold,
 					},
 				},
 			},
@@ -134,18 +137,7 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.success.surface,
-						borderBottomColor: themeContract.color.success.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "success", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.success.surface,
+						fontWeight: themeContract.typography.fontWeight.bold,
 					},
 				},
 			},
@@ -157,18 +149,7 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.warning.surface,
-						borderBottomColor: themeContract.color.warning.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "warning", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.warning.surface,
+						fontWeight: themeContract.typography.fontWeight.bold,
 					},
 				},
 			},
@@ -180,18 +161,7 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.danger.surface,
-						borderBottomColor: themeContract.color.danger.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "danger", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.danger.surface,
+						fontWeight: themeContract.typography.fontWeight.bold,
 					},
 				},
 			},
@@ -203,18 +173,7 @@ export const tab = recipe({
 				selectors: {
 					"&[data-selected]": {
 						color: themeContract.color.neutral.surface,
-						borderBottomColor: themeContract.color.neutral.surface,
-					},
-				},
-			},
-		},
-		{
-			variants: { intent: "neutral", orientation: "vertical" },
-			style: {
-				selectors: {
-					"&[data-selected]": {
-						borderBottomColor: "transparent",
-						borderRightColor: themeContract.color.neutral.surface,
+						fontWeight: themeContract.typography.fontWeight.bold,
 					},
 				},
 			},
@@ -227,11 +186,107 @@ export const tab = recipe({
 	},
 });
 
+export const tabSelected = recipe({
+	variants: {
+		intent: {
+			primary: {
+				color: themeContract.color.primary.surface,
+				fontWeight: themeContract.typography.fontWeight.bold,
+			},
+			secondary: {
+				color: themeContract.color.secondary.surface,
+				fontWeight: themeContract.typography.fontWeight.bold,
+			},
+			success: {
+				color: themeContract.color.success.surface,
+				fontWeight: themeContract.typography.fontWeight.bold,
+			},
+			warning: {
+				color: themeContract.color.warning.surface,
+				fontWeight: themeContract.typography.fontWeight.bold,
+			},
+			danger: {
+				color: themeContract.color.danger.surface,
+				fontWeight: themeContract.typography.fontWeight.bold,
+			},
+			neutral: {
+				color: themeContract.color.neutral.surface,
+				fontWeight: themeContract.typography.fontWeight.bold,
+			},
+		},
+	},
+	defaultVariants: {
+		intent: "primary",
+	},
+});
+
+export const indicator = recipe({
+	base: {
+		position: "absolute",
+		backgroundColor: themeContract.color.primary.surface,
+		transition: "transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out, left 0.3s ease-in-out, top 0.3s ease-in-out",
+		zIndex: 2,
+	},
+	variants: {
+		intent: {
+			primary: {
+				backgroundColor: themeContract.color.primary.surface,
+			},
+			secondary: {
+				backgroundColor: themeContract.color.secondary.surface,
+			},
+			success: {
+				backgroundColor: themeContract.color.success.surface,
+			},
+			warning: {
+				backgroundColor: themeContract.color.warning.surface,
+			},
+			danger: {
+				backgroundColor: themeContract.color.danger.surface,
+			},
+			neutral: {
+				backgroundColor: themeContract.color.neutral.surface,
+			},
+		},
+		orientation: {
+			horizontal: {
+				bottom: "-1px",
+				height: "2px",
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						bottom: "-4px",
+					},
+				},
+			},
+			vertical: {
+				right: "-1px",
+				width: "2px",
+				selectors: {
+					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+						right: "-4px",
+					},
+				},
+			},
+		},
+	},
+	defaultVariants: {
+		intent: "primary",
+		orientation: "horizontal",
+	},
+});
+
 export const panel = style({
 	padding: themeContract.spacing.md,
 	fontFamily: themeContract.typography.fontFamily.sans,
 	fontSize: themeContract.typography.fontSize.medium,
 	lineHeight: themeContract.typography.lineHeight.medium,
 	color: themeContract.color.surface.text,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			borderRadius: 0,
+		},
+	},
 });
+
+
 

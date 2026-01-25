@@ -1,6 +1,10 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 export const container = style({
 	display: "inline-flex",
@@ -36,6 +40,11 @@ const trackBase = style({
 		"button:disabled &": {
 			cursor: "not-allowed",
 		},
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
+		},
 	},
 });
 
@@ -69,60 +78,60 @@ export const track = recipe({
 		intent: {
 			primary: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.primary.surface,
 					},
 				},
 			},
 			secondary: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.secondary.surface,
 					},
 				},
 			},
 			success: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.success.surface,
 					},
 				},
 			},
 			warning: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.warning.surface,
 					},
 				},
 			},
 			danger: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.danger.surface,
 					},
 				},
 			},
 			neutral: {
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.neutral.surface,
 					},
 				},
@@ -136,12 +145,18 @@ export const track = recipe({
 	},
 });
 
-// Switch thumb (sliding circle)
 const thumbBase = style({
 	backgroundColor: "white",
 	borderRadius: themeContract.radius.xlarge,
 	transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
 	boxShadow: themeContract.shadow.small,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: 0,
+		},
+	},
 });
 
 export const thumb = recipe({
@@ -153,11 +168,11 @@ export const thumb = recipe({
 				width: "14px",
 				height: "14px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
-						transform: "translateX(16px)",
+					"[role='switch'][data-checked] &": {
+						transform: "translateX(12px)",
 					},
 				},
 			},
@@ -165,11 +180,11 @@ export const thumb = recipe({
 				width: "20px",
 				height: "20px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
-						transform: "translateX(22px)",
+					"[role='switch'][data-checked] &": {
+						transform: "translateX(20px)",
 					},
 				},
 			},
@@ -177,11 +192,11 @@ export const thumb = recipe({
 				width: "24px",
 				height: "24px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
-						transform: "translateX(28px)",
+					"[role='switch'][data-checked] &": {
+						transform: "translateX(26px)",
 					},
 				},
 			},
@@ -189,10 +204,10 @@ export const thumb = recipe({
 				width: "28px",
 				height: "28px",
 				selectors: {
-					"&[data-state='unchecked']": {
+					"[role='switch'][data-unchecked] &": {
 						transform: "translateX(0)",
 					},
-					"&[data-state='checked']": {
+					"[role='switch'][data-checked] &": {
 						transform: "translateX(34px)",
 					},
 				},
@@ -204,3 +219,6 @@ export const thumb = recipe({
 		size: "medium",
 	},
 });
+
+
+

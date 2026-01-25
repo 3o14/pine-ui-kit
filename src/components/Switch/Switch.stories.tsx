@@ -98,38 +98,9 @@ export const Checked: Story = {
 	},
 };
 
-// Uncontrolled (내부 상태 관리)
-export const Uncontrolled: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-			<p>
-				<strong>Uncontrolled 모드:</strong> checked prop 없이 사용하면 내부에서
-				상태를 관리합니다.
-			</p>
-			<Switch label="알림 받기" />
-			<Switch label="자동 저장" intent="success" />
-			<Switch label="다크 모드" intent="neutral" />
-		</div>
-	),
-};
-
-// Without Label
-export const WithoutLabel: Story = {
-	args: {},
-};
-
 // Disabled
 export const Disabled: Story = {
 	args: {
-		disabled: true,
-	},
-	render: (args) => <Switch {...args} />,
-};
-
-// Disabled Checked
-export const DisabledChecked: Story = {
-	args: {
-		checked: true,
 		disabled: true,
 	},
 	render: (args) => <Switch {...args} />,
@@ -200,28 +171,6 @@ export const SizesAndIntents: Story = {
 				<Switch size="xlarge" intent="warning" label="Warning" checked />
 				<Switch size="xlarge" intent="danger" label="Danger" checked />
 				<Switch size="xlarge" intent="neutral" label="Neutral" checked />
-			</div>
-		</div>
-	),
-};
-
-// Interactive States
-export const InteractiveStates: Story = {
-	render: () => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>OFF State</h4>
-				<Switch label="Click to turn ON" />
-			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>ON State</h4>
-				<Switch label="Click to turn OFF" checked />
-			</div>
-			<div>
-				<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Disabled</h4>
-				<Switch label="Disabled OFF" disabled />
-				<br />
-				<Switch label="Disabled ON" checked disabled />
 			</div>
 		</div>
 	),
@@ -308,52 +257,4 @@ export const SettingsExample: Story = {
 			</div>
 		</div>
 	),
-};
-
-// Controlled Component Example
-export const ControlledExample: Story = {
-	render: function ControlledSwitch() {
-		const [checked, setChecked] = React.useState(false);
-
-		return (
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<Switch
-					label="Toggle me"
-					checked={checked}
-					onCheckedChange={(checked) => setChecked(checked)}
-				/>
-				<p>Current state: {checked ? "🟢 ON" : "⚪ OFF"}</p>
-				<button
-					type="button"
-					onClick={() => setChecked(!checked)}
-					style={{
-						padding: "0.5rem 1rem",
-						cursor: "pointer",
-						borderRadius: "4px",
-						border: "1px solid #ddd",
-					}}
-				>
-					Toggle Programmatically
-				</button>
-			</div>
-		);
-	},
-};
-
-// Playground
-export const Playground: Story = {
-	args: {},
-	render: function PlaygroundSwitch(args) {
-		const [checked, setChecked] = React.useState(args.checked ?? false);
-		React.useEffect(() => {
-			setChecked(args.checked ?? false);
-		}, [args.checked]);
-		return (
-			<Switch
-				{...args}
-				checked={checked}
-				onCheckedChange={(checked) => setChecked(checked)}
-			/>
-		);
-	},
 };

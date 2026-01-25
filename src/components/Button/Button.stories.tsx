@@ -84,7 +84,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Primary button (default)
-export const Primary: Story = {
+export const Default: Story = {
 	args: {
 		children: "Primary Button",
 		intent: "primary",
@@ -144,44 +144,6 @@ export const Sizes: Story = {
 export const Intents: Story = {
 	render: (args) => (
 		<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-			<Button {...args} intent="primary">
-				Primary
-			</Button>
-			<Button {...args} intent="secondary">
-				Secondary
-			</Button>
-			<Button {...args} intent="success">
-				Success
-			</Button>
-			<Button {...args} intent="warning">
-				Warning
-			</Button>
-			<Button {...args} intent="danger">
-				Danger
-			</Button>
-			<Button {...args} intent="neutral">
-				Neutral
-			</Button>
-		</div>
-	),
-	args: {
-		variant: "solid",
-	},
-};
-
-// Dark mode showcase
-export const DarkMode: Story = {
-	render: (args) => (
-		<div
-			style={{
-				display: "flex",
-				gap: "12px",
-				flexWrap: "wrap",
-				padding: "24px",
-				backgroundColor: "#0b1120",
-				borderRadius: "8px",
-			}}
-		>
 			<Button {...args} intent="primary">
 				Primary
 			</Button>
@@ -301,134 +263,142 @@ export const Playground: Story = {
 
 // Custom Primary Color
 export const CustomPrimaryColor: Story = {
-	render: (args) => (
-		<div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-			<div>
-				<h3 style={{ margin: 0, marginBottom: "1rem" }}>
-					Gray Primary (#D3D1CC)
-				</h3>
-				<ThemeProvider primaryColor="#D3D1CC">
-					<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-						<Button {...args} variant="solid">
-							Solid
-						</Button>
-						<Button {...args} variant="outline">
-							Outline
-						</Button>
-						<Button {...args} variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} variant="weak">
-							Weak
-						</Button>
-						<Button {...args} variant="solid" disabled>
-							Disabled
-						</Button>
-					</div>
-				</ThemeProvider>
-			</div>
+	render: (args, context) => {
+		const mode = (context.globals?.mode || "light") as "light" | "dark";
+		const theme = (context.globals?.themeName || "basic") as
+			| "basic"
+			| "game"
+			| "crayon";
 
-			<div>
-				<h3 style={{ margin: 0, marginBottom: "1rem" }}>
-					Green Primary (#10b981)
-				</h3>
-				<ThemeProvider primaryColor="#10b981">
-					<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-						<Button {...args} variant="solid">
-							Solid
-						</Button>
-						<Button {...args} variant="outline">
-							Outline
-						</Button>
-						<Button {...args} variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} variant="weak">
-							Weak
-						</Button>
-						<Button {...args} variant="solid" disabled>
-							Disabled
-						</Button>
-					</div>
-				</ThemeProvider>
-			</div>
+		return (
+			<div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+				<div>
+					<h3 style={{ margin: 0, marginBottom: "1rem" }}>
+						Gray Primary (#D3D1CC)
+					</h3>
+					<ThemeProvider primaryColor="#D3D1CC" theme={theme} mode={mode}>
+						<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+							<Button {...args} variant="solid">
+								Solid
+							</Button>
+							<Button {...args} variant="outline">
+								Outline
+							</Button>
+							<Button {...args} variant="ghost">
+								Ghost
+							</Button>
+							<Button {...args} variant="weak">
+								Weak
+							</Button>
+							<Button {...args} variant="solid" disabled>
+								Disabled
+							</Button>
+						</div>
+					</ThemeProvider>
+				</div>
 
-			<div>
-				<h3 style={{ margin: 0, marginBottom: "1rem" }}>
-					Red Primary (#ef4444)
-				</h3>
-				<ThemeProvider primaryColor="#ef4444">
-					<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-						<Button {...args} variant="solid">
-							Solid
-						</Button>
-						<Button {...args} variant="outline">
-							Outline
-						</Button>
-						<Button {...args} variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} variant="weak">
-							Weak
-						</Button>
-						<Button {...args} variant="solid" disabled>
-							Disabled
-						</Button>
-					</div>
-				</ThemeProvider>
-			</div>
+				<div>
+					<h3 style={{ margin: 0, marginBottom: "1rem" }}>
+						Green Primary (#10b981)
+					</h3>
+					<ThemeProvider primaryColor="#10b981" theme={theme} mode={mode}>
+						<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+							<Button {...args} variant="solid">
+								Solid
+							</Button>
+							<Button {...args} variant="outline">
+								Outline
+							</Button>
+							<Button {...args} variant="ghost">
+								Ghost
+							</Button>
+							<Button {...args} variant="weak">
+								Weak
+							</Button>
+							<Button {...args} variant="solid" disabled>
+								Disabled
+							</Button>
+						</div>
+					</ThemeProvider>
+				</div>
 
-			<div>
-				<h3 style={{ margin: 0, marginBottom: "1rem" }}>
-					Purple Primary (#8b5cf6)
-				</h3>
-				<ThemeProvider primaryColor="#8b5cf6">
-					<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-						<Button {...args} variant="solid">
-							Solid
-						</Button>
-						<Button {...args} variant="outline">
-							Outline
-						</Button>
-						<Button {...args} variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} variant="weak">
-							Weak
-						</Button>
-						<Button {...args} variant="solid" disabled>
-							Disabled
-						</Button>
-					</div>
-				</ThemeProvider>
-			</div>
+				<div>
+					<h3 style={{ margin: 0, marginBottom: "1rem" }}>
+						Red Primary (#ef4444)
+					</h3>
+					<ThemeProvider primaryColor="#ef4444" theme={theme} mode={mode}>
+						<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+							<Button {...args} variant="solid">
+								Solid
+							</Button>
+							<Button {...args} variant="outline">
+								Outline
+							</Button>
+							<Button {...args} variant="ghost">
+								Ghost
+							</Button>
+							<Button {...args} variant="weak">
+								Weak
+							</Button>
+							<Button {...args} variant="solid" disabled>
+								Disabled
+							</Button>
+						</div>
+					</ThemeProvider>
+				</div>
 
-			<div>
-				<h3 style={{ margin: 0, marginBottom: "1rem" }}>
-					Orange Primary (#f97316)
-				</h3>
-				<ThemeProvider primaryColor="#f97316">
-					<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-						<Button {...args} variant="solid">
-							Solid
-						</Button>
-						<Button {...args} variant="outline">
-							Outline
-						</Button>
-						<Button {...args} variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} variant="weak">
-							Weak
-						</Button>
-						<Button {...args} variant="solid" disabled>
-							Disabled
-						</Button>
-					</div>
-				</ThemeProvider>
+				<div>
+					<h3 style={{ margin: 0, marginBottom: "1rem" }}>
+						Purple Primary (#8b5cf6)
+					</h3>
+					<ThemeProvider primaryColor="#8b5cf6" theme={theme} mode={mode}>
+						<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+							<Button {...args} variant="solid">
+								Solid
+							</Button>
+							<Button {...args} variant="outline">
+								Outline
+							</Button>
+							<Button {...args} variant="ghost">
+								Ghost
+							</Button>
+							<Button {...args} variant="weak">
+								Weak
+							</Button>
+							<Button {...args} variant="solid" disabled>
+								Disabled
+							</Button>
+						</div>
+					</ThemeProvider>
+				</div>
+
+				<div>
+					<h3 style={{ margin: 0, marginBottom: "1rem" }}>
+						Orange Primary (#f97316)
+					</h3>
+					<ThemeProvider primaryColor="#f97316" theme={theme} mode={mode}>
+						<div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+							<Button {...args} variant="solid">
+								Solid
+							</Button>
+							<Button {...args} variant="outline">
+								Outline
+							</Button>
+							<Button {...args} variant="ghost">
+								Ghost
+							</Button>
+							<Button {...args} variant="weak">
+								Weak
+							</Button>
+							<Button {...args} variant="solid" disabled>
+								Disabled
+							</Button>
+						</div>
+					</ThemeProvider>
+				</div>
 			</div>
-		</div>
-	),
+		);
+	},
 	args: {
 		intent: "primary",
 	},
@@ -437,95 +407,6 @@ export const CustomPrimaryColor: Story = {
 			description: {
 				story:
 					"primaryColor prop을 사용하여 커스텀 primary 색상을 설정할 수 있습니다. 각 variant(solid, outline, ghost, weak)와 disabled 상태의 색상이 자동으로 계산됩니다.",
-			},
-		},
-	},
-};
-
-// Custom Primary Color - All Sizes
-export const CustomPrimaryColorSizes: Story = {
-	render: (args) => (
-		<ThemeProvider primaryColor="#3b82f6">
-			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-				<div>
-					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Small</h4>
-					<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-						<Button {...args} size="small" variant="solid">
-							Solid
-						</Button>
-						<Button {...args} size="small" variant="outline">
-							Outline
-						</Button>
-						<Button {...args} size="small" variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} size="small" variant="weak">
-							Weak
-						</Button>
-					</div>
-				</div>
-				<div>
-					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Medium</h4>
-					<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-						<Button {...args} size="medium" variant="solid">
-							Solid
-						</Button>
-						<Button {...args} size="medium" variant="outline">
-							Outline
-						</Button>
-						<Button {...args} size="medium" variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} size="medium" variant="weak">
-							Weak
-						</Button>
-					</div>
-				</div>
-				<div>
-					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>Large</h4>
-					<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-						<Button {...args} size="large" variant="solid">
-							Solid
-						</Button>
-						<Button {...args} size="large" variant="outline">
-							Outline
-						</Button>
-						<Button {...args} size="large" variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} size="large" variant="weak">
-							Weak
-						</Button>
-					</div>
-				</div>
-				<div>
-					<h4 style={{ margin: 0, marginBottom: "0.5rem" }}>XLarge</h4>
-					<div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-						<Button {...args} size="xlarge" variant="solid">
-							Solid
-						</Button>
-						<Button {...args} size="xlarge" variant="outline">
-							Outline
-						</Button>
-						<Button {...args} size="xlarge" variant="ghost">
-							Ghost
-						</Button>
-						<Button {...args} size="xlarge" variant="weak">
-							Weak
-						</Button>
-					</div>
-				</div>
-			</div>
-		</ThemeProvider>
-	),
-	args: {
-		intent: "primary",
-	},
-	parameters: {
-		docs: {
-			description: {
-				story:
-					"커스텀 primary 색상이 모든 크기에서 올바르게 적용되는지 확인합니다.",
 			},
 		},
 	},

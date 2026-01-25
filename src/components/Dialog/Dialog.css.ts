@@ -1,5 +1,9 @@
 import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 import { themeContract } from "@/tokens";
+import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+
+const gameLightThemeClass = String(gameLightTheme);
+const gameDarkThemeClass = String(gameDarkTheme);
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },
@@ -14,30 +18,30 @@ const fadeOut = keyframes({
 const scaleIn = keyframes({
 	from: {
 		opacity: 0,
-		transform: "scale(0.95) translateY(-10px)",
+		transform: "translate(-50%, calc(-50% - 10px)) scale(0.95)",
 	},
 	to: {
 		opacity: 1,
-		transform: "scale(1) translateY(0)",
+		transform: "translate(-50%, -50%) scale(1)",
 	},
 });
 
 const scaleOut = keyframes({
 	from: {
 		opacity: 1,
-		transform: "scale(1) translateY(0)",
+		transform: "translate(-50%, -50%) scale(1)",
 	},
 	to: {
 		opacity: 0,
-		transform: "scale(0.95) translateY(-10px)",
+		transform: "translate(-50%, calc(-50% - 10px)) scale(0.95)",
 	},
 });
 
 export const overlay = style({
 	position: "fixed",
-	inset: 0,
+	inset: "0",
 	backgroundColor: "rgba(0, 0, 0, 0.5)",
-	zIndex: 1000,
+	zIndex: "9999",
 	animation: `${fadeIn} 0.2s ease-out`,
 	selectors: {
 		"&[data-state='closing']": {
@@ -60,11 +64,16 @@ export const container = style({
 	flexDirection: "column",
 	maxHeight: "90vh",
 	width: "100%",
-	zIndex: 1001,
-	animation: `${scaleIn} 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)`,
+	zIndex: "10000",
+	animation: `${scaleIn} 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
 	selectors: {
 		"&[data-ending-style]": {
-			animation: `${scaleOut} 0.2s ease-in`,
+			animation: `${scaleOut} 0.2s ease-in forwards`,
+		},
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+			borderRadius: "0 !important",
 		},
 	},
 });
@@ -107,6 +116,13 @@ export const header = style({
 	padding: themeContract.spacing.lg,
 	borderBottom: `1px solid ${themeContract.color.surface.divider}`,
 	gap: themeContract.spacing.md,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			borderBottom: "1px solid transparent",
+			boxShadow: `0 4px 0 0 ${themeContract.color.surface.divider}`,
+			padding: themeContract.spacing.md,
+		},
+	},
 });
 
 export const title = style({
@@ -150,6 +166,11 @@ export const body = style({
 	fontSize: themeContract.typography.fontSize.medium,
 	lineHeight: themeContract.typography.lineHeight.medium,
 	color: themeContract.color.surface.text,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			padding: themeContract.spacing.md,
+		},
+	},
 });
 
 export const footer = style({
@@ -159,6 +180,13 @@ export const footer = style({
 	gap: themeContract.spacing.sm,
 	padding: themeContract.spacing.lg,
 	borderTop: `1px solid ${themeContract.color.surface.divider}`,
+	selectors: {
+		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+			borderTop: "1px solid transparent",
+			boxShadow: `0 -4px 0 0 ${themeContract.color.surface.divider}`,
+			padding: themeContract.spacing.md,
+		},
+	},
 });
 
 export const description = style({
@@ -168,3 +196,6 @@ export const description = style({
 	lineHeight: themeContract.typography.lineHeight.small,
 	color: themeContract.color.surface.textMuted,
 });
+
+
+
