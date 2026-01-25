@@ -39,10 +39,10 @@ const scaleOut = keyframes({
 });
 
 export const overlay = style({
-	position: "fixed !important",
-	inset: "0 !important",
+	position: "fixed",
+	inset: "0",
 	backgroundColor: "rgba(0, 0, 0, 0.5)",
-	zIndex: "9999 !important",
+	zIndex: "9999",
 	animation: `${fadeIn} 0.2s ease-out`,
 	selectors: {
 		"&[data-state='closing']": {
@@ -55,17 +55,17 @@ export const overlay = style({
 });
 
 export const container = style({
-	position: "fixed !important",
-	top: "50% !important",
-	left: "50% !important",
-	transform: "translate(-50%, -50%) !important",
+	position: "fixed",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
 	backgroundColor: themeContract.color.surface.background,
 	boxShadow: themeContract.shadow.xlarge,
 	display: "flex",
 	flexDirection: "column",
 	maxHeight: "90vh",
 	width: "100%",
-	zIndex: "10000 !important",
+	zIndex: "10000",
 	animation: `${scaleIn} 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
 	selectors: {
 		"&[data-ending-style]": {

@@ -57,7 +57,7 @@ export const appearanceTheme: Record<AppearanceMode, AppearanceThemeConfig> = {
  * 각 테마의 light/dark 모드별 설정
  */
 export const getAppearanceTheme = (
-	theme: ThemeName,
+	_theme: ThemeName,
 	appearance: AppearanceMode
 ): AppearanceThemeConfig => {
 	// 기본적으로 basic 테마의 appearance theme 사용

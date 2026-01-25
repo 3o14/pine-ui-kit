@@ -9,10 +9,7 @@ export * from "./themes";
 
 // Backward compatibility: 기존 exports 유지
 export * from "./colors";
-export * from "./typography";
-export * from "./spacing";
-export * from "./radius";
-export * from "./shadow";
+// typography, spacing, radius, shadow는 foundation에서 이미 export됨
 export * from "./appearanceTheme";
 export * from "./theme.css";
 
