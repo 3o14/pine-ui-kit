@@ -1,7 +1,5 @@
 import React from "react";
 import type { Decorator, Preview } from "@storybook/react";
-// vanilla-extract CSS 파일들을 직접 import
-// 모든 테마를 미리 로드하여 CSS가 생성되도록 함
 import "../src/tokens/global.css";
 import "../src/tokens/themes/basic.css";
 import "../src/tokens/themes/game.css";

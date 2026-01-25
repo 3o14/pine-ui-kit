@@ -3,14 +3,12 @@ import { themeContract } from "@/tokens";
 import { fontWeight } from "@/tokens";
 import { fontSize, lineHeight } from "@/tokens/typography";
 
-// Base text styles
 export const base = style({
 	fontFamily: themeContract.typography.fontFamily.sans,
 	margin: 0,
 	padding: 0,
 });
 
-// Size variants
 export const sizeVariants = styleVariants({
 	xsmall: {
 		fontSize: fontSize.xsmall,
@@ -46,7 +44,6 @@ export const sizeVariants = styleVariants({
 	},
 });
 
-// Weight variants
 export const weightVariants = styleVariants({
 	regular: {
 		fontWeight: fontWeight.regular,
@@ -62,8 +59,6 @@ export const weightVariants = styleVariants({
 	},
 });
 
-// Color/Intent variants
-// Text 컴포넌트는 배경이 없으므로 surface 색상을 텍스트 색상으로 사용
 export const intentVariants = styleVariants({
 	primary: {
 		color: themeContract.color.primary.surface,
@@ -88,7 +83,6 @@ export const intentVariants = styleVariants({
 	},
 });
 
-// Align variants
 export const alignVariants = styleVariants({
 	left: {
 		textAlign: "left",
@@ -101,7 +95,6 @@ export const alignVariants = styleVariants({
 	},
 });
 
-// Truncate style
 export const truncate = style({
 	overflow: "hidden",
 	textOverflow: "ellipsis",

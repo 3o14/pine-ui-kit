@@ -1,9 +1,3 @@
-/**
- * Foundation Layer - Colors
- * 원시 색상 팔레트 정의 (테마와 무관한 순수 값)
- */
-
-// Primary 색상 (Purple 계열)
 export const purple = {
 	50: "#faf5ff",
 	100: "#f3e8ff",
@@ -17,7 +11,6 @@ export const purple = {
 	900: "#581c87",
 } as const;
 
-// Secondary 색상 (Slate/Gray 계열)
 export const slate = {
 	50: "#f8fafc",
 	100: "#f1f5f9",
@@ -31,7 +24,6 @@ export const slate = {
 	900: "#0f172a",
 } as const;
 
-// Success 색상 (Green 계열)
 export const green = {
 	50: "#f0fdf4",
 	100: "#dcfce7",
@@ -45,7 +37,6 @@ export const green = {
 	900: "#14532d",
 } as const;
 
-// Warning 색상 (Yellow 계열)
 export const yellow = {
 	50: "#fefce8",
 	100: "#fef9c3",
@@ -59,7 +50,6 @@ export const yellow = {
 	900: "#713f12",
 } as const;
 
-// Danger 색상 (Red 계열)
 export const red = {
 	50: "#fef2f2",
 	100: "#fee2e2",
@@ -73,14 +63,13 @@ export const red = {
 	900: "#7f1d1d",
 } as const;
 
-// Game 테마용 밝은 색상
 export const gameGreen = {
 	50: "#f0fff4",
 	100: "#dcffe7",
 	200: "#b8ffcf",
 	300: "#94ffb7",
 	400: "#70ff9f",
-	500: "#4cff87", // 밝은 그린
+	500: "#4cff87",
 	600: "#3dcc6f",
 	700: "#2e9957",
 	800: "#1f663f",
@@ -93,7 +82,7 @@ export const gameOrange = {
 	200: "#ffe3b8",
 	300: "#ffd594",
 	400: "#ffc770",
-	500: "#ffb94c", // 밝은 오렌지
+	500: "#ffb94c",
 	600: "#cc943d",
 	700: "#996f2e",
 	800: "#664a1f",
@@ -106,21 +95,20 @@ export const gameBlue = {
 	200: "#b8e1ff",
 	300: "#94d2ff",
 	400: "#70c3ff",
-	500: "#4cb4ff", // 밝은 블루
+	500: "#4cb4ff",
 	600: "#3d90cc",
 	700: "#2e6c99",
 	800: "#1f4866",
 	900: "#102433",
 } as const;
 
-// Crayon 테마용 파스텔 색상
 export const crayonPurple = {
 	50: "#f5f2ff",
 	100: "#ebe5ff",
 	200: "#d7cbff",
 	300: "#c3b1ff",
 	400: "#af97ff",
-	500: "#b9a7ff", // 파스텔 퍼플
+	500: "#b9a7ff",
 	600: "#9486cc",
 	700: "#6f6599",
 	800: "#4a4466",
@@ -133,7 +121,7 @@ export const crayonPink = {
 	200: "#ffd7e7",
 	300: "#ffc3db",
 	400: "#ffafcf",
-	500: "#ffb4d4", // 파스텔 핑크
+	500: "#ffb4d4",
 	600: "#cc90aa",
 	700: "#996c80",
 	800: "#664855",
@@ -146,7 +134,7 @@ export const crayonGreen = {
 	200: "#d7ffe3",
 	300: "#c3ffd5",
 	400: "#afffc7",
-	500: "#b4f4c4", // 파스텔 그린
+	500: "#b4f4c4",
 	600: "#90c39d",
 	700: "#6c9276",
 	800: "#48614f",
@@ -159,7 +147,7 @@ export const crayonYellow = {
 	200: "#fffbd7",
 	300: "#fff9c3",
 	400: "#fff7af",
-	500: "#ffe5a7", // 파스텔 옐로우
+	500: "#ffe5a7",
 	600: "#ccb786",
 	700: "#998965",
 	800: "#665b44",
@@ -172,7 +160,7 @@ export const crayonBlue = {
 	200: "#d7e7ff",
 	300: "#c3dbff",
 	400: "#afcfff",
-	500: "#a7d7ff", // 파스텔 블루
+	500: "#a7d7ff",
 	600: "#86acc6",
 	700: "#658194",
 	800: "#445663",
@@ -185,7 +173,7 @@ export const crayonCream = {
 	200: "#fffbf0",
 	300: "#fff9e8",
 	400: "#fff7e0",
-	500: "#faf3ec", // 크림
+	500: "#faf3ec",
 	600: "#c8c2bc",
 	700: "#96918d",
 	800: "#64615e",
@@ -198,21 +186,19 @@ export const crayonDark = {
 	200: "#d7d7d7",
 	300: "#c3c3c3",
 	400: "#afafaf",
-	500: "#4b4b4b", // 다크 그레이
+	500: "#4b4b4b",
 	600: "#3c3c3c",
 	700: "#2d2d2d",
 	800: "#1e1e1e",
 	900: "#0f0f0f",
 } as const;
 
-// 중립 색상 (모든 테마에서 공통 사용)
 export const neutral = {
 	white: "#ffffff",
 	black: "#000000",
 	transparent: "transparent",
 } as const;
 
-// Foundation 색상 타입
 export type FoundationColorScale = typeof purple;
 export type FoundationColorName =
 	| "purple"

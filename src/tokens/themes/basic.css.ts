@@ -1,15 +1,9 @@
-/**
- * Basic Theme - 기본 테마
- * 현재 디자인을 유지하는 기본 테마
- */
-
 import { createTheme } from "@vanilla-extract/css";
 import { semanticTokens } from "../semantic";
 import * as foundation from "../foundation";
 import { getWeakColor } from "../utils/getWeakColor";
 import { PRIMARY_COLOR_CSS_VAR_NAMES } from "../utils/constants";
 
-// Primary 색상을 위한 CSS 변수 참조
 const primaryColorVars = {
 	surface: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surface})`,
 	surfaceHover: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surfaceHover})`,
@@ -19,9 +13,6 @@ const primaryColorVars = {
 	weak: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.weak})`,
 } as const;
 
-/**
- * Basic Theme - Light Mode
- */
 export const basicLightTheme = createTheme(semanticTokens, {
 	color: {
 		primary: primaryColorVars,
@@ -82,14 +73,14 @@ export const basicLightTheme = createTheme(semanticTokens, {
 			crayon: foundation.fontFamily.crayon,
 		},
 		fontSize: {
-			xsmall: foundation.fontSize.xsmall,
-			small: foundation.fontSize.small,
-			medium: foundation.fontSize.medium,
-			large: foundation.fontSize.large,
-			xlarge: foundation.fontSize.xlarge,
-			"display-small": foundation.fontSize["2xlarge"],
-			"display-medium": foundation.fontSize["3xlarge"],
-			"display-large": foundation.fontSize["4xlarge"],
+			xsmall: foundation.fontSize.xs,
+			small: foundation.fontSize.sm,
+			medium: foundation.fontSize.md,
+			large: foundation.fontSize.lg,
+			xlarge: foundation.fontSize.xl,
+			"display-small": foundation.fontSize["2xl"],
+			"display-medium": foundation.fontSize["3xl"],
+			"display-large": foundation.fontSize["4xl"],
 		},
 		lineHeight: {
 			xsmall: String(foundation.lineHeight.snug),
@@ -111,13 +102,18 @@ export const basicLightTheme = createTheme(semanticTokens, {
 	radius: {
 		none: foundation.radius.none,
 		small: foundation.radius.sm,
-		medium: foundation.radius.xl, // 16px
+		medium: foundation.radius.xl,
 		large: foundation.radius.xxl,
 		xlarge: foundation.radius.xxxl,
 		full: foundation.radius.full,
 	},
 	shadow: {
-		...foundation.shadow,
+		none: foundation.shadow.none,
+		xsmall: foundation.shadow.xs,
+		small: foundation.shadow.sm,
+		medium: foundation.shadow.md,
+		large: foundation.shadow.lg,
+		xlarge: foundation.shadow.xl,
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},
@@ -146,9 +142,6 @@ export const basicLightTheme = createTheme(semanticTokens, {
 	},
 });
 
-/**
- * Basic Theme - Dark Mode
- */
 export const basicDarkTheme = createTheme(semanticTokens, {
 	color: {
 		primary: primaryColorVars,
@@ -209,14 +202,14 @@ export const basicDarkTheme = createTheme(semanticTokens, {
 			crayon: foundation.fontFamily.crayon,
 		},
 		fontSize: {
-			xsmall: foundation.fontSize.xsmall,
-			small: foundation.fontSize.small,
-			medium: foundation.fontSize.medium,
-			large: foundation.fontSize.large,
-			xlarge: foundation.fontSize.xlarge,
-			"display-small": foundation.fontSize["2xlarge"],
-			"display-medium": foundation.fontSize["3xlarge"],
-			"display-large": foundation.fontSize["4xlarge"],
+			xsmall: foundation.fontSize.xs,
+			small: foundation.fontSize.sm,
+			medium: foundation.fontSize.md,
+			large: foundation.fontSize.lg,
+			xlarge: foundation.fontSize.xl,
+			"display-small": foundation.fontSize["2xl"],
+			"display-medium": foundation.fontSize["3xl"],
+			"display-large": foundation.fontSize["4xl"],
 		},
 		lineHeight: {
 			xsmall: String(foundation.lineHeight.snug),
@@ -238,13 +231,18 @@ export const basicDarkTheme = createTheme(semanticTokens, {
 	radius: {
 		none: foundation.radius.none,
 		small: foundation.radius.sm,
-		medium: foundation.radius.xl, // 16px
+		medium: foundation.radius.xl,
 		large: foundation.radius.xxl,
 		xlarge: foundation.radius.xxxl,
 		full: foundation.radius.full,
 	},
 	shadow: {
-		...foundation.shadow,
+		none: foundation.shadow.none,
+		xsmall: foundation.shadow.xs,
+		small: foundation.shadow.sm,
+		medium: foundation.shadow.md,
+		large: foundation.shadow.lg,
+		xlarge: foundation.shadow.xl,
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},

@@ -1,17 +1,6 @@
-/**
- * Semantic Layer - 의미론적 토큰 계약 정의
- * Foundation을 참조하지만 의미를 가진 토큰들
- */
-
 import { createThemeContract } from "@vanilla-extract/css";
 
-/**
- * Semantic Token Contract
- * 컴포넌트에서 사용하는 의미론적 토큰의 구조를 정의합니다.
- * 실제 값은 Theme Mapping Layer에서 Foundation 값으로 매핑됩니다.
- */
 export const semanticTokens = createThemeContract({
-	// Color tokens
 	color: {
 		primary: {
 			surface: null,
@@ -70,7 +59,6 @@ export const semanticTokens = createThemeContract({
 			divider: null,
 		},
 	},
-	// Spacing tokens
 	spacing: {
 		none: null,
 		xxxs: null,
@@ -83,7 +71,6 @@ export const semanticTokens = createThemeContract({
 		xxl: null,
 		xxxl: null,
 	},
-	// Typography tokens
 	typography: {
 		fontFamily: {
 			sans: null,
@@ -117,7 +104,6 @@ export const semanticTokens = createThemeContract({
 			bold: null,
 		},
 	},
-	// Radius tokens
 	radius: {
 		none: null,
 		small: null,
@@ -126,7 +112,6 @@ export const semanticTokens = createThemeContract({
 		xlarge: null,
 		full: null,
 	},
-	// Shadow tokens
 	shadow: {
 		none: null,
 		xsmall: null,
@@ -137,7 +122,6 @@ export const semanticTokens = createThemeContract({
 		pixelBox: null,
 		pixelBoxMargin: null,
 	},
-	// Component-specific semantic tokens
 	component: {
 		button: {
 			padding: {
@@ -163,8 +147,4 @@ export const semanticTokens = createThemeContract({
 	},
 });
 
-/**
- * Backward compatibility: 기존 themeContract와 동일한 이름으로 export
- * 기존 컴포넌트들이 사용하는 themeContract를 semanticTokens로 대체
- */
 export const themeContract = semanticTokens;

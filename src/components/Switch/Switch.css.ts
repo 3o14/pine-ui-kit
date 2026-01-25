@@ -3,7 +3,6 @@ import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// Game 테마 클래스 이름을 문자열로 변환
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
@@ -41,7 +40,6 @@ const trackBase = style({
 		"button:disabled &": {
 			cursor: "not-allowed",
 		},
-		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			boxShadow: themeContract.shadow.pixelBox,
 			margin: themeContract.shadow.pixelBoxMargin,
@@ -80,7 +78,6 @@ export const track = recipe({
 		intent: {
 			primary: {
 				selectors: {
-					// Base UI는 data-checked/data-unchecked 속성을 사용
 					"[role='switch'][data-unchecked] &": {
 						backgroundColor: themeContract.color.surface.outline,
 					},
@@ -148,7 +145,6 @@ export const track = recipe({
 	},
 });
 
-// Switch thumb (sliding circle)
 const thumbBase = style({
 	backgroundColor: "white",
 	borderRadius: themeContract.radius.xlarge,

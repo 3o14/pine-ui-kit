@@ -3,7 +3,6 @@ import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// 게임 테마 클래스 이름을 문자열로 변환
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
@@ -181,7 +180,6 @@ export const input = recipe({
 	},
 
 	compoundVariants: [
-		// Outline - Default
 		{
 			variants: { variant: "outline", status: "default" },
 			style: {
@@ -191,7 +189,6 @@ export const input = recipe({
 					boxShadow: `0 0 0 3px ${themeContract.color.primary.surface}20`,
 				},
 				selectors: {
-					// Game 테마: outline을 pixelBox shadow로 대체
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.surface.outline}, 4px 0 0 0 ${themeContract.color.surface.outline}, 0 4px 0 0 ${themeContract.color.surface.outline}, 0 calc(-4px) 0 0 ${themeContract.color.surface.outline}`,
@@ -200,7 +197,6 @@ export const input = recipe({
 				},
 			},
 		},
-		// Outline - Error
 		{
 			variants: { variant: "outline", status: "error" },
 			style: {
@@ -210,7 +206,6 @@ export const input = recipe({
 					boxShadow: `0 0 0 3px ${themeContract.color.danger.surface}20`,
 				},
 				selectors: {
-					// Game 테마: outline을 pixelBox shadow로 대체
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
@@ -219,7 +214,6 @@ export const input = recipe({
 				},
 			},
 		},
-		// Outline - Success
 		{
 			variants: { variant: "outline", status: "success" },
 			style: {
@@ -229,7 +223,6 @@ export const input = recipe({
 					boxShadow: `0 0 0 3px ${themeContract.color.success.surface}20`,
 				},
 				selectors: {
-					// Game 테마: outline을 pixelBox shadow로 대체
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
@@ -239,7 +232,6 @@ export const input = recipe({
 			},
 		},
 
-		// Filled - Default
 		{
 			variants: { variant: "filled", status: "default" },
 			style: {
@@ -251,7 +243,6 @@ export const input = recipe({
 				},
 			},
 		},
-		// Filled - Error
 		{
 			variants: { variant: "filled", status: "error" },
 			style: {
@@ -263,7 +254,6 @@ export const input = recipe({
 				},
 			},
 		},
-		// Filled - Success
 		{
 			variants: { variant: "filled", status: "success" },
 			style: {
@@ -276,7 +266,6 @@ export const input = recipe({
 			},
 		},
 
-		// Rounded variants for outline
 		{
 			variants: { variant: "outline", rounded: "small" },
 			style: {
@@ -296,7 +285,6 @@ export const input = recipe({
 			},
 		},
 
-		// Rounded variants for filled
 		{
 			variants: { variant: "filled", rounded: "small" },
 			style: {
@@ -325,13 +313,12 @@ export const input = recipe({
 	},
 });
 
-// Textarea 전용 스타일
 export const textarea = style({
 	resize: "none",
 	minHeight: "80px",
-	scrollbarWidth: "none", // Firefox
+	scrollbarWidth: "none",
 	"::-webkit-scrollbar": {
-		display: "none", // Chrome, Safari, Edge
+		display: "none",
 	},
 	overflow: "auto",
 });

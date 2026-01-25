@@ -3,11 +3,9 @@ import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// Game 테마 클래스 이름을 문자열로 변환
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
-// Base badge style
 const badgeBase = style({
 	display: "inline-flex",
 	alignItems: "center",
@@ -23,7 +21,6 @@ const badgeBase = style({
 	margin: themeContract.shadow.pixelBoxMargin,
 });
 
-// Badge recipe
 export const badge = recipe({
 	base: badgeBase,
 
@@ -144,7 +141,6 @@ export const badge = recipe({
 				borderColor: themeContract.color.primary.border,
 				color: themeContract.color.primary.surface,
 				selectors: {
-					// Game 테마: outline을 pixelBox shadow로 대체
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						borderColor: "transparent",
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
@@ -294,7 +290,6 @@ export const badge = recipe({
 				color: themeContract.color.primary.surface,
 				borderColor: "transparent",
 				selectors: {
-					// Game 테마: pixelBox shadow 적용
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
 						margin: themeContract.shadow.pixelBoxMargin,

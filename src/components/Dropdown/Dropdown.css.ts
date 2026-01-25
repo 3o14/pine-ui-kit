@@ -3,7 +3,6 @@ import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// Game 테마 클래스 이름을 문자열로 변환
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
@@ -58,7 +57,6 @@ const triggerBase = style({
 		cursor: "not-allowed",
 	},
 	selectors: {
-		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			border: "1px solid transparent",
 			boxShadow: themeContract.shadow.pixelBox,
@@ -79,7 +77,6 @@ export const trigger = recipe({
 				lineHeight: themeContract.typography.lineHeight.small,
 				minHeight: "32px",
 				selectors: {
-					// Game 테마: padding 감소
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						padding: `${themeContract.spacing.xxxs} ${themeContract.spacing.xs}`,
 					},
@@ -91,7 +88,6 @@ export const trigger = recipe({
 				lineHeight: themeContract.typography.lineHeight.medium,
 				minHeight: "40px",
 				selectors: {
-					// Game 테마: padding 감소
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
 					},
@@ -103,7 +99,6 @@ export const trigger = recipe({
 				lineHeight: themeContract.typography.lineHeight.large,
 				minHeight: "48px",
 				selectors: {
-					// Game 테마: padding 감소
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						padding: `${themeContract.spacing.sm} ${themeContract.spacing.md}`,
 					},
@@ -147,7 +142,6 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.primary.surface}`,
 					},
-					// Game 테마: Trigger 테두리는 검정색으로 고정
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: themeContract.shadow.pixelBox,
@@ -174,7 +168,6 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.secondary.surface}`,
 					},
-					// Game 테마: Trigger 테두리는 검정색으로 고정
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: themeContract.shadow.pixelBox,
@@ -201,7 +194,6 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.success.surface}`,
 					},
-					// Game 테마: Trigger 테두리는 검정색으로 고정
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: themeContract.shadow.pixelBox,
@@ -228,7 +220,6 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.warning.surface}`,
 					},
-					// Game 테마: Trigger 테두리는 검정색으로 고정
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: themeContract.shadow.pixelBox,
@@ -255,7 +246,6 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.danger.surface}`,
 					},
-					// Game 테마: Trigger 테두리는 검정색으로 고정
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: themeContract.shadow.pixelBox,
@@ -282,7 +272,6 @@ export const trigger = recipe({
 					"&:focus-visible": {
 						outline: `2px solid ${themeContract.color.neutral.surface}`,
 					},
-					// Game 테마: Trigger 테두리는 검정색으로 고정
 					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 						border: "1px solid transparent",
 						boxShadow: themeContract.shadow.pixelBox,
@@ -339,7 +328,6 @@ export const menu = style({
 		"&[data-state='closing']": {
 			animation: `${slideUp} 0.15s ease-in`,
 		},
-		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			border: "1px solid transparent",
 			margin: themeContract.shadow.pixelBoxMargin,
@@ -348,7 +336,6 @@ export const menu = style({
 	},
 });
 
-// Game 테마: intent별 색상 pixelBox shadow 적용 (별도 style로 분리하여 우선순위 확보)
 export const menuPrimaryIntent = style({
 	selectors: {
 		[`.${gameLightThemeClass} &[data-intent='primary'], .${gameDarkThemeClass} &[data-intent='primary']`]: {
@@ -584,7 +571,6 @@ export const divider = style({
 	margin: `${themeContract.spacing.xxs} 0`,
 });
 
-// Label (for grouped items)
 export const groupLabel = style({
 	padding: `${themeContract.spacing.xs} ${themeContract.spacing.sm}`,
 	fontSize: themeContract.typography.fontSize.xsmall,

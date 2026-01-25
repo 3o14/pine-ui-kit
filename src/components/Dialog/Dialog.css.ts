@@ -2,7 +2,6 @@ import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// Game 테마 클래스 이름을 문자열로 변환
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
@@ -71,7 +70,6 @@ export const container = style({
 		"&[data-ending-style]": {
 			animation: `${scaleOut} 0.2s ease-in forwards`,
 		},
-		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			boxShadow: themeContract.shadow.pixelBox,
 			margin: themeContract.shadow.pixelBoxMargin,

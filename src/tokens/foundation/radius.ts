@@ -1,8 +1,3 @@
-/**
- * Foundation Layer - Radius
- * 원시 radius 값 정의 (테마와 무관한 순수 값)
- */
-
 export const radius = {
 	none: "0px",
 	xxs: "2px",

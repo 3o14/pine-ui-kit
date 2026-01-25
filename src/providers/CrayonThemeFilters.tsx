@@ -2,12 +2,6 @@
 
 import React from "react";
 
-/**
- * CrayonThemeFilters - 크레용 테마용 SVG 필터를 주입하는 컴포넌트
- *
- * 크레용 질감 효과를 위한 SVG 필터를 정의합니다.
- * 이 컴포넌트는 크레용 테마가 활성화될 때만 렌더링되어야 합니다.
- */
 export const CrayonThemeFilters: React.FC = () => {
 	return (
 		<svg
@@ -21,9 +15,7 @@ export const CrayonThemeFilters: React.FC = () => {
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<defs>
-				{/* 크레용 텍스처 필터 - solid 버튼용 */}
 				<filter id="crayon-texture" x="-5%" y="-5%" width="110%" height="110%">
-					{/* 거친 질감 */}
 					<feTurbulence
 						type="fractalNoise"
 						baseFrequency="0.9"
@@ -31,7 +23,6 @@ export const CrayonThemeFilters: React.FC = () => {
 						seed="2"
 						result="noise"
 					/>
-					{/* 가장자리 흔들림 효과 */}
 					<feDisplacementMap
 						in="SourceGraphic"
 						in2="noise"
@@ -40,14 +31,11 @@ export const CrayonThemeFilters: React.FC = () => {
 						yChannelSelector="G"
 						result="displacement"
 					/>
-					{/* 약간의 블러로 크레용 느낌 */}
 					<feGaussianBlur in="displacement" stdDeviation="0.3" result="blur" />
 					<feComposite in="blur" in2="SourceGraphic" operator="in" />
 				</filter>
 
-				{/* 크레용 엣지 필터 - outline/ghost 버튼용 */}
 				<filter id="crayon-edge" x="-5%" y="-5%" width="110%" height="110%">
-					{/* 테두리용 강한 텍스처 */}
 					<feTurbulence
 						type="fractalNoise"
 						baseFrequency="0.8"
@@ -55,7 +43,6 @@ export const CrayonThemeFilters: React.FC = () => {
 						seed="5"
 						result="noise"
 					/>
-					{/* 강한 변위 효과 */}
 					<feDisplacementMap
 						in="SourceGraphic"
 						in2="noise"
@@ -64,7 +51,6 @@ export const CrayonThemeFilters: React.FC = () => {
 						yChannelSelector="G"
 						result="displacement"
 					/>
-					{/* 약간의 블러로 크레용 느낌 */}
 					<feGaussianBlur in="displacement" stdDeviation="0.2" result="blur" />
 					<feComposite in="blur" in2="SourceGraphic" operator="in" />
 				</filter>

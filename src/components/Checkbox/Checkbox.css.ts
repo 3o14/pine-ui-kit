@@ -3,11 +3,9 @@ import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 
-// Game 테마 클래스 이름을 문자열로 변환
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
-// Animations
 const checkmark = keyframes({
 	"0%": {
 		strokeDashoffset: 16,
@@ -17,7 +15,6 @@ const checkmark = keyframes({
 	},
 });
 
-// Container (wrapper)
 export const container = style({
 	display: "inline-flex",
 	alignItems: "center",
@@ -32,12 +29,10 @@ export const container = style({
 	},
 });
 
-// Checkbox root (Base UI)
 export const checkboxRoot = style({
 	all: "unset",
 });
 
-// Custom checkbox box base
 const checkboxBase = style({
 	position: "relative",
 	display: "inline-flex",
@@ -56,7 +51,6 @@ const checkboxBase = style({
 		"&:disabled": {
 			cursor: "not-allowed",
 		},
-		// Game 테마: pixelBox shadow 및 borderRadius 0 적용
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			boxShadow: themeContract.shadow.pixelBox,
 			margin: themeContract.shadow.pixelBoxMargin,
@@ -65,7 +59,6 @@ const checkboxBase = style({
 	},
 });
 
-// Checkbox recipe with size and intent variants
 export const checkbox = recipe({
 	base: checkboxBase,
 
@@ -101,7 +94,6 @@ export const checkbox = recipe({
 	},
 
 	compoundVariants: [
-		// Primary
 		{
 			variants: { intent: "primary" },
 			style: {
@@ -118,7 +110,6 @@ export const checkbox = recipe({
 			},
 		},
 
-		// Secondary
 		{
 			variants: { intent: "secondary" },
 			style: {
@@ -135,7 +126,6 @@ export const checkbox = recipe({
 			},
 		},
 
-		// Success
 		{
 			variants: { intent: "success" },
 			style: {
@@ -152,7 +142,6 @@ export const checkbox = recipe({
 			},
 		},
 
-		// Warning
 		{
 			variants: { intent: "warning" },
 			style: {
@@ -169,7 +158,6 @@ export const checkbox = recipe({
 			},
 		},
 
-		// Danger
 		{
 			variants: { intent: "danger" },
 			style: {
@@ -186,7 +174,6 @@ export const checkbox = recipe({
 			},
 		},
 
-		// Neutral
 		{
 			variants: { intent: "neutral" },
 			style: {
@@ -211,7 +198,6 @@ export const checkbox = recipe({
 	},
 });
 
-// Indicator container
 export const indicatorContainer = style({
 	display: "none",
 	width: "100%",
@@ -225,7 +211,6 @@ export const indicatorContainer = style({
 	},
 });
 
-// Checkmark icon (SVG)
 export const checkmarkIcon = style({
 	width: "100%",
 	height: "100%",

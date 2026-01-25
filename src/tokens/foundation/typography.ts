@@ -1,14 +1,7 @@
-/**
- * Foundation Layer - Typography
- * 원시 폰트 값 정의 (테마와 무관한 순수 값)
- */
-
 export const fontFamily = {
 	sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 	mono: "'Roboto Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
-	// Crayon 테마용 폰트
 	crayon: "'Human-Beomseok Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-	// Game 테마용 pixel 폰트
 	pixel: "'DungGeunMo', system-ui, -apple-system, sans-serif",
 } as const;
 
@@ -25,16 +18,16 @@ export const fontWeight = {
 } as const;
 
 export const fontSize = {
-	"2xsmall": "0.625rem", // 10px
-	xsmall: "0.75rem", // 12px
-	small: "0.875rem", // 14px
-	medium: "1rem", // 16px
-	large: "1.125rem", // 18px
-	xlarge: "1.25rem", // 20px
-	"2xlarge": "1.5rem", // 24px
-	"3xlarge": "1.875rem", // 30px
-	"4xlarge": "2.25rem", // 36px
-	"5xlarge": "3rem", // 48px
+	"2xs": "0.625rem",
+	xs: "0.75rem",
+	sm: "0.875rem",
+	md: "1rem",
+	lg: "1.125rem",
+	xl: "1.25rem",
+	"2xl": "1.5rem",
+	"3xl": "1.875rem",
+	"4xl": "2.25rem",
+	"5xl": "3rem",
 } as const;
 
 export const lineHeight = {

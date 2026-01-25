@@ -1,15 +1,9 @@
-/**
- * Game Theme - 모던 픽셀아트 테마
- * 밝은 색상, 작은 radius로 각진 느낌
- */
-
 import { createTheme } from "@vanilla-extract/css";
 import { semanticTokens } from "../semantic";
 import * as foundation from "../foundation";
 import { getWeakColor } from "../utils/getWeakColor";
 import { PRIMARY_COLOR_CSS_VAR_NAMES } from "../utils/constants";
 
-// Primary 색상을 위한 CSS 변수 참조
 const primaryColorVars = {
 	surface: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surface})`,
 	surfaceHover: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surfaceHover})`,
@@ -19,9 +13,6 @@ const primaryColorVars = {
 	weak: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.weak})`,
 } as const;
 
-/**
- * Game Theme - Light Mode
- */
 export const gameLightTheme = createTheme(semanticTokens, {
 	color: {
 		primary: primaryColorVars,
@@ -82,14 +73,14 @@ export const gameLightTheme = createTheme(semanticTokens, {
 			crayon: foundation.fontFamily.crayon,
 		},
 		fontSize: {
-			xsmall: foundation.fontSize.xsmall,
-			small: foundation.fontSize.small,
-			medium: foundation.fontSize.medium,
-			large: foundation.fontSize.large,
-			xlarge: foundation.fontSize.xlarge,
-			"display-small": foundation.fontSize["2xsmall"],
-			"display-medium": foundation.fontSize["3xlarge"],
-			"display-large": foundation.fontSize["4xlarge"],
+			xsmall: foundation.fontSize.xs,
+			small: foundation.fontSize.sm,
+			medium: foundation.fontSize.md,
+			large: foundation.fontSize.lg,
+			xlarge: foundation.fontSize.xl,
+			"display-small": foundation.fontSize["2xs"],
+			"display-medium": foundation.fontSize["3xl"],
+			"display-large": foundation.fontSize["4xl"],
 		},
 		lineHeight: {
 			xsmall: String(foundation.lineHeight.snug),
@@ -117,7 +108,12 @@ export const gameLightTheme = createTheme(semanticTokens, {
 		full: foundation.radius.full,
 	},
 	shadow: {
-		...foundation.shadow,
+		none: foundation.shadow.none,
+		xsmall: foundation.shadow.xs,
+		small: foundation.shadow.sm,
+		medium: foundation.shadow.md,
+		large: foundation.shadow.lg,
+		xlarge: foundation.shadow.xl,
 		pixelBox: `calc(-4px) 0 0 0 black, 4px 0 0 0 black, 0 4px 0 0 black, 0 calc(-4px) 0 0 black`,
 		pixelBoxMargin: "0",
 	},
@@ -146,9 +142,6 @@ export const gameLightTheme = createTheme(semanticTokens, {
 	},
 });
 
-/**
- * Game Theme - Dark Mode
- */
 export const gameDarkTheme = createTheme(semanticTokens, {
 	color: {
 		primary: primaryColorVars,
@@ -209,14 +202,14 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 			crayon: foundation.fontFamily.crayon,
 		},
 		fontSize: {
-			xsmall: foundation.fontSize.xsmall,
-			small: foundation.fontSize.small,
-			medium: foundation.fontSize.medium,
-			large: foundation.fontSize.large,
-			xlarge: foundation.fontSize.xlarge,
-			"display-small": foundation.fontSize["2xsmall"],
-			"display-medium": foundation.fontSize["3xlarge"],
-			"display-large": foundation.fontSize["4xlarge"],
+			xsmall: foundation.fontSize.xs,
+			small: foundation.fontSize.sm,
+			medium: foundation.fontSize.md,
+			large: foundation.fontSize.lg,
+			xlarge: foundation.fontSize.xl,
+			"display-small": foundation.fontSize["2xs"],
+			"display-medium": foundation.fontSize["3xl"],
+			"display-large": foundation.fontSize["4xl"],
 		},
 		lineHeight: {
 			xsmall: String(foundation.lineHeight.snug),
@@ -244,7 +237,12 @@ export const gameDarkTheme = createTheme(semanticTokens, {
 		full: foundation.radius.full,
 	},
 	shadow: {
-		...foundation.shadow,
+		none: foundation.shadow.none,
+		xsmall: foundation.shadow.xs,
+		small: foundation.shadow.sm,
+		medium: foundation.shadow.md,
+		large: foundation.shadow.lg,
+		xlarge: foundation.shadow.xl,
 		pixelBox: `calc(-4px) 0 0 0 ${foundation.neutral.white}, 4px 0 0 0 ${foundation.neutral.white}, 0 4px 0 0 ${foundation.neutral.white}, 0 calc(-4px) 0 0 ${foundation.neutral.white}`,
 		pixelBoxMargin: "0",
 	},

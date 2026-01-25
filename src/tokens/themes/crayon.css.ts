@@ -1,16 +1,9 @@
-/**
- * Crayon Theme - 크레용 테마
- * 파스텔 색상, 큰 radius, 부드러운 텍스처
- * thanks-for-the-year 프로젝트 참고
- */
-
 import { createTheme } from "@vanilla-extract/css";
 import { semanticTokens } from "../semantic";
 import * as foundation from "../foundation";
 import { getWeakColor } from "../utils/getWeakColor";
 import { PRIMARY_COLOR_CSS_VAR_NAMES } from "../utils/constants";
 
-// Primary 색상을 위한 CSS 변수 참조
 const primaryColorVars = {
 	surface: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surface})`,
 	surfaceHover: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surfaceHover})`,
@@ -20,9 +13,6 @@ const primaryColorVars = {
 	weak: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.weak})`,
 } as const;
 
-/**
- * Crayon Theme - Light Mode
- */
 export const crayonLightTheme = createTheme(semanticTokens, {
 	color: {
 		primary: primaryColorVars,
@@ -78,19 +68,19 @@ export const crayonLightTheme = createTheme(semanticTokens, {
 	spacing: foundation.spacing,
 	typography: {
 		fontFamily: {
-			sans: foundation.fontFamily.crayon, // Human-Beomseok Neo 폰트 사용
+			sans: foundation.fontFamily.crayon,
 			mono: foundation.fontFamily.mono,
 			crayon: foundation.fontFamily.crayon,
 		},
 		fontSize: {
-			xsmall: foundation.fontSize.xsmall,
-			small: foundation.fontSize.small,
-			medium: foundation.fontSize.medium,
-			large: foundation.fontSize.large,
-			xlarge: foundation.fontSize.xlarge,
-			"display-small": foundation.fontSize["2xlarge"],
-			"display-medium": foundation.fontSize["3xlarge"],
-			"display-large": foundation.fontSize["4xlarge"],
+			xsmall: foundation.fontSize.xs,
+			small: foundation.fontSize.sm,
+			medium: foundation.fontSize.md,
+			large: foundation.fontSize.lg,
+			xlarge: foundation.fontSize.xl,
+			"display-small": foundation.fontSize["2xl"],
+			"display-medium": foundation.fontSize["3xl"],
+			"display-large": foundation.fontSize["4xl"],
 		},
 		lineHeight: {
 			xsmall: String(foundation.lineHeight.snug),
@@ -111,14 +101,19 @@ export const crayonLightTheme = createTheme(semanticTokens, {
 	},
 	radius: {
 		none: foundation.radius.none,
-		small: foundation.radius.lg, // 12px
-		medium: foundation.radius.xxl, // 24px
-		large: foundation.radius.xxxl, // 32px
-		xlarge: foundation.radius.xxxl, // 32px
+		small: foundation.radius.lg,
+		medium: foundation.radius.xxl,
+		large: foundation.radius.xxxl,
+		xlarge: foundation.radius.xxxl,
 		full: foundation.radius.full,
 	},
 	shadow: {
-		...foundation.shadow,
+		none: foundation.shadow.none,
+		xsmall: foundation.shadow.xs,
+		small: foundation.shadow.sm,
+		medium: foundation.shadow.md,
+		large: foundation.shadow.lg,
+		xlarge: foundation.shadow.xl,
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},
@@ -131,25 +126,22 @@ export const crayonLightTheme = createTheme(semanticTokens, {
 				xlarge: `${foundation.spacing.lg} ${foundation.spacing.xl}`,
 			},
 			radius: {
-				small: foundation.radius.xxl, // 24px
-				medium: foundation.radius.xxxl, // 32px
-				large: foundation.radius.xxxl, // 32px
+				small: foundation.radius.xxl,
+				medium: foundation.radius.xxxl,
+				large: foundation.radius.xxxl,
 			},
 		},
 		card: {
-			radius: foundation.radius.xxxl, // 32px
+			radius: foundation.radius.xxxl,
 			padding: foundation.spacing.md,
 		},
 		input: {
-			radius: foundation.radius.xxl, // 24px
+			radius: foundation.radius.xxl,
 			padding: foundation.spacing.sm,
 		},
 	},
 });
 
-/**
- * Crayon Theme - Dark Mode
- */
 export const crayonDarkTheme = createTheme(semanticTokens, {
 	color: {
 		primary: primaryColorVars,
@@ -210,14 +202,14 @@ export const crayonDarkTheme = createTheme(semanticTokens, {
 			crayon: foundation.fontFamily.crayon,
 		},
 		fontSize: {
-			xsmall: foundation.fontSize.xsmall,
-			small: foundation.fontSize.small,
-			medium: foundation.fontSize.medium,
-			large: foundation.fontSize.large,
-			xlarge: foundation.fontSize.xlarge,
-			"display-small": foundation.fontSize["2xlarge"],
-			"display-medium": foundation.fontSize["3xlarge"],
-			"display-large": foundation.fontSize["4xlarge"],
+			xsmall: foundation.fontSize.xs,
+			small: foundation.fontSize.sm,
+			medium: foundation.fontSize.md,
+			large: foundation.fontSize.lg,
+			xlarge: foundation.fontSize.xl,
+			"display-small": foundation.fontSize["2xl"],
+			"display-medium": foundation.fontSize["3xl"],
+			"display-large": foundation.fontSize["4xl"],
 		},
 		lineHeight: {
 			xsmall: String(foundation.lineHeight.snug),
@@ -245,7 +237,12 @@ export const crayonDarkTheme = createTheme(semanticTokens, {
 		full: foundation.radius.full,
 	},
 	shadow: {
-		...foundation.shadow,
+		none: foundation.shadow.none,
+		xsmall: foundation.shadow.xs,
+		small: foundation.shadow.sm,
+		medium: foundation.shadow.md,
+		large: foundation.shadow.lg,
+		xlarge: foundation.shadow.xl,
 		pixelBox: "none",
 		pixelBoxMargin: "0",
 	},
