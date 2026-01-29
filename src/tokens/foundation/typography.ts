@@ -1,7 +1,8 @@
 export const fontFamily = {
 	sans: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif",
 	mono: "'Roboto Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
-	crayon: "'Human-Beomseok Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+	crayon:
+		"'온글잎-승훈체', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
 	pixel: "'DungGeunMo', system-ui, -apple-system, sans-serif",
 } as const;
 

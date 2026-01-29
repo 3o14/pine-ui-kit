@@ -52,12 +52,12 @@ export const Badge = ({
 					intent,
 					rounded,
 				}),
-				className
+				className,
 			)}
 			{...props}
 		>
 			{showDot && <span className={styles.dot} />}
-			{children}
+			<span className={styles.content}>{children}</span>
 		</span>
 	);
 };

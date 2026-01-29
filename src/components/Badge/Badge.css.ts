@@ -1,10 +1,89 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract } from "@/tokens";
+import { themeContract, type ColorIntent } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+import {
+	crayonBumpyShellBefore,
+	crayonTextureBackgroundImage,
+	crayonGrainBackgroundImage,
+} from "@/tokens/themes/crayonTexture.css";
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
+
+const crayonLightThemeClass = String(crayonLightTheme);
+const crayonDarkThemeClass = String(crayonDarkTheme);
+
+// Helper functions for theme-specific styles
+type BadgeVariant = "solid" | "outline" | "subtle" | "weak";
+
+/**
+ * Creates crayon theme ::before pseudo-element style
+ */
+const createCrayonBeforeStyle = (
+	background: string,
+	borderColor: string,
+	hasBorder = true,
+) => ({
+	...crayonBumpyShellBefore,
+	background,
+	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
+});
+
+/**
+ * Creates game theme box shadow style
+ */
+const createGameBoxShadow = (borderColor: string) => ({
+	borderColor: "transparent",
+	boxShadow: `calc(-4px) 0 0 0 ${borderColor}, 4px 0 0 0 ${borderColor}, 0 4px 0 0 ${borderColor}, 0 calc(-4px) 0 0 ${borderColor}`,
+	margin: themeContract.shadow.pixelBoxMargin,
+});
+
+/**
+ * Creates theme-specific selectors for a given intent and variant
+ */
+const createThemeSelectors = (intent: ColorIntent, variant: BadgeVariant) => {
+	const color = themeContract.color[intent];
+	const selectors: Record<string, unknown> = {};
+
+	// Game theme styles
+	if (variant === "outline" || variant === "weak") {
+		selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] =
+			createGameBoxShadow(color.border);
+	}
+
+	// Crayon theme styles
+	if (variant === "solid" || variant === "subtle" || variant === "weak") {
+		const bg =
+			variant === "solid"
+				? color.surface
+				: variant === "subtle"
+					? `${color.surface}20`
+					: color.weak;
+
+		// Subtle variant has no border
+		const hasBorder = variant !== "subtle";
+
+		selectors[
+			`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+		] = createCrayonBeforeStyle(bg, color.border, hasBorder);
+	}
+
+	if (variant === "outline") {
+		selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+			borderColor: "transparent",
+		};
+		selectors[
+			`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+		] = createCrayonBeforeStyle("transparent", color.border);
+	}
+
+	// Type assertion needed because vanilla-extract's SelectorMap type is complex
+	// and we're dynamically building selectors
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
 
 const badgeBase = style({
 	display: "inline-flex",
@@ -19,6 +98,32 @@ const badgeBase = style({
 	verticalAlign: "middle",
 	boxShadow: themeContract.shadow.pixelBox,
 	margin: themeContract.shadow.pixelBoxMargin,
+	position: "relative",
+	selectors: {
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			background: "transparent",
+			overflow: "visible",
+			filter: "none",
+			position: "relative",
+			isolation: "isolate",
+		},
+		[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
+			{
+				zIndex: 0,
+			},
+		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]: {
+			content: '""',
+			position: "absolute",
+			inset: 0,
+			borderRadius: "inherit",
+			pointerEvents: "none",
+			backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+			backgroundSize: "auto, 3px 3px",
+			mixBlendMode: "overlay",
+			opacity: 0.8,
+			zIndex: 0,
+		},
+	},
 });
 
 export const badge = recipe({
@@ -91,6 +196,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.primary.surface,
 				color: themeContract.color.primary.text,
 				borderColor: "transparent",
+				selectors: createThemeSelectors("primary", "solid"),
 			},
 		},
 		{
@@ -99,6 +205,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.secondary.surface,
 				color: themeContract.color.secondary.text,
 				borderColor: "transparent",
+				selectors: createThemeSelectors("secondary", "solid"),
 			},
 		},
 		{
@@ -107,6 +214,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.success.surface,
 				color: themeContract.color.success.text,
 				borderColor: "transparent",
+				selectors: createThemeSelectors("success", "solid"),
 			},
 		},
 		{
@@ -115,6 +223,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.warning.surface,
 				color: themeContract.color.warning.text,
 				borderColor: "transparent",
+				selectors: createThemeSelectors("warning", "solid"),
 			},
 		},
 		{
@@ -123,6 +232,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.danger.surface,
 				color: themeContract.color.danger.text,
 				borderColor: "transparent",
+				selectors: createThemeSelectors("danger", "solid"),
 			},
 		},
 		{
@@ -131,6 +241,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.neutral.surface,
 				color: themeContract.color.neutral.text,
 				borderColor: "transparent",
+				selectors: createThemeSelectors("neutral", "solid"),
 			},
 		},
 
@@ -140,13 +251,7 @@ export const badge = recipe({
 			style: {
 				borderColor: themeContract.color.primary.border,
 				color: themeContract.color.primary.surface,
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						borderColor: "transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("primary", "outline"),
 			},
 		},
 		{
@@ -154,13 +259,7 @@ export const badge = recipe({
 			style: {
 				borderColor: themeContract.color.secondary.border,
 				color: themeContract.color.secondary.surface,
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						borderColor: "transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("secondary", "outline"),
 			},
 		},
 		{
@@ -168,13 +267,7 @@ export const badge = recipe({
 			style: {
 				borderColor: themeContract.color.success.border,
 				color: themeContract.color.success.surface,
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						borderColor: "transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("success", "outline"),
 			},
 		},
 		{
@@ -182,13 +275,7 @@ export const badge = recipe({
 			style: {
 				borderColor: themeContract.color.warning.border,
 				color: themeContract.color.warning.surface,
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						borderColor: "transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("warning", "outline"),
 			},
 		},
 		{
@@ -196,13 +283,7 @@ export const badge = recipe({
 			style: {
 				borderColor: themeContract.color.danger.border,
 				color: themeContract.color.danger.surface,
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						borderColor: "transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("danger", "outline"),
 			},
 		},
 		{
@@ -210,13 +291,7 @@ export const badge = recipe({
 			style: {
 				borderColor: themeContract.color.neutral.border,
 				color: themeContract.color.neutral.surface,
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						borderColor: "transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("neutral", "outline"),
 			},
 		},
 
@@ -229,6 +304,7 @@ export const badge = recipe({
 				borderColor: "transparent",
 				boxShadow: "none",
 				margin: "0",
+				selectors: createThemeSelectors("primary", "subtle"),
 			},
 		},
 		{
@@ -239,6 +315,7 @@ export const badge = recipe({
 				borderColor: "transparent",
 				boxShadow: "none",
 				margin: "0",
+				selectors: createThemeSelectors("secondary", "subtle"),
 			},
 		},
 		{
@@ -249,6 +326,7 @@ export const badge = recipe({
 				borderColor: "transparent",
 				boxShadow: "none",
 				margin: "0",
+				selectors: createThemeSelectors("success", "subtle"),
 			},
 		},
 		{
@@ -259,6 +337,7 @@ export const badge = recipe({
 				borderColor: "transparent",
 				boxShadow: "none",
 				margin: "0",
+				selectors: createThemeSelectors("warning", "subtle"),
 			},
 		},
 		{
@@ -269,6 +348,7 @@ export const badge = recipe({
 				borderColor: "transparent",
 				boxShadow: "none",
 				margin: "0",
+				selectors: createThemeSelectors("danger", "subtle"),
 			},
 		},
 		{
@@ -279,6 +359,7 @@ export const badge = recipe({
 				borderColor: "transparent",
 				boxShadow: "none",
 				margin: "0",
+				selectors: createThemeSelectors("neutral", "subtle"),
 			},
 		},
 
@@ -289,12 +370,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.primary.weak,
 				color: themeContract.color.primary.surface,
 				borderColor: "transparent",
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("primary", "weak"),
 			},
 		},
 		{
@@ -303,12 +379,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.secondary.weak,
 				color: themeContract.color.secondary.surface,
 				borderColor: "transparent",
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("secondary", "weak"),
 			},
 		},
 		{
@@ -317,12 +388,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.success.weak,
 				color: themeContract.color.success.surface,
 				borderColor: "transparent",
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("success", "weak"),
 			},
 		},
 		{
@@ -331,12 +397,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.warning.weak,
 				color: themeContract.color.warning.surface,
 				borderColor: "transparent",
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("warning", "weak"),
 			},
 		},
 		{
@@ -345,12 +406,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.danger.weak,
 				color: themeContract.color.danger.surface,
 				borderColor: "transparent",
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("danger", "weak"),
 			},
 		},
 		{
@@ -359,12 +415,7 @@ export const badge = recipe({
 				backgroundColor: themeContract.color.neutral.weak,
 				color: themeContract.color.neutral.surface,
 				borderColor: "transparent",
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-				},
+				selectors: createThemeSelectors("neutral", "weak"),
 			},
 		},
 	],
@@ -377,10 +428,19 @@ export const badge = recipe({
 	},
 });
 
+// Content wrapper for text (prevents mixBlendMode from affecting text)
+export const content = style({
+	position: "relative",
+	zIndex: 1,
+	isolation: "isolate",
+});
+
 // Dot indicator (optional)
 export const dot = style({
 	width: "6px",
 	height: "6px",
 	borderRadius: themeContract.radius.full,
 	backgroundColor: "currentColor",
+	position: "relative",
+	zIndex: 1,
 });
