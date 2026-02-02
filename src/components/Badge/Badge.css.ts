@@ -418,6 +418,30 @@ export const badge = recipe({
 				selectors: createThemeSelectors("neutral", "weak"),
 			},
 		},
+
+		// Crayon theme: hide texture for outline/subtle (transparent/light background)
+		{
+			variants: { variant: "outline" },
+			style: {
+				selectors: {
+					[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]:
+						{
+							display: "none",
+						},
+				},
+			},
+		},
+		{
+			variants: { variant: "subtle" },
+			style: {
+				selectors: {
+					[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]:
+						{
+							display: "none",
+						},
+				},
+			},
+		},
 	],
 
 	defaultVariants: {
