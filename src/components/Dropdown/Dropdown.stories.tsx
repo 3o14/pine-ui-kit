@@ -160,7 +160,7 @@ export const WithDefaultValue: Story = {
 
 // Sizes
 export const Sizes: Story = {
-	render: function DropdownSizes() {
+	render: function DropdownSizes(args) {
 		const [value1, setValue1] = React.useState<string>("");
 		const [value2, setValue2] = React.useState<string>("");
 		const [value3, setValue3] = React.useState<string>("");
@@ -175,6 +175,7 @@ export const Sizes: Story = {
 				}}
 			>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value1}
 					onValueChange={(value) => setValue1(value ?? "")}
@@ -182,6 +183,7 @@ export const Sizes: Story = {
 					placeholder="Small"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value2}
 					onValueChange={(value) => setValue2(value ?? "")}
@@ -189,6 +191,7 @@ export const Sizes: Story = {
 					placeholder="Medium"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value3}
 					onValueChange={(value) => setValue3(value ?? "")}
@@ -202,7 +205,7 @@ export const Sizes: Story = {
 
 // Intents
 export const Intents: Story = {
-	render: function DropdownIntents() {
+	render: function DropdownIntents(args) {
 		const [value1, setValue1] = React.useState<string>("");
 		const [value2, setValue2] = React.useState<string>("");
 		const [value3, setValue3] = React.useState<string>("");
@@ -220,6 +223,7 @@ export const Intents: Story = {
 				}}
 			>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value1}
 					onValueChange={(value) => setValue1(value ?? "")}
@@ -227,6 +231,7 @@ export const Intents: Story = {
 					placeholder="Primary"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value2}
 					onValueChange={(value) => setValue2(value ?? "")}
@@ -234,6 +239,7 @@ export const Intents: Story = {
 					placeholder="Secondary"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value3}
 					onValueChange={(value) => setValue3(value ?? "")}
@@ -241,6 +247,7 @@ export const Intents: Story = {
 					placeholder="Success"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value4}
 					onValueChange={(value) => setValue4(value ?? "")}
@@ -248,6 +255,7 @@ export const Intents: Story = {
 					placeholder="Warning"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value5}
 					onValueChange={(value) => setValue5(value ?? "")}
@@ -255,6 +263,7 @@ export const Intents: Story = {
 					placeholder="Danger"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value6}
 					onValueChange={(value) => setValue6(value ?? "")}
@@ -268,7 +277,7 @@ export const Intents: Story = {
 
 // Rounded
 export const Rounded: Story = {
-	render: function DropdownRounded() {
+	render: function DropdownRounded(args) {
 		const [value1, setValue1] = React.useState<string>("");
 		const [value2, setValue2] = React.useState<string>("");
 		const [value3, setValue3] = React.useState<string>("");
@@ -283,6 +292,7 @@ export const Rounded: Story = {
 				}}
 			>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value1}
 					onValueChange={(value) => setValue1(value ?? "")}
@@ -290,6 +300,7 @@ export const Rounded: Story = {
 					placeholder="Small rounded"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value2}
 					onValueChange={(value) => setValue2(value ?? "")}
@@ -297,6 +308,7 @@ export const Rounded: Story = {
 					placeholder="Medium rounded"
 				/>
 				<Dropdown
+					{...args}
 					options={sampleOptions}
 					value={value3}
 					onValueChange={(value) => setValue3(value ?? "")}
@@ -387,7 +399,7 @@ export const WithDisabledOptions: Story = {
 
 // Form Example
 export const FormExample: Story = {
-	render: function DropdownForm() {
+	render: function DropdownForm(args) {
 		const [country, setCountry] = React.useState<string>("");
 		const [city, setCity] = React.useState<string>("");
 		const [language, setLanguage] = React.useState<string>("");
@@ -436,6 +448,7 @@ export const FormExample: Story = {
 						Country
 					</label>
 					<Dropdown
+						{...args}
 						options={countries}
 						value={country}
 						onValueChange={(value) => setCountry(value ?? "")}
@@ -456,6 +469,7 @@ export const FormExample: Story = {
 						City
 					</label>
 					<Dropdown
+						{...args}
 						options={cities}
 						value={city}
 						onValueChange={(value) => setCity(value ?? "")}
@@ -476,6 +490,7 @@ export const FormExample: Story = {
 						Preferred Language
 					</label>
 					<Dropdown
+						{...args}
 						options={languages}
 						value={language}
 						onValueChange={(value) => setLanguage(value ?? "")}

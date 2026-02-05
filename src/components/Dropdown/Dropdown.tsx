@@ -8,14 +8,6 @@ export type DropdownSize = "small" | "medium" | "large";
 export type DropdownRounded = "small" | "medium" | "large";
 export type DropdownIntent = ColorIntent;
 
-const menuIntentStyles: Record<ColorIntent, typeof styles.menuPrimaryIntent> = {
-	primary: styles.menuPrimaryIntent,
-	secondary: styles.menuSecondaryIntent,
-	success: styles.menuSuccessIntent,
-	warning: styles.menuWarningIntent,
-	danger: styles.menuDangerIntent,
-	neutral: styles.menuNeutralIntent,
-};
 
 export interface DropdownOption {
 	value: string;
@@ -96,7 +88,7 @@ export const Dropdown = ({
 						fullWidth && styles.triggerFullWidth
 					)}
 				>
-					<BaseSelect.Value>
+					<BaseSelect.Value className={styles.triggerValue}>
 						{(selectedValue: string | null) => {
 							const selected = options.find(
 								(opt) => opt.value === selectedValue
@@ -126,8 +118,7 @@ export const Dropdown = ({
 				<BaseSelect.Portal>
 					<BaseSelect.Positioner sideOffset={4}>
 						<BaseSelect.Popup
-							className={clsx(styles.menu, menuIntentStyles[intent])}
-							data-intent={intent}
+							className={styles.menu({ intent })}
 						>
 							<BaseSelect.List>
 								{options.map((option) => (

@@ -1,10 +1,185 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract } from "@/tokens";
+import { themeContract, type ColorIntent } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+import {
+	crayonBumpyShellBefore,
+	crayonTextureBackgroundImage,
+	crayonGrainBackgroundImage,
+} from "@/tokens/themes/crayonTexture.css";
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
+
+const crayonLightThemeClass = String(crayonLightTheme);
+const crayonDarkThemeClass = String(crayonDarkTheme);
+
+/**
+ * Creates crayon theme ::before pseudo-element style
+ */
+const createCrayonBeforeStyle = (
+	background: string,
+	borderColor: string,
+	hasBorder = true,
+) => ({
+	...crayonBumpyShellBefore,
+	background,
+	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
+});
+
+/**
+ * Creates crayon theme selectors for the dropdown trigger
+ */
+const createCrayonTriggerSelectors = () => {
+	const selectors: Record<string, unknown> = {};
+
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		background: "transparent",
+		borderColor: "transparent",
+		overflow: "visible",
+		isolation: "isolate",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+	] = {
+		...createCrayonBeforeStyle(
+			themeContract.color.surface.background,
+			themeContract.color.surface.outline,
+		),
+		zIndex: 0,
+		transition: "background 0.2s ease-in-out",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
+	] = {
+		content: '""',
+		position: "absolute",
+		inset: 0,
+		borderRadius: "inherit",
+		pointerEvents: "none",
+		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+		backgroundSize: "auto, 3px 3px",
+		mixBlendMode: "overlay",
+		opacity: 0.8,
+		zIndex: 0,
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
+
+/**
+ * Creates crayon theme selectors for the dropdown menu
+ */
+const createCrayonMenuSelectors = () => {
+	const selectors: Record<string, unknown> = {};
+
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		background: "transparent",
+		borderColor: "transparent",
+		overflow: "visible",
+		isolation: "isolate",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+	] = {
+		...createCrayonBeforeStyle(
+			themeContract.color.surface.background,
+			themeContract.color.surface.outline,
+		),
+		zIndex: 0,
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
+	] = {
+		content: '""',
+		position: "absolute",
+		inset: 0,
+		borderRadius: "inherit",
+		pointerEvents: "none",
+		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+		backgroundSize: "auto, 3px 3px",
+		mixBlendMode: "overlay",
+		opacity: 0.8,
+		zIndex: 0,
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
+
+/**
+ * Creates trigger compound variant selectors for a given intent.
+ * Returns selectors object for use in compound variants.
+ */
+const createTriggerIntentSelectors = (intent: ColorIntent) => {
+	const color = themeContract.color[intent];
+	const pixelBoxShadow = `calc(-4px) 0 0 0 ${color.border}, 4px 0 0 0 ${color.border}, 0 4px 0 0 ${color.border}, 0 calc(-4px) 0 0 ${color.border}`;
+
+	const selectors: Record<string, unknown> = {};
+
+	// Basic theme: show intent border color
+	selectors["&"] = {
+		borderColor: color.border,
+	};
+
+	selectors["&:focus-visible"] = {
+		outline: `2px solid ${color.surface}`,
+	};
+
+	// Game theme: pixel-box shadow with intent color
+	selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] = {
+		border: "1px solid transparent",
+		boxShadow: pixelBoxShadow,
+		margin: themeContract.shadow.pixelBoxMargin,
+	};
+
+	// Crayon theme: bumpy border with intent color
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		border: "none",
+	};
+
+	selectors[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`] = {
+		boxShadow: `inset 0 0 0 3px ${color.border}`,
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
+
+/**
+ * Creates menu intent compound variant style for all themes.
+ */
+const createMenuIntentStyle = (intent: ColorIntent) => {
+	const color = themeContract.color[intent];
+	const pixelBoxShadow = `calc(-4px) 0 0 0 ${color.border}, 4px 0 0 0 ${color.border}, 0 4px 0 0 ${color.border}, 0 calc(-4px) 0 0 ${color.border} !important`;
+
+	return {
+		// Basic theme: show intent border color
+		borderColor: color.border,
+		borderWidth: "1.5px",
+		selectors: {
+			// Game theme: pixel-box shadow with intent color
+			[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
+				border: "1px solid transparent",
+				boxShadow: pixelBoxShadow,
+			},
+			// Crayon theme: bumpy border with intent color
+			[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+				border: "none",
+			},
+			[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
+				{
+					boxShadow: `inset 0 0 0 3px ${color.border}`,
+				},
+		},
+	};
+};
 
 const slideDown = keyframes({
 	from: {
@@ -45,9 +220,8 @@ const triggerBase = style({
 	color: themeContract.color.surface.text,
 	cursor: "pointer",
 	transition: "all 0.2s ease-in-out",
-	":hover": {
-		backgroundColor: themeContract.color.surface.backgroundElevated,
-	},
+	position: "relative",
+	margin: themeContract.shadow.pixelBoxMargin,
 	":focus-visible": {
 		outline: `2px solid ${themeContract.color.primary.surface}`,
 		outlineOffset: "2px",
@@ -60,9 +234,12 @@ const triggerBase = style({
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			border: "1px solid transparent",
 			boxShadow: themeContract.shadow.pixelBox,
-			margin: themeContract.shadow.pixelBoxMargin,
 			borderRadius: 0,
 		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			border: "none",
+		},
+		...createCrayonTriggerSelectors(),
 	},
 });
 
@@ -131,159 +308,27 @@ export const trigger = recipe({
 	compoundVariants: [
 		{
 			variants: { intent: "primary" },
-			style: {
-				selectors: {
-					"&:hover:not(:disabled)": {
-						borderColor: themeContract.color.primary.surface,
-					},
-					"&[data-state='open']": {
-						borderColor: themeContract.color.primary.surface,
-					},
-					"&:focus-visible": {
-						outline: `2px solid ${themeContract.color.primary.surface}`,
-					},
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-				},
-			},
+			style: { selectors: createTriggerIntentSelectors("primary") },
 		},
 		{
 			variants: { intent: "secondary" },
-			style: {
-				selectors: {
-					"&:hover:not(:disabled)": {
-						borderColor: themeContract.color.secondary.surface,
-					},
-					"&[data-state='open']": {
-						borderColor: themeContract.color.secondary.surface,
-					},
-					"&:focus-visible": {
-						outline: `2px solid ${themeContract.color.secondary.surface}`,
-					},
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-				},
-			},
+			style: { selectors: createTriggerIntentSelectors("secondary") },
 		},
 		{
 			variants: { intent: "success" },
-			style: {
-				selectors: {
-					"&:hover:not(:disabled)": {
-						borderColor: themeContract.color.success.surface,
-					},
-					"&[data-state='open']": {
-						borderColor: themeContract.color.success.surface,
-					},
-					"&:focus-visible": {
-						outline: `2px solid ${themeContract.color.success.surface}`,
-					},
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-				},
-			},
+			style: { selectors: createTriggerIntentSelectors("success") },
 		},
 		{
 			variants: { intent: "warning" },
-			style: {
-				selectors: {
-					"&:hover:not(:disabled)": {
-						borderColor: themeContract.color.warning.surface,
-					},
-					"&[data-state='open']": {
-						borderColor: themeContract.color.warning.surface,
-					},
-					"&:focus-visible": {
-						outline: `2px solid ${themeContract.color.warning.surface}`,
-					},
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-				},
-			},
+			style: { selectors: createTriggerIntentSelectors("warning") },
 		},
 		{
 			variants: { intent: "danger" },
-			style: {
-				selectors: {
-					"&:hover:not(:disabled)": {
-						borderColor: themeContract.color.danger.surface,
-					},
-					"&[data-state='open']": {
-						borderColor: themeContract.color.danger.surface,
-					},
-					"&:focus-visible": {
-						outline: `2px solid ${themeContract.color.danger.surface}`,
-					},
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-				},
-			},
+			style: { selectors: createTriggerIntentSelectors("danger") },
 		},
 		{
 			variants: { intent: "neutral" },
-			style: {
-				selectors: {
-					"&:hover:not(:disabled)": {
-						borderColor: themeContract.color.neutral.surface,
-					},
-					"&[data-state='open']": {
-						borderColor: themeContract.color.neutral.surface,
-					},
-					"&:focus-visible": {
-						outline: `2px solid ${themeContract.color.neutral.surface}`,
-					},
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-					[`.${gameLightThemeClass} &[data-state='open'], .${gameDarkThemeClass} &[data-state='open']`]: {
-						boxShadow: themeContract.shadow.pixelBox,
-					},
-				},
-			},
+			style: { selectors: createTriggerIntentSelectors("neutral") },
 		},
 	],
 
@@ -298,19 +343,32 @@ export const triggerFullWidth = style({
 	width: "100%",
 });
 
+export const triggerValue = style({
+	selectors: {
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
+		},
+	},
+});
+
 export const triggerIcon = style({
 	display: "flex",
 	alignItems: "center",
 	justifyContent: "center",
 	transition: "transform 0.2s ease-in-out",
 	selectors: {
-		"[data-state='open'] &": {
+		"[data-popup-open] &": {
 			transform: "rotate(180deg)",
+		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
 		},
 	},
 });
 
-export const menu = style({
+const menuBase = style({
 	position: "absolute",
 	top: "calc(100% + 4px)",
 	left: 0,
@@ -324,63 +382,47 @@ export const menu = style({
 	animation: `${slideDown} 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)`,
 	maxHeight: "300px",
 	overflowY: "auto",
+	margin: themeContract.shadow.pixelBoxMargin,
 	selectors: {
 		"&[data-state='closing']": {
 			animation: `${slideUp} 0.15s ease-in`,
 		},
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			border: "1px solid transparent",
-			margin: themeContract.shadow.pixelBoxMargin,
 			borderRadius: 0,
 		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			border: "none",
+		},
+		...createCrayonMenuSelectors(),
 	},
 });
 
-export const menuPrimaryIntent = style({
-	selectors: {
-		[`.${gameLightThemeClass} &[data-intent='primary'], .${gameDarkThemeClass} &[data-intent='primary']`]: {
-			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.primary.border}, 4px 0 0 0 ${themeContract.color.primary.border}, 0 4px 0 0 ${themeContract.color.primary.border}, 0 calc(-4px) 0 0 ${themeContract.color.primary.border} !important`,
+export const menu = recipe({
+	base: menuBase,
+
+	variants: {
+		intent: {
+			primary: {},
+			secondary: {},
+			success: {},
+			warning: {},
+			danger: {},
+			neutral: {},
 		},
 	},
-});
 
-export const menuSecondaryIntent = style({
-	selectors: {
-		[`.${gameLightThemeClass} &[data-intent='secondary'], .${gameDarkThemeClass} &[data-intent='secondary']`]: {
-			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.secondary.border}, 4px 0 0 0 ${themeContract.color.secondary.border}, 0 4px 0 0 ${themeContract.color.secondary.border}, 0 calc(-4px) 0 0 ${themeContract.color.secondary.border} !important`,
-		},
-	},
-});
+	compoundVariants: [
+		{ variants: { intent: "primary" }, style: createMenuIntentStyle("primary") },
+		{ variants: { intent: "secondary" }, style: createMenuIntentStyle("secondary") },
+		{ variants: { intent: "success" }, style: createMenuIntentStyle("success") },
+		{ variants: { intent: "warning" }, style: createMenuIntentStyle("warning") },
+		{ variants: { intent: "danger" }, style: createMenuIntentStyle("danger") },
+		{ variants: { intent: "neutral" }, style: createMenuIntentStyle("neutral") },
+	],
 
-export const menuSuccessIntent = style({
-	selectors: {
-		[`.${gameLightThemeClass} &[data-intent='success'], .${gameDarkThemeClass} &[data-intent='success']`]: {
-			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border} !important`,
-		},
-	},
-});
-
-export const menuWarningIntent = style({
-	selectors: {
-		[`.${gameLightThemeClass} &[data-intent='warning'], .${gameDarkThemeClass} &[data-intent='warning']`]: {
-			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.warning.border}, 4px 0 0 0 ${themeContract.color.warning.border}, 0 4px 0 0 ${themeContract.color.warning.border}, 0 calc(-4px) 0 0 ${themeContract.color.warning.border} !important`,
-		},
-	},
-});
-
-export const menuDangerIntent = style({
-	selectors: {
-		[`.${gameLightThemeClass} &[data-intent='danger'], .${gameDarkThemeClass} &[data-intent='danger']`]: {
-			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border} !important`,
-		},
-	},
-});
-
-export const menuNeutralIntent = style({
-	selectors: {
-		[`.${gameLightThemeClass} &[data-intent='neutral'], .${gameDarkThemeClass} &[data-intent='neutral']`]: {
-			boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.neutral.border}, 4px 0 0 0 ${themeContract.color.neutral.border}, 0 4px 0 0 ${themeContract.color.neutral.border}, 0 calc(-4px) 0 0 ${themeContract.color.neutral.border} !important`,
-		},
+	defaultVariants: {
+		intent: "primary",
 	},
 });
 
@@ -402,6 +444,12 @@ const menuItemBase = style({
 	":disabled": {
 		opacity: 0.5,
 		cursor: "not-allowed",
+	},
+	selectors: {
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
+		},
 	},
 });
 
@@ -569,6 +617,12 @@ export const divider = style({
 	height: "1px",
 	backgroundColor: themeContract.color.surface.divider,
 	margin: `${themeContract.spacing.xxs} 0`,
+	selectors: {
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
+		},
+	},
 });
 
 export const groupLabel = style({
@@ -579,9 +633,10 @@ export const groupLabel = style({
 	color: themeContract.color.surface.textMuted,
 	textTransform: "uppercase",
 	letterSpacing: "0.05em",
+	selectors: {
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
+		},
+	},
 });
-
-
-
-
-
