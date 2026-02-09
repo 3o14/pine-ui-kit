@@ -268,22 +268,6 @@ export const Disabled: Story = {
 	},
 };
 
-// Full Width
-export const FullWidth: Story = {
-	render: (args) => (
-		<div style={{ width: "100%", maxWidth: "600px" }}>
-			<TextField {...args} />
-		</div>
-	),
-	args: {
-		label: "Full Width Field",
-		placeholder: "This field spans the full width",
-		fullWidth: true,
-		helperText: "Takes up all available width",
-		variant: "outline",
-	},
-};
-
 // Rounded
 export const Rounded: Story = {
 	render: (args) => (
@@ -320,55 +304,6 @@ export const Rounded: Story = {
 	},
 };
 
-// Form Example
-export const FormExample: Story = {
-	render: (args) => (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				gap: "16px",
-				width: "400px",
-			}}
-		>
-			<TextField
-				{...args}
-				label="First Name"
-				placeholder="John"
-				helperText="Enter your first name"
-			/>
-			<TextField
-				{...args}
-				label="Last Name"
-				placeholder="Doe"
-				helperText="Enter your last name"
-			/>
-		<TextField
-			variant={args.variant}
-			size={args.size}
-			rounded={args.rounded}
-			status="success"
-			label="Email"
-			type="email"
-			placeholder="john.doe@example.com"
-			helperText="Email format is correct"
-		/>
-		<TextField
-			variant={args.variant}
-			size={args.size}
-			rounded={args.rounded}
-			label="Phone"
-			type="tel"
-			placeholder="+1 (555) 000-0000"
-			helperText="Include country code"
-		/>
-		</div>
-	),
-	args: {
-		variant: "outline",
-	},
-};
-
 // Multiline (Textarea)
 export const Multiline: Story = {
 	render: (args) => (
@@ -384,6 +319,7 @@ export const Multiline: Story = {
 				variant={args.variant}
 				size={args.size}
 				rounded={args.rounded}
+				disabled={args.disabled}
 				multiline
 				rows={3}
 				label="Message"
@@ -412,6 +348,7 @@ export const MultilineRows: Story = {
 				variant={args.variant}
 				size={args.size}
 				rounded={args.rounded}
+				disabled={args.disabled}
 				multiline
 				rows={2}
 				label="Short Message (2 rows)"
@@ -421,6 +358,7 @@ export const MultilineRows: Story = {
 				variant={args.variant}
 				size={args.size}
 				rounded={args.rounded}
+				disabled={args.disabled}
 				multiline
 				rows={4}
 				label="Medium Message (4 rows)"
@@ -430,6 +368,7 @@ export const MultilineRows: Story = {
 				variant={args.variant}
 				size={args.size}
 				rounded={args.rounded}
+				disabled={args.disabled}
 				multiline
 				rows={6}
 				label="Long Message (6 rows)"
@@ -439,50 +378,5 @@ export const MultilineRows: Story = {
 	),
 	args: {
 		variant: "outline",
-	},
-};
-
-// Multiline Variants
-export const MultilineVariants: Story = {
-	render: (args) => (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				gap: "16px",
-				width: "400px",
-			}}
-		>
-			<TextField
-				variant="outline"
-				size={args.size}
-				rounded={args.rounded}
-				multiline
-				rows={3}
-				label="Outline Textarea"
-				placeholder="Outline variant..."
-			/>
-			<TextField
-				variant="filled"
-				size={args.size}
-				rounded={args.rounded}
-				multiline
-				rows={3}
-				label="Filled Textarea"
-				placeholder="Filled variant..."
-			/>
-		</div>
-	),
-	args: {
-		variant: "outline",
-	},
-};
-
-// Interactive Playground
-export const Playground: Story = {
-	args: {
-		label: "Label",
-		placeholder: "Type something...",
-		helperText: "Helper text goes here",
 	},
 };

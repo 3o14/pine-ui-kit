@@ -2,9 +2,117 @@ import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+import {
+	crayonBumpyShellBefore,
+	crayonTextureBackgroundImage,
+	crayonGrainBackgroundImage,
+} from "@/tokens/themes/crayonTexture.css";
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
+
+const crayonLightThemeClass = String(crayonLightTheme);
+const crayonDarkThemeClass = String(crayonDarkTheme);
+
+/**
+ * Creates crayon theme ::before pseudo-element style
+ */
+const createCrayonBeforeStyle = (
+	background: string,
+	borderColor: string,
+	hasBorder = true,
+) => ({
+	...crayonBumpyShellBefore,
+	background,
+	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
+});
+
+/**
+ * Creates crayon theme selectors for the input field
+ */
+const createCrayonInputSelectors = () => {
+	const selectors: Record<string, unknown> = {};
+
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		background: "transparent",
+		borderColor: "transparent",
+		overflow: "visible",
+		isolation: "isolate",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+	] = {
+		...createCrayonBeforeStyle(
+			themeContract.color.surface.background,
+			themeContract.color.surface.outline,
+		),
+		zIndex: 0,
+		transition: "background 0.2s ease-in-out",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
+	] = {
+		content: '""',
+		position: "absolute",
+		inset: 0,
+		borderRadius: "inherit",
+		pointerEvents: "none",
+		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+		backgroundSize: "auto, 3px 3px",
+		mixBlendMode: "overlay",
+		opacity: 0.8,
+		zIndex: 0,
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
+
+/**
+ * Creates crayon theme selectors for input with status-based border color
+ */
+const createCrayonInputStatusSelectors = (borderColor: string) => {
+	const selectors: Record<string, unknown> = {};
+
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		background: "transparent",
+		borderColor: "transparent",
+		overflow: "visible",
+		isolation: "isolate",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+	] = {
+		...createCrayonBeforeStyle(
+			themeContract.color.surface.background,
+			borderColor,
+		),
+		zIndex: 0,
+		transition: "background 0.2s ease-in-out",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
+	] = {
+		content: '""',
+		position: "absolute",
+		inset: 0,
+		borderRadius: "inherit",
+		pointerEvents: "none",
+		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+		backgroundSize: "auto, 3px 3px",
+		mixBlendMode: "overlay",
+		opacity: 0.8,
+		zIndex: 0,
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
 
 export const label = recipe({
 	base: {
@@ -96,6 +204,104 @@ export const containerVariants = styleVariants({
 	},
 });
 
+const inputWrapperBase = style({
+	position: "relative",
+	display: "block",
+	width: "100%",
+});
+
+export const inputWrapper = recipe({
+	base: inputWrapperBase,
+
+	variants: {
+		variant: {
+			outline: {},
+			filled: {},
+		},
+
+		status: {
+			default: {},
+			error: {},
+			success: {},
+		},
+
+		rounded: {
+			small: {},
+			medium: {},
+			large: {},
+		},
+	},
+
+	compoundVariants: [
+		{
+			variants: { variant: "outline", status: "default" },
+			style: {
+				selectors: createCrayonInputSelectors(),
+			},
+		},
+		{
+			variants: { variant: "outline", status: "error" },
+			style: {
+				selectors: createCrayonInputStatusSelectors(
+					themeContract.color.danger.border
+				),
+			},
+		},
+		{
+			variants: { variant: "outline", status: "success" },
+			style: {
+				selectors: createCrayonInputStatusSelectors(
+					themeContract.color.success.border
+				),
+			},
+		},
+
+		{
+			variants: { variant: "outline", rounded: "small" },
+			style: {
+				borderRadius: themeContract.radius.small,
+			},
+		},
+		{
+			variants: { variant: "outline", rounded: "medium" },
+			style: {
+				borderRadius: themeContract.radius.medium,
+			},
+		},
+		{
+			variants: { variant: "outline", rounded: "large" },
+			style: {
+				borderRadius: themeContract.radius.large,
+			},
+		},
+
+		{
+			variants: { variant: "filled", rounded: "small" },
+			style: {
+				borderRadius: `${themeContract.radius.small} ${themeContract.radius.small} 0 0`,
+			},
+		},
+		{
+			variants: { variant: "filled", rounded: "medium" },
+			style: {
+				borderRadius: `${themeContract.radius.medium} ${themeContract.radius.medium} 0 0`,
+			},
+		},
+		{
+			variants: { variant: "filled", rounded: "large" },
+			style: {
+				borderRadius: `${themeContract.radius.large} ${themeContract.radius.large} 0 0`,
+			},
+		},
+	],
+
+	defaultVariants: {
+		variant: "outline",
+		status: "default",
+		rounded: "medium",
+	},
+});
+
 export const inputBase = style({
 	fontFamily: themeContract.typography.fontFamily.sans,
 	fontWeight: themeContract.typography.fontWeight.regular,
@@ -104,9 +310,15 @@ export const inputBase = style({
 	transition: "all 0.2s ease-in-out",
 	width: "100%",
 	boxSizing: "border-box",
+	position: "relative",
 	":disabled": {
 		opacity: 0.5,
 		cursor: "not-allowed",
+	},
+	selectors: {
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			zIndex: 1,
+		},
 	},
 });
 
@@ -194,6 +406,9 @@ export const input = recipe({
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.surface.outline}, 4px 0 0 0 ${themeContract.color.surface.outline}, 0 4px 0 0 ${themeContract.color.surface.outline}, 0 calc(-4px) 0 0 ${themeContract.color.surface.outline}`,
 						margin: themeContract.shadow.pixelBoxMargin,
 					},
+					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+						border: "none",
+					},
 				},
 			},
 		},
@@ -211,6 +426,9 @@ export const input = recipe({
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
 						margin: themeContract.shadow.pixelBoxMargin,
 					},
+					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+						border: "none",
+					},
 				},
 			},
 		},
@@ -227,6 +445,9 @@ export const input = recipe({
 						border: "1px solid transparent",
 						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
 						margin: themeContract.shadow.pixelBoxMargin,
+					},
+					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+						border: "none",
 					},
 				},
 			},

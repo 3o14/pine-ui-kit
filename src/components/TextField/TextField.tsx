@@ -2,7 +2,8 @@ import { Field } from "@base-ui/react/field";
 import { Input } from "@base-ui/react/input";
 import clsx from "clsx";
 import * as styles from "./TextField.css";
-const { container, containerVariants, input, label, helperText } = styles;
+const { container, containerVariants, input, label, helperText, inputWrapper } =
+	styles;
 import { lightTheme } from "@/tokens";
 import { useTheme } from "@/providers";
 
@@ -106,21 +107,23 @@ export const TextField = ({
 					{required && " *"}
 				</Field.Label>
 			)}
-			{multiline ? (
-				<textarea
-					className={inputClassName}
-					required={required}
-					disabled={disabled}
-					rows={rows}
-					{...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
-				/>
-			) : (
-				<Input
-					className={inputClassName}
-					required={required}
-					{...(props as React.InputHTMLAttributes<HTMLInputElement>)}
-				/>
-			)}
+			<div className={inputWrapper({ variant, status, rounded })}>
+				{multiline ? (
+					<textarea
+						className={inputClassName}
+						required={required}
+						disabled={disabled}
+						rows={rows}
+						{...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+					/>
+				) : (
+					<Input
+						className={inputClassName}
+						required={required}
+						{...(props as React.InputHTMLAttributes<HTMLInputElement>)}
+					/>
+				)}
+			</div>
 			{helperTextContent && status !== "error" && (
 				<Field.Description className={helperText({ size, status })}>
 					{helperTextContent}
