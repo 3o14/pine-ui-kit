@@ -18,8 +18,9 @@
 
 ## Features
 
+- **Three Unique Themes** — Switch between basic, game, and crayon themes instantly
 - **Token-First Design** — Consistent theming through design tokens
-- **Light & Dark Mode** — Built-in theme variants out of the box
+- **Light & Dark Mode** — Built-in theme variants for all themes
 - **Tree-Shakeable** — Import only what you need
 - **TypeScript Native** — First-class TypeScript support
 - **Zero-Runtime CSS** — Powered by Vanilla Extract
@@ -36,15 +37,15 @@ pnpm add pine-ui-kit
 yarn add pine-ui-kit
 ```
 
-Import components and start building:
+Wrap your app with `ThemeProvider` and start building:
 
 ```tsx
-import { Button, Badge, TextField, Switch } from "pine-ui-kit";
+import { ThemeProvider, Button, Badge, TextField, Switch } from "pine-ui-kit";
 import "pine-ui-kit/style.css";
 
 function App() {
 	return (
-		<div>
+		<ThemeProvider theme="basic" defaultMode="light">
 			<Button intent="primary" size="md">
 				Get Started
 			</Button>
@@ -57,7 +58,64 @@ function App() {
 				placeholder="you@example.com"
 				variant="outline"
 			/>
-		</div>
+		</ThemeProvider>
+	);
+}
+```
+
+## Themes
+
+Pine UI comes with **three distinct design themes** that can be switched seamlessly with a single prop change:
+
+### 🎯 Basic Theme
+
+A clean, modern design system perfect for professional applications. Features smooth animations, subtle shadows, and a refined aesthetic.
+
+```tsx
+<ThemeProvider theme="basic">
+	<YourApp />
+</ThemeProvider>
+```
+
+### 🎮 Game Theme
+
+Pixel-art inspired design for gamified experiences. Features retro aesthetics, bold borders, and playful interactions that bring a nostalgic gaming feel to your interface.
+
+```tsx
+<ThemeProvider theme="game">
+	<YourApp />
+</ThemeProvider>
+```
+
+### 🖍️ Crayon Theme
+
+Soft, warm, and friendly design with hand-drawn aesthetics. Features rounded corners, gentle shadows, and a cozy feel perfect for creative or educational applications.
+
+```tsx
+<ThemeProvider theme="crayon">
+	<YourApp />
+</ThemeProvider>
+```
+
+**All themes support both light and dark modes:**
+
+```tsx
+<ThemeProvider theme="game" defaultMode="dark">
+	<YourApp />
+</ThemeProvider>
+```
+
+Change the theme dynamically at runtime:
+
+```tsx
+function App() {
+	const [theme, setTheme] = useState<"basic" | "game" | "crayon">("basic");
+
+	return (
+		<ThemeProvider theme={theme} onThemeChange={setTheme}>
+			<button onClick={() => setTheme("game")}>Switch to Game Theme</button>
+			<YourApp />
+		</ThemeProvider>
 	);
 }
 ```

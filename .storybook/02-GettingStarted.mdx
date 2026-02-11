@@ -29,17 +29,17 @@ yarn add pine-ui-kit`}
 ### Import Components and Styles
 
 <Source
-	code={`import { Button, Badge, Switch, TextField } from "pine-ui-kit";
+	code={`import { ThemeProvider, Button, Badge, Switch, TextField } from "pine-ui-kit";
 import "pine-ui-kit/style.css";`}
 	language="tsx"
 />
 
-### Use Components
+### Use Components with ThemeProvider
 
 <Source
   code={`function App() {
   return (
-    <div>
+    <ThemeProvider theme="basic" defaultMode="light">
       <Button intent="primary" size="medium">
         Primary Button
       </Button>
@@ -55,7 +55,7 @@ import "pine-ui-kit/style.css";`}
         placeholder="Enter your email"
         helperText="We'll never share your email"
       />
-    </div>
+    </ThemeProvider>
   );
 }`}
 language="tsx"
@@ -63,23 +63,91 @@ language="tsx"
 
 ---
 
-<Heading>Theme Support</Heading>
+<Heading>Theme System</Heading>
 
-Pine UI supports light and dark themes through the `ThemeProvider` component.
+Pine UI provides **three distinct design themes** that transform your entire UI with a single prop change. Each theme has its own unique visual language, supporting both light and dark modes.
 
-### Basic Theme Provider
+### 🎯 Basic Theme
+
+A clean, modern design system perfect for professional applications. Features smooth animations, subtle shadows, and a refined aesthetic.
+
+<Source
+	code={`import { ThemeProvider } from "pine-ui-kit";
+
+function App() {
+  return (
+    <ThemeProvider theme="basic" defaultMode="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+	language="tsx"
+/>
+
+### 🎮 Game Theme
+
+Pixel-art inspired design for gamified experiences. Features retro aesthetics, bold borders, and playful interactions that bring a nostalgic gaming feel to your interface.
+
+<Source
+	code={`import { ThemeProvider } from "pine-ui-kit";
+
+function App() {
+  return (
+    <ThemeProvider theme="game" defaultMode="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+	language="tsx"
+/>
+
+### 🖍️ Crayon Theme
+
+Soft, warm, and friendly design with hand-drawn aesthetics. Features rounded corners, gentle shadows, and a cozy feel perfect for creative or educational applications.
+
+<Source
+	code={`import { ThemeProvider } from "pine-ui-kit";
+
+function App() {
+  return (
+    <ThemeProvider theme="crayon" defaultMode="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+	language="tsx"
+/>
+
+### Theme Provider Props
+
+- **theme** (optional): `"basic" | "game" | "crayon"` - The theme to apply (default: `"basic"`)
+- **defaultTheme** (optional): `"basic" | "game" | "crayon"` - Initial theme for uncontrolled mode
+- **onThemeChange** (optional): `(theme: ThemeName) => void` - Callback when theme changes
+- **defaultMode** (optional): `"light" | "dark"` - Initial mode for uncontrolled mode
+- **mode** (optional): `"light" | "dark"` - Controlled mode value
+- **onModeChange** (optional): `(mode: ThemeMode) => void` - Callback when mode changes
+- **syncWithSystem** (optional): `boolean` - Sync with system theme (default: `true`)
+- **primaryColor** (optional): `string` - Custom primary color (hex format)
+
+---
+
+<Heading>Light & Dark Mode</Heading>
+
+All three themes support both light and dark modes.
+
+### Default Mode
 
 <Source
   code={`import { ThemeProvider } from "pine-ui-kit";
 
 function App() {
   return (
-    <ThemeProvider defaultMode="light">
+    <ThemeProvider theme="basic" defaultMode="light">
       <YourApp />
     </ThemeProvider>
   );
-}`
-} language="tsx" />
+}`}
+language="tsx" />
 
 ### Automatic System Theme Detection
 
@@ -92,24 +160,49 @@ You can enable automatic system theme detection:
 	language="tsx"
 />
 
-### Controlled Theme
+### Controlled Theme and Mode
 
-For controlled theme mode:
+For complete control over both theme and mode:
 
 <Source
   code={`import { useState } from "react";
 import { ThemeProvider } from "pine-ui-kit";
 
 function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"basic" | "game" | "crayon">("basic");
 
   return (
-    <ThemeProvider mode={theme} onModeChange={setTheme}>
+    <ThemeProvider 
+      theme={theme} 
+      onThemeChange={setTheme}
+      mode={mode} 
+      onModeChange={setMode}
+    >
+      <div>
+        <button onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+          Toggle Light/Dark
+        </button>
+        <button onClick={() => setTheme("basic")}>Basic Theme</button>
+        <button onClick={() => setTheme("game")}>Game Theme</button>
+        <button onClick={() => setTheme("crayon")}>Crayon Theme</button>
+      </div>
       <YourApp />
     </ThemeProvider>
   );
 }`}
 language="tsx" />
+
+### Custom Primary Color
+
+You can customize the primary color across all themes:
+
+<Source
+  code={`<ThemeProvider theme="basic" primaryColor="#FF6B6B">
+  <YourApp />
+</ThemeProvider>`}
+  language="tsx"
+/>
 
 ---
 
@@ -368,12 +461,17 @@ Components support full-width layouts:
 
 <Source
   code={`// app/layout.tsx
+import { ThemeProvider } from "pine-ui-kit";
 import "pine-ui-kit/style.css";
 
 export default function RootLayout({ children }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider theme="basic" syncWithSystem={true}>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }`}
@@ -384,10 +482,15 @@ export default function RootLayout({ children }) {
 
 <Source
   code={`// main.tsx
+import { ThemeProvider } from "pine-ui-kit";
 import "pine-ui-kit/style.css";
 import { createRoot } from "react-dom/client";
 
-createRoot(document.getElementById("root")!).render(<App />);`}
+createRoot(document.getElementById("root")!).render(
+  <ThemeProvider theme="basic" defaultMode="light">
+    <App />
+  </ThemeProvider>
+);`}
 language="tsx"
 />
 
