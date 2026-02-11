@@ -1,0 +1,11 @@
+/* [project]/docs/styles.css [client] (css) */
+:root {
+  --pine-design: "basic";
+  --pine-theme: "light";
+}
+
+* {
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+
+/*# sourceMappingURL=docs_styles_css_65f1660e._.single.css.map*/

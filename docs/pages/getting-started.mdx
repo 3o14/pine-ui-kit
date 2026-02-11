@@ -1,0 +1,155 @@
+# Getting Started
+
+Learn how to install and use Pine Design System in your project.
+
+## Installation
+
+Install Pine Design System using your preferred package manager:
+
+```bash
+npm install pine-design-system
+# or
+pnpm add pine-design-system
+# or
+yarn add pine-design-system
+```
+
+## Basic Usage
+
+### Import Components and Styles
+
+```tsx
+import { ThemeProvider, Button, Badge, Switch, TextField } from "pine-design-system";
+import "pine-design-system/style.css";
+```
+
+### Use Components with ThemeProvider
+
+```tsx
+function App() {
+  return (
+    <ThemeProvider design="basic" defaultTheme="light">
+      <Button intent="primary" size="medium">
+        Primary Button
+      </Button>
+
+      <Badge variant="solid" intent="success">
+        New Feature
+      </Badge>
+
+      <Switch label="Enable notifications" />
+
+      <TextField
+        label="Email"
+        placeholder="Enter your email"
+        helperText="We'll never share your email"
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Design System
+
+Pine Design System provides **three distinct design variants** that transform your entire UI with a single prop change. Each variant has its own unique visual language, supporting both light and dark themes.
+
+### 🎯 Basic Design
+
+A clean, modern design perfect for professional applications. Features smooth animations, subtle shadows, and a refined aesthetic.
+
+```tsx
+<ThemeProvider design="basic" defaultTheme="light">
+  <YourApp />
+</ThemeProvider>
+```
+
+### 🎮 Game Design
+
+Pixel-art inspired design for gamified experiences. Features retro aesthetics, bold borders, and playful interactions that bring a nostalgic gaming feel to your interface.
+
+```tsx
+<ThemeProvider design="game" defaultTheme="light">
+  <YourApp />
+</ThemeProvider>
+```
+
+### 🖍️ Crayon Design
+
+Soft, warm, and friendly design with hand-drawn aesthetics. Features rounded corners, gentle shadows, and a cozy feel perfect for creative or educational applications.
+
+```tsx
+<ThemeProvider design="crayon" defaultTheme="light">
+  <YourApp />
+</ThemeProvider>
+```
+
+## Theme System
+
+All design variants support both light and dark themes.
+
+### Default Theme
+
+```tsx
+<ThemeProvider design="basic" defaultTheme="light">
+  <YourApp />
+</ThemeProvider>
+```
+
+### Automatic System Theme Detection
+
+You can enable automatic system theme detection:
+
+```tsx
+<ThemeProvider syncWithSystem={true}>
+  <YourApp />
+</ThemeProvider>
+```
+
+### Controlled Theme and Design
+
+For complete control over both theme and design:
+
+```tsx
+import { useState } from "react";
+import { ThemeProvider } from "pine-design-system";
+
+function App() {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [design, setDesign] = useState<"basic" | "game" | "crayon">("basic");
+
+  return (
+    <ThemeProvider 
+      design={design} 
+      onDesignChange={setDesign}
+      theme={theme} 
+      onThemeChange={setTheme}
+    >
+      <div>
+        <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+          Toggle Light/Dark
+        </button>
+        <button onClick={() => setDesign("basic")}>Basic Design</button>
+        <button onClick={() => setDesign("game")}>Game Design</button>
+        <button onClick={() => setDesign("crayon")}>Crayon Design</button>
+      </div>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+### Custom Primary Color
+
+You can customize the primary color across all designs:
+
+```tsx
+<ThemeProvider design="basic" primaryColor="#FF6B6B">
+  <YourApp />
+</ThemeProvider>
+```
+
+## Next Steps
+
+- [Components](/components) - Explore all components
+- [Design Tokens](/tokens) - Learn about design tokens
+- [Examples](/examples) - View code examples

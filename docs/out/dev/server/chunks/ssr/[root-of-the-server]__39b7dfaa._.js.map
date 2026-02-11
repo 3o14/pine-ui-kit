@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":["file:///Users/wonju/Developer/pine-ui-kit/docs/pages/_document.tsx"],"sourcesContent":["import { Html, Head, Main, NextScript } from 'next/document';\n\nexport default function Document() {\n  return (\n    <Html lang=\"en\">\n      <Head />\n      <body>\n        <Main />\n        <NextScript />\n      </body>\n    </Html>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,qKAAC,kSAAI;QAAC,MAAK;;0BACT,qKAAC,kSAAI;;;;;0BACL,qKAAC;;kCACC,qKAAC,kSAAI;;;;;kCACL,qKAAC,wSAAU;;;;;;;;;;;;;;;;;AAInB"}}]
+}

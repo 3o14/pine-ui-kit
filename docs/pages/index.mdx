@@ -1,0 +1,42 @@
+# Pine Design System
+
+A comprehensive design system with token-driven theming and accessible React components.
+
+import { ThemeSwitcher } from '../components/ThemeSwitcher';
+
+<ThemeSwitcher />
+
+## Features
+
+- **Three Unique Design Variants** — Switch between basic, game, and crayon designs instantly
+- **Token-Driven Architecture** — Consistent theming through semantic design tokens
+- **Light & Dark Themes** — Built-in theme support for all design variants
+- **Tree-Shakeable** — Import only what you need
+- **TypeScript Native** — First-class TypeScript support with full type safety
+- **Zero-Runtime CSS** — Powered by Vanilla Extract for optimal performance
+- **Accessible by Default** — Built on top of Base UI for WCAG compliance
+
+## Quick Start
+
+```bash
+npm install pine-design-system
+# or
+pnpm add pine-design-system
+# or
+yarn add pine-design-system
+```
+
+## Basic Usage
+
+```tsx
+import { ThemeProvider, Button } from "pine-design-system";
+import "pine-design-system/style.css";
+
+function App() {
+  return (
+    <ThemeProvider design="basic" defaultTheme="light">
+      <Button intent="primary">Get Started</Button>
+    </ThemeProvider>
+  );
+}
+```

@@ -1,7 +1,7 @@
 import { lightColors, darkColors, type ColorTokens } from "./colors";
-import type { ThemeName } from "./themes";
+import type { Design } from "./themes";
 
-export type AppearanceMode = "light" | "dark";
+export type Theme = "light" | "dark";
 
 type CssVariableMap = Record<string, string>;
 
@@ -35,7 +35,7 @@ const buildCssVariables = (colors: ColorTokens): CssVariableMap => {
 	return variables;
 };
 
-export const appearanceTheme: Record<AppearanceMode, AppearanceThemeConfig> = {
+export const appearanceTheme: Record<Theme, AppearanceThemeConfig> = {
 	light: {
 		cssVariables: buildCssVariables(lightColors),
 		bodyBackground: lightColors.surface.background,
@@ -49,18 +49,18 @@ export const appearanceTheme: Record<AppearanceMode, AppearanceThemeConfig> = {
 };
 
 export const getAppearanceTheme = (
-	_theme: ThemeName,
-	appearance: AppearanceMode
+	_design: Design,
+	theme: Theme
 ): AppearanceThemeConfig => {
-	return appearanceTheme[appearance];
+	return appearanceTheme[theme];
 };
 
-export const applyAppearanceTheme = (mode: AppearanceMode) => {
+export const applyAppearanceTheme = (theme: Theme) => {
 	if (typeof document === "undefined") {
 		return;
 	}
 
-	const { cssVariables, bodyBackground, bodyText } = appearanceTheme[mode];
+	const { cssVariables, bodyBackground, bodyText } = appearanceTheme[theme];
 	const root = document.documentElement;
 
 	Object.entries(cssVariables).forEach(([variable, value]) => {
@@ -70,7 +70,7 @@ export const applyAppearanceTheme = (mode: AppearanceMode) => {
 	document.body.style.backgroundColor = bodyBackground;
 	document.body.style.color = bodyText;
 	root.style.backgroundColor = bodyBackground;
-	root.dataset.theme = mode;
+	root.dataset.theme = theme;
 
 	const selectors = [
 		"#storybook-root",

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/docs/styles.css"],"sourcesContent":["/* Import Pine Design System styles */\n@import 'pine-design-system/style.css';\n\n/* Custom Nextra overrides */\n:root {\n  --pine-design: 'basic';\n  --pine-theme: 'light';\n}\n\n[data-pine-design='basic'] {\n  /* Basic design is default */\n}\n\n[data-pine-design='game'] {\n  /* Game design overrides will be handled by Pine DS */\n}\n\n[data-pine-design='crayon'] {\n  /* Crayon design overrides will be handled by Pine DS */\n}\n\n/* Ensure smooth theme transitions */\n* {\n  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;\n}\n"],"names":[],"mappings":"AAIA;;;;;AAkBA"}}]
+}

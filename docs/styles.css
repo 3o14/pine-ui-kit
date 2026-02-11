@@ -1,0 +1,25 @@
+/* Import Pine Design System styles */
+@import 'pine-design-system/style.css';
+
+/* Custom Nextra overrides */
+:root {
+  --pine-design: 'basic';
+  --pine-theme: 'light';
+}
+
+[data-pine-design='basic'] {
+  /* Basic design is default */
+}
+
+[data-pine-design='game'] {
+  /* Game design overrides will be handled by Pine DS */
+}
+
+[data-pine-design='crayon'] {
+  /* Crayon design overrides will be handled by Pine DS */
+}
+
+/* Ensure smooth theme transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
