@@ -15,7 +15,7 @@ export const crayonBumpyShellBefore = {
 	borderRadius: "inherit",
 	pointerEvents: "none",
 	filter: "url(#crayon-bumpy)",
-};
+} as const;
 
 /**
  * texture 오버레이용 backgroundImage (종이 섬유 + 왁스 반사)
@@ -55,3 +55,58 @@ export const crayonGrainBackgroundImage = `radial-gradient(
 	rgba(0, 0, 0, 0.12) 1px,
 	transparent 1px
 )`;
+
+/**
+ * Creates crayon theme base selectors for the element itself
+ * Applied to: `.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`
+ */
+export const createCrayonBaseStyle = () =>
+	({
+		background: "transparent",
+		overflow: "visible",
+		filter: "none",
+		position: "relative",
+		isolation: "isolate",
+	}) as const;
+
+/**
+ * Creates crayon theme ::before selector style (base only, zIndex)
+ * Applied to: `.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+ */
+export const createCrayonBeforeBaseStyle = () =>
+	({
+		zIndex: 0,
+	}) as const;
+
+/**
+ * Creates crayon theme ::after selector style (texture overlay)
+ * Applied to: `.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
+ */
+export const createCrayonAfterStyle = () =>
+	({
+		content: '""',
+		position: "absolute",
+		inset: 0,
+		borderRadius: "inherit",
+		pointerEvents: "none",
+		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+		backgroundSize: "auto, 3px 3px",
+		mixBlendMode: "overlay",
+		opacity: 0.8,
+		zIndex: 0,
+	}) as const;
+
+/**
+ * Creates crayon theme ::before pseudo-element style with background, border, and optional opacity
+ */
+export const createCrayonBeforeStyle = (
+	background: string,
+	borderColor: string,
+	hasBorder = true,
+	opacity?: number,
+) => ({
+	...crayonBumpyShellBefore,
+	background,
+	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
+	...(opacity !== undefined && { opacity }),
+});

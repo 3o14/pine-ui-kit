@@ -1,6 +1,6 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract, type ColorIntent } from "@/tokens";
+import { themeContract, type ColorIntent, type SelectorMap } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
 import {
@@ -29,10 +29,10 @@ const createCrayonBeforeStyle = (
 });
 
 /**
- * Creates crayon theme selectors for the dropdown trigger
+ * Creates crayon theme selectors with optional transition
  */
-const createCrayonTriggerSelectors = () => {
-	const selectors: Record<string, unknown> = {};
+const createCrayonSelectors = (addTransition = false): SelectorMap => {
+	const selectors: SelectorMap = {};
 
 	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
 		background: "transparent",
@@ -41,16 +41,18 @@ const createCrayonTriggerSelectors = () => {
 		isolation: "isolate",
 	};
 
-	selectors[
-		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
-	] = {
+	const beforeStyle = {
 		...createCrayonBeforeStyle(
 			themeContract.color.surface.background,
 			themeContract.color.surface.outline,
 		),
 		zIndex: 0,
-		transition: "background 0.2s ease-in-out",
+		...(addTransition && { transition: "background 0.2s ease-in-out" }),
 	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+	] = beforeStyle;
 
 	selectors[
 		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
@@ -67,61 +69,21 @@ const createCrayonTriggerSelectors = () => {
 		zIndex: 0,
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
+	return selectors;
 };
 
-/**
- * Creates crayon theme selectors for the dropdown menu
- */
-const createCrayonMenuSelectors = () => {
-	const selectors: Record<string, unknown> = {};
-
-	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
-		background: "transparent",
-		borderColor: "transparent",
-		overflow: "visible",
-		isolation: "isolate",
-	};
-
-	selectors[
-		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
-	] = {
-		...createCrayonBeforeStyle(
-			themeContract.color.surface.background,
-			themeContract.color.surface.outline,
-		),
-		zIndex: 0,
-	};
-
-	selectors[
-		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
-	] = {
-		content: '""',
-		position: "absolute",
-		inset: 0,
-		borderRadius: "inherit",
-		pointerEvents: "none",
-		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
-		backgroundSize: "auto, 3px 3px",
-		mixBlendMode: "overlay",
-		opacity: 0.8,
-		zIndex: 0,
-	};
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
-};
+const createCrayonTriggerSelectors = () => createCrayonSelectors(true);
+const createCrayonMenuSelectors = () => createCrayonSelectors(false);
 
 /**
  * Creates trigger compound variant selectors for a given intent.
  * Returns selectors object for use in compound variants.
  */
-const createTriggerIntentSelectors = (intent: ColorIntent) => {
+const createTriggerIntentSelectors = (intent: ColorIntent): SelectorMap => {
 	const color = themeContract.color[intent];
 	const pixelBoxShadow = `calc(-4px) 0 0 0 ${color.border}, 4px 0 0 0 ${color.border}, 0 4px 0 0 ${color.border}, 0 calc(-4px) 0 0 ${color.border}`;
 
-	const selectors: Record<string, unknown> = {};
+	const selectors: SelectorMap = {};
 
 	// Basic theme: show intent border color
 	selectors["&"] = {
@@ -148,8 +110,7 @@ const createTriggerIntentSelectors = (intent: ColorIntent) => {
 		boxShadow: `inset 0 0 0 3px ${color.border}`,
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
+	return selectors;
 };
 
 /**

@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract } from "@/tokens";
+import { themeContract, type SelectorMap } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
 import {
@@ -29,10 +29,10 @@ const createCrayonBeforeStyle = (
 });
 
 /**
- * Creates crayon theme selectors for the input field
+ * Creates crayon theme selectors for input wrapper
  */
-const createCrayonInputSelectors = () => {
-	const selectors: Record<string, unknown> = {};
+const createCrayonInputWrapperSelectors = (borderColor: string): SelectorMap => {
+	const selectors: SelectorMap = {};
 
 	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
 		background: "transparent",
@@ -41,52 +41,7 @@ const createCrayonInputSelectors = () => {
 		isolation: "isolate",
 	};
 
-	selectors[
-		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
-	] = {
-		...createCrayonBeforeStyle(
-			themeContract.color.surface.background,
-			themeContract.color.surface.outline,
-		),
-		zIndex: 0,
-		transition: "background 0.2s ease-in-out",
-	};
-
-	selectors[
-		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
-	] = {
-		content: '""',
-		position: "absolute",
-		inset: 0,
-		borderRadius: "inherit",
-		pointerEvents: "none",
-		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
-		backgroundSize: "auto, 3px 3px",
-		mixBlendMode: "overlay",
-		opacity: 0.8,
-		zIndex: 0,
-	};
-
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
-};
-
-/**
- * Creates crayon theme selectors for input with status-based border color
- */
-const createCrayonInputStatusSelectors = (borderColor: string) => {
-	const selectors: Record<string, unknown> = {};
-
-	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
-		background: "transparent",
-		borderColor: "transparent",
-		overflow: "visible",
-		isolation: "isolate",
-	};
-
-	selectors[
-		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
-	] = {
+	selectors[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`] = {
 		...createCrayonBeforeStyle(
 			themeContract.color.surface.background,
 			borderColor,
@@ -95,9 +50,7 @@ const createCrayonInputStatusSelectors = (borderColor: string) => {
 		transition: "background 0.2s ease-in-out",
 	};
 
-	selectors[
-		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
-	] = {
+	selectors[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`] = {
 		content: '""',
 		position: "absolute",
 		inset: 0,
@@ -110,8 +63,26 @@ const createCrayonInputStatusSelectors = (borderColor: string) => {
 		zIndex: 0,
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
+	return selectors;
+};
+
+/**
+ * Creates game theme outline selectors for input
+ */
+const createGameThemeInputSelectors = (borderColor: string): SelectorMap => {
+	const selectors: SelectorMap = {};
+
+	selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] = {
+		border: "1px solid transparent",
+		boxShadow: `calc(-4px) 0 0 0 ${borderColor}, 4px 0 0 0 ${borderColor}, 0 4px 0 0 ${borderColor}, 0 calc(-4px) 0 0 ${borderColor}`,
+		margin: themeContract.shadow.pixelBoxMargin,
+	};
+
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		border: "none",
+	};
+
+	return selectors;
 };
 
 export const label = recipe({
@@ -236,23 +207,19 @@ export const inputWrapper = recipe({
 		{
 			variants: { variant: "outline", status: "default" },
 			style: {
-				selectors: createCrayonInputSelectors(),
+				selectors: createCrayonInputWrapperSelectors(themeContract.color.surface.outline),
 			},
 		},
 		{
 			variants: { variant: "outline", status: "error" },
 			style: {
-				selectors: createCrayonInputStatusSelectors(
-					themeContract.color.danger.border
-				),
+				selectors: createCrayonInputWrapperSelectors(themeContract.color.danger.border),
 			},
 		},
 		{
 			variants: { variant: "outline", status: "success" },
 			style: {
-				selectors: createCrayonInputStatusSelectors(
-					themeContract.color.success.border
-				),
+				selectors: createCrayonInputWrapperSelectors(themeContract.color.success.border),
 			},
 		},
 
@@ -400,16 +367,7 @@ export const input = recipe({
 					borderColor: themeContract.color.primary.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.primary.surface}20`,
 				},
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.surface.outline}, 4px 0 0 0 ${themeContract.color.surface.outline}, 0 4px 0 0 ${themeContract.color.surface.outline}, 0 calc(-4px) 0 0 ${themeContract.color.surface.outline}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
-						border: "none",
-					},
-				},
+				selectors: createGameThemeInputSelectors(themeContract.color.surface.outline),
 			},
 		},
 		{
@@ -420,16 +378,7 @@ export const input = recipe({
 					borderColor: themeContract.color.danger.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.danger.surface}20`,
 				},
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.danger.border}, 4px 0 0 0 ${themeContract.color.danger.border}, 0 4px 0 0 ${themeContract.color.danger.border}, 0 calc(-4px) 0 0 ${themeContract.color.danger.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
-						border: "none",
-					},
-				},
+				selectors: createGameThemeInputSelectors(themeContract.color.danger.border),
 			},
 		},
 		{
@@ -440,16 +389,7 @@ export const input = recipe({
 					borderColor: themeContract.color.success.surface,
 					boxShadow: `0 0 0 3px ${themeContract.color.success.surface}20`,
 				},
-				selectors: {
-					[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
-						border: "1px solid transparent",
-						boxShadow: `calc(-4px) 0 0 0 ${themeContract.color.success.border}, 4px 0 0 0 ${themeContract.color.success.border}, 0 4px 0 0 ${themeContract.color.success.border}, 0 calc(-4px) 0 0 ${themeContract.color.success.border}`,
-						margin: themeContract.shadow.pixelBoxMargin,
-					},
-					[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
-						border: "none",
-					},
-				},
+				selectors: createGameThemeInputSelectors(themeContract.color.success.border),
 			},
 		},
 

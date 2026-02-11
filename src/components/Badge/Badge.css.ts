@@ -1,35 +1,21 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract, type ColorIntent } from "@/tokens";
+import { themeContract, type ColorIntent, type SelectorMap } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
 import {
-	crayonBumpyShellBefore,
-	crayonTextureBackgroundImage,
-	crayonGrainBackgroundImage,
+	createCrayonBaseStyle,
+	createCrayonBeforeBaseStyle,
+	createCrayonBeforeStyle,
+	createCrayonAfterStyle,
 } from "@/tokens/themes/crayonTexture.css";
+import type { BadgeVariant } from "./Badge";
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
 
 const crayonLightThemeClass = String(crayonLightTheme);
 const crayonDarkThemeClass = String(crayonDarkTheme);
-
-// Helper functions for theme-specific styles
-type BadgeVariant = "solid" | "outline" | "subtle" | "weak";
-
-/**
- * Creates crayon theme ::before pseudo-element style
- */
-const createCrayonBeforeStyle = (
-	background: string,
-	borderColor: string,
-	hasBorder = true,
-) => ({
-	...crayonBumpyShellBefore,
-	background,
-	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
-});
 
 /**
  * Creates game theme box shadow style
@@ -43,9 +29,9 @@ const createGameBoxShadow = (borderColor: string) => ({
 /**
  * Creates theme-specific selectors for a given intent and variant
  */
-const createThemeSelectors = (intent: ColorIntent, variant: BadgeVariant) => {
+const createThemeSelectors = (intent: ColorIntent, variant: BadgeVariant): SelectorMap => {
 	const color = themeContract.color[intent];
-	const selectors: Record<string, unknown> = {};
+	const selectors: SelectorMap = {};
 
 	// Game theme styles
 	if (variant === "outline" || variant === "weak") {
@@ -55,14 +41,12 @@ const createThemeSelectors = (intent: ColorIntent, variant: BadgeVariant) => {
 
 	// Crayon theme styles
 	if (variant === "solid" || variant === "subtle" || variant === "weak") {
-		const bg =
-			variant === "solid"
-				? color.surface
-				: variant === "subtle"
-					? `${color.surface}20`
-					: color.weak;
-
-		// Subtle variant has no border
+		const bgMap = {
+			solid: color.surface,
+			subtle: `${color.surface}20`,
+			weak: color.weak,
+		} as const;
+		const bg = bgMap[variant];
 		const hasBorder = variant !== "subtle";
 
 		selectors[
@@ -79,10 +63,7 @@ const createThemeSelectors = (intent: ColorIntent, variant: BadgeVariant) => {
 		] = createCrayonBeforeStyle("transparent", color.border);
 	}
 
-	// Type assertion needed because vanilla-extract's SelectorMap type is complex
-	// and we're dynamically building selectors
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
+	return selectors;
 };
 
 const badgeBase = style({
@@ -100,29 +81,12 @@ const badgeBase = style({
 	margin: themeContract.shadow.pixelBoxMargin,
 	position: "relative",
 	selectors: {
-		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
-			background: "transparent",
-			overflow: "visible",
-			filter: "none",
-			position: "relative",
-			isolation: "isolate",
-		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]:
+			createCrayonBaseStyle(),
 		[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
-			{
-				zIndex: 0,
-			},
-		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]: {
-			content: '""',
-			position: "absolute",
-			inset: 0,
-			borderRadius: "inherit",
-			pointerEvents: "none",
-			backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
-			backgroundSize: "auto, 3px 3px",
-			mixBlendMode: "overlay",
-			opacity: 0.8,
-			zIndex: 0,
-		},
+			createCrayonBeforeBaseStyle(),
+		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]:
+			createCrayonAfterStyle(),
 	},
 });
 

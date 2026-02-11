@@ -1,37 +1,21 @@
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract, type ColorIntent } from "@/tokens";
+import { themeContract, type ColorIntent, type SelectorMap } from "@/tokens";
 import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 import {
-	crayonBumpyShellBefore,
-	crayonTextureBackgroundImage,
-	crayonGrainBackgroundImage,
+	createCrayonBaseStyle,
+	createCrayonBeforeBaseStyle,
+	createCrayonBeforeStyle,
+	createCrayonAfterStyle,
 } from "@/tokens/themes/crayonTexture.css";
+import type { ButtonVariant } from "./Button";
 
 const crayonLightThemeClass = String(crayonLightTheme);
 const crayonDarkThemeClass = String(crayonDarkTheme);
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
-
-// Helper functions for theme-specific styles
-type ButtonVariant = "solid" | "outline" | "ghost" | "weak";
-
-/**
- * Creates crayon theme ::before pseudo-element style
- */
-const createCrayonBeforeStyle = (
-	background: string,
-	borderColor: string,
-	hasBorder = true,
-	opacity?: number,
-) => ({
-	...crayonBumpyShellBefore,
-	background,
-	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
-	...(opacity !== undefined && { opacity }),
-});
 
 /**
  * Creates game theme box shadow style
@@ -43,39 +27,15 @@ const createGameBoxShadow = (borderColor: string) => ({
 });
 
 /**
- * Creates theme-specific selectors for a given intent and variant
+ * Creates crayon theme-specific selectors for a given intent and variant
  */
-const createThemeSelectors = (intent: ColorIntent, variant: ButtonVariant) => {
+const createCrayonThemeSelectors = (
+	intent: ColorIntent,
+	variant: ButtonVariant,
+): SelectorMap => {
 	const color = themeContract.color[intent];
-	const selectors: Record<string, unknown> = {};
-	const pixelBoxShadow = `calc(-4px) 0 0 0 ${color.border}, 4px 0 0 0 ${color.border}, 0 4px 0 0 ${color.border}, 0 calc(-4px) 0 0 ${color.border}`;
+	const selectors: SelectorMap = {};
 
-	// Game theme styles
-	if (variant === "solid") {
-		selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] = {
-			boxShadow: themeContract.shadow.pixelBox,
-			margin: themeContract.shadow.pixelBoxMargin,
-		};
-		selectors[
-			`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`
-		] = {
-			boxShadow: themeContract.shadow.pixelBox,
-		};
-	}
-
-	if (variant === "outline" || variant === "weak") {
-		selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] =
-			createGameBoxShadow(color.border);
-		if (variant === "weak") {
-			selectors[
-				`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`
-			] = {
-				boxShadow: pixelBoxShadow,
-			};
-		}
-	}
-
-	// Crayon theme styles
 	if (variant === "solid" || variant === "weak") {
 		const bg = variant === "solid" ? color.surface : color.weak;
 		selectors[
@@ -170,8 +130,58 @@ const createThemeSelectors = (intent: ColorIntent, variant: ButtonVariant) => {
 		};
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	return selectors as any;
+	return selectors;
+};
+
+/**
+ * Creates game theme-specific selectors for a given intent and variant
+ */
+const createGameThemeSelectors = (
+	intent: ColorIntent,
+	variant: ButtonVariant,
+): SelectorMap => {
+	const color = themeContract.color[intent];
+	const selectors: SelectorMap = {};
+	const pixelBoxShadow = `calc(-4px) 0 0 0 ${color.border}, 4px 0 0 0 ${color.border}, 0 4px 0 0 ${color.border}, 0 calc(-4px) 0 0 ${color.border}`;
+
+	if (variant === "solid") {
+		selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] = {
+			boxShadow: themeContract.shadow.pixelBox,
+			margin: themeContract.shadow.pixelBoxMargin,
+		};
+		selectors[
+			`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`
+		] = {
+			boxShadow: themeContract.shadow.pixelBox,
+		};
+	}
+
+	if (variant === "outline" || variant === "weak") {
+		selectors[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`] =
+			createGameBoxShadow(color.border);
+		if (variant === "weak") {
+			selectors[
+				`.${gameLightThemeClass} &:hover:not(:disabled), .${gameDarkThemeClass} &:hover:not(:disabled)`
+			] = {
+				boxShadow: pixelBoxShadow,
+			};
+		}
+	}
+
+	return selectors;
+};
+
+/**
+ * Creates theme-specific selectors for a given intent and variant
+ */
+const createThemeSelectors = (
+	intent: ColorIntent,
+	variant: ButtonVariant,
+): SelectorMap => {
+	return {
+		...createGameThemeSelectors(intent, variant),
+		...createCrayonThemeSelectors(intent, variant),
+	};
 };
 
 const buttonBase = style({
@@ -192,28 +202,15 @@ const buttonBase = style({
 			opacity: 0.5,
 			cursor: "not-allowed",
 		},
-		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
-			background: "transparent",
-			overflow: "visible",
-			isolation: "isolate",
-		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]:
+			createCrayonBaseStyle(),
 		[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]:
 			{
-				zIndex: 0,
+				...createCrayonBeforeBaseStyle(),
 				transition: "background 0.2s ease-in-out",
 			},
-		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]: {
-			content: '""',
-			position: "absolute",
-			inset: 0,
-			borderRadius: "inherit",
-			pointerEvents: "none",
-			backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
-			backgroundSize: "auto, 3px 3px",
-			mixBlendMode: "overlay",
-			opacity: 0.8,
-			zIndex: 0,
-		},
+		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]:
+			createCrayonAfterStyle(),
 	},
 });
 

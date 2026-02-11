@@ -1,6 +1,6 @@
 import { style, keyframes } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import { themeContract, type ColorIntent } from "@/tokens";
+import { themeContract, type ColorIntent, type SelectorMap } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
 import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
 import {
@@ -40,10 +40,9 @@ const createCrayonBeforeStyle = (
 /**
  * Creates theme-specific selectors for a given checkbox intent
  */
-const createThemeSelectors = (intent: ColorIntent) => {
+const createThemeSelectors = (intent: ColorIntent): SelectorMap => {
 	const color = themeContract.color[intent];
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const selectors: Record<string, any> = {};
+	const selectors: SelectorMap = {};
 
 	// Crayon theme: unchecked - weak background + bumpy border
 	selectors[
