@@ -27,8 +27,9 @@ import { Meta, Source } from '@storybook/blocks';
 
 ## Features
 
+- **Three Unique Themes** — Switch between basic, game, and crayon themes instantly
 - **Token-First Design** — Consistent theming through design tokens
-- **Light & Dark Mode** — Built-in theme variants out of the box
+- **Light & Dark Mode** — Built-in theme variants for all themes
 - **Tree-Shakeable** — Import only what you need
 - **TypeScript Native** — First-class TypeScript support
 - **Zero-Runtime CSS** — Powered by Vanilla Extract
@@ -46,15 +47,15 @@ yarn add pine-ui-kit`}
   language="bash"
 />
 
-Import components and start building:
+Wrap your app with `ThemeProvider` and start building:
 
 <Source
-  code={`import { Button, Badge, TextField, Switch } from "pine-ui-kit";
+  code={`import { ThemeProvider, Button, Badge, TextField, Switch } from "pine-ui-kit";
 import "pine-ui-kit/style.css";
 
 function App() {
   return (
-    <div>
+    <ThemeProvider theme="basic" defaultMode="light">
       <Button intent="primary" size="md">
         Get Started
       </Button>
@@ -67,7 +68,69 @@ function App() {
         placeholder="you@example.com"
         variant="outline"
       />
-    </div>
+    </ThemeProvider>
+  );
+}`}
+  language="tsx"
+/>
+
+## Themes
+
+Pine UI comes with **three distinct design themes** that can be switched seamlessly with a single prop change:
+
+### 🎯 Basic Theme
+
+A clean, modern design system perfect for professional applications. Features smooth animations, subtle shadows, and a refined aesthetic.
+
+<Source
+  code={`<ThemeProvider theme="basic">
+  <YourApp />
+</ThemeProvider>`}
+  language="tsx"
+/>
+
+### 🎮 Game Theme
+
+Pixel-art inspired design for gamified experiences. Features retro aesthetics, bold borders, and playful interactions that bring a nostalgic gaming feel to your interface.
+
+<Source
+  code={`<ThemeProvider theme="game">
+  <YourApp />
+</ThemeProvider>`}
+  language="tsx"
+/>
+
+### 🖍️ Crayon Theme
+
+Soft, warm, and friendly design with hand-drawn aesthetics. Features rounded corners, gentle shadows, and a cozy feel perfect for creative or educational applications.
+
+<Source
+  code={`<ThemeProvider theme="crayon">
+  <YourApp />
+</ThemeProvider>`}
+  language="tsx"
+/>
+
+**All themes support both light and dark modes:**
+
+<Source
+  code={`<ThemeProvider theme="game" defaultMode="dark">
+  <YourApp />
+</ThemeProvider>`}
+  language="tsx"
+/>
+
+Change the theme dynamically at runtime:
+
+<Source
+  code={`function App() {
+  const [theme, setTheme] = useState<"basic" | "game" | "crayon">("basic");
+
+  return (
+    <ThemeProvider theme={theme} onThemeChange={setTheme}>
+      <button onClick={() => setTheme("game")}>Switch to Game Theme</button>
+      <YourApp />
+    </ThemeProvider>
   );
 }`}
   language="tsx"
