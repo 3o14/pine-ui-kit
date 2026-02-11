@@ -23,7 +23,7 @@ export const themeMap = {
 
 export async function getThemeClass(
 	theme: ThemeName,
-	appearance: AppearanceMode
+	appearance: AppearanceMode,
 ): Promise<string> {
 	const themeModule = await themeMap[theme][appearance]();
 	return themeModule;

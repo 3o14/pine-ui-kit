@@ -1,9 +1,68 @@
 import { style, styleVariants, keyframes } from "@vanilla-extract/css";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+import {
+	crayonBumpyShellBefore,
+	crayonTextureBackgroundImage,
+	crayonGrainBackgroundImage,
+} from "@/tokens/themes/crayonTexture.css";
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
+
+const crayonLightThemeClass = String(crayonLightTheme);
+const crayonDarkThemeClass = String(crayonDarkTheme);
+
+/**
+ * Creates crayon theme ::before pseudo-element style
+ */
+const createCrayonBeforeStyle = (
+	background: string,
+	borderColor: string,
+	hasBorder = true,
+) => ({
+	...crayonBumpyShellBefore,
+	background,
+	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
+});
+
+/**
+ * Creates crayon theme selectors for the dialog container
+ */
+const createCrayonContainerSelectors = () => {
+	const selectors: Record<string, unknown> = {};
+
+	selectors[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`] = {
+		background: "transparent",
+		overflow: "visible",
+		isolation: "isolate",
+	};
+
+	selectors[
+		`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`
+	] = createCrayonBeforeStyle(
+		themeContract.color.surface.background,
+		themeContract.color.surface.outline,
+	);
+
+	selectors[
+		`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`
+	] = {
+		content: '""',
+		position: "absolute",
+		inset: 0,
+		borderRadius: "inherit",
+		pointerEvents: "none",
+		backgroundImage: `${crayonTextureBackgroundImage}, ${crayonGrainBackgroundImage}`,
+		backgroundSize: "auto, 3px 3px",
+		mixBlendMode: "overlay",
+		opacity: 0.8,
+	};
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return selectors as any;
+};
 
 const fadeIn = keyframes({
 	from: { opacity: 0 },
@@ -75,6 +134,7 @@ export const container = style({
 			margin: themeContract.shadow.pixelBoxMargin,
 			borderRadius: "0 !important",
 		},
+		...createCrayonContainerSelectors(),
 	},
 });
 
@@ -121,6 +181,10 @@ export const header = style({
 			borderBottom: "1px solid transparent",
 			boxShadow: `0 4px 0 0 ${themeContract.color.surface.divider}`,
 			padding: themeContract.spacing.md,
+		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
 		},
 	},
 });
@@ -170,6 +234,10 @@ export const body = style({
 		[`.${gameLightThemeClass} &, .${gameDarkThemeClass} &`]: {
 			padding: themeContract.spacing.md,
 		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
+		},
 	},
 });
 
@@ -186,6 +254,10 @@ export const footer = style({
 			boxShadow: `0 -4px 0 0 ${themeContract.color.surface.divider}`,
 			padding: themeContract.spacing.md,
 		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			position: "relative",
+			zIndex: 1,
+		},
 	},
 });
 
@@ -196,6 +268,3 @@ export const description = style({
 	lineHeight: themeContract.typography.lineHeight.small,
 	color: themeContract.color.surface.textMuted,
 });
-
-
-

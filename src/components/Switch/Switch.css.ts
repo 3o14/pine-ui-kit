@@ -2,9 +2,32 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { themeContract } from "@/tokens";
 import { gameLightTheme, gameDarkTheme } from "@/tokens/themes/game.css";
+import { crayonLightTheme, crayonDarkTheme } from "@/tokens/themes/crayon.css";
+import {
+	crayonBumpyShellBefore,
+	createCrayonBaseStyle,
+	createCrayonBeforeBaseStyle,
+	createCrayonAfterStyle,
+} from "@/tokens/themes/crayonTexture.css";
 
 const gameLightThemeClass = String(gameLightTheme);
 const gameDarkThemeClass = String(gameDarkTheme);
+
+const crayonLightThemeClass = String(crayonLightTheme);
+const crayonDarkThemeClass = String(crayonDarkTheme);
+
+/**
+ * Creates crayon theme ::before pseudo-element style
+ */
+const createCrayonBeforeStyle = (
+	background: string,
+	borderColor: string,
+	hasBorder = true
+) => ({
+	...crayonBumpyShellBefore,
+	background,
+	...(hasBorder && { boxShadow: `inset 0 0 0 2px ${borderColor}` }),
+});
 
 export const container = style({
 	display: "inline-flex",
@@ -45,6 +68,17 @@ const trackBase = style({
 			margin: themeContract.shadow.pixelBoxMargin,
 			borderRadius: 0,
 		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			...createCrayonBaseStyle(),
+			boxShadow: "none",
+			margin: themeContract.shadow.pixelBoxMargin,
+		},
+		[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]: {
+			...createCrayonBeforeBaseStyle(),
+		},
+		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]: {
+			...createCrayonAfterStyle(),
+		},
 	},
 });
 
@@ -79,62 +113,122 @@ export const track = recipe({
 			primary: {
 				selectors: {
 					"[role='switch'][data-unchecked] &": {
-						backgroundColor: themeContract.color.surface.outline,
+						backgroundColor: themeContract.color.primary.weak,
 					},
 					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.primary.surface,
 					},
+					[`.${crayonLightThemeClass} [role='switch'][data-unchecked] &::before, .${crayonDarkThemeClass} [role='switch'][data-unchecked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.primary.weak,
+							themeContract.color.primary.border
+						),
+					[`.${crayonLightThemeClass} [role='switch'][data-checked] &::before, .${crayonDarkThemeClass} [role='switch'][data-checked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.primary.surface,
+							themeContract.color.primary.border
+						),
 				},
 			},
 			secondary: {
 				selectors: {
 					"[role='switch'][data-unchecked] &": {
-						backgroundColor: themeContract.color.surface.outline,
+						backgroundColor: themeContract.color.secondary.weak,
 					},
 					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.secondary.surface,
 					},
+					[`.${crayonLightThemeClass} [role='switch'][data-unchecked] &::before, .${crayonDarkThemeClass} [role='switch'][data-unchecked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.secondary.weak,
+							themeContract.color.secondary.border
+						),
+					[`.${crayonLightThemeClass} [role='switch'][data-checked] &::before, .${crayonDarkThemeClass} [role='switch'][data-checked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.secondary.surface,
+							themeContract.color.secondary.border
+						),
 				},
 			},
 			success: {
 				selectors: {
 					"[role='switch'][data-unchecked] &": {
-						backgroundColor: themeContract.color.surface.outline,
+						backgroundColor: themeContract.color.success.weak,
 					},
 					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.success.surface,
 					},
-				},
+					[`.${crayonLightThemeClass} [role='switch'][data-unchecked] &::before, .${crayonDarkThemeClass} [role='switch'][data-unchecked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.success.weak,
+							themeContract.color.success.border
+						),
+					[`.${crayonLightThemeClass} [role='switch'][data-checked] &::before, .${crayonDarkThemeClass} [role='switch'][data-checked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.success.surface,
+							themeContract.color.success.border
+						),
+			},
 			},
 			warning: {
 				selectors: {
 					"[role='switch'][data-unchecked] &": {
-						backgroundColor: themeContract.color.surface.outline,
+						backgroundColor: themeContract.color.warning.weak,
 					},
 					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.warning.surface,
 					},
-				},
+					[`.${crayonLightThemeClass} [role='switch'][data-unchecked] &::before, .${crayonDarkThemeClass} [role='switch'][data-unchecked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.warning.weak,
+							themeContract.color.warning.border
+						),
+					[`.${crayonLightThemeClass} [role='switch'][data-checked] &::before, .${crayonDarkThemeClass} [role='switch'][data-checked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.warning.surface,
+							themeContract.color.warning.border
+						),
+			},
 			},
 			danger: {
 				selectors: {
 					"[role='switch'][data-unchecked] &": {
-						backgroundColor: themeContract.color.surface.outline,
+						backgroundColor: themeContract.color.danger.weak,
 					},
 					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.danger.surface,
 					},
-				},
+					[`.${crayonLightThemeClass} [role='switch'][data-unchecked] &::before, .${crayonDarkThemeClass} [role='switch'][data-unchecked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.danger.weak,
+							themeContract.color.danger.border
+						),
+					[`.${crayonLightThemeClass} [role='switch'][data-checked] &::before, .${crayonDarkThemeClass} [role='switch'][data-checked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.danger.surface,
+							themeContract.color.danger.border
+						),
+			},
 			},
 			neutral: {
 				selectors: {
 					"[role='switch'][data-unchecked] &": {
-						backgroundColor: themeContract.color.surface.outline,
+						backgroundColor: themeContract.color.neutral.weak,
 					},
 					"[role='switch'][data-checked] &": {
 						backgroundColor: themeContract.color.neutral.surface,
 					},
-				},
+					[`.${crayonLightThemeClass} [role='switch'][data-unchecked] &::before, .${crayonDarkThemeClass} [role='switch'][data-unchecked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.neutral.weak,
+							themeContract.color.neutral.border
+						),
+					[`.${crayonLightThemeClass} [role='switch'][data-checked] &::before, .${crayonDarkThemeClass} [role='switch'][data-checked] &::before`]:
+						createCrayonBeforeStyle(
+							themeContract.color.neutral.surface,
+							themeContract.color.neutral.border
+						),
+			},
 			},
 		},
 	},
@@ -155,6 +249,22 @@ const thumbBase = style({
 			boxShadow: themeContract.shadow.pixelBox,
 			margin: themeContract.shadow.pixelBoxMargin,
 			borderRadius: 0,
+		},
+		[`.${crayonLightThemeClass} &, .${crayonDarkThemeClass} &`]: {
+			...createCrayonBaseStyle(),
+			backgroundColor: "white",
+			boxShadow: "none",
+			margin: themeContract.shadow.pixelBoxMargin,
+		},
+		[`.${crayonLightThemeClass} &::before, .${crayonDarkThemeClass} &::before`]: {
+			...createCrayonBeforeStyle(
+				"white",
+				themeContract.color.surface.outline
+			),
+			...createCrayonBeforeBaseStyle(),
+		},
+		[`.${crayonLightThemeClass} &::after, .${crayonDarkThemeClass} &::after`]: {
+			...createCrayonAfterStyle(),
 		},
 	},
 });
@@ -219,6 +329,3 @@ export const thumb = recipe({
 		size: "medium",
 	},
 });
-
-
-

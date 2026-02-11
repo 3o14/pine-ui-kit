@@ -46,7 +46,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			className,
 			...props
 		},
-		ref
+		ref,
 	) => {
 		const themeContext = useTheme();
 		const themeClass = themeContext?.themeClass ?? lightTheme;
@@ -63,15 +63,15 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 						rounded,
 					}),
 					fullWidth && styles.fullWidth,
-					className
+					className,
 				)}
 				disabled={disabled}
 				{...props}
 			>
-				{children}
+				<span className={styles.content}>{children}</span>
 			</BaseButton>
 		);
-	}
+	},
 );
 
 Button.displayName = "Button";

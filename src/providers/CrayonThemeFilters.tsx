@@ -15,44 +15,22 @@ export const CrayonThemeFilters: React.FC = () => {
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<defs>
-				<filter id="crayon-texture" x="-5%" y="-5%" width="110%" height="110%">
+				<filter id="crayon-bumpy" x="-10%" y="-10%" width="120%" height="120%">
 					<feTurbulence
 						type="fractalNoise"
-						baseFrequency="0.9"
-						numOctaves="4"
+						baseFrequency="0.08"
+						numOctaves="3"
 						seed="2"
 						result="noise"
 					/>
 					<feDisplacementMap
 						in="SourceGraphic"
 						in2="noise"
-						scale="2"
+						scale="2.5"
 						xChannelSelector="R"
 						yChannelSelector="G"
 						result="displacement"
 					/>
-					<feGaussianBlur in="displacement" stdDeviation="0.3" result="blur" />
-					<feComposite in="blur" in2="SourceGraphic" operator="in" />
-				</filter>
-
-				<filter id="crayon-edge" x="-5%" y="-5%" width="110%" height="110%">
-					<feTurbulence
-						type="fractalNoise"
-						baseFrequency="0.8"
-						numOctaves="3"
-						seed="5"
-						result="noise"
-					/>
-					<feDisplacementMap
-						in="SourceGraphic"
-						in2="noise"
-						scale="1.5"
-						xChannelSelector="R"
-						yChannelSelector="G"
-						result="displacement"
-					/>
-					<feGaussianBlur in="displacement" stdDeviation="0.2" result="blur" />
-					<feComposite in="blur" in2="SourceGraphic" operator="in" />
 				</filter>
 			</defs>
 		</svg>

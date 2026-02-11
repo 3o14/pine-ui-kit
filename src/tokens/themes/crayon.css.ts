@@ -1,8 +1,15 @@
-import { createTheme } from "@vanilla-extract/css";
+import { createTheme, globalFontFace } from "@vanilla-extract/css";
 import { semanticTokens } from "../semantic";
 import * as foundation from "../foundation";
 import { getWeakColor } from "../utils/getWeakColor";
 import { PRIMARY_COLOR_CSS_VAR_NAMES } from "../utils/constants";
+
+globalFontFace("온글잎-승훈체", {
+	src: 'url("/font/온글잎-승훈체.woff2") format("woff2")',
+	fontWeight: "normal",
+	fontStyle: "normal",
+	fontDisplay: "swap",
+});
 
 const primaryColorVars = {
 	surface: `var(${PRIMARY_COLOR_CSS_VAR_NAMES.surface})`,
