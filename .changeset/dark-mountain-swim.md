@@ -1,5 +1,5 @@
 ---
-"pine-ui-kit": patch
+"pine-design-system": patch
 ---
 
 rename prop and package name
