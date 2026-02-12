@@ -2,9 +2,9 @@ export * from "./basic.css";
 export * from "./game.css";
 export * from "./crayon.css";
 
-import type { AppearanceMode } from "../appearanceTheme";
+import type { Theme } from "../appearanceTheme";
 
-export type ThemeName = "basic" | "game" | "crayon";
+export type Design = "basic" | "game" | "crayon";
 
 export const themeMap = {
 	basic: {
@@ -22,9 +22,9 @@ export const themeMap = {
 } as const;
 
 export async function getThemeClass(
-	theme: ThemeName,
-	appearance: AppearanceMode,
+	design: Design,
+	theme: Theme,
 ): Promise<string> {
-	const themeModule = await themeMap[theme][appearance]();
+	const themeModule = await themeMap[design][theme]();
 	return themeModule;
 }

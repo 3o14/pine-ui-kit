@@ -1,23 +1,25 @@
 {
-	"name": "pine-ui-kit",
+	"name": "pine-design-system",
 	"version": "1.0.0",
 	"type": "module",
 	"license": "MIT",
-	"description": "UI component library with design tokens",
+	"description": "Design system with token-driven theming and accessible React components",
 	"author": "3o14",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/3o14/pine-ui-kit.git"
+		"url": "https://github.com/3o14/pine-design-system.git"
 	},
 	"bugs": {
-		"url": "https://github.com/3o14/pine-ui-kit/issues"
+		"url": "https://github.com/3o14/pine-design-system/issues"
 	},
-	"homepage": "https://3o14.github.io/pine-ui-kit",
+	"homepage": "https://3o14.github.io/pine-design-system",
 	"keywords": [
 		"react",
 		"ui",
 		"components",
 		"design-system",
+		"design-tokens",
+		"theming",
 		"typescript"
 	],
 	"main": "./dist/pine-ui.cjs.js",
@@ -48,6 +50,8 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "pnpm run sync-readme && storybook build",
 		"sync-readme": "node scripts/sync-readme.js",
+		"docs": "cd docs && next dev",
+		"docs:build": "cd docs && next build",
 		"prepublishOnly": "pnpm run build:lib",
 		"changeset": "changeset",
 		"changeset:auto": "./scripts/auto-changeset.sh",
@@ -91,6 +95,9 @@
 		"eslint-plugin-storybook": "^10.0.7",
 		"globals": "^16.5.0",
 		"jsdom": "^27.4.0",
+		"next": "^16.1.6",
+		"nextra": "^4.6.1",
+		"nextra-theme-docs": "^4.6.1",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"storybook": "^8",

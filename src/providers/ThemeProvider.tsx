@@ -7,8 +7,8 @@ import React, {
 } from "react";
 import {
 	ThemeContext,
-	type ThemeMode,
-	type ThemeName,
+	type Theme,
+	type Design,
 	type ThemeContextValue,
 } from "./ThemeContext";
 import {
@@ -29,19 +29,19 @@ import clsx from "clsx";
 
 export interface ThemeProviderProps {
 	children: React.ReactNode;
-	defaultMode?: ThemeMode;
-	mode?: ThemeMode;
-	onModeChange?: (mode: ThemeMode) => void;
+	defaultTheme?: Theme;
+	theme?: Theme;
+	onThemeChange?: (theme: Theme) => void;
 	syncWithSystem?: boolean;
-	theme?: ThemeName;
-	defaultTheme?: ThemeName;
-	onThemeChange?: (theme: ThemeName) => void;
+	design?: Design;
+	defaultDesign?: Design;
+	onDesignChange?: (design: Design) => void;
 	primaryColor?: string;
 	className?: string;
 	style?: React.CSSProperties;
 }
 
-const getSystemTheme = (): ThemeMode => {
+const getSystemTheme = (): Theme => {
 	if (typeof window === "undefined") {
 		return "light";
 	}
@@ -52,36 +52,36 @@ const getSystemTheme = (): ThemeMode => {
 
 export const ThemeProvider = ({
 	children,
-	defaultMode,
-	mode: controlledMode,
-	onModeChange,
-	syncWithSystem = true,
+	defaultTheme,
 	theme: controlledTheme,
-	defaultTheme = "basic",
 	onThemeChange,
+	syncWithSystem = true,
+	design: controlledDesign,
+	defaultDesign = "basic",
+	onDesignChange,
 	primaryColor,
 	className,
 	style,
 }: ThemeProviderProps) => {
-	const getInitialMode = (): ThemeMode => {
-		if (defaultMode) {
-			return defaultMode;
+	const getInitialTheme = (): Theme => {
+		if (defaultTheme) {
+			return defaultTheme;
 		}
 		return syncWithSystem ? getSystemTheme() : "light";
 	};
 
-	const [internalMode, setInternalMode] = useState<ThemeMode>(getInitialMode);
-	const [internalTheme, setInternalTheme] = useState<ThemeName>(defaultTheme);
+	const [internalTheme, setInternalTheme] = useState<Theme>(getInitialTheme);
+	const [internalDesign, setInternalDesign] = useState<Design>(defaultDesign);
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		if (controlledMode !== undefined) {
-			setInternalMode(controlledMode);
+		if (controlledTheme !== undefined) {
+			setInternalTheme(controlledTheme);
 		}
-	}, [controlledMode]);
+	}, [controlledTheme]);
 
 	useEffect(() => {
-		if (!syncWithSystem || controlledMode !== undefined) {
+		if (!syncWithSystem || controlledTheme !== undefined) {
 			return;
 		}
 
@@ -94,9 +94,9 @@ export const ThemeProvider = ({
 		const handleSystemThemeChange = (
 			e: MediaQueryListEvent | MediaQueryList
 		) => {
-			const newSystemTheme: ThemeMode = e.matches ? "dark" : "light";
-			setInternalMode(newSystemTheme);
-			onModeChange?.(newSystemTheme);
+			const newSystemTheme: Theme = e.matches ? "dark" : "light";
+			setInternalTheme(newSystemTheme);
+			onThemeChange?.(newSystemTheme);
 		};
 
 		handleSystemThemeChange(mediaQuery);
@@ -106,25 +106,25 @@ export const ThemeProvider = ({
 		return () => {
 			mediaQuery.removeEventListener("change", handleSystemThemeChange);
 		};
-	}, [syncWithSystem, controlledMode, onModeChange]);
-
-	const mode = useMemo(() => {
-		return controlledMode ?? internalMode;
-	}, [controlledMode, internalMode]);
+	}, [syncWithSystem, controlledTheme, onThemeChange]);
 
 	const theme = useMemo(() => {
 		return controlledTheme ?? internalTheme;
 	}, [controlledTheme, internalTheme]);
 
+	const design = useMemo(() => {
+		return controlledDesign ?? internalDesign;
+	}, [controlledDesign, internalDesign]);
+
 	const themeClass = useMemo(() => {
-		if (theme === "game") {
-			return mode === "dark" ? gameDarkTheme : gameLightTheme;
+		if (design === "game") {
+			return theme === "dark" ? gameDarkTheme : gameLightTheme;
 		}
-		if (theme === "crayon") {
-			return mode === "dark" ? crayonDarkTheme : crayonLightTheme;
+		if (design === "crayon") {
+			return theme === "dark" ? crayonDarkTheme : crayonLightTheme;
 		}
-		return mode === "dark" ? basicDarkTheme : basicLightTheme;
-	}, [theme, mode]);
+		return theme === "dark" ? basicDarkTheme : basicLightTheme;
+	}, [design, theme]);
 
 	useEffect(() => {
 		if (!containerRef.current) {
@@ -132,7 +132,7 @@ export const ThemeProvider = ({
 		}
 
 		const container = containerRef.current;
-		const isDark = mode === "dark";
+		const isDark = theme === "dark";
 
 		if (primaryColor) {
 			try {
@@ -154,7 +154,7 @@ export const ThemeProvider = ({
 
 			applyPrimaryColorVars(defaultColors, container);
 		}
-	}, [primaryColor, mode]);
+	}, [primaryColor, theme]);
 
 	useEffect(() => {
 		if (typeof document === "undefined") {
@@ -173,20 +173,10 @@ export const ThemeProvider = ({
 		);
 
 		root.classList.add(themeClass);
-	}, [mode, theme, themeClass]);
-
-	const setMode = useCallback(
-		(newMode: ThemeMode) => {
-			if (!controlledMode) {
-				setInternalMode(newMode);
-			}
-			onModeChange?.(newMode);
-		},
-		[controlledMode, onModeChange]
-	);
+	}, [theme, design, themeClass]);
 
 	const setTheme = useCallback(
-		(newTheme: ThemeName) => {
+		(newTheme: Theme) => {
 			if (!controlledTheme) {
 				setInternalTheme(newTheme);
 			}
@@ -195,15 +185,25 @@ export const ThemeProvider = ({
 		[controlledTheme, onThemeChange]
 	);
 
+	const setDesign = useCallback(
+		(newDesign: Design) => {
+			if (!controlledDesign) {
+				setInternalDesign(newDesign);
+			}
+			onDesignChange?.(newDesign);
+		},
+		[controlledDesign, onDesignChange]
+	);
+
 	const value: ThemeContextValue = useMemo(() => {
 		return {
-			mode,
-			setMode,
 			theme,
 			setTheme,
+			design,
+			setDesign,
 			themeClass,
 		};
-	}, [mode, theme, themeClass, setMode, setTheme]);
+	}, [theme, design, themeClass, setTheme, setDesign]);
 
 	return (
 		<ThemeContext.Provider value={value}>
@@ -212,7 +212,7 @@ export const ThemeProvider = ({
 				className={clsx(themeClass, className)}
 				style={style}
 			>
-				{theme === "crayon" && <CrayonThemeFilters />}
+				{design === "crayon" && <CrayonThemeFilters />}
 				{children}
 			</div>
 		</ThemeContext.Provider>

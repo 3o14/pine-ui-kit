@@ -7,16 +7,16 @@ import "../src/tokens/themes/crayon.css";
 import { ThemeWrapper } from "./ThemeWrapper";
 import {
 	appearanceTheme,
-	type AppearanceMode,
+	type Theme,
 } from "../src/tokens/appearanceTheme";
-import type { ThemeName } from "../src/providers/ThemeContext";
+import type { Design } from "../src/providers/ThemeContext";
 
 const withTheme: Decorator = (Story, context) => {
-	const mode = (context.globals?.mode || "light") as AppearanceMode;
-	const theme = (context.globals?.themeName || "basic") as ThemeName;
+	const theme = (context.globals?.theme || "light") as Theme;
+	const design = (context.globals?.design || "basic") as Design;
 
 	return (
-		<ThemeWrapper mode={mode} theme={theme}>
+		<ThemeWrapper theme={theme} design={design}>
 			<Story />
 		</ThemeWrapper>
 	);
@@ -63,11 +63,11 @@ const preview: Preview = {
 		},
 	},
 	globalTypes: {
-		mode: {
-			description: "Appearance mode (light/dark)",
+		theme: {
+			description: "Theme (light/dark)",
 			defaultValue: "light",
 			toolbar: {
-				title: "Mode",
+				title: "Theme",
 				icon: "circlehollow",
 				items: [
 					{ value: "light", title: "Light" },
@@ -76,11 +76,11 @@ const preview: Preview = {
 				dynamicTitle: true,
 			},
 		},
-		themeName: {
-			description: "Theme name (basic/game/crayon)",
+		design: {
+			description: "Design variant (basic/game/crayon)",
 			defaultValue: "basic",
 			toolbar: {
-				title: "Theme",
+				title: "Design",
 				icon: "paintbrush",
 				items: [
 					{ value: "basic", title: "Basic" },
