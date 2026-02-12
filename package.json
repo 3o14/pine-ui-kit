@@ -1,6 +1,6 @@
 {
 	"name": "pine-design-system",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"license": "MIT",
 	"description": "Design system with token-driven theming and accessible React components",
