@@ -3,31 +3,31 @@ import { ThemeProvider } from "../src/providers";
 import {
 	appearanceTheme,
 	applyAppearanceTheme,
-	type AppearanceMode,
+	type Theme,
 } from "../src/tokens/appearanceTheme";
-import type { ThemeName } from "../src/providers/ThemeContext";
+import type { Design } from "../src/providers/ThemeContext";
 
 interface ThemeWrapperProps {
-	mode: AppearanceMode;
-	theme?: ThemeName;
+	theme: Theme;
+	design?: Design;
 	children: React.ReactNode;
 }
 
 export const ThemeWrapper = ({
-	mode,
-	theme = "basic",
+	theme,
+	design = "basic",
 	children,
 }: ThemeWrapperProps) => {
-	const { bodyBackground, bodyText } = appearanceTheme[mode];
+	const { bodyBackground, bodyText } = appearanceTheme[theme];
 
 	React.useEffect(() => {
-		applyAppearanceTheme(mode);
-	}, [mode]);
+		applyAppearanceTheme(theme);
+	}, [theme]);
 
 	return (
 		<ThemeProvider
-			mode={mode}
 			theme={theme}
+			design={design}
 			syncWithSystem={false}
 			style={{
 				backgroundColor: bodyBackground,

@@ -14,11 +14,11 @@ import { useState } from "react";
 Install Pine UI using your preferred package manager:
 
 <Source
-	code={`npm install pine-ui-kit
+	code={`npm install pine-design-system
 # or
-pnpm add pine-ui-kit
+pnpm add pine-design-system
 # or
-yarn add pine-ui-kit`}
+yarn add pine-design-system`}
 	language="bash"
 />
 
@@ -29,8 +29,8 @@ yarn add pine-ui-kit`}
 ### Import Components and Styles
 
 <Source
-	code={`import { Button, Badge, Switch, TextField } from "pine-ui-kit";
-import "pine-ui-kit/style.css";`}
+	code={`import { ThemeProvider, Button, Badge, Switch, TextField } from "pine-design-system";
+import "pine-design-system/style.css";`}
 	language="tsx"
 />
 
@@ -39,7 +39,7 @@ import "pine-ui-kit/style.css";`}
 <Source
   code={`function App() {
   return (
-    <div>
+    <ThemeProvider design="basic" defaultTheme="light">
       <Button intent="primary" size="medium">
         Primary Button
       </Button>
@@ -65,16 +65,84 @@ language="tsx"
 
 <Heading>Theme Support</Heading>
 
-Pine UI supports light and dark themes through the `ThemeProvider` component.
+Pine UI provides **three distinct design themes** that transform your entire UI with a single prop change. Each theme has its own unique visual language, supporting both light and dark modes.
 
-### Basic Theme Provider
+### 🎯 Basic Theme
+
+A clean, modern design system perfect for professional applications. Features smooth animations, subtle shadows, and a refined aesthetic.
 
 <Source
-  code={`import { ThemeProvider } from "pine-ui-kit";
+	code={`import { ThemeProvider } from "pine-design-system";
 
 function App() {
   return (
-    <ThemeProvider defaultMode="light">
+    <ThemeProvider design="basic" defaultTheme="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+	language="tsx"
+/>
+
+### 🎮 Game Theme
+
+Pixel-art inspired design for gamified experiences. Features retro aesthetics, bold borders, and playful interactions that bring a nostalgic gaming feel to your interface.
+
+<Source
+	code={`import { ThemeProvider } from "pine-design-system";
+
+function App() {
+  return (
+    <ThemeProvider design="game" defaultTheme="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+	language="tsx"
+/>
+
+### 🖍️ Crayon Theme
+
+Soft, warm, and friendly design with hand-drawn aesthetics. Features rounded corners, gentle shadows, and a cozy feel perfect for creative or educational applications.
+
+<Source
+	code={`import { ThemeProvider } from "pine-design-system";
+
+function App() {
+  return (
+    <ThemeProvider design="crayon" defaultTheme="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}`}
+	language="tsx"
+/>
+
+### Theme Provider Props
+
+- **design** (optional): `"basic" | "game" | "crayon"` - The design variant to apply (default: `"basic"`)
+- **defaultDesign** (optional): `"basic" | "game" | "crayon"` - Initial design for uncontrolled mode
+- **onDesignChange** (optional): `(design: Design) => void` - Callback when design changes
+- **defaultTheme** (optional): `"light" | "dark"` - Initial theme for uncontrolled mode
+- **theme** (optional): `"light" | "dark"` - Controlled theme value
+- **onThemeChange** (optional): `(theme: Theme) => void` - Callback when theme changes
+- **syncWithSystem** (optional): `boolean` - Sync with system theme (default: `true`)
+- **primaryColor** (optional): `string` - Custom primary color (hex format)
+
+---
+
+<Heading>Light & Dark Mode</Heading>
+
+All three design variants support both light and dark themes.
+
+### Default Theme
+
+<Source
+  code={`import { ThemeProvider } from "pine-design-system";
+
+function App() {
+  return (
+    <ThemeProvider design="basic" defaultTheme="light">
       <YourApp />
     </ThemeProvider>
   );
@@ -92,24 +160,49 @@ You can enable automatic system theme detection:
 	language="tsx"
 />
 
-### Controlled Theme
+### Controlled Theme and Design
 
-For controlled theme mode:
+For complete control over both theme and design:
 
 <Source
   code={`import { useState } from "react";
-import { ThemeProvider } from "pine-ui-kit";
+import { ThemeProvider } from "pine-design-system";
 
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [design, setDesign] = useState<"basic" | "game" | "crayon">("basic");
 
   return (
-    <ThemeProvider mode={theme} onModeChange={setTheme}>
+    <ThemeProvider 
+      design={design} 
+      onDesignChange={setDesign}
+      theme={theme} 
+      onThemeChange={setTheme}
+    >
+      <div>
+        <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+          Toggle Light/Dark
+        </button>
+        <button onClick={() => setDesign("basic")}>Basic Design</button>
+        <button onClick={() => setDesign("game")}>Game Design</button>
+        <button onClick={() => setDesign("crayon")}>Crayon Design</button>
+      </div>
       <YourApp />
     </ThemeProvider>
   );
 }`}
 language="tsx" />
+
+### Custom Primary Color
+
+You can customize the primary color across all themes:
+
+<Source
+  code={`<ThemeProvider design="basic" primaryColor="#FF6B6B">
+  <YourApp />
+</ThemeProvider>`}
+  language="tsx"
+/>
 
 ---
 
@@ -181,8 +274,8 @@ Components support different visual variants:
 Pine UI is written in TypeScript and provides full type support:
 
 <Source
-  code={`import type { ButtonProps } from "pine-ui-kit";
-import { Button } from "pine-ui-kit";
+  code={`import type { ButtonProps } from "pine-design-system";
+import { Button } from "pine-design-system";
 
 const MyButton = (props: ButtonProps) => {
   return <Button {...props} />;
@@ -199,7 +292,7 @@ language="tsx"
 
 <Source
   code={`import { useState } from "react";
-import { Button, TextField, Checkbox } from "pine-ui-kit";
+import { Button, TextField, Checkbox } from "pine-design-system";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -244,7 +337,7 @@ language="tsx"
 ### Notification Badge
 
 <Source
-  code={`import { Badge } from "pine-ui-kit";
+  code={`import { Badge } from "pine-design-system";
 import { useState } from "react";
 
 function NotificationIcon() {
@@ -273,7 +366,7 @@ function NotificationIcon() {
 ### Form with Validation
 
 <Source
-  code={`import { TextField, Button } from "pine-ui-kit";
+  code={`import { TextField, Button } from "pine-design-system";
 
 function ContactForm() {
   return (
@@ -368,12 +461,17 @@ Components support full-width layouts:
 
 <Source
   code={`// app/layout.tsx
-import "pine-ui-kit/style.css";
+import { ThemeProvider } from "pine-design-system";
+import "pine-design-system/style.css";
 
 export default function RootLayout({ children }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider design="basic" syncWithSystem={true}>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }`}
@@ -384,10 +482,15 @@ export default function RootLayout({ children }) {
 
 <Source
   code={`// main.tsx
-import "pine-ui-kit/style.css";
+import { ThemeProvider } from "pine-design-system";
+import "pine-design-system/style.css";
 import { createRoot } from "react-dom/client";
 
-createRoot(document.getElementById("root")!).render(<App />);`}
+createRoot(document.getElementById("root")!).render(
+  <ThemeProvider design="basic" defaultTheme="light">
+    <App />
+  </ThemeProvider>
+);`}
 language="tsx"
 />
 
@@ -401,4 +504,4 @@ language="tsx"
 
 ---
 
-Have questions? Check out our [GitHub repository](https://github.com/3o14/pine-ui-kit) or open an issue!
+Have questions? Check out our [GitHub repository](https://github.com/3o14/pine-design-system) or open an issue!
