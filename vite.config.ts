@@ -14,8 +14,8 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve(__dirname, "src/components/index.ts"),
-			name: "PineUI",
-			fileName: (format) => `pine-ui.${format}.js`,
+			name: "PineDesignSystem",
+			fileName: (format) => `pine-design-system.${format}.js`,
 			formats: ["es", "cjs"],
 		},
 		rollupOptions: {

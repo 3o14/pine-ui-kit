@@ -195,7 +195,7 @@ CHANGESET_FILENAME="$RANDOM_ADJ-$RANDOM_NOUN-$RANDOM_VERB.md"
 
 # Create changeset content
 CHANGESET_CONTENT="---
-\"pine-ui-kit\": $VERSION_TYPE
+\"pine-design-system\": $VERSION_TYPE
 ---
 
 $SUMMARY

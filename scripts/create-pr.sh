@@ -59,11 +59,11 @@ COMMIT_MESSAGES=$(git log main..HEAD --pretty=format:"%s" | head -5)
 if [[ -n "$CHANGESET_FILES" ]]; then
   CHANGESET_CONTENT=$(cat $(echo "$CHANGESET_FILES" | head -1))
   # BSD grep compatible (macOS)
-  CHANGESET_TYPE=$(echo "$CHANGESET_CONTENT" | grep -o '"[^"]*"' | head -1 | tr -d '"' || echo "pine-ui-kit")
+  CHANGESET_TYPE=$(echo "$CHANGESET_CONTENT" | grep -o '"[^"]*"' | head -1 | tr -d '"' || echo "pine-design-system")
   CHANGESET_VERSION=$(echo "$CHANGESET_CONTENT" | grep -o ': [a-z]*' | head -1 | sed 's/: //' || echo "patch")
   CHANGESET_DESC=$(echo "$CHANGESET_CONTENT" | tail -n +4)
 else
-  CHANGESET_TYPE="pine-ui-kit"
+  CHANGESET_TYPE="pine-design-system"
   CHANGESET_VERSION="patch"
   CHANGESET_DESC=""
 fi

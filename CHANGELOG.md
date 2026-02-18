@@ -1,4 +1,4 @@
-# pine-ui-kit
+# pine-design-system
 
 ## 1.0.0
 
