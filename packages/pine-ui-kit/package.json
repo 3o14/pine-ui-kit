@@ -1,6 +1,6 @@
 {
 	"name": "pine-ui-kit",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "DEPRECATED: This package has been renamed to pine-design-system. Please use pine-design-system instead.",
 	"main": "./index.cjs",
 	"module": "./index.js",
