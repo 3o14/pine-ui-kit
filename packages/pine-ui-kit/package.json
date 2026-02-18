@@ -1,0 +1,32 @@
+{
+	"name": "pine-ui-kit",
+	"version": "1.0.2",
+	"description": "DEPRECATED: This package has been renamed to pine-design-system. Please use pine-design-system instead.",
+	"main": "./index.cjs",
+	"module": "./index.js",
+	"types": "./index.d.ts",
+	"exports": {
+		".": {
+			"import": "./index.js",
+			"require": "./index.cjs",
+			"types": "./index.d.ts"
+		},
+		"./style.css": "./style.css"
+	},
+	"files": [
+		"index.js",
+		"index.cjs",
+		"index.d.ts",
+		"style.css"
+	],
+	"dependencies": {
+		"pine-design-system": "workspace:*"
+	},
+	"peerDependencies": {
+		"react": "^18.0.0 || ^19.0.0",
+		"react-dom": "^18.0.0 || ^19.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

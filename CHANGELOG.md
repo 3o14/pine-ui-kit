@@ -1,4 +1,17 @@
-# pine-ui-kit
+# pine-design-system
+
+## 1.0.1
+
+### Patch Changes
+
+- 2700bbb: rename prop and package name
+
+  package name changee
+  `pine-ui-kit` -> `pine-design-system`
+
+  prop name change
+  1. `mode` -> `theme`
+  2. `theme` -> `design`
 
 ## 1.0.0
 

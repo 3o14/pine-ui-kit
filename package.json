@@ -1,6 +1,6 @@
 {
 	"name": "pine-design-system",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"license": "MIT",
 	"description": "Design system with token-driven theming and accessible React components",
@@ -22,13 +22,13 @@
 		"theming",
 		"typescript"
 	],
-	"main": "./dist/pine-ui.cjs.js",
-	"module": "./dist/pine-ui.es.js",
+	"main": "./dist/pine-design-system.cjs.js",
+	"module": "./dist/pine-design-system.es.js",
 	"types": "./dist/components/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/pine-ui.es.js",
-			"require": "./dist/pine-ui.cjs.js",
+			"import": "./dist/pine-design-system.es.js",
+			"require": "./dist/pine-design-system.cjs.js",
 			"types": "./dist/components/index.d.ts"
 		},
 		"./style.css": "./dist/style.css",

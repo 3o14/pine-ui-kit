@@ -11,5 +11,11 @@
 		".gitignore": ".gitattributes, .gitmodules",
 		"README.md": "CHANGELOG.md, LICENSE, CONTRIBUTING.md",
 		".storybook": "storybook-static"
-	}
+	},
+	"markdownlint.config": {
+		"MD041": false
+	},
+	"markdownlint.ignore": [
+		".changeset/**"
+	]
 }

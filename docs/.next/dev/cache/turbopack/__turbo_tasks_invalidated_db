@@ -1,0 +1,5 @@
+{
+  "_explanation": "The cache database has been invalidated. The existence of this file will cause the cache directory to be cleaned up the next time Turbopack starts up.",
+  "_easter_egg": "you just wrote me, and this is crazy, but if you see me, delete everything maybe?",
+  "reason_code": "turbo_tasks_backend::database::db_invalidation::invalidation_reasons::PANIC"
+}
