@@ -1,0 +1,8 @@
+{
+	"MD041": false,
+	"MD032": false,
+	"MD012": false,
+	"default": true,
+	"extends": null,
+	"ignore": [".changeset/**"]
+}
