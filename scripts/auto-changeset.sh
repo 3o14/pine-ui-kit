@@ -109,7 +109,7 @@ OTHER_COMMITS=$(echo "$COMMITS" | grep -vE "^(feat|fix)" || echo "")
 
 # Create summary from first significant commit
 FIRST_COMMIT=$(echo "$COMMITS" | head -1)
-SUMMARY=$(echo "$FIRST_COMMIT" | sed -E 's/^[a-z]+(\(.+\))?!?: //' | sed 's/^./\u&/')
+SUMMARY=$(echo "$FIRST_COMMIT" | sed -E 's/^[a-z]+(\(.+\))?!?: //' | awk '{print toupper(substr($0,1,1)) substr($0,2)}')
 
 # Create detailed description (BSD sed compatible)
 if [[ -n "$FEAT_COMMITS" ]]; then
